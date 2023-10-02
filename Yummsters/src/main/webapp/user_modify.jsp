@@ -1,13 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=devic e-width, initial-scale=1.0">
-    <title>편마카세</title>
     <style>
-
         /*박스*/
         .box{
             border-radius: 30px;
@@ -152,7 +146,7 @@
             padding: 5px 20px;
             border-radius: 10px;
             font-size: 20px;
-            -webkit-text-stroke: 0.07px white;
+           
             color: #524434;
             box-shadow: 0 10px 320px rgba(0, 0, 0, 0.2);
             background-color: #EEC595;
@@ -167,7 +161,7 @@
             padding: 5px 20px;
             border-radius: 10px;
             font-size: 20px;
-            -webkit-text-stroke: 0.07px white;
+         
             color: #524434;
             box-shadow: 0 10px 320px rgba(0, 0, 0, 0.2);
             background-color: #EEC595;
@@ -180,18 +174,19 @@
             width: 250px;
             height: 30px;
             font-size: 20px;
-            
-            -webkit-text-stroke: 0.07px white;
             color: #524434;
             background-color: #EEC595;
             border-radius: 30px;
          }
-
+         
     </style>
 </head>
 <body>
-<jsp:include page="header.jsp" />
+     <!-- header  -->
+     <jsp:include page="header.jsp" />
+    </div>
      <!-- 박스-->
+     <br>
     <div class="box" style="border:3px solid#EEC595"> 
     <!-- 원-->
     <div class="c1" style="display:inline" ></div>
@@ -226,9 +221,8 @@
     
 
 
-    </div>
+    </div><br>
 
 
-<jsp:include page="footer.jsp" />
+    <jsp:include page="footer.jsp" />
 </body>
-</html>

@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,12 +16,12 @@
 
         body {
             margin: 0 auto;
-/*             background-color: #EEC595; */
             width: 1000px;
             height: 300px;
         }
 
         .footer {
+        	margin: 100px auto;
            background-color: #EEC595;
             position: relative;
             display: flex;

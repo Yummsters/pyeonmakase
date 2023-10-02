@@ -1,24 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>레시피 등록 페이지</title>
+
     <style>
-       .title_picture{
+         .title_picture{
             margin:0 auto;
             margin-left:200px;
         }
 
 
-        /* 제목 입력칸 관련 스타일 적용 */
+        /* 레시피명 입력칸 관련 스타일 적용 */
         #title{
-            width: 400px;
-            height: 20px;
+            width: 500px;
+            height: 30px;
             background-color: white;
-            border: 3px solid rgb(254, 183, 90);
+            border: 3px solid#EEC595;
             border-radius: 10px;
         }
 
@@ -38,31 +35,72 @@
 
         .red{
             border-style: solid;
-            border-color: rgb(254, 183, 90);
+            border-color: #EEC595;
             background-color: rgb(252, 101, 101);
         }
 
         .green{
             border-style: solid;
-            border-color: rgb(254, 183, 90);
+            border-color: #EEC595;
             background-color : rgb(83, 227, 83);
         }
 
         /* 카테고리 관련 스타일 적용 */
-        .store_check{
-            width: 400px;
+        /* 편의점 카테고리 */
+        .store_category {
+            background: #EEC595;
+            margin: 10px auto;
+            padding: 10px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            /* 수직 가운데 정렬*/
+            justify-content: space-between;
+            /* 수평 정렬*/
             height: 30px;
-            background-color: rgb(249, 217, 175);
+            width: 600px;
+            border-radius: 10px;
         }
 
-        .food_check{
-            width: 400px;
+        .store_category img {
+            width: 30px;
+            height: 20px;
+        }
+        
+        .store_category label {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        /* 음식 카테고리 */
+        .food_category{
+            background: #FAE3C8;
+            margin: 10px auto;
+            padding: 10px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            /* 수직 가운데 정렬*/
+            justify-content: space-between;
+            /* 수평 정렬*/
             height: 30px;
-            background-color: rgb(252, 229, 199);
+            width: 600px;
+            border-radius: 10px;
+        }
+
+        .food_category label {
+            display: inline-block;
+            margin-right: 20px;
+        }
+        
+
+        input[type="checkbox"] {
+            width: 15px;
+            height: 15px;
         }
 
     </style>
-    <!-- jQuery CDN 
+     <!-- jQuery CDN 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
     <!-- jQuery UI CDN 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -97,35 +135,45 @@
     <!-- 제목 입력 및 취소/저장 버튼 -->
     <div class="register_title">
         레시피명  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input id="title" type="text" name = board_title placeholder="대표 제목을 입력하세요." required>
-        <button class="red" type="submit"> 취소 </button> <button class="green" type="submit"> 저장</button>
+        <input id="title" type="text" name = board_title placeholder="대표 제목을 입력하세요." required> &nbsp;
+        <button class="red" type="submit" id="cancle"> 취소 </button> <button class="green" type="submit" id="register"> 등록</button>
     </div> 
     <br>
 
     <!-- 썸네일 선택 -->
     <div class="picture">
         썸네일 선택 &nbsp;
-        <input type="file">
+        <input type="file" name="board_picture" required>
     </div>
     </div>
     <br>
 
     <!-- 편의점 선택 -->
-    <div class="store_check">
-        &nbsp;&nbsp;편의점 선택 
-        <input type="checkbox" name="store" value = "CU"> CU
-        <input type="checkbox" name="store" value = "GS25"> GS25
-        <input type="checkbox" name="store" value = "SEVEN ELEVEN"> SEVEN ELEVEN
-        <input type="checkbox" name="store" value = "ECT"> 기타 
+    <div class="store_category">
+        &nbsp;&nbsp; 편의점 선택 &nbsp&nbsp;&nbsp; &nbsp;&nbsp;  
+        <input type="checkbox" name="store" id="all" value="all">
+        <label for="all">전체</label>
+        <input type="checkbox" name="store" id="cu" value="cu">
+        <label for="cu"><img src="imgView?file=cu.png" alt=""></label>
+        <input type="checkbox" name="store" id="gs" value="gs">
+        <label for="gs"><img src="imgView?file=gs.png" alt=""></label>
+        <input type="checkbox" name="store" id="seven" value="seven">
+        <label for="seven"><img src="imgView?file=seven.png" alt=""></label>
+        <input type="checkbox" name="store" id="etc" value="etc">
+        <label for="etc">기타</label>
     </div>
 
     <!-- 카테고리 선택 -->
-    <div class="food_check">
-        &nbsp;&nbsp;카테고리 선택
-        <input type="checkbox" name="food" value = "meal"> 식사류
-        <input type="checkbox" name="food" value = "desert"> 간식류
-        <input type="checkbox" name="food" value = "drink"> 음료
-        <input type="checkbox" name="food" value = "ECT"> 기타
+    <div class="food_category">
+        &nbsp;&nbsp;카테고리 선택 &nbsp;&nbsp; 
+        <input type="checkbox" name="food" id="meal" value = "meal">
+    	<label for="meal">식사류</label>
+  	<input type="checkbox" name="food" id = "desert" value = "desert">
+   	<label for="desert">간식류</label>
+  	<input type="checkbox" name="food" id = "drink" value = "drink">
+  	<label for="drink">음료</label>
+  	<input type="checkbox" name="food" id="ect" value = "ect">
+    	<label for="ect">기타</label>
     </div>
     <br>
 
@@ -138,7 +186,7 @@
         // 에터 객체 생성
         const editor = new toastui.Editor({
             el: document.querySelector('#content'), // 에디터를 적용할 요소 (컨테이너)
-            height: '500px',                        // 에디터 영역의 높이 값 (OOOpx || auto)
+            height: '600px',                        // 에디터 영역의 높이 값 (OOOpx || auto)
             initialEditType: 'markdown',            // 최초로 보여줄 에디터 타입 (markdown || wysiwyg)
             initialValue: '레시피를 작성해주세요.',     // 내용의 초기 값으로, 반드시 마크다운 문자열 형태여야 함
             previewStyle: 'vertical',                // 마크다운 ß프리뷰 스타일 (tab || vertical)
@@ -192,5 +240,3 @@
 
 <jsp:include page="footer.jsp" />
 </body>
-</body>
-</html>

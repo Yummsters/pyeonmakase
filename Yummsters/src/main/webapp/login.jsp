@@ -33,6 +33,7 @@
 		.join-form #loginBtn {
             margin: 30px auto;
             width: 75%;
+            height: 30px;
             border-radius: 5px;
             border: 1px solid #EEC595;
             background: #EEC595;

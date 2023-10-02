@@ -39,7 +39,7 @@
         }
         /* 내비게이션 목록 항목의 패딩과 너비를 설정 */
 
-        nav ul li a {
+        li a {
             color: #524434;
             font-weight: bold;
             font-size: 20px;
@@ -92,7 +92,7 @@
             border-color: #EEC595;
             border-radius: 50px;
             width: 100%;
-            height: 30%;
+            height: 40px;
             overflow: auto;
             font-size: 20px;
             outline: none;
@@ -123,13 +123,7 @@
             color: coral;
             transition: 0.5s;
         }
-
-        .foodCategory ul li a {
-            color: #524434;
-            font-weight: bold;
-            font-size: 25px;
-        }
-
+        
         .foodCategory hr {
             border: 0;
             height: 5px;

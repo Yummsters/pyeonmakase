@@ -1,28 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        /* 기본 영역 설정 */
-        * {
-            font-family: NanumSquareRound;
-
-        }
-
-        body {
-            background: #FBF9F3;
-            width: 1000px;
-            /*1000, 1200 중 선택*/
-            margin: 0 auto;
-        }
-
-        /* 기본 영역 설정 끝 */
 
         /* 제목 영역 설정*/
         .content_title {
@@ -189,6 +172,7 @@
 <body>
 <jsp:include page="header.jsp" />
 
+
     <div class="all_content">
         <!-- 제목, 조회수, 추천수 -->
         <div class="content_title">
@@ -211,15 +195,15 @@
 
     <!-- 내용 -->
     <div class="content_detail">
-        <div class="picture"><img src="/mirro.jpeg" alt="" style="width:350px"></div>
+        <div class="picture"><img src="imgView?file=mirro.jpg" alt="" style="width:350px"></div>
         <br>
         <div class="content">
             <div style="text-align : center;"> 재료 : 오감자, 체다치즈, 스트링치즈</div> <br><br>
-            <div class="picture_text"><img src="/mirro.jpeg" alt="" style="padding-left: 20%;">1. 오감자를 접시에 얹어준다. </div>
+            <div class="picture_text"><img src="imgView?file=mirro.jpg" alt="" style="padding-left: 20%;">1. 오감자를 접시에 얹어준다. </div>
             <br>
-            <div class="picture_text"><img src="/mirro.jpeg" alt="" style="padding-left: 20%;">2. 체다치즈와 스트링치즈를 찢어서 얹는다
+            <div class="picture_text"><img src="imgView?file=mirro.jpg" alt="" style="padding-left: 20%;">2. 체다치즈와 스트링치즈를 찢어서 얹는다
             </div><br>
-            <div class="picture_text"><img src="/mirro.jpeg" alt="" style="padding-left: 20%;">3. 전자레인지에 1분 정도 돌리면 완성
+            <div class="picture_text"><img src="imgView?file=mirro.jpg" alt="" style="padding-left: 20%;">3. 전자레인지에 1분 정도 돌리면 완성
             </div><br>
 
             <br>
@@ -296,8 +280,7 @@
         </div>
     </div>
 
+
 <jsp:include page="footer.jsp" />
 
 </body>
-
-</html>    

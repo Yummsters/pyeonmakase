@@ -1,12 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <style>
@@ -111,7 +106,6 @@
         }
 
         .category img {
-            width: 70px;
             height: 40px;
         }
 
@@ -139,7 +133,6 @@
             color: #524434;
             font-weight: bold;
             width: 150px;
-            /* Adjust the width as needed */
         }
 
         /* 최상단 버튼 */
@@ -242,7 +235,7 @@
             <input type="checkbox" name="store" id="cu" value="cu" checked>
             <label for="cu"><img src="imgView?file=cu.png" alt=""></label>
             <input type="checkbox" name="store" id="gs" value="gs" checked>
-            <label for="gs"><img src="imgView?file=gs.png" alt=""></label>
+            <label for="gs"><img src="imgView?file=gs.png" alt="" style="height: 30px;"></label>
             <input type="checkbox" name="store" id="seven" value="seven" checked>
             <label for="seven"><img src="imgView?file=seven.png" alt=""></label>
             <input type="checkbox" name="store" id="etc" value="etc" checked>
