@@ -1,24 +1,22 @@
 package controller;
 
-import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
-@WebServlet("/register")
-public class Register extends HttpServlet {
+@WebServlet("/recommand")
+public class Recommand extends HttpServlet {
+    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        // 취소 버튼 클릭 시 메인 리스트 페이지로 이동
-        res.sendRedirect("main_list.jsp");
+        // TODO : 추천 여부를 확인한 다음 추천을 했다면 별을 노란색으로, 하지 않았다면 검은색으로 변경하는 로직 생성
     }
 
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        // TODO : 레시피 관련 DB 저장 로직 작성 필요
+        // TODO : 추천을 했는지 여부를 확인한 다음 추천을 했었다면 클릭 시 삭제, 안했었다면 클릭 시 추천하기 로직 생성
 
-        // 등록 페이지에서 등록 버튼 클릭 시 메인 리스트 페이지로 이동
-        req.getRequestDispatcher("main_list.jsp").forward(req, res);
     }
-
 }

@@ -1,24 +1,21 @@
 package controller;
 
-import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
-@WebServlet("/register")
-public class Register extends HttpServlet {
+@WebServlet("/reply")
+public class Reply extends HttpServlet {
+    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        // 취소 버튼 클릭 시 메인 리스트 페이지로 이동
-        res.sendRedirect("main_list.jsp");
+        // TODO : 해당 댓글 삭제 로직 작성
     }
 
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        // TODO : 레시피 관련 DB 저장 로직 작성 필요
-
-        // 등록 페이지에서 등록 버튼 클릭 시 메인 리스트 페이지로 이동
-        req.getRequestDispatcher("main_list.jsp").forward(req, res);
+        // TODO : 댓글 등록 로직 작성
     }
-
 }
