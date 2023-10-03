@@ -150,7 +150,7 @@
         <div class="register_title">
             레시피명 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <input id="title" type="text" name=board_title placeholder="대표 제목을 입력하세요." required> &nbsp;
-            <button class="red" type="submit" id="cancel" name="cancel" formaction="modify_cancel" formmethod="get">
+            <button class="red" type="submit" id="cancel" name="cancel" formaction="modify" formmethod="get">
                 취소
             </button>
             <button class="green" type="submit" id="modify" name="modify" formaction="modify" formmethod="post"> 수정

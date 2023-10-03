@@ -137,7 +137,7 @@
         <div class="register_title">
             레시피명 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <input id="title" type="text" name=board_title placeholder="대표 제목을 입력하세요."> &nbsp;
-            <button class="red" type="submit" id="cancel" name="cancel" formaction="register_cancel" formmethod="get">
+            <button class="red" type="submit" id="cancel" name="cancel" formaction="register" formmethod="get">
                 취소
             </button>
             <button class="green" type="submit" id="register" name="register" formaction="register" formmethod="post">
