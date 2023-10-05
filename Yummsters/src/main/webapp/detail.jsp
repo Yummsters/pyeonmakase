@@ -191,7 +191,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>${board.regdate} &nbsp; {board.nickname}</td> <!-- TODO 날짜 형식 수정 필요 -->
+                    <td>${board.regdate} &nbsp; ${board.nickname}</td> <!-- TODO 날짜 형식 수정 필요 -->
                 </tr>
             </table>
             <!--<div class="recommand_count">추천수 : 1,234 <br>2023.09.17 20:03 닉네임</div>-->
@@ -251,10 +251,10 @@
     <!-- 수정, 삭제 버튼 -->
     <!-- 각 페이지로 이동하는 링크 추가 필요 -->
     <br>
-    <button class="mod_del" type="submit" id="board_modify" name="modify" formaction="board_modify?board_id=${board.board_id}" formmethod="get">
+    <button class="mod_del" type="submit" id="board_modify" name="board_id" value="${board.board_id}" formaction="board_modify?" formmethod="get">
         수정
     </button>
-    <button class="mod_del" type="submit" id="board_delete" name="board_delete" formaction="board_delete?board_id=${board.board_id}"
+    <button class="mod_del" type="submit" id="board_delete" name="board_id" value="${board.board_id}" formaction="board_delete?"
             formmethod="get"> 삭제
     </button>
     <br><br><br>
