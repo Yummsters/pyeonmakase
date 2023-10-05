@@ -1,6 +1,7 @@
 package controller;
 
 import bean.Board;
+import bean.Board_Store;
 import bean.Member;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -50,10 +51,21 @@ public class Register extends HttpServlet {
         board.setFood_category_id(food_category_id);
         board.setNickname(nickname);
 
+
+
         try{
             // 등록 페이지에서 등록 버튼 클릭 시 DB 저장 후 메인 리스트 페이지로 이동
             BoardService boardService = new BoardServiceImpl();
             boardService.boardRegister(board);
+
+            // 게시글 등록시 선택한 편의점 카테고리 전부 데이터 추가
+            for(String s : store_category){
+                Board_Store boardStore = new Board_Store();
+                boardStore.setBoard_id(board.getBoard_id());
+                boardStore.setStore_category_id(Integer.parseInt(s));
+                boardService.board_store(boardStore);
+            }
+
             res.sendRedirect("main_list.jsp");
             //req.getRequestDispatcher("main_list.jsp").forward(req, res);
         }catch (Exception e){
@@ -62,6 +74,10 @@ public class Register extends HttpServlet {
             req.setAttribute("err", e.getMessage());
             req.getRequestDispatcher("error.jsp").forward(req, res);
         }
+
+
+
+
 
     }
 
