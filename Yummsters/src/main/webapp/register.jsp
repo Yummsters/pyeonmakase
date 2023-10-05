@@ -172,14 +172,12 @@
     <!-- 카테고리 선택 -->
     <div class="food_category">
         &nbsp;&nbsp;카테고리 선택 &nbsp;&nbsp;
-        <input type="radio" name="food" id="meal" value="meal">
+        <input type="radio" name="food" id="meal" value="1">
         <label for="meal">식사류</label>
-        <input type="radio" name="food" id="desert" value="desert">
+        <input type="radio" name="food" id="desert" value="2">
         <label for="desert">간식류</label>
-        <input type="radio" name="food" id="drink" value="drink">
+        <input type="radio" name="food" id="drink" value="3">
         <label for="drink">음료</label>
-        <input type="radio" name="food" id="ect" value="ect">
-        <label for="ect">기타</label>
     </div>
     <br>
 
