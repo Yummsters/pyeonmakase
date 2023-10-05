@@ -169,29 +169,27 @@
     <!-- 편의점 선택 -->
     <div class="store_category">
         &nbsp;&nbsp; 편의점 선택 &nbsp&nbsp;&nbsp; &nbsp;&nbsp;
-        <input type="checkbox" name="store" id="all" value="all">
+        <input type="checkbox" name="store" id="all" value="1">
         <label for="all">전체</label>
-        <input type="checkbox" name="store" id="cu" value="cu">
+        <input type="checkbox" name="store" id="cu" value="2">
         <label for="cu"><img src="imgView?file=cu.png" alt=""></label>
-        <input type="checkbox" name="store" id="gs" value="gs">
+        <input type="checkbox" name="store" id="gs" value="3">
         <label for="gs"><img src="imgView?file=gs.png" alt=""></label>
-        <input type="checkbox" name="store" id="seven" value="seven">
+        <input type="checkbox" name="store" id="seven" value="4">
         <label for="seven"><img src="imgView?file=seven.png" alt=""></label>
-        <input type="checkbox" name="store" id="etc" value="etc">
+        <input type="checkbox" name="store" id="etc" value="5">
         <label for="etc">기타</label>
     </div>
 
     <!-- 카테고리 선택 -->
     <div class="food_category">
         &nbsp;&nbsp;카테고리 선택 &nbsp;&nbsp;
-        <input type="checkbox" name="food" id="meal" value="meal">
+        <input type="checkbox" name="food" id="meal" value="1">
         <label for="meal">식사류</label>
-        <input type="checkbox" name="food" id="desert" value="desert">
+        <input type="checkbox" name="food" id="desert" value="2">
         <label for="desert">간식류</label>
-        <input type="checkbox" name="food" id="drink" value="drink">
+        <input type="checkbox" name="food" id="drink" value="3">
         <label for="drink">음료</label>
-        <input type="checkbox" name="food" id="ect" value="ect">
-        <label for="ect">기타</label>
     </div>
     <br>
 
