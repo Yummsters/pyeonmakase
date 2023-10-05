@@ -19,10 +19,7 @@ public class Board {
     // 매핑
     private String nickname; // 작성자
     private Integer food_category_id; // 음식 카테고리
-
-    // 생성자
-    public Board(){};
-
+    
 	public Integer getBoard_id() {
 		return board_id;
 	}
