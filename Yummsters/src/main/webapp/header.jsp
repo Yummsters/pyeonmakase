@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -145,16 +146,21 @@
             <img src="imgView?file=searching.png" alt="My Image">
         </div>
         <nav>
-            <ul>
-                <li><a href="signup">회원<br>가입</a></li>
-                <li><a href="login">로그인</a></li>
-            </ul>
-           <!-- 로그인 한 경우 -->
-<!--             <ul> -->
-<!--                 <li><a href="mypage">마이<br>페이지</a></li> -->
-<!--                 <li><a href="register">레시피<br>등록</a></li> -->
-<!--                 <li><a href="logout">로그<br>아웃</a></li> -->
-<!--             </ul> -->
+        	<c:choose>
+				<c:when test="${user eq Empty}">
+		            <ul>
+		                <li><a href="signup">회원<br>가입</a></li>
+		                <li><a href="login">로그인</a></li>
+		            </ul>
+            	</c:when>
+            	<c:otherwise>
+		             <ul>
+		                 <li><a href="mypage">마이<br>페이지</a></li>
+		                 <li><a href="register">레시피<br>등록</a></li>
+		                 <li><a href="logout">로그<br>아웃</a></li>
+		             </ul>
+             	</c:otherwise>
+             </c:choose>
         </nav>
     </div>
     <div class="foodCategory">
