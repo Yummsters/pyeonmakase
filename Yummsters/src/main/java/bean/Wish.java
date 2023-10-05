@@ -2,11 +2,10 @@ package bean;
 
 public class Wish {
     private Integer wish_id; // PK
-    private boolean choice; // 찜 여부핑
+    private boolean choice; 
 
-    // 매핑
-    private String nickname; // 추천인
-    private Integer board_id; // 추천 레시피
+    private String nickname; 
+    private Integer board_id; 
 	public Integer getWish_id() {
 		return wish_id;
 	}
