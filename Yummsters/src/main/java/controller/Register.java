@@ -7,18 +7,35 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Servlet implementation class Register
+ */
 @WebServlet("/register")
 public class Register extends HttpServlet {
-    protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        // 취소 버튼 클릭 시 메인 리스트 페이지로 이동
-        res.sendRedirect("main_list.jsp");
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public Register() {
+        super();
+        // TODO Auto-generated constructor stub
     }
 
-    protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        // TODO : 레시피 관련 DB 저장 로직 작성 필요
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getRequestDispatcher("register.jsp").forward(request, response);
 
-        // 등록 페이지에서 등록 버튼 클릭 시 메인 리스트 페이지로 이동
-        req.getRequestDispatcher("main_list.jsp").forward(req, res);
-    }
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
 
 }
