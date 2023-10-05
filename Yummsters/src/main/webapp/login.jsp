@@ -67,7 +67,7 @@
 <div class="join-box">
     <div class="title">로그인</div>
 
-    <form class="join-form">
+    <form class="join-form" method="post">
         <input type="text" id="id" name="id" required placeholder="아이디를 입력하세요">
         
         <input type="password" id="password" name="password" required placeholder="비밀번호를 입력하세요">

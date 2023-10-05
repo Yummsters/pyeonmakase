@@ -7,6 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.Member;
+import service.MemberService;
+import service.MemberServiceImpl;
+
 /**
  * Servlet implementation class Join
  */
@@ -33,8 +37,25 @@ public class Signup extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		request.setCharacterEncoding("utf-8");
+		String name = request.getParameter("name");
+		String nickname = request.getParameter("nickname");
+		String email = request.getParameter("email");
+		String id = request.getParameter("id");
+		String password = request.getParameter("password");
+		
+		Member member = new Member(name, nickname, email, id, password);
+		
+		try {
+			MemberService service = new MemberServiceImpl();
+			service.signup(member);
+			response.sendRedirect("login");
+		} catch (Exception e) {
+			request.setAttribute("err", e.getMessage());
+		}
+		
 	}
 
-}
+		
+	}
+
