@@ -131,7 +131,7 @@
 <body>
 <jsp:include page="header.jsp"/>
 
-<form name="recipe_register">
+<form name="recipe_register" enctype="multipart/form-data" id="recipeForm">
     <div class="title_picture">
         <!-- 제목 입력 및 취소/저장 버튼 -->
         <div class="register_title">
@@ -140,7 +140,7 @@
             <button class="red" type="submit" id="cancel" name="cancel" formaction="register" formmethod="get">
                 취소
             </button>
-            <button class="green" type="submit" id="register" name="register" formaction="register" formmethod="post">
+            <button class="green" type="submit" id="registerButton" name="register" formaction="register" formmethod="post" formenctype="multipart/form-data">
                 등록
             </button>
         </div>
@@ -160,7 +160,7 @@
         <input type="checkbox" name="store" id="all" value="all">
         <label for="all">전체</label>
         <input type="checkbox" name="store" id="cu" value="cu">
-        <label for="cu"><img src="images/cu.png" alt=""></label>
+        <label for="cu"><img src="imgView?file=cu.png" alt=""></label>
         <input type="checkbox" name="store" id="gs" value="gs">
         <label for="gs"><img src="imgView?file=gs.png" alt=""></label>
         <input type="checkbox" name="store" id="seven" value="seven">
@@ -172,13 +172,13 @@
     <!-- 카테고리 선택 -->
     <div class="food_category">
         &nbsp;&nbsp;카테고리 선택 &nbsp;&nbsp;
-        <input type="checkbox" name="food" id="meal" value="meal">
+        <input type="radio" name="food" id="meal" value="meal">
         <label for="meal">식사류</label>
-        <input type="checkbox" name="food" id="desert" value="desert">
+        <input type="radio" name="food" id="desert" value="desert">
         <label for="desert">간식류</label>
-        <input type="checkbox" name="food" id="drink" value="drink">
+        <input type="radio" name="food" id="drink" value="drink">
         <label for="drink">음료</label>
-        <input type="checkbox" name="food" id="ect" value="ect">
+        <input type="radio" name="food" id="ect" value="ect">
         <label for="ect">기타</label>
     </div>
     <br>
@@ -195,11 +195,11 @@
             height: '600px',                        // 에디터 영역의 높이 값 (OOOpx || auto)
             initialEditType: 'markdown',            // 최초로 보여줄 에디터 타입 (markdown || wysiwyg)
             initialValue: '레시피를 작성해주세요.',     // 내용의 초기 값으로, 반드시 마크다운 문자열 형태여야 함
-            previewStyle: 'vertical',                // 마크다운 ß프리뷰 스타일 (tab || vertical)
+            previewStyle: 'vertical'//,                // 마크다운 ß프리뷰 스타일 (tab || vertical)
 
             // 이미지가 Base64 형식으로 입력되는 것 가로채주는 옵션
             // 추후 jsp 파일로 바꾼 이후 서블릿의 메서드를 이용해 매핑하여 업로드 이미지를 처리할 컨트롤러 생성 필요
-            hooks: {
+            /*hooks: {
                 addImageBlobHook: (blob, callback) => {
                     // blob : Java Script 파일 객체
                     console.log(blob);
@@ -236,13 +236,23 @@
                         }
                     });
                 }
-            }
+            }*/
         });
         //editor.getHtml()을 사용해서 에디터 내용 수신
         // document.querySelector('#contents').insertAdjacentHTML('afterbegin' ,editor.getHTML());
         // 콘솔창에 표시(브라우저에서 content 값 확인)
         // console.log(editor.getHTML());
+
+        console.log(editor.getMarkdown())
+        console.log(editor.getHTML());
+        document.getElementById("registerButton").addEventListener("click", function (){
+            const editorContent = editor.getMarkdown();
+            document.getElementById("editorContent").value = editorContent;
+            document.getElementById("recipeForm").submit();
+        });
     </script>
+    <input type="hidden" name="editorContent" id="editorContent" value="">
+
 </form>
 
 <jsp:include page="footer.jsp"/>
