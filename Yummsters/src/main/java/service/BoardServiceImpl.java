@@ -23,4 +23,10 @@ public class BoardServiceImpl implements BoardService{
     public void board_store(Board_Store boardStore) throws Exception {
         boardDao.insertStore_category(boardStore);
     }
+
+    // 게시글 번호로 게시글 정보 조회
+    @Override
+    public Board boardDetail(Integer board_id) throws Exception {
+        return boardDao.selectBoardOne(board_id);
+    }
 }

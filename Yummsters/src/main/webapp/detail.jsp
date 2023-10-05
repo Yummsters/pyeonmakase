@@ -181,17 +181,17 @@
         <!-- 제목, 조회수, 추천수 -->
         <div class="content_title">
             <div class="title_store" style="display: inline-block;">
-                <div class="title">오감자치즈후라이</div>
-                <div class="store"> 편의점 : 공통</div>
+                <div class="title">${board.title} </div> <!-- TODO css 깨지는 부분 수정 필요 -->
+                <div class="store"> 편의점 : 공통</div> <!-- TODO 편의점 카테고리 관련 정보 가져오는 로직 추가 필요 -->
             </div>
             <table class="recommand_date">
                 <tr>
                     <td>
-                        추천수 : 1,234
+                        추천수 : ${board.recommand_count}
                     </td>
                 </tr>
                 <tr>
-                    <td>2023.09.17 20:03 닉네임</td>
+                    <td>${board.regdate} &nbsp; {board.nickname}</td> <!-- TODO 날짜 형식 수정 필요 -->
                 </tr>
             </table>
             <!--<div class="recommand_count">추천수 : 1,234 <br>2023.09.17 20:03 닉네임</div>-->
@@ -200,8 +200,9 @@
 
     <!-- 내용 -->
     <div class="content_detail">
-        <div class="picture"><img src="imgView?file=mirro.jpg" alt="" style="width:350px"></div>
+        <div class="picture"><img src="imgView?file=${board.picture}" alt="" style="width:350px"></div>
         <br>
+        <!-- TODO : 토스트 에디터 데이터 저장 및 가져오기 해결 후 로직 변경 -->
         <div class="content">
             <div style="text-align : center;"> 재료 : 오감자, 체다치즈, 스트링치즈</div>
             <br><br>
@@ -250,10 +251,10 @@
     <!-- 수정, 삭제 버튼 -->
     <!-- 각 페이지로 이동하는 링크 추가 필요 -->
     <br>
-    <button class="mod_del" type="submit" id="board_modify" name="modify" formaction="board_modify" formmethod="get">
+    <button class="mod_del" type="submit" id="board_modify" name="modify" formaction="board_modify?board_id=${board.board_id}" formmethod="get">
         수정
     </button>
-    <button class="mod_del" type="submit" id="board_delete" name="board_delete" formaction="board_delete"
+    <button class="mod_del" type="submit" id="board_delete" name="board_delete" formaction="board_delete?board_id=${board.board_id}"
             formmethod="get"> 삭제
     </button>
     <br><br><br>

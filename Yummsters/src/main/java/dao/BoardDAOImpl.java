@@ -25,6 +25,14 @@ public class BoardDAOImpl implements BoardDAO{
         sqlSession.commit();
     }
 
+    // 게시글 번호로 게시글 정보 가져오기
+
+
+    @Override
+    public Board selectBoardOne(Integer board_id) throws Exception {
+        return sqlSession.selectOne("mapper.board.selectBoardOne", board_id);
+    }
+
     @Override
 	public List<Board> selectBoardListTop10(Integer row) throws Exception {
 		return sqlSession.selectList("mapper.board.selectBoardListTop10",row);
