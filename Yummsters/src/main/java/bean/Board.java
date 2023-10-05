@@ -11,7 +11,7 @@ public class Board {
     private String content; // 토스트 에디터로 작성한 레시피 내용
     private Integer recommand_count; // 추천(recommand) 수
     private List<Store_category> store_categoryList;
-    private Food_category food_category;
+    //private Food_category food_category;
 
     private LocalDateTime createdAt; // 레시피 생성 일자
     private LocalDateTime modifiedAt; // 레시피 수정 일자
@@ -22,15 +22,6 @@ public class Board {
 
     // 생성자
     public Board(){};
-
-    public Board(String title, String picture, String content, Integer recommand_count, List<Store_category> store_categoryList, Food_category food_category) {
-        this.title = title;
-        this.picture = picture;
-        this.content = content;
-        this.recommand_count = recommand_count;
-        this.store_categoryList = store_categoryList;
-        this.food_category = food_category;
-    }
 
 	public Integer getBoard_id() {
 		return board_id;
@@ -78,14 +69,6 @@ public class Board {
 
 	public void setStore_categoryList(List<Store_category> store_categoryList) {
 		this.store_categoryList = store_categoryList;
-	}
-
-	public Food_category getFood_category() {
-		return food_category;
-	}
-
-	public void setFood_category(Food_category food_category) {
-		this.food_category = food_category;
 	}
 
 	public LocalDateTime getCreatedAt() {
