@@ -6,6 +6,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import bean.Member;
+import service.MemberService;
+import service.MemberServiceImpl;
 
 /**
  * Servlet implementation class Login
@@ -33,8 +38,25 @@ public class Login extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		request.setCharacterEncoding("utf-8");
+		
+		String id = request.getParameter("id");
+		String password = request.getParameter("password");
+		
+		try {
+			MemberService service = new MemberServiceImpl();
+			// 로그인 시도
+			Member member = service.login(id, password);
+			// 세션 생성 및 "member"라는 이름으로 로그인한 회원 정보 저장
+			HttpSession session = request.getSession();
+			session.setAttribute("member", member);
+			// 메인페이지로 redirect
+			request.getRequestDispatcher("home.jsp").forward(request, response);
+		} catch (Exception e) {
+			request.setAttribute("err", e.getMessage());
+		}
+		
+		
 	}
 
 }
