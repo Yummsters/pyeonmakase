@@ -130,7 +130,7 @@
 <body>
 <jsp:include page="header.jsp"/>
 
-<form name="recipe_register" enctype="multipart/form-data">
+<form name="recipe_register" enctype="multipart/form-data" id="recipeForm">
     <div class="title_picture">
         <!-- 제목 입력 및 취소/저장 버튼 -->
         <div class="register_title">
@@ -139,11 +139,12 @@
             <button class="red" type="submit" id="cancel" name="cancel" formaction="register" formmethod="get">
                 취소
             </button>
-            <button class="green" type="submit" id="register" name="register" formaction="register" formmethod="post" formenctype="multipart/form-data">
+            <button class="green" type="submit" id="registerButton" name="register" formaction="register" formmethod="post" formenctype="multipart/form-data">
                 등록
             </button>
         </div>
         <br>
+
 
         <!-- 썸네일 선택 -->
         <div class="picture">
@@ -171,14 +172,12 @@
     <!-- 카테고리 선택 -->
     <div class="food_category">
         &nbsp;&nbsp;카테고리 선택 &nbsp;&nbsp;
-        <input type="checkbox" name="food" id="meal" value="meal">
+        <input type="radio" name="food" id="meal" value="1">
         <label for="meal">식사류</label>
-        <input type="checkbox" name="food" id="desert" value="desert">
+        <input type="radio" name="food" id="desert" value="2">
         <label for="desert">간식류</label>
-        <input type="checkbox" name="food" id="drink" value="drink">
+        <input type="radio" name="food" id="drink" value="3">
         <label for="drink">음료</label>
-        <input type="checkbox" name="food" id="ect" value="ect">
-        <label for="ect">기타</label>
     </div>
     <br>
 
@@ -237,10 +236,22 @@
             }*/
         });
         //editor.getHtml()을 사용해서 에디터 내용 수신
-        // document.querySelector('#contents').insertAdjacentHTML('afterbegin' ,editor.getHTML());
+        document.querySelector('#contents').insertAdjacentHTML('afterbegin', editor.getMarkdown())
+         document.querySelector('#contents').insertAdjacentHTML('afterbegin' ,editor.getHTML());
         // 콘솔창에 표시(브라우저에서 content 값 확인)
-        // console.log(editor.getHTML());
+
+        console.log(editor.getMarkdown())
+        console.log(editor.getHTML());
+
+        document.getElementById("registerButton").addEventListener("click", function (){
+            const editorContent = editor.getMarkdown();
+            document.getElementById("editorContent").value = editorContent;
+            document.getElementById("recipeForm").submit();
+        });
+
     </script>
+    <input type="hidden" name="editorContent" id="editorContent" value="">
+
 </form>
 
 <jsp:include page="footer.jsp"/>

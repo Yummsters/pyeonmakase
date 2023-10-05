@@ -10,26 +10,25 @@ public class Board {
     private String picture; // 레시피 대표 사진
     private String content; // 토스트 에디터로 작성한 레시피 내용
     private Integer recommand_count; // 추천(recommand) 수
-    private List<Store_category> store_categoryList;
-    private Food_category food_category;
+   // private List<Store_category> store_categoryList;
+
 
     private LocalDateTime createdAt; // 레시피 생성 일자
     private LocalDateTime modifiedAt; // 레시피 수정 일자
 
     // 매핑
     private String nickname; // 작성자
-    private Integer food_category_id; // 음식 카테고리
-
+	private Integer food_category_id; // 음식 카테고리
     // 생성자
     public Board(){};
 
-    public Board(String title, String picture, String content, Integer recommand_count, List<Store_category> store_categoryList, Food_category food_category) {
+    public Board(String title, String picture, String content, Integer recommand_count, Integer food_category) {
         this.title = title;
         this.picture = picture;
         this.content = content;
         this.recommand_count = recommand_count;
-        this.store_categoryList = store_categoryList;
-        this.food_category = food_category;
+        //this.store_categoryList = store_categoryList;
+        this.food_category_id = food_category_id;
     }
 
 	public Integer getBoard_id() {
@@ -72,20 +71,20 @@ public class Board {
 		this.recommand_count = recommand_count;
 	}
 
-	public List<Store_category> getStore_categoryList() {
-		return store_categoryList;
+	//public List<Store_category> getStore_categoryList() {
+	//	return store_categoryList;
+	//}
+
+	//public void setStore_categoryList(List<Store_category> store_categoryList) {
+	//	this.store_categoryList = store_categoryList;
+	//}
+
+	public Integer getFood_category_id() {
+		return food_category_id;
 	}
 
-	public void setStore_categoryList(List<Store_category> store_categoryList) {
-		this.store_categoryList = store_categoryList;
-	}
-
-	public Food_category getFood_category() {
-		return food_category;
-	}
-
-	public void setFood_category(Food_category food_category) {
-		this.food_category = food_category;
+	public void setFood_category_id(Integer food_category_id) {
+		this.food_category_id = food_category_id;
 	}
 
 	public LocalDateTime getCreatedAt() {
@@ -112,13 +111,4 @@ public class Board {
 		this.nickname = nickname;
 	}
 
-	public Integer getFood_category_id() {
-		return food_category_id;
-	}
-
-	public void setFood_category_id(Integer food_category_id) {
-		this.food_category_id = food_category_id;
-	}
-    
-    
 }
