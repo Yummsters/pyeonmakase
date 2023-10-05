@@ -25,19 +25,26 @@
             background-color: #EEC595;
 
          }
+        .card-box {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            margin: 0 auto;
+            max-width: 1000px;
+        }
         
-         .card {
-            width: 30%;
+        .card {
             margin: 10px;
-            float: left;
             padding: 10px;
             box-sizing: border-box;
             background-color: white;
             border-radius: 10px;
+            width: calc(33.33% - 20px);
+            margin-bottom: 20px;
         }
         .recommend {
             color:#00000080;
-            font-size: 16px;
+            font-size: 20px;
         }
         .thumbnail {
             position: relative;
@@ -85,8 +92,8 @@
         /* 타이틀 영역 끝 */
         
         a {
-	        text-decoration: none;
-	        color: black;
+           text-decoration: none;
+           color: black;
         }
 
     </style>
@@ -107,14 +114,7 @@
         <div class="more"><a href="mylist">더보기</a></div>
     </div>
     <div class="line"></div>
-    <div class="card" >
-        <div class="recommend">♥ 123</div>
-        <div class="thumbnail">
-            <img src="imgView?file=mirro.jpg" alt="">
-            <div class="store-name">{편의점 명}</div>
-        </div>
-        <div class="recipe-name">{레시피명}</div>
-    </div>
+     <div class="card-box">
     <div class="card" onclick="location.href={bno}">
         <div class="recommend">♥ 123</div>
         <div class="thumbnail">
@@ -130,6 +130,15 @@
             <div class="store-name">{편의점 명}</div>
         </div>
         <div class="recipe-name">{레시피명}</div>
+    </div>
+    <div class="card" onclick="location.href={bno}">
+        <div class="recommend">♥ 123</div>
+        <div class="thumbnail">
+            <img src="imgView?file=mirro.jpg" alt="">
+            <div class="store-name">{편의점 명}</div>
+        </div>
+        <div class="recipe-name">{레시피명}</div>
+    </div>
     </div>
 
 
@@ -140,7 +149,7 @@
     </div>
 
     <div class="line"></div>
-
+     <div class="card-box">
     <div class="card" onclick="location.href={bno}">
         <div class="recommend">♥ 123</div>
         <div class="thumbnail">
@@ -164,6 +173,7 @@
             <div class="store-name">{편의점 명}</div>
         </div>
         <div class="recipe-name">{레시피명}</div>
+    </div>
     </div>
 
 <jsp:include page="footer.jsp" />

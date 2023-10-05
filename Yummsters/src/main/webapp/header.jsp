@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
+     <style>
         * {
             /* margin:0 auto; */
             font-family: 'NanumSquareRound', sans-serif;
@@ -15,7 +16,7 @@
 
         body {
             margin: 0 auto;
-		    background-color: #FBF9F3;
+            background-color: #FBF9F3;
             width: 1000px;
             height: 200px;
         }
@@ -92,7 +93,7 @@
             border-color: #EEC595;
             border-radius: 50px;
             width: 100%;
-            height: 30%;
+            height: 40px;
             overflow: auto;
             font-size: 20px;
             outline: none;
@@ -132,6 +133,7 @@
 
     </style>
 </head>
+
 <body>
 <div class="container">
     <div class="header">
@@ -144,19 +146,22 @@
             <img src="imgView?file=searching.png" alt="My Image">
         </div>
         <nav>
-            <ul>
-                <li><a href="signup">회원<br>가입</a></li>
-                <li><a href="login">로그인</a></li>
-                
-            </ul>
-            <!-- 로그인 한 경우 -->
-<!--             <ul> -->
-<!--                 <li><a href="mypage">마이<br>페이지</a></li> -->
-<!--                 <li><a href="register">레시피<br>등록</a></li> -->
-<!--                 <li><a href="logout">로그<br>아웃</a></li> -->
-<!--             </ul> -->
+        	<c:choose>
+				<c:when test="${user eq Empty}">
+		            <ul>
+		                <li><a href="signup">회원<br>가입</a></li>
+		                <li><a href="login">로그인</a></li>
+		            </ul>
+            	</c:when>
+            	<c:otherwise>
+		             <ul>
+		                 <li><a href="mypage">마이<br>페이지</a></li>
+		                 <li><a href="register">레시피<br>등록</a></li>
+		                 <li><a href="logout">로그<br>아웃</a></li>
+		             </ul>
+             	</c:otherwise>
+             </c:choose>
         </nav>
-        
     </div>
     <div class="foodCategory">
         <ul>
