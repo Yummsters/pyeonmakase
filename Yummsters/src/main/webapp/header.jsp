@@ -97,6 +97,7 @@
             overflow: auto;
             font-size: 20px;
             outline: none;
+            box-sizing: content-box;
         }
 
         .search img {
