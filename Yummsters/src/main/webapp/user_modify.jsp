@@ -199,25 +199,25 @@
     <div class="title"><b>회원정보</b></div>
 
     <div class="name1" style="display:inline"><b>이름</b></div>
-    <div class="name2">오지윤</div>
+    <div class="name2">${member.member_name }</div>
 
 
     <div class="nickname1"  style="display:inline"><b>닉네임</b></div>
-    <input class="nickname2" type="text" value="떠뽀끼 킬러" name="nickname">
+    <input class="nickname2" type="text" value="${member.nickname}" name="nickname">
     <p><input id = "confirm1" type="submit" value="확인"></p>
 
 
     <div class="email1" style="display:inline"><b>이메일</b></div>
-    <input class="email2" type="text" value="yoon345@gamil.com" name="email">
+    <input class="email2" type="text" value="${member.email }" name="email">
     <p><input id = "confirm2" type="submit" value="확인"></p>
 
 
     <div class="pw1" style="display:inline"><b>비밀번호<br>수정</b></div>
-    <input class="pw2" type="text" value="quwerty1234!@" name="pw">
+    <input class="pw2" type="text" value="${member.member_pw }" name="pw">
     
 
     <!-- 버튼-->
-    <p><input id = "user_btn1" type="submit" value="회원정보 저장"></p>
+    <p><a href="user_info.jsp"><input id = "user_btn1" type="submit" value="회원정보 저장"></a></p>
     
 
 

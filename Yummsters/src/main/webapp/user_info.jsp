@@ -126,8 +126,6 @@
             width: 250px;
             height: 30px;
             font-size: 20px;
-            
-        
             color: #524434;
             background-color: #EEC595;
             border-radius: 30px;
@@ -146,7 +144,37 @@
             background-color: #EEC595;
             border-radius: 30px;
          }
+         .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            z-index: 1000;
+        }
     </style>
+    <script >
+    <!-- 팝업 창 -->
+    function button_event1(){
+        var text;
+        var view=prompt("회원정보를 수정하시려면 \n 비밀번호를 입력해주세요. ","비밀번호를 입력하세요");
+       if(view) {
+            location.href = "user_modify.jsp";
+       }
+        
+    }
+    function button_event2(){
+     var text;
+     var view=prompt("정말 탈퇴하시겠습니까? \n 탈퇴하시면 회원정보를 되돌릴 수 없습니다. ","비밀번호를 입력하세요");
+    if(view){
+    	
+   	 }
+    }
+    </script>
+   
 </head>
 <body>
      <!-- header  -->
@@ -165,19 +193,21 @@
     <div class="title"><b>회원정보</b></div>
 
     <div class="name1" style="display:inline"><b>이름</b></div>
-    <div class="name2">오지윤</div>
+    <div class="name2">${member.member_name }</div>
     <div class="nickname1" style="display:inline"><b>닉네임</b></div>
-    <div class="nickname2">떠뽀끼킬러</div>
+    <div class="nickname2">${member.nickname }</div>
     <div class="email1" style="display:inline"><b>이메일</b></div>
-    <div class="email2">yoon345@gmail.com</div>
+    <div class="email2">${member.email }</div>
 
     <!-- 버튼-->
-    <p><a href="usermodify"><input id = "user_btn1" type="submit" value="회원정보 수정"></a></p>
-    <p><input id = "user_btn2" type="submit" value="회원 탈퇴"></p>
-
-
+    <p><button onclick="button_event1()" id = "user_btn1" >회원정보 수정</button></p>
+   
+    <p><button onclick="button_event2()" id = "user_btn2" >회원탈퇴</button></p>
+   
     </div><br>
+   
 
+	
 
     <jsp:include page="footer.jsp" />
 </body>
