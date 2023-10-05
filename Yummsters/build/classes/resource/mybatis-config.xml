@@ -5,6 +5,7 @@
 
 <configuration>
 	<typeAliases>
+		<typeAlias type="bean.Board" alias="Board"/>
 		<typeAlias type="bean.Member" alias="Member"/>
 	</typeAliases>
 	
@@ -12,13 +13,14 @@
 		<environment id="development">
 			<transactionManager type="JDBC"/>
   			<dataSource type="JNDI">
-				<property name="data_source" value="java:comp/env/jdbc/kosta"/>
+				<property name="data_source" value="java:comp/env/jdbc/MYDB2"/>
 			</dataSource>
    		</environment>
 	</environments>
 	
 	<mappers>
-		<mapper resource="mapper/Member.xml"/>	
+		<mapper resource="/mapper/Board.xml"/>
+		<mapper resource="/mapper/Member.xml"/>	
 	</mappers>
 
 </configuration>

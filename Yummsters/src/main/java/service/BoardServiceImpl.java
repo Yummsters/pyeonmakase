@@ -17,3 +17,5 @@ public class BoardServiceImpl implements BoardService{
         boardDao.insertBoard(board);
     }
 }
+
+

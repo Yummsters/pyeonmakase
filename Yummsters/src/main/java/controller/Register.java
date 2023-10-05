@@ -1,17 +1,19 @@
 package controller;
 
-import bean.Board;
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-import service.BoardService;
-import service.BoardServiceImpl;
-
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
+import bean.Board;
+import service.BoardService;
+import service.BoardServiceImpl;
 
 @WebServlet("/register")
 public class Register extends HttpServlet {
