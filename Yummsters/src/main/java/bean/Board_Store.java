@@ -22,11 +22,5 @@ public class Board_Store {
 	public void setStore_category_id(Integer store_category_id) {
 		this.store_category_id = store_category_id;
 	}
-	
-	public Board_Store(Integer board_store_id, Integer board_id, Integer store_category_id) {
-		super();
-		this.board_store_id = board_store_id;
-		this.board_id = board_id;
-		this.store_category_id = store_category_id;
-	}
+
 }

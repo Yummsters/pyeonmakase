@@ -13,8 +13,8 @@ public class Board {
     private List<Store_category> store_categoryList;
     //private Food_category food_category;
 
-    private LocalDateTime createdAt; // 레시피 생성 일자
-    private LocalDateTime modifiedAt; // 레시피 수정 일자
+    private LocalDateTime regdate; // 레시피 생성 일자
+    private LocalDateTime moddate; // 레시피 수정 일자
 
     // 매핑
     private String nickname; // 작성자
@@ -68,20 +68,20 @@ public class Board {
 		this.store_categoryList = store_categoryList;
 	}
 
-	public LocalDateTime getCreatedAt() {
-		return createdAt;
+	public LocalDateTime getRegdate() {
+		return regdate;
 	}
 
-	public void setCreatedAt(LocalDateTime createdAt) {
-		this.createdAt = createdAt;
+	public void setRegdate(LocalDateTime regdate) {
+		this.regdate = regdate;
 	}
 
-	public LocalDateTime getModifiedAt() {
-		return modifiedAt;
+	public LocalDateTime getModdate() {
+		return moddate;
 	}
 
-	public void setModifiedAt(LocalDateTime modifiedAt) {
-		this.modifiedAt = modifiedAt;
+	public void setModdate(LocalDateTime moddate) {
+		this.moddate = moddate;
 	}
 
 	public String getNickname() {

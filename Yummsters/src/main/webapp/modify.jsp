@@ -145,11 +145,12 @@
 <body>
 <jsp:include page="header.jsp"/>
 <form name="recipe_modify">
+    <input type="hidden" name="board_id" value="${board.board_id}">
     <div class="title_picture">
         <!-- 제목 입력 및 취소/저장 버튼 -->
         <div class="register_title">
             레시피명 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input id="title" type="text" name=board_title placeholder="대표 제목을 입력하세요." required> &nbsp;
+            <input id="title" type="text" name=board_title value="${board.title}"> &nbsp;
             <button class="red" type="submit" id="cancel" name="cancel" formaction="modify" formmethod="get">
                 취소
             </button>
@@ -161,7 +162,7 @@
         <!-- 썸네일 선택 -->
         <div class="picture">
             썸네일 선택 &nbsp;
-            <input type="file" name="board_picture" required>
+            <input type="file" name="board_picture">
         </div>
     </div>
     <br>
@@ -169,29 +170,27 @@
     <!-- 편의점 선택 -->
     <div class="store_category">
         &nbsp;&nbsp; 편의점 선택 &nbsp&nbsp;&nbsp; &nbsp;&nbsp;
-        <input type="checkbox" name="store" id="all" value="all">
+        <input type="checkbox" name="store" id="all" value="1">
         <label for="all">전체</label>
-        <input type="checkbox" name="store" id="cu" value="cu">
+        <input type="checkbox" name="store" id="cu" value="2">
         <label for="cu"><img src="imgView?file=cu.png" alt=""></label>
-        <input type="checkbox" name="store" id="gs" value="gs">
+        <input type="checkbox" name="store" id="gs" value="3">
         <label for="gs"><img src="imgView?file=gs.png" alt=""></label>
-        <input type="checkbox" name="store" id="seven" value="seven">
+        <input type="checkbox" name="store" id="seven" value="4">
         <label for="seven"><img src="imgView?file=seven.png" alt=""></label>
-        <input type="checkbox" name="store" id="etc" value="etc">
+        <input type="checkbox" name="store" id="etc" value="5">
         <label for="etc">기타</label>
     </div>
 
     <!-- 카테고리 선택 -->
     <div class="food_category">
         &nbsp;&nbsp;카테고리 선택 &nbsp;&nbsp;
-        <input type="checkbox" name="food" id="meal" value="meal">
+        <input type="checkbox" name="food" id="meal" value="1">
         <label for="meal">식사류</label>
-        <input type="checkbox" name="food" id="desert" value="desert">
+        <input type="checkbox" name="food" id="desert" value="2">
         <label for="desert">간식류</label>
-        <input type="checkbox" name="food" id="drink" value="drink">
+        <input type="checkbox" name="food" id="drink" value="3">
         <label for="drink">음료</label>
-        <input type="checkbox" name="food" id="ect" value="ect">
-        <label for="ect">기타</label>
     </div>
     <br>
 
@@ -207,11 +206,11 @@
             height: '500px',                        // 에디터 영역의 높이 값 (OOOpx || auto)
             initialEditType: 'markdown',            // 최초로 보여줄 에디터 타입 (markdown || wysiwyg)
             initialValue: '내용을 입력해 주세요.',     // 내용의 초기 값으로, 반드시 마크다운 문자열 형태여야 함
-            previewStyle: 'vertical',                // 마크다운 ß프리뷰 스타일 (tab || vertical)
+            previewStyle: 'vertical'//,                // 마크다운 ß프리뷰 스타일 (tab || vertical)
 
             // 이미지가 Base64 형식으로 입력되는 것 가로채주는 옵션
             // 추후 jsp 파일로 바꾼 이후 서블릿의 메서드를 이용해 매핑하여 업로드 이미지를 처리할 컨트롤러 생성 필요
-            hooks: {
+            /*hooks: {
                 addImageBlobHook: (blob, callback) => {
                     // blob : Java Script 파일 객체
                     console.log(blob);
@@ -248,7 +247,7 @@
                         }
                     });
                 }
-            }
+            }*/
         });
         //editor.getHtml()을 사용해서 에디터 내용 수신
         document.querySelector('#contents').insertAdjacentHTML('afterbegin', editor.getHTML());
