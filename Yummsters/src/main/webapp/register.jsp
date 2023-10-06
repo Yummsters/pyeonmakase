@@ -136,8 +136,8 @@
         <!-- 제목 입력 및 취소/저장 버튼 -->
         <div class="register_title">
             레시피명 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input id="title" type="text" name=board_title placeholder="대표 제목을 입력하세요."> &nbsp;
-            <button class="red" type="submit" id="cancel" name="cancel" formaction="register" formmethod="get">
+            <input id="title" type="text" name=board_title placeholder="대표 제목을 입력하세요." required="required"> &nbsp;
+            <button class="red" id="cancel" name="cancel" formaction="register" formmethod="get">
                 취소
             </button>
             <button class="green" type="submit" id="registerButton" name="register" formaction="register" formmethod="post" formenctype="multipart/form-data">
@@ -149,7 +149,7 @@
         <!-- 썸네일 선택 -->
         <div class="picture">
             썸네일 선택 &nbsp;
-            <input type="file" name="board_picture">
+            <input type="file" name="board_picture" required="required">
         </div>
     </div>
     <br>
@@ -238,18 +238,18 @@
         });
         //editor.getHtml()을 사용해서 에디터 내용 수신
         // document.querySelector('#contents').insertAdjacentHTML('afterbegin' ,editor.getHTML());
-        // 콘솔창에 표시(브라우저에서 content 값 확인)
-        // console.log(editor.getHTML());
 
-        console.log(editor.getMarkdown())
+        // 콘솔창에 표시(브라우저에서 content 값 확인)
+        console.log(editor.getMarkdown());
         console.log(editor.getHTML());
+
         document.getElementById("registerButton").addEventListener("click", function (){
-            const editorContent = editor.getMarkdown();
-            document.getElementById("editorContent").value = editorContent;
-            document.getElementById("recipeForm").submit();
+            document.getElementById("editorContent").value = editor.getMarkdown();
+            document.getElementById("register").submit();
         });
+
     </script>
-    <input type="hidden" name="editorContent" id="editorContent" value="">
+    <input type=hidden" name="editorContent" id="editorContent" value="">
 
 </form>
 
