@@ -156,7 +156,7 @@
 
     <!-- 편의점 선택 -->
     <div class="store_category">
-        &nbsp;&nbsp; 편의점 선택 &nbsp;p&nbsp;&nbsp; &nbsp;&nbsp;
+        &nbsp;&nbsp; 편의점 선택 &nbsp&nbsp;&nbsp; &nbsp;&nbsp;
         <input type="checkbox" name="store" id="all" value="all">
         <label for="all">전체</label>
         <input type="checkbox" name="store" id="cu" value="cu">
