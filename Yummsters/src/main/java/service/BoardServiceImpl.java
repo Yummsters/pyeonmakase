@@ -16,5 +16,4 @@ public class BoardServiceImpl implements BoardService{
     public void boardRegister(Board board) throws Exception {
         boardDao.insertBoard(board);
     }
-    
 }
