@@ -33,6 +33,7 @@
 	background-color: white;
 	border-radius: 10px;
 	width: calc(20% - 20px);
+	height: 300px;
 	margin-bottom: 20px;
 }
 
@@ -53,19 +54,10 @@
 	/* width: 90%; */
 }
 
-.store-name {
-	position: absolute;
-	bottom: 0;
-	right: 0;
-	background-color: rgba(0, 0, 0, 0.7);
-	color: #fff;
-	padding: 5px;
-	font-size: 16px;
-}
-
 .recipe-name {
 	text-align: center;
 	font-size: 20px;
+	line-height: 50px;
 }
 
 /* 레시피 카드 영역 끝 */
@@ -159,7 +151,6 @@
 				<div class="recommend">♥ 123</div>
 				<div class="thumbnail">
 					<img src="imgView?file=mirro.jpg" alt="">
-					<div class="store-name">{편의점 명}</div>
 				</div>
 				<div class="recipe-name">{레시피명}</div>
 			</div>
@@ -167,7 +158,6 @@
 				<div class="recommend">♥ 123</div>
 				<div class="thumbnail">
 					<img src="./imgView?file=mirro.jpg" alt="">
-					<div class="store-name">{편의점 명}</div>
 				</div>
 				<div class="recipe-name">{레시피명}</div>
 			</div>
@@ -175,7 +165,6 @@
 				<div class="recommend">♥ 123</div>
 				<div class="thumbnail">
 					<img src="imgView?file=mirro.jpg" alt="">
-					<div class="store-name">{편의점 명}</div>
 				</div>
 				<div class="recipe-name">{레시피명}</div>
 			</div>
@@ -183,7 +172,6 @@
 				<div class="recommend">♥ 123</div>
 				<div class="thumbnail">
 					<img src="imgView?file=mirro.jpg" alt="">
-					<div class="store-name">{편의점 명}</div>
 				</div>
 				<div class="recipe-name">{레시피명}</div>
 			</div>
@@ -191,7 +179,6 @@
 				<div class="recommend">♥ 123</div>
 				<div class="thumbnail">
 					<img src="imgView?file=mirro.jpg" alt="">
-					<div class="store-name">{편의점 명}</div>
 				</div>
 				<div class="recipe-name">{레시피명}</div>
 			</div>
@@ -199,7 +186,6 @@
 				<div class="recommend">♥ 123</div>
 				<div class="thumbnail">
 					<img src="imgView?file=mirro.jpg" alt="">
-					<div class="store-name">{편의점 명}</div>
 				</div>
 				<div class="recipe-name">{레시피명}</div>
 			</div>
@@ -218,7 +204,6 @@
 			<div class="recommend">♥ 123</div>
 			<div class="thumbnail">
 				<img src="imgView?file=mirro.jpg" alt="">
-				<div class="store-name">{편의점 명}</div>
 			</div>
 			<div class="recipe-name">{레시피명}</div>
 		</div>
@@ -226,7 +211,6 @@
 			<div class="recommend">♥ 123</div>
 			<div class="thumbnail">
 				<img src="imgView?file=mirro.jpg" alt="">
-				<div class="store-name">{편의점 명}</div>
 			</div>
 			<div class="recipe-name">{레시피명}</div>
 		</div>
@@ -234,7 +218,6 @@
 			<div class="recommend">♥ 123</div>
 			<div class="thumbnail">
 				<img src="imgView?file=mirro.jpg" alt="">
-				<div class="store-name">{편의점 명}</div>
 			</div>
 			<div class="recipe-name">{레시피명}</div>
 		</div>
@@ -242,7 +225,6 @@
 			<div class="recommend">♥ 123</div>
 			<div class="thumbnail">
 				<img src="imgView?file=mirro.jpg" alt="">
-				<div class="store-name">{편의점 명}</div>
 			</div>
 			<div class="recipe-name">{레시피명}</div>
 		</div>
@@ -250,7 +232,6 @@
 			<div class="recommend">♥ 123</div>
 			<div class="thumbnail">
 				<img src="imgView?file=mirro.jpg" alt="">
-				<div class="store-name">{편의점 명}</div>
 			</div>
 			<div class="recipe-name">{레시피명}</div>
 		</div>

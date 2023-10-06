@@ -30,3 +30,5 @@ public class BoardServiceImpl implements BoardService{
         return boardDao.selectBoardOne(board_id);
     }
 }
+
+
