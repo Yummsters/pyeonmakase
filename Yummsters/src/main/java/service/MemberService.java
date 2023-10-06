@@ -18,4 +18,7 @@ public interface MemberService {
 	
 	// 아이디 중복확인
 	boolean isIdDuplicate(String member_id) throws Exception;
+	
+	//회원 탈퇴
+	void memberRemove(Integer member_pw) throws Exception;
 }

@@ -50,4 +50,11 @@ public class MemberServiceImpl implements MemberService{
         return count > 0;
 
 	}
+	//회원 탈퇴
+	@Override
+	public void memberRemove(Integer member_pw) throws Exception {
+		memberDAO.deleteMember(member_pw);
+		
+	}
+	
 }

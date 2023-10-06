@@ -17,4 +17,7 @@ public interface MemberDAO {
 	
 	// 로그인
 	Member selectMember(String member_id) throws Exception;
+	
+	//회원탈퇴
+	void deleteMember(Integer member_pw) throws Exception;
 }

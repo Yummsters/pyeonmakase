@@ -40,4 +40,12 @@ public class MemberDAOImpl implements MemberDAO{
 	public Member selectMember(String member_id) throws Exception {
 		return sqlSession.selectOne("mapper.member.selectMember", member_id);	
 	}
+	
+	//회원 탈퇴
+	@Override
+	public void deleteMember(Integer member_pw) throws Exception {
+		sqlSession.delete("mapper.member.deleteMember", member_pw);
+		sqlSession.commit();
+		
+	}
 }

@@ -102,7 +102,7 @@
 <jsp:include page="header.jsp" />
 
     <div class="title-box">   
-        <div class="title">${member.nickname } 마이페이지</div>  
+        <div class="title">${member.nickname } 셰프님 마이페이지</div>  
         <p><a href="userinfo"><input id = "user_btn" type="submit" value="회원정보"></a></p>
     </div>
 

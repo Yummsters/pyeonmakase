@@ -38,4 +38,10 @@
 			select * from member where member_id = #{member_id}
 		]]>
 	</select>
+	<!-- 회원 탈퇴 -->
+	<delete id="deleteMember" parameterType="Integer">
+		<![CDATA[
+			delete from member where member_pw = #{member_pw}
+		]]>
+	</delete>
 </mapper>
