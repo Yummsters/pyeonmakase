@@ -39,7 +39,7 @@ public class Register extends HttpServlet {
         //Member member = (Member)session.getAttribute("user"); // TODO : 로그인 한 회원 key에 따라 변경 필요
         //String nickname = member.getNickname();
 
-        // 로그인 한 회원 조회
+        // Board 객체 생성 및 정보 추가
         Board board = new Board();
         board.setTitle(title);
         board.setPicture(picture);
