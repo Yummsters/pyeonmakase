@@ -207,7 +207,7 @@
                     formData.append('image', blob);
 
                     let url = '/images/';
-                    $.ajax({ // 이미지 업로드 시 로직 처리 필요s
+                    $.ajax({ // 이미지 업로드 시 로직 처리 필요
                         type: 'POST',
                         enctype: 'multipart/form-data',
                         url: '/ImageUploadServlet', // 매핑할 서블릿 경로 설정하여 호출 진행
@@ -241,15 +241,17 @@
 
         // 콘솔창에 표시(브라우저에서 content 값 확인)
         console.log(editor.getMarkdown());
-        console.log(editor.getHTML());
+    </script>
 
+    <!-- 토스트 에디터에 작성한 내용 디비 저장을 위한 div -->
+    <input type="hidden" name="editorContent" id="editorContent" value="">
+    <script>
+        // 버튼 클릭시 토스트 에디터에 작성한 내용을 div에 저장해서 req로 보내기
         document.getElementById("registerButton").addEventListener("click", function (){
             document.getElementById("editorContent").value = editor.getMarkdown();
             document.getElementById("register").submit();
         });
-
     </script>
-    <input type=hidden" name="editorContent" id="editorContent" value="">
 
 </form>
 
