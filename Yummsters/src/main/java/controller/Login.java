@@ -31,7 +31,12 @@ public class Login extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("login.jsp").forward(request, response);
+	    HttpSession session = request.getSession();
+	    if (session.getAttribute("member") == null) {
+	    	request.getRequestDispatcher("login.jsp").forward(request, response);
+	    } else {
+	    	request.getRequestDispatcher("home.jsp").forward(request, response);
+	    }
 	}
 
 	/**
@@ -50,13 +55,11 @@ public class Login extends HttpServlet {
 			// 세션 생성 및 "member"라는 이름으로 로그인한 회원 정보 저장
 			HttpSession session = request.getSession();
 			session.setAttribute("member", member);
-			// 메인페이지로 redirect
 			request.getRequestDispatcher("home.jsp").forward(request, response);
+			
 		} catch (Exception e) {
-			request.setAttribute("err", e.getMessage());
-		}
-		
-		
+			response.getWriter().print("fail");
+		}	
 	}
 
 }

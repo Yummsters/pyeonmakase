@@ -16,28 +16,20 @@ public class MemberDAOImpl implements MemberDAO{
 		sqlSession.insert("mapper.member.insertMember", member);
 		sqlSession.commit();
 	}
-
-	// 회원가입 이메일 중복확인
-	@Override
-	public int countNickname(String nickname) throws Exception {
-		return sqlSession.selectOne("mapper.member.countNickname", nickname);
-	}
-
-	// 회원가입 이메일 중복확인
-	@Override
-	public int countEmail(String email) throws Exception {
-		return sqlSession.selectOne("mapper.member.countEmail", email);
-	}
-
-	// 회원가입 아이디 중복확인
-	@Override
-	public int countId(String member_id) throws Exception {
-		return sqlSession.selectOne("mapper.member.countId", member_id);
-	}
 	
-	// 로그인을 위한 selectMember
+	// 아이디 중복확인 및 로그인을 위한 selectMember
 	@Override
-	public Member selectMember(String member_id) throws Exception {
-		return sqlSession.selectOne("mapper.member.selectMember", member_id);	
+	public Member selectId(String member_id) throws Exception {
+		return sqlSession.selectOne("mapper.member.selectId", member_id);	
+	}
+
+	@Override
+	public Member selectNickname(String nickname) throws Exception {
+		return sqlSession.selectOne("mapper.member.selectNickname", nickname);
+	}
+
+	@Override
+	public Member selectEmail(String email) throws Exception {
+		return sqlSession.selectOne("mapper.member.selectEmail", email);
 	}
 }
