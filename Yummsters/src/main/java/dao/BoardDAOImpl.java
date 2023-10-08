@@ -34,7 +34,12 @@ public class BoardDAOImpl implements BoardDAO{
     }
 
     @Override
-	public List<Board> selectBoardListTop10(Integer row) throws Exception {
-		return sqlSession.selectList("mapper.board.selectBoardListTop10",row);
+    public List<Board> selectBoardList(Integer row) throws Exception {
+    	return sqlSession.selectList("mapper.board.selectBoardList", row);
+    }
+    
+	@Override
+	public List<Board> selectBoardListTop10() throws Exception {
+		return sqlSession.selectList("mapper.board.selectBoardListTop10");
 	}
 }
