@@ -11,4 +11,6 @@ public interface BoardService {
     Board boardDetail(Integer board_id) throws Exception;
     Map<String,Object> boardList(Integer row) throws Exception;
     Map<String,Object> boardListTop10() throws Exception;
+    Map<String,Object> wishList(Integer row) throws Exception;
+    Map<String,Object> myList(Integer row) throws Exception;
 }

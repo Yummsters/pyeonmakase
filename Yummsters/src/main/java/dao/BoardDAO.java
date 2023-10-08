@@ -11,4 +11,6 @@ public interface BoardDAO {
     Board selectBoardOne(Integer board_id) throws Exception;
     List<Board> selectBoardList(Integer row) throws Exception;
     List<Board> selectBoardListTop10() throws Exception;
+    List<Board> selectWishList(Integer row) throws Exception;
+    List<Board> selectMyList(Integer row) throws Exception;
 }

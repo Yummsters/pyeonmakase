@@ -34,10 +34,10 @@ public class BoardServiceImpl implements BoardService{
         return boardDao.selectBoardOne(board_id);
     }
     
-    // home에서 최신순으로 5개의 게시글 조회
+    // 최신순으로 row개의 게시글 조회
     @Override
     public Map<String, Object> boardList(Integer row) throws Exception {
-    	List<Board> boardList = boardDao.selectBoardList(5);
+    	List<Board> boardList = boardDao.selectBoardList(row);
 		Map<String,Object> map = new HashMap<>();
 		map.put("boardList", boardList);
 		return map;
@@ -49,6 +49,22 @@ public class BoardServiceImpl implements BoardService{
 		List<Board> boardListTop10 = boardDao.selectBoardListTop10();
 		Map<String,Object> map = new HashMap<>();
 		map.put("boardListTop10", boardListTop10);
+		return map;
+	}
+
+	@Override
+	public Map<String, Object> wishList(Integer row) throws Exception {
+		List<Board> wishList = boardDao.selectWishList(row);
+		Map<String,Object> map = new HashMap<>();
+		map.put("wishList", wishList);
+		return map;
+	}
+
+	@Override
+	public Map<String, Object> myList(Integer row) throws Exception {
+		List<Board> myList = boardDao.selectMyList(row);
+		Map<String,Object> map = new HashMap<>();
+		map.put("myList", myList);
 		return map;
 	}
 }
