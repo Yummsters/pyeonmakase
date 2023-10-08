@@ -7,20 +7,35 @@
         insert into board (title, picture, content, nickname, food_category_id) values(#{title}, #{picture}, #{content}, #{nickname}, #{food_category_id})
         ]]>
     </insert>
-	<select id="selectBoardListTop10" parameterType="Integer" resultType="Board">
-		<![CDATA[
-			select b.title,b.picture,b.recommand_count,sc.store_category_name
-			from board b
-			join board_store bs on b.board_id=bs.board.id
-			join store_category sc on bs.store_category_id=sc.store_category_id
-			group by b.board_id
-			order by b.recommand_count desc
-			limit 10;
-		]]>
-	</select>
+<!-- 	<select id="selectBoardListTop10" parameterType="Integer" resultType="Board"> -->
+<!-- 		<![CDATA[ -->
+<!-- 			select b.title,b.picture,b.recommand_count,sc.store_category_name -->
+<!-- 			from board b -->
+<!-- 			join board_store bs on b.board_id=bs.board.id -->
+<!-- 			join store_category sc on bs.store_category_id=sc.store_category_id -->
+<!-- 			group by b.board_id -->
+<!-- 			order by b.recommand_count desc -->
+<!-- 			limit 10; -->
+<!-- 		]]> -->
+<!-- 	</select>  -->
 	<select id="selectBoardOne" parameterType="Integer" resultType="Board">
 		<![CDATA[
 			select * from board where board_id=#{board_id}
+		]]>
+	</select>
+	
+	<!-- 선진 작성 부분 -->
+	<!-- main_list -->
+	<select id="selectBoardList" resultType="Board">
+		<![CDATA[
+			select * from Board order by regdate desc
+		]]>
+	</select>
+	
+	<!-- foodCategory별 list 출력 -->
+	<select id="selectBoardByFood" parameterType="Integer" resultType="Board">
+		<![CDATA[
+			select * from Board where food_category_id = #{foodId} order by regdate desc
 		]]>
 	</select>
 </mapper>

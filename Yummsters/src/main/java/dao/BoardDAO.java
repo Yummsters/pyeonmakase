@@ -11,4 +11,10 @@ public interface BoardDAO {
     Board selectBoardOne(Integer board_id) throws Exception;
     List<Board> selectBoardList(Integer row) throws Exception;
     List<Board> selectBoardListTop10() throws Exception;
+    
+    // 선진 작성 부분---
+    // main_list
+    List<Board> selectBoardList() throws Exception;
+    // main_list by foodCategory
+    List<Board> selectBoardByFood(Integer foodId) throws Exception;
 }

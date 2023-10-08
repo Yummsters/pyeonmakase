@@ -166,9 +166,9 @@
     </div>
     <div class="foodCategory">
         <ul>
-            <li><a href="#">식사류</a></li>
-            <li><a href="#">간식류</a></li>
-            <li><a href="#">음료</a></li>
+            <li><a href="mainlist?foodId=1">식사류</a></li>
+            <li><a href="mainlist?foodId=2">간식류</a></li>
+            <li><a href="mainlist?foodId=3">음료</a></li>
         </ul>
         <hr>
     </div>

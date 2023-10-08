@@ -51,6 +51,18 @@ public class BoardServiceImpl implements BoardService{
 		map.put("boardListTop10", boardListTop10);
 		return map;
 	}
+	
+    // 선진 작성 부분 
+    // main-list
+	@Override
+	public List<Board> boardAllList() throws Exception {
+		return boardDao.selectBoardList();
+	}
+    // main-list by food
+	@Override
+	public List<Board> boardListByFood(Integer foodId) throws Exception {
+		return boardDao.selectBoardByFood(foodId);
+	}
 }
 
 
