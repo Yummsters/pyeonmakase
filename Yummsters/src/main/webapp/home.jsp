@@ -151,7 +151,7 @@
 		<div class="card-slider">
 			<c:forEach var="board" items="${boardListTop10}">
 				<div class="card">
-					<div class="recommend">♥ ${board.likecount}</div>
+					<div class="recommend">♥ ${board.recommand_count}</div>
 					<div class="thumbnail">
 						<img src="imgView?file=${board.picture}" alt="">
 					</div>
@@ -175,7 +175,7 @@
 		<div class="card">
 			<c:forEach var="board" items="${boardList}">
 				<div class="card">
-					<div class="recommend">♥ ${board.likecount}</div>
+					<div class="recommend">♥ ${board.recommand_count}</div>
 					<div class="thumbnail">
 						<img src="imgView?file=${board.picture}" alt="">
 					</div>

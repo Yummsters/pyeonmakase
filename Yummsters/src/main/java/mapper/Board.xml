@@ -15,7 +15,7 @@
 			left join store_category sc on bs.store_category_id=sc.store_category_id
 			group by b.board_id
 			order by b.board_id desc
-			limit 10;
+			limit ${row};
 		]]>
 	</select>
 	<select id="selectBoardListTop10" parameterType="Integer" resultType="Board">
