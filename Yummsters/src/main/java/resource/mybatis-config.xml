@@ -13,7 +13,7 @@
 		<environment id="development">
 			<transactionManager type="JDBC"/>
   			<dataSource type="JNDI">
-				<property name="data_source" value="java:comp/env/jdbc/kosta"/>
+				<property name="data_source" value="java:comp/env/jdbc/MYDB2"/>
 			</dataSource>
    		</environment>
 	</environments>
