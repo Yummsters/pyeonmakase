@@ -113,6 +113,18 @@ public class BoardServiceImpl implements BoardService{
 		List<Board> myList = boardDao.selectMyList(member, row);
 		return myList;
 	}
+	
+    // 선진 작성 부분 
+    // main-list
+	@Override
+	public List<Board> boardAllList() throws Exception {
+		return boardDao.selectBoardList();
+	}
+    // main-list by food
+	@Override
+	public List<Board> boardListByFood(Integer foodId) throws Exception {
+		return boardDao.selectBoardByFood(foodId);
+	}
 }
 
 

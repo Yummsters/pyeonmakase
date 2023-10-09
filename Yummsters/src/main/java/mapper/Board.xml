@@ -9,7 +9,7 @@
     </insert>
     <select id="selectBoardList" parameterType="Integer" resultType="Board">
 		<![CDATA[
-			select b.title,b.picture,b.recommand_count,group_concat(sc.store_category_name) as store_name
+			select b.title,b.picture,b.recommand_count,group_concat(sc.store_category_name) as store_category_name
 			from board b
 			left join board_store bs on b.board_id=bs.board_id
 			left join store_category sc on bs.store_category_id=sc.store_category_id
@@ -20,7 +20,7 @@
 	</select>
 	<select id="selectBoardListTop10" parameterType="Integer" resultType="Board">
 		<![CDATA[
-			select b.title,b.picture,b.recommand_count,group_concat(sc.store_category_name) as store_name
+			select b.title,b.picture,b.recommand_count,group_concat(sc.store_category_name) as store_category_name
 			from board b
 			left join board_store bs on b.board_id=bs.board_id
 			left join store_category sc on bs.store_category_id=sc.store_category_id
@@ -29,14 +29,29 @@
 			limit 10;
 		]]>
 	</select>
-	<select id="selectBoardOne" parameterType="Integer" resultType="Board">
+	
+	<!-- 선진 작성 부분 -->
+	<!-- main_list -->
+	<select id="selectBoardList" resultType="Board">
 		<![CDATA[
-			select * from board where board_id=#{board_id}
+			select b.*, s.* from board b join board_store bs using(board_id)
+				join store_category s using(store_category_id)
+			order by regdate desc
+		]]>
+	</select>
+	
+	<!-- foodCategory별 list 출력 -->
+	<select id="selectBoardByFood" parameterType="Integer" resultType="Board">
+		<![CDATA[
+			select b.*, s.* from board b join board_store bs using(board_id)
+				join store_category s using(store_category_id)
+			where b.food_category_id = #{foodId} 
+			order by regdate desc
 		]]>
 	</select>
 	<select id="selectWishList" resultType="Board">
 		<![CDATA[
-			select b.title,b.picture,b.recommand_count,group_concat(sc.store_category_name) as store_name
+			select b.title,b.picture,b.recommand_count,group_concat(sc.store_category_name) as store_category_name
 			from board b
 			left join board_store bs on b.board_id=bs.board_id
 			left join store_category sc on bs.store_category_id=sc.store_category_id
@@ -49,7 +64,7 @@
 	</select>
 	<select id="selectMyList" resultType="Board">
 		<![CDATA[
-			select b.title,b.picture,b.recommand_count,group_concat(sc.store_category_name) as store_name
+			select b.title,b.picture,b.recommand_count,group_concat(sc.store_category_name) as store_category_name
 			from board b
 			left join board_store bs on b.board_id=bs.board_id
 			left join store_category sc on bs.store_category_id=sc.store_category_id

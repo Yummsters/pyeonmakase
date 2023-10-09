@@ -19,10 +19,16 @@ public class Board {
     // 매핑
     private String nickname; // 작성자
     private Integer food_category_id; // 음식 카테고리
+    private String store_category_name; // 편의점명    
     
-    // 커스텀 컬럼
-    private String store_name;
-    
+	public String getStore_category_name() {
+		return store_category_name;
+	}
+
+	public void setStore_category_name(String store_category_name) {
+		this.store_category_name = store_category_name;
+	}
+
 	public Integer getBoard_id() {
 		return board_id;
 	}
@@ -103,13 +109,4 @@ public class Board {
 		this.food_category_id = food_category_id;
 	}
 
-	public String getStore_name() {
-		return store_name;
-	}
-
-	public void setStore_name(String store_name) {
-		this.store_name = store_name;
-	}
-    
-    
 }
