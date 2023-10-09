@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.recommand">
+    <insert id="insertRecommand" parameterType="hashmap" useGeneratedKeys="true" keyProperty="board_id">
+        <![CDATA[
+            insert into recommand (choice, nickname, board_id) values(#{choice}, #{nickname}, #{board_id})
+        ]]>
+    </insert>
+
+    <delete id="deleteRecommand" parameterType="hashmap">
+        <![CDATA[
+            delete from recommand where nickname=#{nickname} and board_id=#{board_id}
+        ]]>
+    </delete>
+
+    <select id="selectRecommand" parameterType="hashmap" resultType="Integer">
+        <![CDATA[
+            select * from recommand where nickname=#{nickname} and board_id=#{board_id}
+        ]]>
+    </select>
+</mapper>

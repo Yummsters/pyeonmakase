@@ -7,17 +7,6 @@
         insert into board (title, picture, content, nickname, food_category_id) values(#{title}, #{picture}, #{content}, #{nickname}, #{food_category_id})
         ]]>
     </insert>
-    <select id="selectBoardList" parameterType="Integer" resultType="Board">
-		<![CDATA[
-			select b.title,b.picture,b.recommand_count,group_concat(sc.store_category_name) as store_category_name
-			from board b
-			left join board_store bs on b.board_id=bs.board_id
-			left join store_category sc on bs.store_category_id=sc.store_category_id
-			group by b.board_id
-			order by b.board_id desc
-			limit ${row};
-		]]>
-	</select>
 	<select id="selectBoardListTop10" parameterType="Integer" resultType="Board">
 		<![CDATA[
 			select b.title,b.picture,b.recommand_count,group_concat(sc.store_category_name) as store_category_name
