@@ -15,6 +15,13 @@
 	margin: 0 auto 100px auto;
 	max-width: 1000px;
 }
+#emptyboard {
+	text-align: center;
+	margin: 60px auto;
+	color: #524434;
+	font-weight: 800;
+	font-size: 30px;
+}
 
 .card {
 	margin: 10px;
@@ -82,6 +89,10 @@
 	font-size: 20px;
 	color: #524434;
 	font-weight: bold;
+}
+.register > a {
+	text-decoration: none;
+	color: #524434;
 }
 
 /* 타이틀 영역 끝 */
@@ -265,16 +276,19 @@ $(function() {
 		<div class="title-box">
 			<div class="title">
 				<c:choose>
+					<c:when test="${foodId eq 0}">전체 레시피</c:when>
 					<c:when test="${foodId eq 1}">식사류 레시피</c:when>
 					<c:when test="${foodId eq 2}">간식류 레시피</c:when>
 					<c:when test="${foodId eq 3}">음료 레시피</c:when>
-					<c:otherwise>전체 레시피</c:otherwise>
+					<c:otherwise>"${param.keyword}" 검색 결과</c:otherwise>
 				</c:choose>
 			</div>
 			<div class="register"><a href="register">레시피 등록</a></div>
 		</div>
 
 		<div class="card-box">
+		<c:choose>
+        <c:when test="${not empty boardList}">
 			<c:forEach items="${boardList}" var="board">
 				<div class="card">
 					<input type="hidden" class="boardId" value="${board.board_id}">
@@ -287,6 +301,12 @@ $(function() {
 				</div>
 			</c:forEach>
 			<div class="more_btn">더보기</div>
+		</c:when>
+        <c:otherwise>
+            <p id="emptyboard">게시글이 없습니다.</p>
+        </c:otherwise>
+        </c:choose>
+		</div>
 		</div>
 
 		<div class="scroll-to-top" id="scrollToTop">↑</div>

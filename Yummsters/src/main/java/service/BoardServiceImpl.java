@@ -118,6 +118,12 @@ public class BoardServiceImpl implements BoardService{
 	public List<Board> boardListByFood(Integer foodId) throws Exception {
 		return boardDao.selectBoardByFood(foodId);
 	}
+	
+	// 키워드 검색
+	@Override
+	public List<Board> boardSearch(String keyword) throws Exception {
+		return boardDao.searchByKeyword(keyword);
+	}
 }
 
 

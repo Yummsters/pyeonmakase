@@ -39,4 +39,6 @@ public interface BoardDAO {
     void minusRecommandCount(Integer board_id) throws Exception; // 추천수 -1
 
     Integer selectRecommandCount(Integer board_id) throws Exception; // 추천수 조회
+    
+    List<Board> searchByKeyword(String keyword) throws Exception; // 키워드 검색
 }

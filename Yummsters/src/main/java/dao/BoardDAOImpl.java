@@ -107,4 +107,10 @@ public class BoardDAOImpl implements BoardDAO{
     public Integer selectRecommandCount(Integer board_id) throws Exception {
         return sqlSession.selectOne("mapper.board.selectRecommandCount", board_id);
     }
+    
+    // 키워드 검색
+	@Override
+	public List<Board> searchByKeyword(String keyword) throws Exception {
+		return sqlSession.selectList("mapper.board.searchByKeyword", "%" + keyword + "%");
+	}
 }
