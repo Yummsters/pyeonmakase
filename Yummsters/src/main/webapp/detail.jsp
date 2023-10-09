@@ -250,21 +250,18 @@
         <br><br>
 
         <!-- 추천하기 버튼 -->
+        <button class="heart_btn" style="margin-left:45%"  name="recommand">
         <c:choose>
             <c:when test="${select == true}">
-                <button class="heart_btn" id = "recommand_bnt" style="margin-left:45%" name="recommand">
-                   <img  src="imgView?file=heart11.png" width="60px" height="60px" alt=""/>
+                   <img id = "recommand_bnt" src="imgView?file=heart_fill.png" width="60px" height="60px" alt=""/>
                     <div>추천하기</div>
-                </button>
             </c:when>
             <c:otherwise>
-                <button class="heart_btn" style="margin-left:45%" id="recommand_bnt" name="recommand">
-                    <img  src="imgView?file=heart12.png" width="60px" height="60px" alt=""/>
+                    <img id="recommand_bnt" src="imgView?file=heart_empty.png" width="60px" height="60px" alt=""/>
                     <div>추천하기</div>
-                </button>
             </c:otherwise>
         </c:choose>
-
+        </button>
         <!-- 찜하기 버튼 -->
         <button class="star_btn" id="wish" name="wish_bnt">
             <i><span class="material-symbols-outlined" style="font-size: 50px;">
