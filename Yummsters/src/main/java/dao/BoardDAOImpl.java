@@ -36,20 +36,15 @@ public class BoardDAOImpl implements BoardDAO{
     }
   // 최신 게시글 목록 조회
     @Override
-    public List<Board> selectBoardList(Integer row) throws Exception {
-    	return sqlSession.selectList("mapper.board.selectBoardList", row);
+    public List<Board> selectBoardList() throws Exception {
+    	return sqlSession.selectList("mapper.board.selectBoardList");
     }
   // 추천순 Top10 목록 조회
 	@Override
 	public List<Board> selectBoardListTop10() throws Exception {
 		return sqlSession.selectList("mapper.board.selectBoardListTop10");
 	}
-	
-    // 선진 작성 부분
-    // main-list
-    public List<Board> selectBoardList() {
-    	return sqlSession.selectList("mapper.board.selectBoardList");
-    }
+
     // main-list by foodCategory
 	@Override
 	public List<Board> selectBoardByFood(Integer foodId) throws Exception {

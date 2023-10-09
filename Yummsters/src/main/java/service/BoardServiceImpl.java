@@ -87,13 +87,6 @@ public class BoardServiceImpl implements BoardService{
         if(boardDao.selectRecommand(map) == null) return false;
         return true;
     }
-    
-    // 최신순으로 row개의 게시글 조회
-    @Override
-    public List<Board> boardList(Integer row) throws Exception {
-    	List<Board> boardList = boardDao.selectBoardList(row);
-		return boardList;
-    }
 
     // home에서 추천 Top10 게시글 조회
 	@Override

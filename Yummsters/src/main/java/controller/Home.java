@@ -40,7 +40,7 @@ public class Home extends HttpServlet {
 			List<Board> boardListTop10 = boardService.boardListTop10();
 			request.setAttribute("boardListTop10", boardListTop10);
 			
-			List<Board> boardList = boardService.boardList(5);
+			List<Board> boardList = boardService.boardAllList();
 			request.setAttribute("boardList", boardList);
 			request.getRequestDispatcher("home.jsp").forward(request, response);			
 		} catch(Exception e) {
