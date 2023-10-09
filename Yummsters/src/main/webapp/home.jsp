@@ -39,6 +39,10 @@
 	margin-bottom: 20px;
 }
 
+#card:nth-child(n+6) {
+    display: none; /* 6번째 이후의 카드는 숨김 처리 */
+}
+
 .recommend {
 	color: #00000080;
 	font-size: 16px;
@@ -182,7 +186,7 @@
 	<!-- 여기는 출력만 -->
 	<div class="card-box">
 		<c:forEach var="board" items="${boardList}">
-			<div class="card">
+			<div class="card" id="card">
 				<div class="recommend">♥ ${board.recommand_count}</div>
 				<div class="thumbnail">
 					<img src="imgView?file=${board.picture}" alt="">
