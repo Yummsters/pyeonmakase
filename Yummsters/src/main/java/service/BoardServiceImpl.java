@@ -1,11 +1,10 @@
 package service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import bean.Board;
 import bean.Board_Store;
+import bean.Member;
 import dao.BoardDAO;
 import dao.BoardDAOImpl;
 import org.json.simple.JSONObject;
@@ -89,22 +88,30 @@ public class BoardServiceImpl implements BoardService{
         return true;
     }
     
-    // home에서 최신순으로 5개의 게시글 조회
+    // 최신순으로 row개의 게시글 조회
     @Override
-    public Map<String, Object> boardList(Integer row) throws Exception {
-    	List<Board> boardList = boardDao.selectBoardList(5);
-		Map<String,Object> map = new HashMap<>();
-		map.put("boardList", boardList);
-		return map;
+    public List<Board> boardList(Integer row) throws Exception {
+    	List<Board> boardList = boardDao.selectBoardList(row);
+		return boardList;
     }
 
     // home에서 추천 Top10 게시글 조회
 	@Override
-	public Map<String, Object> boardListTop10() throws Exception {
+	public List<Board> boardListTop10() throws Exception {
 		List<Board> boardListTop10 = boardDao.selectBoardListTop10();
-		Map<String,Object> map = new HashMap<>();
-		map.put("boardListTop10", boardListTop10);
-		return map;
+		return boardListTop10;
+	}
+
+	@Override
+	public List<Board> wishList(Member member, Integer row) throws Exception {
+		List<Board> wishList = boardDao.selectWishList(member, row);
+		return wishList;
+	}
+
+	@Override
+	public List<Board> myList(Member member, Integer row) throws Exception {
+		List<Board> myList = boardDao.selectMyList(member, row);
+		return myList;
 	}
 }
 
