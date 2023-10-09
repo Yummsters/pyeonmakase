@@ -141,6 +141,7 @@ input[type="checkbox"] {
 	color: #524434;
 	font-weight: bold;
 	width: 150px;
+	height: 20px;
 }
 
 /* 최상단 버튼 */
@@ -300,13 +301,13 @@ $(function() {
 					<div class="store-name">#${board.store_category_name}</div>
 				</div>
 			</c:forEach>
-			<div class="more_btn">더보기</div>
 		</c:when>
         <c:otherwise>
             <p id="emptyboard">게시글이 없습니다.</p>
         </c:otherwise>
         </c:choose>
 		</div>
+		<div class="more_btn">더보기</div>
 		</div>
 
 		<div class="scroll-to-top" id="scrollToTop">↑</div>
