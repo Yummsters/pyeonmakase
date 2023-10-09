@@ -23,4 +23,19 @@
 			select * from board where board_id=#{board_id}
 		]]>
 	</select>
+	<update id="plusRecommandCount" parameterType="Integer">
+		<![CDATA[
+			update board set recommand_count=recommand_count+1 where board_id=#{board_id}
+		]]>
+	</update>
+	<update id="minusRecommandCount" parameterType="Integer">
+		<![CDATA[
+		update board set recommand_count=recommand_count-1 where board_id=#{board_id}
+		]]>
+	</update>
+	<select id="selectRecommandCount" parameterType="Integer" resultType="Integer">
+        <![CDATA[
+		select recommand_count from board where board_id=#{board_id}
+		]]>
+    </select>
 </mapper>
