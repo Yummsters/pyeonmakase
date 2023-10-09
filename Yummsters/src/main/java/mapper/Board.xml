@@ -63,6 +63,14 @@
 			limit ${row};
 		]]>
 	</select>
+
+	<!-- 희진 작성 부분 -->
+	<select id="selectBoardOne" parameterType="Integer" resultType="Board">
+		<![CDATA[
+		select * from board where board_id=#{board_id}
+		]]>
+	</select>
+
 	<update id="plusRecommandCount" parameterType="Integer">
 		<![CDATA[
 			update board set recommand_count=recommand_count+1 where board_id=#{board_id}
@@ -73,6 +81,7 @@
 		update board set recommand_count=recommand_count-1 where board_id=#{board_id}
 		]]>
 	</update>
+
 	<select id="selectRecommandCount" parameterType="Integer" resultType="Integer">
         <![CDATA[
 		select recommand_count from board where board_id=#{board_id}
