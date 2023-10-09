@@ -74,6 +74,6 @@ public class BoardDAOImpl implements BoardDAO{
     // 추천수 조회
     @Override
     public Integer selectRecommandCount(Integer board_id) throws Exception {
-        return sqlSession.selectOne("mapper.board.selectRecommandCount");
+        return sqlSession.selectOne("mapper.board.selectRecommandCount", board_id);
     }
 }
