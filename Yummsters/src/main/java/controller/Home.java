@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -9,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
+
+import bean.Board;
 import service.BoardService;
 import service.BoardServiceImpl;
 
@@ -33,9 +37,10 @@ public class Home extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			BoardService boardService = new BoardServiceImpl();
-			Map<String,Object> boardListTop10 = boardService.boardListTop10();
+			List<Board> boardListTop10 = boardService.boardListTop10();
 			request.setAttribute("boardListTop10", boardListTop10);
-			Map<String,Object> boardList = boardService.boardList(5);
+			
+			List<Board> boardList = boardService.boardList(5);
 			request.setAttribute("boardList", boardList);
 			request.getRequestDispatcher("home.jsp").forward(request, response);			
 		} catch(Exception e) {

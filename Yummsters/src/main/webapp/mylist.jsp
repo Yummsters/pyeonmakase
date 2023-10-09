@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <head>
 
@@ -43,13 +44,9 @@
         }
 
         .store-name {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            background-color: rgba(0, 0, 0, 0.7);
-            color: #fff;
-            padding: 5px;
-            font-size: 16px;
+            color: gray;
+			text-align: center;
+			margin: 5px;
         }
 
         .recipe-name {
@@ -195,6 +192,10 @@
                 return false;
             });
         
+            $(".card").click(function() {
+                var boardId = $(this).find(".boardId").val();
+                window.location.href = "boardDetail?board_id=" + boardId;
+             })
     </script>
 
 </head>
@@ -211,58 +212,20 @@
         <div class="line"></div>
 
         <div class="card-box">
-            <div class="card">
-                <div class="recommend">♥ 123</div>
-                <div class="thumbnail">
-                    <img src="imgView?file=mirro.jpg" alt="">
-                    <div class="store-name">{편의점 명}</div>
-                </div>
-                <div class="recipe-name">{레시피명}</div>
-            </div>
-            <div class="card">
-                <div class="recommend">♥ 123</div>
-                <div class="thumbnail">
-                    <img src="imgView?file=mirro.jpg" alt="">
-                    <div class="store-name">{편의점 명}</div>
-                </div>
-                <div class="recipe-name">{레시피명}</div>
-            </div>
-            <div class="card">
-                <div class="recommend">♥ 123</div>
-                <div class="thumbnail">
-                    <img src="imgView?file=mirro.jpg" alt="">
-                    <div class="store-name">{편의점 명}</div>
-                </div>
-                <div class="recipe-name">{레시피명}</div>
-            </div>
-            <div class="card">
-                <div class="recommend">♥ 123</div>
-                <div class="thumbnail">
-                    <img src="imgView?file=mirro.jpg" alt="">
-                    <div class="store-name">{편의점 명}</div>
-                </div>
-                <div class="recipe-name">{레시피명}</div>
-            </div>
-            <div class="card">
-                <div class="recommend">♥ 123</div>
-                <div class="thumbnail">
-                    <img src="imgView?file=mirro.jpg" alt="">
-                    <div class="store-name">{편의점 명}</div>
-                </div>
-                <div class="recipe-name">{레시피명}</div>
-            </div>
-            <div class="card">
-                <div class="recommend">♥ 123</div>
-                <div class="thumbnail">
-                    <img src="imgView?file=mirro.jpg" alt="">
-                    <div class="store-name">{편의점 명}</div>
-                </div>
-                <div class="recipe-name">{레시피명}</div>
-            </div>
+            <c:forEach var="board" items="${myList}">
+				<div class="card">
+					<div class="recommend">♥ ${board.recommand_count}</div>
+					<div class="thumbnail">
+						<img src="imgView?file=${board.picture}" alt="">
+					</div>
+					<div class="store-name">#${board.store_name}</div>
+					<div class="recipe-name">${board.title}</div>
+				</div>
+			</c:forEach>
         </div>
 
         <div class="more_btn">더보기</div>
-        <div class="scroll-to-top" id="scrollToTop">↑</div>
+        <a class="scroll-to-top" id="scrollToTop">↑</a>
 
     </div>
     <jsp:include page="footer.jsp" />

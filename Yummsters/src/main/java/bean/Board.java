@@ -21,7 +21,6 @@ public class Board {
     private Integer food_category_id; // 음식 카테고리
     private String store_category_name; // 편의점명    
     
-    
 	public String getStore_category_name() {
 		return store_category_name;
 	}
@@ -29,7 +28,7 @@ public class Board {
 	public void setStore_category_name(String store_category_name) {
 		this.store_category_name = store_category_name;
 	}
-	
+
 	public Integer getBoard_id() {
 		return board_id;
 	}
@@ -109,6 +108,5 @@ public class Board {
 	public void setFood_category_id(Integer food_category_id) {
 		this.food_category_id = food_category_id;
 	}
-    
-    
+
 }

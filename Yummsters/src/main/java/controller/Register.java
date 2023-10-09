@@ -21,7 +21,8 @@ import javax.servlet.http.HttpSession;
 public class Register extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         // 취소 버튼 클릭 시 메인 리스트 페이지로 이동
-        res.sendRedirect("register.jsp");
+        req.getRequestDispatcher("register.jsp").forward(req, res);
+        //res.sendRedirect("register.jsp");
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -35,7 +36,7 @@ public class Register extends HttpServlet {
         String title = multi.getParameter("board_title");
         String picture = multi.getOriginalFileName("board_picture");
         // TODO : 토스트 에디터에 작성한 내용을 어떻게 가져와야 하는지 해결 필요
-        String content = "아무값이나 넣어보기";//multi.getParameter("editorContent");
+        String content = /*"아무값이나 넣어보기";*/multi.getParameter("editorContent");
         Integer food_category_id  = Integer.parseInt(multi.getParameter("food"));
         String[] store_category = multi.getParameterValues("store");
 

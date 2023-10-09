@@ -1,13 +1,16 @@
 package service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import bean.Board;
 import bean.Board_Store;
+import bean.Member;
 import dao.BoardDAO;
 import dao.BoardDAOImpl;
+import org.json.simple.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class BoardServiceImpl implements BoardService{
     private BoardDAO boardDao;
@@ -33,23 +36,82 @@ public class BoardServiceImpl implements BoardService{
     public Board boardDetail(Integer board_id) throws Exception {
         return boardDao.selectBoardOne(board_id);
     }
-    
-    // home에서 최신순으로 5개의 게시글 조회
+
+    // 추천하기 기능 구현
     @Override
-    public Map<String, Object> boardList(Integer row) throws Exception {
-    	List<Board> boardList = boardDao.selectBoardList(5);
-		Map<String,Object> map = new HashMap<>();
-		map.put("boardList", boardList);
-		return map;
+    public String boardRecommand(String nickname, Integer board_id) throws Exception {
+        // Recommand 존재 여부 확인
+        Map<String, Object> map = new HashMap<>();
+        map.put("nickname", nickname);
+        map.put("board_id", board_id);
+        Integer recommand_id = boardDao.selectRecommand(map);
+
+        Map<String, Object> response = new HashMap<>();
+
+        // Recommand가 존재하지 않는다면
+        if(recommand_id == null){
+            // 테이블에 추천 저장
+            boardDao.insertRecommand(map);
+            // 추천 수  + 1
+            boardDao.plusRecommandCount(board_id);
+            // response 값 넣기
+            response.put("select", true);
+        }else{
+            // Recommand가 존재한다면
+            // 테이블에서 추천 삭제
+            boardDao.deleteRecommand(map);
+            // 추천 수 -1
+            boardDao.minusRecommandCount(board_id);
+            // response에 값 넣기
+            response.put("select", false);
+        }
+
+        // 좋아요 수 response에 넣기
+        Integer recommandCount = boardDao.selectRecommandCount(board_id);
+        System.out.println(recommandCount);
+        response.put("recommandCount", recommandCount);
+
+        // JSON 형식으로 응답 변경
+        JSONObject jsonObject = new JSONObject(response);
+        return jsonObject.toJSONString();
+    }
+
+    // 추천 여부 조회
+    @Override
+    public Boolean isboardRecommand(String nickname, Integer board_id) throws Exception {
+        Map<String, Object> map = new HashMap<>();
+        map.put("nickname", nickname);
+        map.put("board_id", board_id);
+
+        // 추천을 누른 정보 조회
+        if(boardDao.selectRecommand(map) == null) return false;
+        return true;
+    }
+    
+    // 최신순으로 row개의 게시글 조회
+    @Override
+    public List<Board> boardList(Integer row) throws Exception {
+    	List<Board> boardList = boardDao.selectBoardList(row);
+		return boardList;
     }
 
     // home에서 추천 Top10 게시글 조회
 	@Override
-	public Map<String, Object> boardListTop10() throws Exception {
+	public List<Board> boardListTop10() throws Exception {
 		List<Board> boardListTop10 = boardDao.selectBoardListTop10();
-		Map<String,Object> map = new HashMap<>();
-		map.put("boardListTop10", boardListTop10);
-		return map;
+		return boardListTop10;
+	}
+
+	@Override
+	public List<Board> wishList(Member member, Integer row) throws Exception {
+		List<Board> wishList = boardDao.selectWishList(member, row);
+		return wishList;
+	}
+
+	@Override
+	public List<Board> myList(Member member, Integer row) throws Exception {
+		List<Board> myList = boardDao.selectMyList(member, row);
+		return myList;
 	}
 	
     // 선진 작성 부분 
