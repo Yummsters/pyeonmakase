@@ -28,14 +28,19 @@
 	<!-- main_list -->
 	<select id="selectBoardList" resultType="Board">
 		<![CDATA[
-			select * from Board order by regdate desc
+			select b.*, s.* from board b join board_store bs using(board_id)
+				join store_category s using(store_category_id)
+			order by regdate desc
 		]]>
 	</select>
 	
 	<!-- foodCategory별 list 출력 -->
 	<select id="selectBoardByFood" parameterType="Integer" resultType="Board">
 		<![CDATA[
-			select * from Board where food_category_id = #{foodId} order by regdate desc
+			select b.*, s.* from board b join board_store bs using(board_id)
+				join store_category s using(store_category_id)
+			where b.food_category_id = #{foodId} 
+			order by regdate desc
 		]]>
 	</select>
 </mapper>

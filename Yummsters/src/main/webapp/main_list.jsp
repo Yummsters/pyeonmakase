@@ -283,7 +283,7 @@ $(function() {
 						<img src="imgView?file=${board.picture}" alt="">
 					</div>
 					<div class="recipe-name">${board.title}</div>
-					<div class="store-name">#편의점명(구현하기)</div>
+					<div class="store-name">#${board.store_category_name}</div>
 				</div>
 			</c:forEach>
 			<div class="more_btn">더보기</div>
