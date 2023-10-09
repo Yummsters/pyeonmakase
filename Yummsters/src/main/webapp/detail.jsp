@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <head>
     <meta charset="UTF-8">
@@ -83,7 +84,6 @@
 
         .heart_btn {
             background: #FBF9F3;
-            color: black;
             outline: none;
             border: none;
         }
@@ -166,17 +166,39 @@
             margin-left: 10px;
             margin-right: 40px;
         }
-
-
     </style>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script type="text/javascript">
+        // 추천하기 버튼 클릭 시
+        $(function(){
+            $('#recommand_bnt').click(function (){
+                $.ajax({
+                    url : 'recommand',
+                    type : 'post',
+                    dataType : 'json',
+                    data : {'board_id': '<c:out value="${board.board_id}"/>'},
+                    success:function (response){
+                        console.log(response.select);
+                        console.log(response.recommandCount);
+                        if(response.select){
+                            $("#recommand_bnt").attr("src", "imgView?file=heart11.png")
+                        }else{
+                            $("#recommand_bnt").attr("src", "imgView?file=heart12.png")
+                        }
+                        $("#recommandCount").text(response.recommandCount);
+                    },
+                    error:function (error){
+                        console.log(error)
+                    }
+                })
+            })
+        })
+    </script>
 </head>
 <body>
 <jsp:include page="header.jsp"/>
 
-<form name="detail_button">
     <div class="all_content">
         <!-- 제목, 조회수, 추천수 -->
         <div class="content_title">
@@ -187,7 +209,7 @@
             <table class="recommand_date">
                 <tr>
                     <td>
-                        추천수 : ${board.recommand_count}
+                         추천수 : <span  id = "recommandCount">${board.recommand_count}</span>
                     </td>
                 </tr>
                 <tr>
@@ -226,30 +248,38 @@
             </div>
         </div>
         <br><br>
-        <!-- 추천/찜하기 버튼-->
-        <!-- TODO : 어떤 경우에 method가 get인지 post인지 로직 작성 필요-->
-        <button class="heart_btn" type="submit" style="margin-left:45%" id="recommand" name="recommand"
-                formaction="recommand" formmethod="get">
-            <i><span class="material-symbols-outlined" style="font-size: 50px;">
-                favorite
-            </span></i>
-            <div>추천하기</div>
-        </button>
 
-        <!-- TODO : 어떤 경우에 method가 get인지 post인지 로직 작성 필요-->
-        <button class="star_btn" type="submit" id="wish" name="wish" formaction="wishlist" formmethod="get">
+        <!-- 추천하기 버튼 -->
+        <c:choose>
+            <c:when test="${select == true}">
+                <button class="heart_btn" id = "recommand_bnt" style="margin-left:45%" name="recommand">
+                   <img  src="imgView?file=heart11.png" width="60px" height="60px" alt=""/>
+                    <div>추천하기</div>
+                </button>
+            </c:when>
+            <c:otherwise>
+                <button class="heart_btn" style="margin-left:45%" id="recommand_bnt" name="recommand">
+                    <img  src="imgView?file=heart12.png" width="60px" height="60px" alt=""/>
+                    <div>추천하기</div>
+                </button>
+            </c:otherwise>
+        </c:choose>
+
+        <!-- 찜하기 버튼 -->
+        <button class="star_btn" id="wish" name="wish_bnt">
             <i><span class="material-symbols-outlined" style="font-size: 50px;">
                 star
                 </span></i>
             <div>찜하기</div>
         </button>
 
-        <br><br>
 
+        <br><br>
     </div>
 
     <!-- 수정, 삭제 버튼 -->
     <!-- 각 페이지로 이동하는 링크 추가 필요 -->
+    <form name="modify_delete">
     <br>
     <button class="mod_del" type="submit" id="board_modify" name="board_id" value="${board.board_id}" formaction="board_modify?" formmethod="get">
         수정
@@ -258,6 +288,7 @@
             formmethod="get"> 삭제
     </button>
     <br><br><br>
+    </form>
 
 
     <div class="all_reply">
@@ -305,7 +336,7 @@
             <button class="reply_del" type="submit"></button>
         </div>
     </div>
-</form>
+
 
 <jsp:include page="footer.jsp"/>
 
