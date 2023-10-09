@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,9 +11,7 @@
 <!-- jQuery (Slick Carousel dependency) -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- Slick Carousel JavaScript -->
-<script
-	src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
 <style>
 /* 카드 영역 */
@@ -54,10 +51,15 @@
 	/* width: 90%; */
 }
 
+.store-name {
+	color: gray;
+	text-align: center;
+	margin: 5px;
+}
+
 .recipe-name {
 	text-align: center;
 	font-size: 20px;
-	line-height: 50px;
 }
 
 /* 레시피 카드 영역 끝 */
@@ -140,100 +142,47 @@
 </head>
 
 <body>
-<jsp:include page="header.jsp" />
+	<jsp:include page="header.jsp" />
 	<div class="container">
 
 		<!-- 추천 TOP10 -->
 		<div class="title">추천 TOP 10</div>
 		<!-- 카드 부분 db생기면 {data} 반복 돌리기 -->
 		<div class="card-slider">
-			<div class="card">
-				<div class="recommend">♥ 123</div>
-				<div class="thumbnail">
-					<img src="imgView?file=mirro.jpg" alt="">
+			<c:forEach var="board" items="${boardListTop10}">
+				<div class="card">
+					<div class="recommend">♥ ${board.likecount}</div>
+					<div class="thumbnail">
+						<img src="imgView?file=${board.picture}" alt="">
+					</div>
+					<div class="store-name">#${board.store_name}</div>
+					<div class="recipe-name">${board.title}</div>
 				</div>
-				<div class="recipe-name">{레시피명}</div>
-			</div>
-			<div class="card">
-				<div class="recommend">♥ 123</div>
-				<div class="thumbnail">
-					<img src="./imgView?file=mirro.jpg" alt="">
-				</div>
-				<div class="recipe-name">{레시피명}</div>
-			</div>
-			<div class="card">
-				<div class="recommend">♥ 123</div>
-				<div class="thumbnail">
-					<img src="imgView?file=mirro.jpg" alt="">
-				</div>
-				<div class="recipe-name">{레시피명}</div>
-			</div>
-			<div class="card">
-				<div class="recommend">♥ 123</div>
-				<div class="thumbnail">
-					<img src="imgView?file=mirro.jpg" alt="">
-				</div>
-				<div class="recipe-name">{레시피명}</div>
-			</div>
-			<div class="card">
-				<div class="recommend">♥ 123</div>
-				<div class="thumbnail">
-					<img src="imgView?file=mirro.jpg" alt="">
-				</div>
-				<div class="recipe-name">{레시피명}</div>
-			</div>
-			<div class="card">
-				<div class="recommend">♥ 123</div>
-				<div class="thumbnail">
-					<img src="imgView?file=mirro.jpg" alt="">
-				</div>
-				<div class="recipe-name">{레시피명}</div>
-			</div>
+			</c:forEach>
 		</div>
-
 	</div>
+
 	<!-- 전체 레시피 -->
 	<div class="title-box">
 		<div class="title">전체 레시피</div>
-		<div class="more"><a href="mainlist">더보기</a></div>
+		<div class="more">
+			<a href="mainlist">더보기</a>
+		</div>
 	</div>
 
-
+	<!-- 여기는 출력만 -->
 	<div class="card-box">
 		<div class="card">
-			<div class="recommend">♥ 123</div>
-			<div class="thumbnail">
-				<img src="imgView?file=mirro.jpg" alt="">
-			</div>
-			<div class="recipe-name">{레시피명}</div>
-		</div>
-		<div class="card">
-			<div class="recommend">♥ 123</div>
-			<div class="thumbnail">
-				<img src="imgView?file=mirro.jpg" alt="">
-			</div>
-			<div class="recipe-name">{레시피명}</div>
-		</div>
-		<div class="card">
-			<div class="recommend">♥ 123</div>
-			<div class="thumbnail">
-				<img src="imgView?file=mirro.jpg" alt="">
-			</div>
-			<div class="recipe-name">{레시피명}</div>
-		</div>
-		<div class="card">
-			<div class="recommend">♥ 123</div>
-			<div class="thumbnail">
-				<img src="imgView?file=mirro.jpg" alt="">
-			</div>
-			<div class="recipe-name">{레시피명}</div>
-		</div>
-		<div class="card">
-			<div class="recommend">♥ 123</div>
-			<div class="thumbnail">
-				<img src="imgView?file=mirro.jpg" alt="">
-			</div>
-			<div class="recipe-name">{레시피명}</div>
+			<c:forEach var="board" items="${boardList}">
+				<div class="card">
+					<div class="recommend">♥ ${board.likecount}</div>
+					<div class="thumbnail">
+						<img src="imgView?file=${board.picture}" alt="">
+					</div>
+					<div class="store-name">#${board.store_name}</div>
+					<div class="recipe-name">${board.title}</div>
+				</div>
+			</c:forEach>
 		</div>
 	</div>
 

@@ -10,32 +10,23 @@
 				values(#{member_name}, #{nickname}, #{email}, #{member_id}, #{member_pw})
 		]]>
 	</insert>
-	
-	<!-- 회원가입 - 닉네임 중복확인 -->
-	<select id="countNickname" parameterType="String" resultType="int">
-		<![CDATA[
-			select count(*) from member where nickname = #{nickname}
-		]]>
-	</select>
-	
-	<!-- 회원가입 - 이메일 중복확인 -->
-	<select id="countEmail" parameterType="String" resultType="int">
-		<![CDATA[
-			select count(*) from member where email = #{email}
-		]]>
-	</select>
-	
-	<!-- 회원가입 - 아이디 중복확인  -->
-	<select id="countId" parameterType="String" resultType="int">
-		<![CDATA[
-			select count(*) from member where member_id = #{member_id}
-		]]>
-	</select>
 
-	<!-- 로그인 - 아이디 찾기 -->
-	<select id="selectMember" parameterType="String" resultType="Member">
+	<!-- 회원가입 아이디 중복확인 및 로그인 아이디 찾기 -->
+	<select id="selectId" parameterType="String" resultType="Member">
 		<![CDATA[
 			select * from member where member_id = #{member_id}
+		]]>
+	</select>
+	
+	<select id="selectEmail" parameterType="String" resultType="Member">
+		<![CDATA[
+			select * from member where email = #{email}
+		]]>
+	</select>
+	
+	<select id="selectNickname" parameterType="String" resultType="Member">
+		<![CDATA[
+			select * from member where nickname = #{nickname}
 		]]>
 	</select>
 </mapper>
