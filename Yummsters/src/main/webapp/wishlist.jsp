@@ -44,13 +44,9 @@
         }
 
         .store-name {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            background-color: rgba(0, 0, 0, 0.7);
-            color: #fff;
-            padding: 5px;
-            font-size: 16px;
+            color: gray;
+			text-align: center;
+			margin: 5px;
         }
 
         .recipe-name {
@@ -197,7 +193,10 @@
                 return false;
             });
             
-            
+            $(".card").click(function() {
+                var boardId = $(this).find(".boardId").val();
+                window.location.href = "boardDetail?board_id=" + boardId;
+             })
         
     </script>
 

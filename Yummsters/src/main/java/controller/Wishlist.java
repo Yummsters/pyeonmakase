@@ -1,14 +1,17 @@
 package controller;
 
 import java.io.IOException;
-import java.util.Map;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import bean.Board;
+import bean.Member;
 import service.BoardService;
 import service.BoardServiceImpl;
 
@@ -32,8 +35,10 @@ public class Wishlist extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			HttpSession session = request.getSession();
+			Member member = (Member) session.getAttribute("member");
 			BoardService boardService = new BoardServiceImpl();
-			Map<String,Object> wishList = boardService.wishList(12);
+			List<Board> wishList = boardService.wishList(member, 12);
 			request.setAttribute("wishList", wishList);
 			request.getRequestDispatcher("wishlist.jsp").forward(request, response);			
 		} catch(Exception e) {

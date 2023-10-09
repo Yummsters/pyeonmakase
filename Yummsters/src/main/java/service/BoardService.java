@@ -1,16 +1,17 @@
 package service;
 
-import java.util.Map;
+import java.util.List;
 
 import bean.Board;
 import bean.Board_Store;
+import bean.Member;
 
 public interface BoardService {
     void boardRegister(Board board) throws Exception;
     void board_store(Board_Store boardStore) throws Exception;
     Board boardDetail(Integer board_id) throws Exception;
-    Map<String,Object> boardList(Integer row) throws Exception;
-    Map<String,Object> boardListTop10() throws Exception;
-    Map<String,Object> wishList(Integer row) throws Exception;
-    Map<String,Object> myList(Integer row) throws Exception;
+    List<Board> boardList(Integer row) throws Exception;
+    List<Board> boardListTop10() throws Exception;
+    List<Board> wishList(Member member, Integer row) throws Exception;
+    List<Board> myList(Member member, Integer row) throws Exception;
 }

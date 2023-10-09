@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,8 +12,13 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- Slick Carousel JavaScript -->
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
 <style>
+.card-slider {
+	
+}
+
 /* 카드 영역 */
 .card-box {
 	display: flex;
@@ -136,6 +141,10 @@
 			dots : true,
 		});
 	});
+	$(".card").click(function() {
+	      var boardId = $(this).find(".boardId").val();
+	      window.location.href = "boardDetail?board_id=" + boardId;
+	   })
 </script>
 
 
@@ -172,18 +181,16 @@
 
 	<!-- 여기는 출력만 -->
 	<div class="card-box">
-		<div class="card">
-			<c:forEach var="board" items="${boardList}">
-				<div class="card">
-					<div class="recommend">♥ ${board.recommand_count}</div>
-					<div class="thumbnail">
-						<img src="imgView?file=${board.picture}" alt="">
-					</div>
-					<div class="store-name">#${board.store_name}</div>
-					<div class="recipe-name">${board.title}</div>
+		<c:forEach var="board" items="${boardList}">
+			<div class="card">
+				<div class="recommend">♥ ${board.recommand_count}</div>
+				<div class="thumbnail">
+					<img src="imgView?file=${board.picture}" alt="">
 				</div>
-			</c:forEach>
-		</div>
+				<div class="store-name">#${board.store_name}</div>
+				<div class="recipe-name">${board.title}</div>
+			</div>
+		</c:forEach>
 	</div>
 
 	<jsp:include page="footer.jsp" />

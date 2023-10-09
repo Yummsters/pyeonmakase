@@ -1,14 +1,17 @@
 package controller;
 
 import java.io.IOException;
-import java.util.Map;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import bean.Board;
+import bean.Member;
 import service.BoardService;
 import service.BoardServiceImpl;
 
@@ -32,9 +35,12 @@ public class MyList extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			HttpSession session = request.getSession();
+			Member member = (Member) session.getAttribute("member");
+			
 			BoardService boardService = new BoardServiceImpl();
-			Map<String,Object> mylist = boardService.myList(12);
-			request.setAttribute("mylist", mylist);
+			List<Board> myList = boardService.myList(member, 12);
+			request.setAttribute("myList", myList);
 			request.getRequestDispatcher("mylist.jsp").forward(request, response);			
 		} catch(Exception e) {
 			e.printStackTrace();

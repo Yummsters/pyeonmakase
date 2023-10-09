@@ -20,6 +20,9 @@ public class Board {
     private String nickname; // 작성자
     private Integer food_category_id; // 음식 카테고리
     
+    // 커스텀 컬럼
+    private String store_name;
+    
 	public Integer getBoard_id() {
 		return board_id;
 	}
@@ -98,6 +101,14 @@ public class Board {
 
 	public void setFood_category_id(Integer food_category_id) {
 		this.food_category_id = food_category_id;
+	}
+
+	public String getStore_name() {
+		return store_name;
+	}
+
+	public void setStore_name(String store_name) {
+		this.store_name = store_name;
 	}
     
     

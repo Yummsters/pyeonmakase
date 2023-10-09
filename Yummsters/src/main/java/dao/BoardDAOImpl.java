@@ -1,11 +1,15 @@
 package dao;
 
-import bean.Board;
-
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import bean.Board_Store;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
+
+import bean.Board;
+import bean.Board_Store;
+import bean.Member;
 import util.MybatisSqlSessionFactory;
 
 public class BoardDAOImpl implements BoardDAO{
@@ -43,12 +47,18 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 
 	@Override
-	public List<Board> selectWishList(Integer row) throws Exception {
-		return sqlSession.selectList("mapper.board.selectWishList", row);
+	public List<Board> selectWishList(@Param("member") Member member, @Param("row") Integer row) throws Exception {
+		Map<String, Object> map = new HashMap<>();
+		map.put("member", member);
+		map.put("row", row);
+		return sqlSession.selectList("mapper.board.selectWishList", map);
 	}
 
 	@Override
-	public List<Board> selectMyList(Integer row) throws Exception {
-		return sqlSession.selectList("mapper.board.selectMyList", row);
+	public List<Board> selectMyList(@Param("member") Member member, @Param("row") Integer row) throws Exception {
+		Map<String, Object> map = new HashMap<>();
+		map.put("member", member);
+		map.put("row", row);
+		return sqlSession.selectList("mapper.board.selectMyList", map);
 	}
 }
