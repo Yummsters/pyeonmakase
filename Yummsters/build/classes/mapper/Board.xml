@@ -18,4 +18,9 @@
 			limit 10;
 		]]>
 	</select>
+	<select id="selectBoardOne" parameterType="Integer" resultType="Board">
+		<![CDATA[
+			select * from board where board_id=#{board_id}
+		]]>
+	</select>
 </mapper>

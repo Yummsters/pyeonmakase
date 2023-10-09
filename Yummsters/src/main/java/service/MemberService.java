@@ -11,11 +11,11 @@ public interface MemberService {
 	Member login(String member_id, String member_pw) throws Exception;
 	
 	// 닉네임 중복확인
-	boolean isNicknameDuplicate(String nickname) throws Exception;
+	String isNicknameCheck(String nickname) throws Exception;
 	
 	// 이메일 중복확인
-	boolean isEmailDuplicate(String email) throws Exception;
+	String isEmailCheck(String email) throws Exception;
 	
 	// 아이디 중복확인
-	boolean isIdDuplicate(String member_id) throws Exception;
+	String isIdCheck(String member_id) throws Exception;
 }
