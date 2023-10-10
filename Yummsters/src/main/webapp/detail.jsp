@@ -179,14 +179,39 @@
                     dataType : 'json',
                     data : {'board_id': '<c:out value="${board.board_id}"/>'},
                     success:function (response){
-                        console.log(response.select);
+                        console.log(response.recommand_select);
                         console.log(response.recommandCount);
-                        if(response.select){
-                            $("#recommand_bnt").attr("src", "imgView?file=heart11.png")
+                        if(response.recommand_select){
+                            $("#recommand_bnt").attr("src", "imgView?file=heart_fill.png")
                         }else{
-                            $("#recommand_bnt").attr("src", "imgView?file=heart12.png")
+                            $("#recommand_bnt").attr("src", "imgView?file=heart_empty.png")
                         }
                         $("#recommandCount").text(response.recommandCount);
+                    },
+                    error:function (error){
+                        console.log(error)
+                    }
+                })
+            })
+        })
+    </script>
+
+    <script type="text/javascript">
+        // 찜하기 버튼 클릭 시
+        $(function(){
+            $('#wish_bnt').click(function (){
+                $.ajax({
+                    url : 'wish',
+                    type : 'post',
+                    dataType : 'json',
+                    data : {'board_id': '<c:out value="${board.board_id}"/>'},
+                    success:function (response){
+                        console.log(response.wish_select);
+                        if(response.wish_select){
+                            $("#wish_bnt").attr("src", "imgView?file=star_fill.png")
+                        }else{
+                            $("#wish_bnt").attr("src", "imgView?file=star_empty.png")
+                        }
                     },
                     error:function (error){
                         console.log(error)
@@ -216,7 +241,6 @@
                     <td>${board.regdate} &nbsp; ${board.nickname}</td> <!-- TODO 날짜 형식 수정 필요 -->
                 </tr>
             </table>
-            <!--<div class="recommand_count">추천수 : 1,234 <br>2023.09.17 20:03 닉네임</div>-->
         </div>
     </div>
 
@@ -252,7 +276,7 @@
         <!-- 추천하기 버튼 -->
         <button class="heart_btn" style="margin-left:45%"  name="recommand">
         <c:choose>
-            <c:when test="${select == true}">
+            <c:when test="${recommand_select == true}">
                    <img id = "recommand_bnt" src="imgView?file=heart_fill.png" width="60px" height="60px" alt=""/>
                     <div>추천하기</div>
             </c:when>
@@ -264,13 +288,16 @@
         </button>
         <!-- 찜하기 버튼 -->
         <button class="star_btn" id="wish" name="wish_bnt">
-            <i><span class="material-symbols-outlined" style="font-size: 50px;">
-                star
-                </span></i>
+            <c:choose>
+                <c:when test="${wish_select == true}">
+                    <img id = "wish_bnt" src="imgView?file=star_fill.png" width="60px" height="60px" alt=""/>
+                </c:when>
+                <c:otherwise>
+                    <img id="wish_bnt" src="imgView?file=star_empty.png" width="60px" height="60px" alt=""/>
+                </c:otherwise>
+            </c:choose>
             <div>찜하기</div>
         </button>
-
-
         <br><br>
     </div>
 

@@ -1,7 +1,6 @@
 package service;
 
 import java.util.List;
-import java.util.Map;
 
 import bean.Board;
 import bean.Board_Store;
@@ -29,4 +28,8 @@ public interface BoardService {
     String boardRecommand(String nickname, Integer board_id) throws Exception; // 추천하기 기능 구현 메서드
 
     Boolean isboardRecommand(String nickname, Integer board_id) throws Exception; // 추천 여부 조회 메서드
+
+    String boardWish(String nickname, Integer board_id) throws Exception; // 찜하기 기능 구현 메서드
+
+    boolean isboardWish(String nickname, Integer board_id) throws Exception; // 찜 여부 조회 메서드
 }

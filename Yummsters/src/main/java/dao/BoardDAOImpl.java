@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import bean.Wish;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 
@@ -50,7 +51,6 @@ public class BoardDAOImpl implements BoardDAO{
 	public List<Board> selectBoardByFood(Integer foodId) throws Exception {
 		return sqlSession.selectList("mapper.board.selectBoardByFood", foodId);
 	}
-  // -----
 
   // 내가 찜한 게시글 목록 조회
 	@Override
@@ -68,10 +68,11 @@ public class BoardDAOImpl implements BoardDAO{
 		map.put("row", row);
 		return sqlSession.selectList("mapper.board.selectMyList", map);
 	}
+
     // 추천할 데이터 저장
     @Override
     public void insertRecommand(Map<String, Object> param) throws Exception {
-        sqlSession.selectOne("mapper.recommand.insertRecommand", param);
+        sqlSession.insert("mapper.recommand.insertRecommand", param);
         sqlSession.commit();
     }
 
@@ -106,5 +107,26 @@ public class BoardDAOImpl implements BoardDAO{
     @Override
     public Integer selectRecommandCount(Integer board_id) throws Exception {
         return sqlSession.selectOne("mapper.board.selectRecommandCount", board_id);
+    }
+
+    // 찜할 데이터 저장
+    @Override
+    public void insertWish(Map<String, Object> param) throws Exception {
+        sqlSession.insert("mapper.wish.insertWish", param);
+        System.out.println(param);
+        sqlSession.commit();
+    }
+
+    // 찜한 데이터 삭제
+    @Override
+    public void deleteWish(Map<String, Object> param) throws Exception {
+        sqlSession.selectOne("mapper.wish.deleteWish", param);
+        sqlSession.commit();
+    }
+
+    // 찜한 데이터 조회
+    @Override
+    public Integer selectWish(Map<String, Object> param) throws Exception {
+        return sqlSession.selectOne("mapper.wish.selectWish", param);
     }
 }

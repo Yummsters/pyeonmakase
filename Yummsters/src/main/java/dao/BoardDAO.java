@@ -3,6 +3,7 @@ package dao;
 import java.util.List;
 import java.util.Map;
 
+import bean.Wish;
 import org.apache.ibatis.annotations.Param;
 
 import bean.Board;
@@ -39,4 +40,10 @@ public interface BoardDAO {
     void minusRecommandCount(Integer board_id) throws Exception; // 추천수 -1
 
     Integer selectRecommandCount(Integer board_id) throws Exception; // 추천수 조회
+
+    void insertWish(Map<String, Object> param) throws Exception; // 찜 데이터 저장
+
+    void deleteWish(Map<String, Object> param) throws Exception; // 찜 데이터 삭제
+
+   Integer selectWish(Map<String, Object> param) throws Exception; // 로그인 멤버에 대한 찜 여부 확인
 }
