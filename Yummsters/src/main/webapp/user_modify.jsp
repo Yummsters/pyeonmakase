@@ -193,7 +193,7 @@
     <div class="c2" ></div>
     <div class="c3" ></div>
     <div class="c4"></div>
-    
+ 
     <!-- 회원정보-->
     <img class="img" src="imgView?file=로고.png" alt="">
     <div class="title"><b>회원정보</b></div>
@@ -226,3 +226,45 @@
 
     <jsp:include page="footer.jsp" />
 </body>
+<script>
+	$ajax({
+		url:"getUserInfo",
+		type:"get",
+		dataType:"json",
+		success:function(user){
+			$(".nickname").val(user.nickname);
+			$(".email").val(user.email);
+			$(".member_pw").val(user.member_pw);
+		},
+		erro: function(err) {
+			console.log(err);
+		}
+	});
+	
+	
+	
+	//수정확인 누르면..
+	$("#user_btn1").click(function() {
+    var newNickname = $(".nickname2").val();
+    $.ajax({
+        url: "userModify", // 수정할 서블릿 주소
+        type: "post", // POST 방식으로 요청
+        data: {
+            // 수정할 데이터를 전달
+            originalNickname: "${member.nickname}", // 기존 닉네임
+            updatedNickname: newNickname // 수정된 닉네임
+            originalEmail: "${member.email}",
+            updatedEmail: newEmail
+            originalPassword:"${member.member_pw}",
+            updatedPassword : newPassword
+        },
+        dataType: "json",
+        success: function (result) {
+            console.log(result);
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
+});
+</script>

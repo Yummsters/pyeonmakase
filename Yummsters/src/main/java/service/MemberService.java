@@ -1,5 +1,7 @@
 package service;
 
+import java.util.Map;
+
 import bean.Member;
 
 public interface MemberService {
@@ -18,4 +20,9 @@ public interface MemberService {
 	
 	// 아이디 중복확인
 	String isIdCheck(String member_id) throws Exception;
+	
+	//회원탈퇴
+		void memberRemove(Map<String, Object> paramMap) throws Exception;
+	//회원정보수정
+		void userModify(Map<String, Object> paramMap) throws Exception;
 }

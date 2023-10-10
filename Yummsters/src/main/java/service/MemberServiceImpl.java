@@ -1,5 +1,7 @@
 package service;
 
+import java.util.Map;
+
 import bean.Member;
 import dao.MemberDAO;
 import dao.MemberDAOImpl;
@@ -51,5 +53,15 @@ public class MemberServiceImpl implements MemberService{
 		Member member = memberDAO.selectId(member_id);
 		if(member==null) return "notexist";
 		return "exist";
+	}
+	//회원탈퇴
+	@Override
+	public void memberRemove(Map<String, Object> paramMap) throws Exception {
+	    memberDAO.deleteMember(paramMap);
+	}
+	//회원정보수정
+	@Override
+	public void userModify(Map<String, Object> paramMap) throws Exception {
+	    memberDAO.updateMember(paramMap);
 	}
 }

@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 
 import bean.Member;
@@ -31,5 +33,17 @@ public class MemberDAOImpl implements MemberDAO{
 	@Override
 	public Member selectEmail(String email) throws Exception {
 		return sqlSession.selectOne("mapper.member.selectEmail", email);
+	}
+	//회원탈퇴
+	@Override
+	public void deleteMember(Map<String, Object> paramMap) throws Exception {
+	    sqlSession.delete("mapper.member.deleteMember", paramMap);
+	    sqlSession.commit();
+	}
+	//회원정보수정
+	@Override
+	public void updateMember(Map<String, Object> paramMap) throws Exception {
+		 sqlSession.update("mapper.member.updateMember", paramMap);
+		    sqlSession.commit();
 	}
 }
