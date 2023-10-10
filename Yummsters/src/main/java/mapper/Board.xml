@@ -38,6 +38,18 @@
 			order by regdate desc
 		]]>
 	</select>
+	
+	<!-- 검색 -->
+	  <select id="searchByKeyword" resultType="Board">
+  		<![CDATA[
+  			select b.*, s.* from board b join board_store bs using(board_id)
+			join store_category s using(store_category_id)
+			where title like #{title}
+			order by regdate desc
+		]]>
+	  </select>
+	
+	<!-- 선진 끝 -->
 	<select id="selectWishList" resultType="Board">
 		<![CDATA[
 			select b.title,b.picture,b.recommand_count,group_concat(sc.store_category_name) as store_category_name

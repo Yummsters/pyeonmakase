@@ -129,4 +129,10 @@ public class BoardDAOImpl implements BoardDAO{
     public Integer selectWish(Map<String, Object> param) throws Exception {
         return sqlSession.selectOne("mapper.wish.selectWish", param);
     }
+    
+    // 키워드 검색
+	@Override
+	public List<Board> searchByKeyword(String keyword) throws Exception {
+		return sqlSession.selectList("mapper.board.searchByKeyword", "%" + keyword + "%");
+	}
 }

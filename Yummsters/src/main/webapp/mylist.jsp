@@ -121,6 +121,7 @@
             color: #524434;
             font-weight: bold;
             width: 150px;
+            height: 20px;
         }
 
         /* 최상단 버튼 */
