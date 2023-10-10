@@ -34,7 +34,15 @@ public class BoardDetail extends HttpServlet {
             Member member = (Member)session.getAttribute("member");
             if(member != null){
                 Boolean isRecommand = boardService.isboardRecommand(member.getNickname(), board_id);
-                req.setAttribute("select", isRecommand);
+                Boolean isWish = boardService.isboardWish(member.getNickname(), board_id);
+                System.out.println("boardDtail : " + isWish);
+                req.setAttribute("recommand_select", isRecommand);
+                if(isWish){
+                    req.setAttribute("wish_select", true);
+                }else{
+                    req.setAttribute("wish_select", false);
+                }
+
             }
             req.getRequestDispatcher("detail.jsp").forward(req, res);
         } catch (Exception e) {

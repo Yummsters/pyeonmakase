@@ -102,16 +102,6 @@
             height: 15px;
         }
 
-        /* 임시 (나중에 삭제) */
-        .header, .footer {
-            background: black;
-            color: white;
-            text-align: center;
-            height: 100px;
-            clear: left;
-            margin: 0 auto;
-        }
-
     </style>
     <!-- jQuery CDN -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

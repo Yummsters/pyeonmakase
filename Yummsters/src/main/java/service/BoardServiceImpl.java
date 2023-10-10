@@ -5,6 +5,7 @@ import java.util.List;
 import bean.Board;
 import bean.Board_Store;
 import bean.Member;
+import bean.Wish;
 import dao.BoardDAO;
 import dao.BoardDAOImpl;
 import org.json.simple.JSONObject;
@@ -55,7 +56,7 @@ public class BoardServiceImpl implements BoardService{
             // 추천 수  + 1
             boardDao.plusRecommandCount(board_id);
             // response 값 넣기
-            response.put("select", true);
+            response.put("recommand_select", true);
         }else{
             // Recommand가 존재한다면
             // 테이블에서 추천 삭제
@@ -63,12 +64,11 @@ public class BoardServiceImpl implements BoardService{
             // 추천 수 -1
             boardDao.minusRecommandCount(board_id);
             // response에 값 넣기
-            response.put("select", false);
+            response.put("recommand_select", false);
         }
 
         // 좋아요 수 response에 넣기
         Integer recommandCount = boardDao.selectRecommandCount(board_id);
-        System.out.println(recommandCount);
         response.put("recommandCount", recommandCount);
 
         // JSON 형식으로 응답 변경
@@ -86,6 +86,54 @@ public class BoardServiceImpl implements BoardService{
         // 추천을 누른 정보 조회
         if(boardDao.selectRecommand(map) == null) return false;
         return true;
+    }
+
+    // 찜하기 기능 구현
+    @Override
+    public String boardWish(String nickname, Integer board_id) throws Exception {
+        // Wish 존재 여부 확인
+        Map<String, Object> map = new HashMap<>();
+        map.put("nickname", nickname);
+        map.put("board_id", board_id);
+        System.out.println("BoardServiceImpl nickname : " + nickname);
+        System.out.println("BoardServiceImpl board_id : " + board_id);
+        Integer wish_id = boardDao.selectWish(map);
+        System.out.println("BoardServiceImpl wish_id : " + wish_id);
+
+        Map<String, Object> response = new HashMap<>();
+
+        // Wish가 존재하지 않는다면
+        if(wish_id == null){
+            System.out.println("if문 진입 insert문 실행 필요");
+            // 테이블에 찜 저장
+            boardDao.insertWish(map);
+            System.out.println(map);
+            // response 값 넣기
+            response.put("wish_select", true);
+        }else{
+            System.out.println("if문 진입 delete문 실행 필요");
+            // Wish가 존재한다면
+            boardDao.deleteWish(map);
+            // response에 값 넣기
+            response.put("wish_select", false);
+        }
+        System.out.println("BoardServiceImpl wish_select : " + response.get("wish_select"));
+
+        // JSON 형식으로 응답 변경
+        JSONObject jsonObject = new JSONObject(response);
+        return jsonObject.toJSONString();
+    }
+
+    // 찜 여부 조회
+    @Override
+    public boolean isboardWish(String nickname, Integer board_id) throws Exception {
+        Map<String, Object> map = new HashMap<>();
+        map.put("nickname", nickname);
+        map.put("board_id", board_id);
+        System.out.println(boardDao.selectWish(map));
+
+        // 추천을 누른 정보 조회
+        return boardDao.selectWish(map) != null;
     }
 
     // home에서 추천 Top10 게시글 조회

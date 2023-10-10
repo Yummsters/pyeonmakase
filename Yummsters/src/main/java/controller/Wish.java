@@ -12,10 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet("/recommand")
-public class Recommand extends HttpServlet {
+@WebServlet("/wish")
+public class Wish extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+
     }
 
     @Override
@@ -26,11 +27,11 @@ public class Recommand extends HttpServlet {
         HttpSession session = req.getSession();
         Member member = (Member)session.getAttribute("member");
 
-        // 추천하기 버튼 클릭 시 넘겨준 게시글 아이디를 이용해 어떤 게시글인지 판별리
+        // 찜하기 버튼 클릭 시 넘겨준 게시글 아이디를 이용해 어떤 게시글인지 판별 후 찜하기 여부 처리
         Integer board_id = Integer.parseInt(req.getParameter("board_id"));
         try{
             BoardService boardService = new BoardServiceImpl();
-            String response = boardService.boardRecommand(member.getNickname(), board_id);
+            String response = boardService.boardWish(member.getNickname(), board_id);
             res.getWriter().print(response);
             System.out.println(response.toString());
         }catch (Exception e){
@@ -38,6 +39,5 @@ public class Recommand extends HttpServlet {
             req.setAttribute("err", e.getMessage());
             req.getRequestDispatcher("/error.jsp").forward(req, res);
         }
-
     }
 }

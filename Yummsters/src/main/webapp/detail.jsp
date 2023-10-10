@@ -179,14 +179,39 @@
                     dataType : 'json',
                     data : {'board_id': '<c:out value="${board.board_id}"/>'},
                     success:function (response){
-                        console.log(response.select);
+                        console.log(response.recommand_select);
                         console.log(response.recommandCount);
-                        if(response.select){
-                            $("#recommand_bnt").attr("src", "imgView?file=heart11.png")
+                        if(response.recommand_select){
+                            $("#recommand_bnt").attr("src", "imgView?file=heart_fill.png")
                         }else{
-                            $("#recommand_bnt").attr("src", "imgView?file=heart12.png")
+                            $("#recommand_bnt").attr("src", "imgView?file=heart_empty.png")
                         }
                         $("#recommandCount").text(response.recommandCount);
+                    },
+                    error:function (error){
+                        console.log(error)
+                    }
+                })
+            })
+        })
+    </script>
+
+    <script type="text/javascript">
+        // 찜하기 버튼 클릭 시
+        $(function(){
+            $('#wish_bnt').click(function (){
+                $.ajax({
+                    url : 'wish',
+                    type : 'post',
+                    dataType : 'json',
+                    data : {'board_id': '<c:out value="${board.board_id}"/>'},
+                    success:function (response){
+                        console.log(response.wish_select);
+                        if(response.wish_select){
+                            $("#wish_bnt").attr("src", "imgView?file=star_fill.png")
+                        }else{
+                            $("#wish_bnt").attr("src", "imgView?file=star_empty.png")
+                        }
                     },
                     error:function (error){
                         console.log(error)
@@ -216,7 +241,6 @@
                     <td>${board.regdate} &nbsp; ${board.nickname}</td> <!-- TODO 날짜 형식 수정 필요 -->
                 </tr>
             </table>
-            <!--<div class="recommand_count">추천수 : 1,234 <br>2023.09.17 20:03 닉네임</div>-->
         </div>
     </div>
 
@@ -226,6 +250,10 @@
         <br>
         <!-- TODO : 토스트 에디터 데이터 저장 및 가져오기 해결 후 로직 변경 -->
         <div class="content">
+            <div  style="text-align: center">
+            ${board.content}
+            </div>
+            <!--
             <div style="text-align : center;"> 재료 : 오감자, 체다치즈, 스트링치즈</div>
             <br><br>
             <div class="picture_text"><img src="imgView?file=mirro.jpg" alt="" style="padding-left: 20%;">1. 오감자를 접시에
@@ -246,34 +274,34 @@
                 이것만큼 맛있는 안주는 없었다. 이것은 그라탕인가 오감자인가<br>
                 오감자치즈후라이로 불금 어떠신가요??
             </div>
+        -->
+         <br><br>
         </div>
-        <br><br>
-
         <!-- 추천하기 버튼 -->
+        <button class="heart_btn" style="margin-left:43%"  name="recommand">
         <c:choose>
-            <c:when test="${select == true}">
-                <button class="heart_btn" id = "recommand_bnt" style="margin-left:45%" name="recommand">
-                   <img  src="imgView?file=heart11.png" width="60px" height="60px" alt=""/>
+            <c:when test="${recommand_select == true}">
+                   <img id = "recommand_bnt" src="imgView?file=heart_fill.png" width="60px" height="60px" alt=""/>
                     <div>추천하기</div>
-                </button>
             </c:when>
             <c:otherwise>
-                <button class="heart_btn" style="margin-left:45%" id="recommand_bnt" name="recommand">
-                    <img  src="imgView?file=heart12.png" width="60px" height="60px" alt=""/>
+                    <img id="recommand_bnt" src="imgView?file=heart_empty.png" width="60px" height="60px" alt=""/>
                     <div>추천하기</div>
-                </button>
             </c:otherwise>
         </c:choose>
-
+        </button>
         <!-- 찜하기 버튼 -->
         <button class="star_btn" id="wish" name="wish_bnt">
-            <i><span class="material-symbols-outlined" style="font-size: 50px;">
-                star
-                </span></i>
+            <c:choose>
+                <c:when test="${wish_select == true}">
+                    <img id = "wish_bnt" src="imgView?file=star_fill.png" width="60px" height="60px" alt=""/>
+                </c:when>
+                <c:otherwise>
+                    <img id="wish_bnt" src="imgView?file=star_empty.png" width="60px" height="60px" alt=""/>
+                </c:otherwise>
+            </c:choose>
             <div>찜하기</div>
         </button>
-
-
         <br><br>
     </div>
 
@@ -281,15 +309,16 @@
     <!-- 각 페이지로 이동하는 링크 추가 필요 -->
     <form name="modify_delete">
     <br>
-    <button class="mod_del" type="submit" id="board_modify" name="board_id" value="${board.board_id}" formaction="board_modify?" formmethod="get">
-        수정
-    </button>
-    <button class="mod_del" type="submit" id="board_delete" name="board_id" value="${board.board_id}" formaction="board_delete?"
-            formmethod="get"> 삭제
-    </button>
+        <c:if test="${member.nickname eq board.nickname}">
+            <button class="mod_del" type="submit" id="board_modify" name="board_id" value="${board.board_id}" formaction="board_modify?" formmethod="get">
+                수정
+            </button>
+            <button class="mod_del" type="submit" id="board_delete" name="board_id" value="${board.board_id}" formaction="board_delete?"
+                    formmethod="get"> 삭제
+            </button>
+        </c:if>
     <br><br><br>
     </form>
-
 
     <div class="all_reply">
         <div class="reply">
