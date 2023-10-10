@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -129,7 +130,37 @@ public class BoardDAOImpl implements BoardDAO{
     public Integer selectWish(Map<String, Object> param) throws Exception {
         return sqlSession.selectOne("mapper.wish.selectWish", param);
     }
-    
+
+    @Override
+    public List<Board> selectBoardCategoryList(Integer board_id) throws Exception {
+        return sqlSession.selectList("mapper.board.selectStoreCategoryList", board_id);
+    }
+
+    @Override
+    public void deleteWishBoard(Integer board_id) throws Exception {
+        sqlSession.delete("mapper.wish.deleteWishBoard", board_id);
+        sqlSession.commit();
+    }
+
+    @Override
+    public void deleteRecommandBoard(Integer board_id) throws Exception {
+        sqlSession.delete("mapper.recommand.deleteRecommandBoard", board_id);
+        sqlSession.commit();
+    }
+
+    // 게시글 참조하는 board_store 삭제
+    @Override
+    public void deleteBoard_store(Integer board_id) throws Exception {
+        sqlSession.delete("mapper.board_store.deleteBoard_store", board_id);
+        sqlSession.commit();
+    }
+
+    @Override
+    public void deleteBoardOne(Integer board_id) throws Exception {
+        sqlSession.delete("mapper.board.deleteBoardOne", board_id);
+        sqlSession.commit();
+    }
+
     // 키워드 검색
 	@Override
 	public List<Board> searchByKeyword(String keyword) throws Exception {

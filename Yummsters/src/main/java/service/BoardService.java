@@ -32,6 +32,10 @@ public interface BoardService {
     String boardWish(String nickname, Integer board_id) throws Exception; // 찜하기 기능 구현 메서드
 
     boolean isboardWish(String nickname, Integer board_id) throws Exception; // 찜 여부 조회 메서드
-  
+
+    List<Board> boardStoreCategoryList(Integer board_id) throws Exception; // 게시글의 편의점 카테고리 조회
+
  	List<Board> boardSearch(String keyword) throws Exception; // 키워드 검색
+
+    void deleteBoardAll(Integer board_id) throws Exception; // 게시글 삭제를 위한 모든 참조 삭제
 }

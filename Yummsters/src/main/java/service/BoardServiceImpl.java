@@ -1,5 +1,6 @@
 package service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import bean.Board;
@@ -134,6 +135,20 @@ public class BoardServiceImpl implements BoardService{
 
         // 추천을 누른 정보 조회
         return boardDao.selectWish(map) != null;
+    }
+
+    @Override
+    public List<Board> boardStoreCategoryList(Integer board_id) throws Exception {
+        return boardDao.selectBoardCategoryList(board_id);
+    }
+
+    // 게시글 삭제를 위해 게시글을 참조하는 모든 행 삭제
+    @Override
+    public void deleteBoardAll(Integer board_id) throws Exception {
+        boardDao.deleteWishBoard(board_id);
+        boardDao.deleteRecommandBoard(board_id);
+        boardDao.deleteBoard_store(board_id);
+        boardDao.deleteBoardOne(board_id);
     }
 
     // home에서 추천 Top10 게시글 조회
