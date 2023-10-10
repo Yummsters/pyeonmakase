@@ -156,23 +156,35 @@
             z-index: 1000;
         }
     </style>
-    <script >
-    <!-- 팝업 창 -->
+   <script>
     function button_event1(){
-        var text;
-        var view=prompt("회원정보를 수정하시려면 \n 비밀번호를 입력해주세요. ","비밀번호를 입력하세요");
-       if(view) {
-            location.href = "user_modify.jsp";
-       }
-        
-    }
-    function button_event2(){
-     var text;
-     var view=prompt("정말 탈퇴하시겠습니까? \n 탈퇴하시면 회원정보를 되돌릴 수 없습니다. ","비밀번호를 입력하세요");
-    if(view){
-    	
-   	 }
-    }
+	    var placeholder = "비밀번호를 입력하세요.";
+	 	var message = prompt("회원정보를 수정하시려면 \n 비밀번호를 입력해주세요.", placeholder);
+	 	 var memberPw = "${sessionScope.member.member_pw}";
+	    if(message === memberPw){
+	    	location.href = "user_modify.jsp";
+	    	
+	    }  else {
+	    	alert("비밀번호가 일치하지 않습니다.")
+	    } 	    
+	    
+	}
+	function button_event2(){
+		var placeholder = "비밀번호를 입력하세요.";
+	    var message = prompt("정말 탈퇴하시겠습니까? \n 탈퇴하시면 회원정보를 되돌릴 수 없습니다.", placeholder);
+
+	    // 세션에 저장된 회원 정보 가져오기
+	    var memberNickname = "${sessionScope.member.nickname}";
+	    var memberPw = "${sessionScope.member.member_pw}";
+
+	    // 입력한 비밀번호와 로그인한 회원의 비밀번호 비교
+	    if (message === memberPw) {
+	        // 탈퇴 처리를 위한 서블릿으로 이동
+	        location.href = "memberdelete?nickname=" + memberNickname + "&member_pw=" + memberPw + "&redirect=home.jsp";
+	    } else {
+	        alert("비밀번호가 일치하지 않습니다.");
+	    }
+	}
     </script>
    
 </head>

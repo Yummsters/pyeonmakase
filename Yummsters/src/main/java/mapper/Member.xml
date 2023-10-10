@@ -29,4 +29,22 @@
 			select * from member where nickname = #{nickname}
 		]]>
 	</select>
+	
+	<!-- 회원 탈퇴 -->
+	<delete id="deleteMember" parameterType="Map">
+		<![CDATA[
+			delete from member where nickname = #{nickname} AND member_pw = #{member_pw}
+		]]>
+	</delete>
+	
+	<!-- 회원정보 수정 -->
+<update id="updateMember" parameterType="Map">
+    <![CDATA[
+        update member
+        set nickname = #{newNickname},
+            email = #{newEmail},
+            member_pw = #{newPassword}
+        where nickname = #{nickname}
+    ]]>
+</update>
 </mapper>
