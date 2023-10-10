@@ -250,6 +250,10 @@
         <br>
         <!-- TODO : 토스트 에디터 데이터 저장 및 가져오기 해결 후 로직 변경 -->
         <div class="content">
+            <div  style="text-align: center">
+            ${board.content}
+            </div>
+            <!--
             <div style="text-align : center;"> 재료 : 오감자, 체다치즈, 스트링치즈</div>
             <br><br>
             <div class="picture_text"><img src="imgView?file=mirro.jpg" alt="" style="padding-left: 20%;">1. 오감자를 접시에
@@ -270,11 +274,11 @@
                 이것만큼 맛있는 안주는 없었다. 이것은 그라탕인가 오감자인가<br>
                 오감자치즈후라이로 불금 어떠신가요??
             </div>
+        -->
+         <br><br>
         </div>
-        <br><br>
-
         <!-- 추천하기 버튼 -->
-        <button class="heart_btn" style="margin-left:45%"  name="recommand">
+        <button class="heart_btn" style="margin-left:43%"  name="recommand">
         <c:choose>
             <c:when test="${recommand_select == true}">
                    <img id = "recommand_bnt" src="imgView?file=heart_fill.png" width="60px" height="60px" alt=""/>
@@ -305,15 +309,16 @@
     <!-- 각 페이지로 이동하는 링크 추가 필요 -->
     <form name="modify_delete">
     <br>
-    <button class="mod_del" type="submit" id="board_modify" name="board_id" value="${board.board_id}" formaction="board_modify?" formmethod="get">
-        수정
-    </button>
-    <button class="mod_del" type="submit" id="board_delete" name="board_id" value="${board.board_id}" formaction="board_delete?"
-            formmethod="get"> 삭제
-    </button>
+        <c:if test="${member.nickname eq board.nickname}">
+            <button class="mod_del" type="submit" id="board_modify" name="board_id" value="${board.board_id}" formaction="board_modify?" formmethod="get">
+                수정
+            </button>
+            <button class="mod_del" type="submit" id="board_delete" name="board_id" value="${board.board_id}" formaction="board_delete?"
+                    formmethod="get"> 삭제
+            </button>
+        </c:if>
     <br><br><br>
     </form>
-
 
     <div class="all_reply">
         <div class="reply">
