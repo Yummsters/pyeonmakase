@@ -33,7 +33,7 @@ public class BoardDetail extends HttpServlet {
             List<Board> store_category_list = boardService.boardStoreCategoryList(board_id);
             String store_category_name = "";
             for(Board b : store_category_list){
-                store_category_name += b.getStore_category_name() + " ";
+                store_category_name += "#" + b.getStore_category_name() + " ";
             }
             System.out.println("BoardDetail store_category_list : " + store_category_list);
             System.out.println("BoardDetail store_category_name : " + store_category_name);
