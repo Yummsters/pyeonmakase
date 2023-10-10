@@ -37,5 +37,5 @@ public interface BoardService {
 
  	List<Board> boardSearch(String keyword) throws Exception; // 키워드 검색
 
-
+    void deleteBoardAll(Integer board_id) throws Exception; // 게시글 삭제를 위한 모든 참조 삭제
 }

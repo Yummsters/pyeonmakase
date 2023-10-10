@@ -19,4 +19,10 @@
             select * from recommand where nickname=#{nickname} and board_id=#{board_id}
         ]]>
     </select>
+
+    <delete id="deleteRecommandBoard" parameterType="Integer">
+        <![CDATA[
+        delete from recommand where board_id=#{board_id}
+        ]]>
+    </delete>
 </mapper>

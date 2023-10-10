@@ -109,4 +109,9 @@
 		]]>
 	</select>
 
+	<delete id="deleteBoardOne" parameterType="Integer">
+		<![CDATA[
+			delete from board where board_id=#{board_id}
+		]]>
+	</delete>
 </mapper>

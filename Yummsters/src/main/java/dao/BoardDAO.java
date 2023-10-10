@@ -47,7 +47,15 @@ public interface BoardDAO {
 
    Integer selectWish(Map<String, Object> param) throws Exception; // 로그인 멤버에 대한 찜 여부 확인
 
-    List<Board> selectBoardCategoryList(Integer board_id) throws Exception;
+    List<Board> selectBoardCategoryList(Integer board_id) throws Exception; // 편의점 카테고리 리스트 가져오기
+
+    void deleteWishBoard(Integer board_id) throws Exception; // 게시글을 참조하는 모든 wish 삭제
+
+    void deleteRecommandBoard(Integer board_id) throws Exception; // 게시글을 참조하는 모든 recommand 삭제
+
+    void deleteBoard_store(Integer board_id) throws Exception; // 게시글을 참조하는 모든 board_store 삭제
+
+    void deleteBoardOne(Integer board_id) throws Exception; // 게시글 삭제
 
     List<Board> searchByKeyword(String keyword) throws Exception; // 키워드 검색
 }
