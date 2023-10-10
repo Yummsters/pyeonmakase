@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 
@@ -160,26 +162,91 @@
     <!-- 편의점 선택 -->
     <div class="store_category">
         &nbsp;&nbsp; 편의점 선택 &nbsp&nbsp;&nbsp; &nbsp;&nbsp;
-        <input type="checkbox" name="store" id="all" value="1">
+        <!-- TODO : 이미 선택되어 있는 편의점들 가져와서 체크표시 -->
+        <c:out value="${board.store_category_name}"/>
+        <c:set var = "store_category_name" value="${board.store_category_name}"/>
+        <c:choose>
+            <c:when test="${fn:contains(store_category_name,'all')}">
+                <input type="checkbox" name="store" id="all" value="1" checked>
+            </c:when>
+            <c:otherwise>
+                <input type="checkbox" name="store" id="all" value="1">
+            </c:otherwise>
+        </c:choose>
         <label for="all">전체</label>
-        <input type="checkbox" name="store" id="cu" value="2">
+
+        <c:choose>
+            <c:when test="${fn:contains(store_category_name,'CU')}">
+                <input type="checkbox" name="store" id="cu" value="2" checked>
+            </c:when>
+            <c:otherwise>
+                <input type="checkbox" name="store" id="cu" value="2">
+            </c:otherwise>
+        </c:choose>
         <label for="cu"><img src="imgView?file=cu.png" alt=""></label>
-        <input type="checkbox" name="store" id="gs" value="3">
+
+        <c:choose>
+            <c:when test="${fn:contains(store_category_name,'GS25')}">
+                <input type="checkbox" name="store" id="gs" value="3" checked>
+            </c:when>
+            <c:otherwise>
+                <input type="checkbox" name="store" id="gs" value="3">
+            </c:otherwise>
+        </c:choose>
         <label for="gs"><img src="imgView?file=gs.png" alt=""></label>
-        <input type="checkbox" name="store" id="seven" value="4">
+
+        <c:choose>
+            <c:when test="${fn:contains(store_category_name,'SevenEleven')}">
+                <input type="checkbox" name="store" id="seven" value="4" checked>
+            </c:when>
+            <c:otherwise>
+                <input type="checkbox" name="store" id="seven" value="4">
+            </c:otherwise>
+        </c:choose>
         <label for="seven"><img src="imgView?file=seven.png" alt=""></label>
-        <input type="checkbox" name="store" id="etc" value="5">
+
+        <c:choose>
+            <c:when test="${fn:contains(store_category_name,'기타')}">
+                <input type="checkbox" name="store" id="etc" value="5" checked>
+            </c:when>
+            <c:otherwise>
+                <input type="checkbox" name="store" id="etc" value="5">
+            </c:otherwise>
+        </c:choose>
         <label for="etc">기타</label>
     </div>
 
     <!-- 카테고리 선택 -->
     <div class="food_category">
         &nbsp;&nbsp;카테고리 선택 &nbsp;&nbsp;
-        <input type="checkbox" name="food" id="meal" value="1">
+        <c:choose>
+            <c:when test="${board.food_category_id == 1}">
+                <input type="checkbox" name="food" id="meal" value="1" checked>
+            </c:when>
+            <c:otherwise>
+                <input type="checkbox" name="food" id="meal" value="1">
+            </c:otherwise>
+        </c:choose>
         <label for="meal">식사류</label>
-        <input type="checkbox" name="food" id="desert" value="2">
+
+        <c:choose>
+            <c:when test="${board.food_category_id == 2}">
+                <input type="checkbox" name="food" id="desert" value="2" checked>
+            </c:when>
+            <c:otherwise>
+                <input type="checkbox" name="food" id="desert" value="2">
+            </c:otherwise>
+        </c:choose>
         <label for="desert">간식류</label>
-        <input type="checkbox" name="food" id="drink" value="3">
+
+        <c:choose>
+            <c:when test="${board.food_category_id == 3}">
+                <input type="checkbox" name="food" id="drink" value="3" checked>
+            </c:when>
+            <c:otherwise>
+                <input type="checkbox" name="food" id="drink" value="3">
+            </c:otherwise>
+        </c:choose>
         <label for="drink">음료</label>
     </div>
     <br>
@@ -195,7 +262,7 @@
             el: document.querySelector('#content'), // 에디터를 적용할 요소 (컨테이너)
             height: '500px',                        // 에디터 영역의 높이 값 (OOOpx || auto)
             initialEditType: 'markdown',            // 최초로 보여줄 에디터 타입 (markdown || wysiwyg)
-            initialValue: '내용을 입력해 주세요.',     // 내용의 초기 값으로, 반드시 마크다운 문자열 형태여야 함
+            initialValue: '${board.content}',     // 내용의 초기 값으로, 반드시 마크다운 문자열 형태여야 함
             previewStyle: 'vertical'//,                // 마크다운 ß프리뷰 스타일 (tab || vertical)
 
             // 이미지가 Base64 형식으로 입력되는 것 가로채주는 옵션
@@ -240,7 +307,7 @@
             }*/
         });
         //editor.getHtml()을 사용해서 에디터 내용 수신
-        document.querySelector('#contents').insertAdjacentHTML('afterbegin', editor.getHTML());
+        //document.querySelector('#contents').insertAdjacentHTML('afterbegin', editor.getHTML());
         // 콘솔창에 표시(브라우저에서 content 값 확인)
         // console.log(editor.getHTML());
     </script>

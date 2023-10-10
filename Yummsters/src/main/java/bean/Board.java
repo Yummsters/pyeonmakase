@@ -10,7 +10,7 @@ public class Board {
     private String picture; // 레시피 대표 사진
     private String content; // 토스트 에디터로 작성한 레시피 내용
     private Integer recommand_count; // 추천(recommand) 수
-    private List<Store_category> store_categoryList;
+    private List<Board> store_category_list;
     //private Food_category food_category;
 
     private LocalDateTime regdate; // 레시피 생성 일자
@@ -69,12 +69,12 @@ public class Board {
 		this.recommand_count = recommand_count;
 	}
 
-	public List<Store_category> getStore_categoryList() {
-		return store_categoryList;
+	public List<Board> getStore_category_list() {
+		return store_category_list;
 	}
 
-	public void setStore_categoryList(List<Store_category> store_categoryList) {
-		this.store_categoryList = store_categoryList;
+	public void setStore_category_list(List<Board> store_category_list) {
+		this.store_category_list = store_category_list;
 	}
 
 	public LocalDateTime getRegdate() {

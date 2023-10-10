@@ -229,7 +229,7 @@
         <div class="content_title">
             <div class="title_store" style="display: inline-block;">
                 <div class="title">${board.title} </div> <!-- TODO css 깨지는 부분 수정 필요 -->
-                <div class="store"> 편의점 : ${store_category_name}</div> <!-- TODO 편의점 카테고리 관련 정보 가져오는 로직 추가 필요 -->
+                <div class="store"> 편의점 : ${board.store_category_name}</div>
             </div>
             <table class="recommand_date">
                 <tr>
@@ -248,7 +248,8 @@
     <div class="content_detail">
         <div class="picture"><img src="imgView?file=${board.picture}" alt="" style="width:350px"></div>
         <br>
-        <!-- TODO : 토스트 에디터 데이터 저장 및 가져오기 해결 후 로직 변경 -->
+
+        <!-- TODO : 토스트 에디터 이미지 url 변경 로직 작성 필요 -->
         <div class="content">
             <div  style="text-align: center">
             ${board.content}
