@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -129,7 +130,12 @@ public class BoardDAOImpl implements BoardDAO{
     public Integer selectWish(Map<String, Object> param) throws Exception {
         return sqlSession.selectOne("mapper.wish.selectWish", param);
     }
-    
+
+    @Override
+    public List<Board> selectBoardCategoryList(Integer board_id) throws Exception {
+        return sqlSession.selectList("mapper.board.selectStoreCategoryList", board_id);
+    }
+
     // 키워드 검색
 	@Override
 	public List<Board> searchByKeyword(String keyword) throws Exception {

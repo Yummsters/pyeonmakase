@@ -229,7 +229,7 @@
         <div class="content_title">
             <div class="title_store" style="display: inline-block;">
                 <div class="title">${board.title} </div> <!-- TODO css 깨지는 부분 수정 필요 -->
-                <div class="store"> 편의점 : 공통</div> <!-- TODO 편의점 카테고리 관련 정보 가져오는 로직 추가 필요 -->
+                <div class="store"> 편의점 : ${store_category_name}</div> <!-- TODO 편의점 카테고리 관련 정보 가져오는 로직 추가 필요 -->
             </div>
             <table class="recommand_date">
                 <tr>

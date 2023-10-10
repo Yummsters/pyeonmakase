@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/boardDetail")
 public class BoardDetail extends HttpServlet {
@@ -28,6 +29,16 @@ public class BoardDetail extends HttpServlet {
             // 게시글 번호를 통해 디비에서 게시글 조회 진행
             BoardService boardService = new BoardServiceImpl();
             Board board = boardService.boardDetail(board_id);
+            // 게시글에 해당하는 편의점 카테고리 조회
+            List<Board> store_category_list = boardService.boardStoreCategoryList(board_id);
+            String store_category_name = "";
+            for(Board b : store_category_list){
+                store_category_name += b.getStore_category_name() + " ";
+            }
+            System.out.println("BoardDetail store_category_list : " + store_category_list);
+            System.out.println("BoardDetail store_category_name : " + store_category_name);
+
+            req.setAttribute("store_category_name", store_category_name);
             req.setAttribute("board", board);
             // 로그인 정보를 통해 디테일 페이지에 로그인한 회원에 따른 정보 변경(추천, 찜)
             HttpSession session = req.getSession();
@@ -35,14 +46,12 @@ public class BoardDetail extends HttpServlet {
             if(member != null){
                 Boolean isRecommand = boardService.isboardRecommand(member.getNickname(), board_id);
                 Boolean isWish = boardService.isboardWish(member.getNickname(), board_id);
-                System.out.println("boardDtail : " + isWish);
                 req.setAttribute("recommand_select", isRecommand);
                 if(isWish){
                     req.setAttribute("wish_select", true);
                 }else{
                     req.setAttribute("wish_select", false);
                 }
-
             }
             req.getRequestDispatcher("detail.jsp").forward(req, res);
         } catch (Exception e) {

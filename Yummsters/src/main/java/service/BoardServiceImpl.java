@@ -1,5 +1,6 @@
 package service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import bean.Board;
@@ -134,6 +135,11 @@ public class BoardServiceImpl implements BoardService{
 
         // 추천을 누른 정보 조회
         return boardDao.selectWish(map) != null;
+    }
+
+    @Override
+    public List<Board> boardStoreCategoryList(Integer board_id) throws Exception {
+        return boardDao.selectBoardCategoryList(board_id);
     }
 
     // home에서 추천 Top10 게시글 조회

@@ -99,4 +99,13 @@
 		select recommand_count from board where board_id=#{board_id}
 		]]>
     </select>
+
+	<select id="selectStoreCategoryList" parameterType="Integer" resultType="Board">
+		<![CDATA[
+		select b.*, s.* from board b
+		    join board_store bs using(board_id)
+			join store_category s using(store_category_id);
+		]]>
+	</select>
+
 </mapper>
