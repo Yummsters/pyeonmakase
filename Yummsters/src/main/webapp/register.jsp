@@ -240,7 +240,7 @@
         // document.querySelector('#contents').insertAdjacentHTML('afterbegin' ,editor.getHTML());
 
         // 콘솔창에 표시(브라우저에서 content 값 확인)
-        console.log(editor.getMarkdown());
+        console.log(editor.getHTML());
     </script>
 
     <!-- 토스트 에디터에 작성한 내용 디비 저장을 위한 div -->
@@ -248,7 +248,7 @@
     <script>
         // 버튼 클릭시 토스트 에디터에 작성한 내용을 div에 저장해서 req로 보내기
         document.getElementById("registerButton").addEventListener("click", function (){
-            document.getElementById("editorContent").value = editor.getMarkdown();
+            document.getElementById("editorContent").value = editor.getHTML();
             document.getElementById("register").submit();
         });
     </script>
