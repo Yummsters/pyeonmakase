@@ -21,4 +21,5 @@ public interface MemberDAO {
 		void deleteMember(Map<String, Object> paramMap) throws Exception;
 	//회원정보 수정	
 	    void updateMember(Map<String, Object> paramMap) throws Exception;
+	    
 }

@@ -61,7 +61,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 	//회원정보수정
 	@Override
-	public void userModify(Map<String, Object> paramMap) throws Exception {
+	public void updateMember(Map<String, Object> paramMap) throws Exception {
 	    memberDAO.updateMember(paramMap);
 	}
 }
