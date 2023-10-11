@@ -13,7 +13,7 @@ import bean.Member;
 public interface BoardDAO {
     
     // main_list by foodCategory
-    List<Board> selectBoardByFood(Integer foodId) throws Exception; // food 카테고리 sj
+//    List<Board> selectBoardByFood(Integer foodId) throws Exception; // food 카테고리 sj
 
     void insertBoard(Board board) throws Exception; // 게시글 저장
 
@@ -21,7 +21,7 @@ public interface BoardDAO {
 
     Board selectBoardOne(Integer board_id) throws Exception; // 게시글 한개 조회
 
-    List<Board> selectBoardList() throws Exception; // 게시글 최신순 조회 sj
+    List<Board> selectBoardList(List<String> storeNames) throws Exception; // 게시글 최신순 조회 sj
   
     List<Board> selectBoardListTop10() throws Exception; // 게시글 추천순 Top10 조회
   
@@ -57,7 +57,7 @@ public interface BoardDAO {
 
     void deleteBoardOne(Integer board_id) throws Exception; // 게시글 삭제
 
-    List<Board> searchByKeyword(String keyword) throws Exception; // 키워드 검색 sj
+    List<Board> searchByKeyword(String keyword, List<String> storeNames) throws Exception; // 키워드 검색 sj
     
     List<Board> selectBoardByCate(Integer foodId, List<String> storeNames); // 카테고리별 리스트 sj
 }

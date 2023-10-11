@@ -1,18 +1,16 @@
 package dao;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import bean.Wish;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.session.SqlSession;
-
 import bean.Board;
 import bean.Board_Store;
 import bean.Member;
+
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.SqlSession;
 import util.MybatisSqlSessionFactory;
+
 
 public class BoardDAOImpl implements BoardDAO{
     SqlSession sqlSession = MybatisSqlSessionFactory.getSqlSessionFactory().openSession();
@@ -38,8 +36,10 @@ public class BoardDAOImpl implements BoardDAO{
     }
   // 최신 게시글 목록 조회
     @Override
-    public List<Board> selectBoardList() throws Exception {
-    	return sqlSession.selectList("mapper.board.selectBoardList");
+    public List<Board> selectBoardList(List<String> storeNames) {
+    	Map<String, Object> params = new HashMap<>();
+	    params.put("storeNames", storeNames);
+    	return sqlSession.selectList("mapper.board.selectBoardList", params);
     }
   // 추천순 Top10 목록 조회
 	@Override
@@ -48,10 +48,10 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 
     // main-list by foodCategory
-	@Override
-	public List<Board> selectBoardByFood(Integer foodId) throws Exception {
-		return sqlSession.selectList("mapper.board.selectBoardByFood", foodId);
-	}
+//	@Override
+//	public List<Board> selectBoardByFood(Integer foodId) throws Exception {
+//		return sqlSession.selectList("mapper.board.selectBoardByFood", foodId);
+//	}
 
   // 내가 찜한 게시글 목록 조회
 	@Override
@@ -163,8 +163,11 @@ public class BoardDAOImpl implements BoardDAO{
 
     // 키워드 검색 sj
 	@Override
-	public List<Board> searchByKeyword(String keyword) throws Exception {
-		return sqlSession.selectList("mapper.board.searchByKeyword", "%" + keyword + "%");
+	public List<Board> searchByKeyword(String keyword, List<String> storeNames) throws Exception {
+		Map<String, Object> params = new HashMap<>();
+		params.put("keyword", keyword);
+		params.put("storeNames", storeNames);
+		return sqlSession.selectList("mapper.board.searchByKeyword", params);
 	}
 	
 	// main-list by category(food, store) sj

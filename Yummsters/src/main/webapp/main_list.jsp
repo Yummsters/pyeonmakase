@@ -194,8 +194,22 @@ $(function() {
 	
 	// 체크박스 선택값 서버로 전송
 	$("input[type='checkbox']").change(function() {
-		var foodId = ${foodId};
+		// 현재 url의 파라미터 값 추출
 		var storeNames = [];
+		var currentURL =  window.location.href;
+		var urlParam = new URLSearchParams(window.location.search);
+		
+		var foodId = urlParam.get("foodId");
+		var keyword = urlParam.get("keyword");
+		
+		var data = {storeNames:storeNames}; // 기본 전달 데이터
+		
+		if(foodId !== null) { // url 파라미터 foodId 있는 경우 data 함께 전달.
+			data.foodId = foodId;
+		}
+		if(keyword !== null) { // url 파라미터 keyword 있는 경우 data 함께 전달.
+			data.keyword = keyword;
+		}
 		
 		$("input[name='store']:checked").each(function() {
 			storeNames.push($(this).val());
@@ -204,10 +218,10 @@ $(function() {
 		$.ajax({
 			url: "mainlist",
 			type:"post",
-			data: {foodId:foodId, storeNames:storeNames},
+			data: data, // 조건부로 구성된 data 전송
 			success: function(data) {
-				$(".reloading").find(".board-box").html(data); // 필터링 성공
-				console.log("ajax 요청 성공, foodId: " + foodId + ", storeNames: " + storeNames);
+				$(".reloading").find(".board-box").html(data);
+				console.log("ajax 요청 성공, foodId: " + ", storeNames: " + storeNames);
 			},
 			error: function(error) {
 				console.log("ajax 요청 실패 : " + error);

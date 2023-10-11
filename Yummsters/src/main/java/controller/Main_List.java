@@ -35,7 +35,8 @@ public class Main_List extends HttpServlet {
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
-        String foodIdParam = request.getParameter("foodId");
+        String foodIdParam = request.getParameter("foodId"); // mainlist?foodId=
+		String keyword = request.getParameter("keyword"); // mainlist?keyword=
         String[] storeNameParam = request.getParameterValues("storeNames[]"); 
         
         Integer foodId = 0;
@@ -51,18 +52,20 @@ public class Main_List extends HttpServlet {
             BoardService service = new BoardServiceImpl();
             List<Board> boardList;
             
-			if(foodIdParam != null && !foodIdParam.isEmpty()) { // foodCategory에 따라 필터링
+			if(foodIdParam != null && !foodIdParam.isEmpty()) { // foodCategory 선택할 때
 				foodId = Integer.parseInt(foodIdParam);
 				boardList = service.boardListByCate(foodId, storeNames);
+			} else if (keyword != null) { // 검색할 때
+				boardList = service.boardSearch(keyword, storeNames);
 			} else { // foodId 없을 때, 전체 리스트 출력
-				boardList = service.boardAllList();
+				boardList = service.boardAllList(storeNames);
 			}
 
             request.setAttribute("boardList", boardList);
             request.setAttribute("foodId", foodId);
             request.setAttribute("storeNames", storeNames);
             
-            System.out.println("success, foodId: " + foodId + ", storeNames: " + storeNames);
+            System.out.println("success, foodId: " + foodId + ", keyword: " + keyword + ", storeNames: " + storeNames);
             request.getRequestDispatcher("main_list.jsp").forward(request, response);
             
         } catch (Exception e) {
@@ -74,7 +77,8 @@ public class Main_List extends HttpServlet {
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
-        String foodIdParam = request.getParameter("foodId");
+        String foodIdParam = request.getParameter("foodId"); // mainlist?foodId=
+		String keyword = request.getParameter("keyword"); // mainlist?keyword=
         String[] storeNameParam = request.getParameterValues("storeNames[]"); 
         
         Integer foodId = 0;
@@ -90,25 +94,26 @@ public class Main_List extends HttpServlet {
             BoardService service = new BoardServiceImpl();
             List<Board> boardList;
             
-			if(foodIdParam != null && !foodIdParam.isEmpty()) { // foodCategory에 따라 필터링
+			if(foodIdParam != null && !foodIdParam.isEmpty()) { // foodCategory 선택할 때
 				foodId = Integer.parseInt(foodIdParam);
 				boardList = service.boardListByCate(foodId, storeNames);
+			} else if (keyword != null) { // 검색할 때
+				boardList = service.boardSearch(keyword, storeNames);
 			} else { // foodId 없을 때, 전체 리스트 출력
-				boardList = service.boardAllList();
+				boardList = service.boardAllList(storeNames);
 			}
 
             request.setAttribute("boardList", boardList);
             request.setAttribute("foodId", foodId);
             request.setAttribute("storeNames", storeNames);
             
-            System.out.println("success, foodId: " + foodId + ", storeNames: " + storeNames);
+            System.out.println("success, foodId: " + foodId + ", keyword: " + keyword + ", storeNames: " + storeNames);
             request.getRequestDispatcher("boardCard.jsp").forward(request, response);
             
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
         }
-
     }
     
 }

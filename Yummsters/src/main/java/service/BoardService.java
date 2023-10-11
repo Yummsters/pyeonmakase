@@ -9,9 +9,9 @@ import bean.Member;
 public interface BoardService {    
     // 선진 작성 부분
     // main-list
-    List<Board> boardAllList() throws Exception;
+	List<Board> boardAllList(List<String> storeNames) throws Exception;
     // main_list by foodCategory
-	 List<Board> boardListByFood(Integer foodId) throws Exception;
+//	 List<Board> boardListByFood(Integer foodId) throws Exception;
     
     List<Board> boardListTop10() throws Exception; // 추천순 Top10 게시글 조회
   
@@ -35,9 +35,9 @@ public interface BoardService {
 
     List<Board> boardStoreCategoryList(Integer board_id) throws Exception; // 게시글의 편의점 카테고리 조회
 
- 	List<Board> boardSearch(String keyword) throws Exception; // 키워드 검색
+    List<Board> boardSearch(String keyword, List<String> storeNames) throws Exception; // 키워드 검색
  	
-	List<Board> boardListByCate(Integer foodId, List<String> storeNames); // 카테고리별 리스트
+ 	List<Board> boardListByCate(Integer foodId, List<String> storeNames); // 카테고리별 리스트
 
     void deleteBoardAll(Integer board_id) throws Exception; // 게시글 삭제를 위한 모든 참조 삭제
 }
