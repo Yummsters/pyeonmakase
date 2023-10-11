@@ -161,9 +161,18 @@ public class BoardDAOImpl implements BoardDAO{
         sqlSession.commit();
     }
 
-    // 키워드 검색
+    // 키워드 검색 sj
 	@Override
 	public List<Board> searchByKeyword(String keyword) throws Exception {
 		return sqlSession.selectList("mapper.board.searchByKeyword", "%" + keyword + "%");
+	}
+	
+	// main-list by category(food, store) sj
+	@Override
+	public List<Board> selectBoardByCate(Integer foodId, List<String> storeNames) {
+	    Map<String, Object> params = new HashMap<>();
+	    params.put("foodId", foodId);
+	    params.put("storeNames", storeNames);
+	    return sqlSession.selectList("mapper.board.selectBoardByCate", params);
 	}
 }

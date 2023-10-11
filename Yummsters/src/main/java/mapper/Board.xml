@@ -39,6 +39,23 @@
 		]]>
 	</select>
 	
+	<!-- food/store 카테고리별 list -->
+		<select id="selectBoardByCate" resultType="Board"> 
+	    select b.*, GROUP_CONCAT(s.store_category_name SEPARATOR ' #') AS store_category_name
+	    from board b join board_store bs using(board_id)
+		join store_category s using(store_category_id)
+		where b.food_category_id = #{foodId}
+	    <if test="storeNames != null and !storeNames.isEmpty()">
+	        AND (
+	        <foreach collection="storeNames" item="storeName" separator=" OR ">
+	            s.store_category_name LIKE CONCAT('%', #{storeName}, '%')
+	        </foreach>
+	        )
+	    </if>
+        group by b.board_id
+		order by regdate DESC
+	</select>
+	
 	<!-- 검색 -->
 	  <select id="searchByKeyword" resultType="Board">
   		<![CDATA[

@@ -36,6 +36,8 @@ public interface BoardService {
     List<Board> boardStoreCategoryList(Integer board_id) throws Exception; // 게시글의 편의점 카테고리 조회
 
  	List<Board> boardSearch(String keyword) throws Exception; // 키워드 검색
+ 	
+	List<Board> boardListByCate(Integer foodId, List<String> storeNames); // 카테고리별 리스트
 
     void deleteBoardAll(Integer board_id) throws Exception; // 게시글 삭제를 위한 모든 참조 삭제
 }
