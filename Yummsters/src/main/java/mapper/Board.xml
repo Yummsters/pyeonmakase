@@ -9,7 +9,7 @@
     </insert>
 	<select id="selectBoardListTop10" parameterType="Integer" resultType="Board">
 		<![CDATA[
-			select b.title,b.picture,b.recommand_count,group_concat(sc.store_category_name) as store_category_name
+			select b.*,group_concat(sc.store_category_name) as store_category_name
 			from board b
 			left join board_store bs on b.board_id=bs.board_id
 			left join store_category sc on bs.store_category_id=sc.store_category_id
@@ -23,9 +23,12 @@
 	<!-- main_list -->
 	<select id="selectBoardList" resultType="Board">
 		<![CDATA[
-			select b.*, s.* from board b join board_store bs using(board_id)
-				join store_category s using(store_category_id)
-			order by regdate desc
+			SELECT b.*,s.*
+			FROM board b
+			JOIN board_store bs ON b.board_id = bs.board_id
+			JOIN store_category s ON bs.store_category_id = s.store_category_id
+			GROUP BY b.board_id
+			ORDER BY b.regdate DESC
 		]]>
 	</select>
 	
