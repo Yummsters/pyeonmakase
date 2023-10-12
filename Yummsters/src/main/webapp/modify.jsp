@@ -153,11 +153,45 @@
         });
     </script>
 
+    <script>
+        function categoryCheck(form){
+            var arr_store = document.getElementsByName('store');
+            var arr_food = document.getElementsByName('food');
+
+            var store_num = 0;
+            var food_num = 0;
+
+            for(var i=0; i<arr_store.length; i++){
+                if(arr_store[i].checked){
+                    store_num++;
+                }
+            }
+
+            for(var i=0; i<arr_food.length; i++){
+                if(arr_food[i].checked){
+                    food_num++;
+                }
+            }
+
+            if(!store_num && !food_num){
+                alert('편의점 및 카테고리를 하나 이상 선택해주세요.')
+                return false;
+            }else if(!store_num){
+                alert('편의점을 하나 이상 선택해주세요.')
+                return false;
+            }else{
+
+            }alert('카테고리를 하나 이상 선택해주세요.')
+            return false;
+        }
+    </script>
+
 </head>
 
 <body>
 <jsp:include page="header.jsp"/>
-<form name="recipe_modify">
+
+<form name="recipe_modify" onsubmit="return categoryCheck(this)">
     <input type="hidden" name="board_id" value="${board.board_id}">
     <div class="title_picture">
         <!-- 제목 입력 및 취소/저장 버튼 -->
