@@ -23,6 +23,8 @@ public interface MemberService {
 	
 	//회원탈퇴
 		void memberRemove(Map<String, Object> paramMap) throws Exception;
+    //탈퇴할때
+		void removeRelatedData(String nickname) throws Exception;
 	//회원정보수정
 		void updateMember(Map<String, Object> paramMap) throws Exception;
 

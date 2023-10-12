@@ -17,28 +17,60 @@
 			select * from member where member_id = #{member_id}
 		]]>
 	</select>
-	
-	<select id="selectEmail" parameterType="String" resultType="Member">
+
+	<select id="selectEmail" parameterType="String"
+		resultType="Member">
 		<![CDATA[
 			select * from member where email = #{email}
 		]]>
 	</select>
-	
-	<select id="selectNickname" parameterType="String" resultType="Member">
+
+	<select id="selectNickname" parameterType="String"
+		resultType="Member">
 		<![CDATA[
 			select * from member where nickname = #{nickname}
 		]]>
 	</select>
-	
+
 	<!-- 회원 탈퇴 -->
 	<delete id="deleteMember" parameterType="Map">
 		<![CDATA[
 			delete from member where nickname = #{nickname} AND member_pw = #{member_pw}
 		]]>
 	</delete>
-	
+	<!-- 탈퇴할때 데이터 삭제 -->
+	<delete id="removeRelatedDataBoard">
+    <![CDATA[
+        DELETE FROM board_store WHERE board_id IN (SELECT board_id FROM board WHERE nickname = #{nickname});
+    ]]>
+	</delete>
+
+	<delete id="removeRelatedDataBoard2">
+    <![CDATA[
+        DELETE FROM board WHERE nickname = #{nickname};
+    ]]>
+	</delete>
+
+	<delete id="removeRelatedDataRecommand">
+    <![CDATA[     
+        DELETE FROM recommand WHERE nickname = #{nickname}
+    ]]>
+	</delete>
+
+	<delete id="removeRelatedDataReply">
+    <![CDATA[     
+        DELETE FROM reply WHERE nickname = #{nickname}
+    ]]>
+	</delete>
+
+	<delete id="removeRelatedDataWish">
+    <![CDATA[     
+        DELETE FROM wish WHERE nickname = #{nickname}
+    ]]>
+	</delete>
+
 	<!-- 회원정보 수정 -->
-<update id="updateMember" parameterType="Map">
+	<update id="updateMember" parameterType="Map">
     <![CDATA[
         update member
         set nickname = #{newNickname},
@@ -46,5 +78,5 @@
             member_pw = #{newPassword}
         where nickname = #{nickname}
     ]]>
-</update>
+	</update>
 </mapper>

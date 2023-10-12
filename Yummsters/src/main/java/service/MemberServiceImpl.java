@@ -59,6 +59,14 @@ public class MemberServiceImpl implements MemberService{
 	public void memberRemove(Map<String, Object> paramMap) throws Exception {
 	    memberDAO.deleteMember(paramMap);
 	}
+	//탈퇴할때..
+	@Override
+	public void removeRelatedData(String nickname) throws Exception {
+		memberDAO.removeRelatedDataBoard(nickname);
+		memberDAO.removeRelatedDataBoard2(nickname);
+		memberDAO.removeRelatedData(nickname);
+		
+	}
 	//회원정보수정
 	@Override
 	public void updateMember(Map<String, Object> paramMap) throws Exception {
