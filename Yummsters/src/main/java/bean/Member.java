@@ -63,6 +63,6 @@ public class Member{
 	public void setModifiedAt(LocalDateTime modifiedAt) {
 		this.modifiedAt = modifiedAt;
 	}
-    
+	
     
 }
