@@ -20,9 +20,13 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/register")
 public class Register extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        // 취소 버튼 클릭 시 메인 리스트 페이지로 이동
+        HttpSession session = req.getSession();
+        Member member = (Member)session.getAttribute("member");
+        if(member == null){
+            req.getRequestDispatcher("login.jsp").forward(req, res);
+        }
+
         req.getRequestDispatcher("register.jsp").forward(req, res);
-        //res.sendRedirect("register.jsp");
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
