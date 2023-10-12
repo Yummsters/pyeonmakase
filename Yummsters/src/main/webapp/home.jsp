@@ -12,7 +12,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- Slick Carousel JavaScript -->
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript"
+	src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
 <style>
 .card-slider {
@@ -40,7 +41,7 @@
 }
 
 #card:nth-child(n+6) {
-    display: none; /* 6번째 이후의 카드는 숨김 처리 */
+	display: none; /* 6번째 이후의 카드는 숨김 처리 */
 }
 
 .recommend {
@@ -144,11 +145,17 @@
 			autoplaySpeed : 2500, // 넘기는 속도
 			dots : true,
 		});
+
+		// 게시글 더보기 기능
+		// 초기에는 처음 5개 카드만 보이도록 설정
+		$(".card-box > .card").slice(5).hide();
+
+		// 게시글 디테일(boardDetail) 이동
+		$(".card").click(function() {
+			var boardId = $(this).find(".boardId").val();
+			window.location.href = "boardDetail?board_id=" + boardId;
+		});
 	});
-	$(".card").click(function() {
-	      var boardId = $(this).find(".boardId").val();
-	      window.location.href = "boardDetail?board_id=" + boardId;
-	   })
 </script>
 
 
@@ -164,12 +171,15 @@
 		<div class="card-slider">
 			<c:forEach var="board" items="${boardListTop10}">
 				<div class="card">
+				<c:if test="${not empty board.board_id}">
+					<input type="hidden" class="boardId" value="${board.board_id}">
 					<div class="recommend">♥ ${board.recommand_count}</div>
 					<div class="thumbnail">
 						<img src="imgView?file=${board.picture}" alt="">
 					</div>
-					<div class="store-name">#${board.store_category_name}</div>
 					<div class="recipe-name">${board.title}</div>
+					<div class="store-name">#${board.store_category_name}</div>
+					</c:if>
 				</div>
 			</c:forEach>
 		</div>
@@ -186,14 +196,17 @@
 	<!-- 여기는 출력만 -->
 	<div class="card-box">
 		<c:forEach var="board" items="${boardList}">
-			<div class="card" id="card">
-				<div class="recommend">♥ ${board.recommand_count}</div>
-				<div class="thumbnail">
-					<img src="imgView?file=${board.picture}" alt="">
+			<div class="card">
+				<c:if test="${not empty board.board_id}">
+					<input type="hidden" class="boardId" value="${board.board_id}">
+					<div class="recommend">♥ ${board.recommand_count}</div>
+					<div class="thumbnail">
+						<img src="imgView?file=${board.picture}" alt="">
+					</div>
+					<div class="recipe-name">${board.title}</div>
+					<div class="store-name">#${board.store_category_name}</div>
+					</c:if>
 				</div>
-				<div class="store-name">#${board.store_category_name}</div>
-				<div class="recipe-name">${board.title}</div>
-			</div>
 		</c:forEach>
 	</div>
 
