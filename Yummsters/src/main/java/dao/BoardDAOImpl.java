@@ -33,6 +33,7 @@ public class BoardDAOImpl implements BoardDAO{
     public Board selectBoardOne(Integer board_id) throws Exception {
         return sqlSession.selectOne("mapper.board.selectBoardOne", board_id);
     }
+
   // 최신 게시글 목록 조회
     @Override
     public List<Board> selectBoardList(List<String> storeNames) {
@@ -150,6 +151,13 @@ public class BoardDAOImpl implements BoardDAO{
     @Override
     public void deleteBoard_store(Integer board_id) throws Exception {
         sqlSession.delete("mapper.board_store.deleteBoard_store", board_id);
+        sqlSession.commit();
+    }
+
+    // 삭제할 게시글의 댓글 삭제
+    @Override
+    public void deleteReplyBoard(Integer board_id) throws Exception {
+        sqlSession.delete("mapper.reply.deleteReplyBoard", board_id);
         sqlSession.commit();
     }
 

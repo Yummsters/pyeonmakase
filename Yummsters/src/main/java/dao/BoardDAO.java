@@ -60,7 +60,9 @@ public interface BoardDAO {
 
     void insertReply(Reply reply) throws Exception; // 댓글 등록
 
-    void deleteReply(Integer reply_id) throws Exception; // 댓글 삭제
+    void deleteReply(Integer reply_id) throws Exception; // 댓글 삭제(댓글 아이디 기준)
+
+    void deleteReplyBoard(Integer board_id) throws Exception; // 댓글 삭제(게시글 아이디 기준)
 
     Reply selectReply(Integer reply_id) throws Exception; // 댓글 하나 조회
 

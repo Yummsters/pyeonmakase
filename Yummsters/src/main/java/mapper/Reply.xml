@@ -20,6 +20,12 @@
         ]]>
     </delete>
 
+    <delete id="deleteReplyBoard" parameterType="Integer">
+        <![CDATA[
+            delete from reply where board_id=#{board_id}
+        ]]>
+    </delete>
+
     <select id="selectReply" parameterType="Integer" resultType="Reply">
         <![CDATA[
             select * from reply where reply_id = #{reply_id}

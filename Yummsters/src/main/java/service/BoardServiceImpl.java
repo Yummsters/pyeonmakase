@@ -144,6 +144,7 @@ public class BoardServiceImpl implements BoardService{
         boardDao.deleteWishBoard(board_id);
         boardDao.deleteRecommandBoard(board_id);
         boardDao.deleteBoard_store(board_id);
+        boardDao.deleteReplyBoard(board_id);
         boardDao.deleteBoardOne(board_id);
     }
 
