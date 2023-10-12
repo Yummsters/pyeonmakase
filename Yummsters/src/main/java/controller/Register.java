@@ -23,7 +23,8 @@ public class Register extends HttpServlet {
         HttpSession session = req.getSession();
         Member member = (Member)session.getAttribute("member");
         if(member == null){
-            req.getRequestDispatcher("login.jsp").forward(req, res);
+            res.sendRedirect("login");
+            return;
         }
 
         req.getRequestDispatcher("register.jsp").forward(req, res);
@@ -42,6 +43,8 @@ public class Register extends HttpServlet {
         String content = multi.getParameter("editorContent");
         Integer food_category_id  = Integer.parseInt(multi.getParameter("food"));
         String[] store_category = multi.getParameterValues("store");
+
+        System.out.println("content = " + content);
 
         // 로그인 한 회원 조회
         HttpSession session = req.getSession();

@@ -173,13 +173,15 @@
             if(!store_num && !food_num){
                 alert('편의점 및 카테고리를 하나 이상 선택해주세요.')
                 return false;
-            }else if(!store_num){
+            }
+            if(!store_num){
                 alert('편의점을 하나 이상 선택해주세요.')
                 return false;
-            }else{
-
-            }alert('카테고리를 하나 이상 선택해주세요.')
-            return false;
+            }
+            if(!food_num){
+                alert('카테고리를 하나 이상 선택해주세요.')
+                return false;
+            }
         }
     </script>
 
@@ -208,13 +210,13 @@
 <body>
 <jsp:include page="header.jsp"/>
 
-<form name="recipe_register" enctype="multipart/form-data" id="recipeForm" onsubmit="return categoryCheck(this)" >
+<form name="recipe_register" enctype="multipart/form-data" id="register" onsubmit="return categoryCheck(this)" >
     <div class="title_picture">
         <!-- 제목 입력 및 취소/저장 버튼 -->
         <div class="register_title">
             레시피명 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <input id="title" type="text" name=board_title placeholder="대표 제목을 입력하세요." required="required"> &nbsp;
-            <button class="red" id="cancel" name="cancel" formaction="register" formmethod="get">
+            <button class="red" id="cancel" name="cancel" onclick="location.href='main_list'">
                 취소
             </button>
             <button class="green" type="submit" id="registerButton" name="register" formaction="register" formmethod="post" formenctype="multipart/form-data">
@@ -260,6 +262,7 @@
 
     <!-- 토스트 에디터 넣기 -->
     <div id="content"></div>
+
     <!-- TUI 에디터 JS CDN -->
     <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
 
@@ -326,6 +329,7 @@
         // 버튼 클릭시 토스트 에디터에 작성한 내용을 div에 저장해서 req로 보내기
         document.getElementById("registerButton").addEventListener("click", function (){
             document.getElementById("editorContent").value = editor.getHTML();
+            console.log(editor.getHTML);
             document.getElementById("register").submit();
         });
     </script>
