@@ -2,9 +2,7 @@ package service;
 
 import java.util.List;
 
-import bean.Board;
-import bean.Board_Store;
-import bean.Member;
+import bean.*;
 
 public interface BoardService {    
     // 선진 작성 부분
@@ -34,6 +32,12 @@ public interface BoardService {
     boolean isboardWish(String nickname, Integer board_id) throws Exception; // 찜 여부 조회 메서드
 
     List<Board> boardStoreCategoryList(Integer board_id) throws Exception; // 게시글의 편의점 카테고리 조회
+
+    String replyRegisterAndList(Reply reply) throws Exception; // 댓글 등록 및 모든 댓글 조회
+
+    String selectReplyList(Integer board_id) throws Exception; // 게시글에 해당하는 댓글 출력
+
+    String deleteReply(Integer reply_id) throws Exception; // 댓글 삭제
 
  	List<Board> boardSearch(String keyword) throws Exception; // 키워드 검색
 

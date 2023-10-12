@@ -5,13 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import bean.Wish;
+import bean.*;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 
-import bean.Board;
-import bean.Board_Store;
-import bean.Member;
 import util.MybatisSqlSessionFactory;
 
 public class BoardDAOImpl implements BoardDAO{
@@ -114,7 +111,6 @@ public class BoardDAOImpl implements BoardDAO{
     @Override
     public void insertWish(Map<String, Object> param) throws Exception {
         sqlSession.insert("mapper.wish.insertWish", param);
-        System.out.println(param);
         sqlSession.commit();
     }
 
@@ -155,10 +151,37 @@ public class BoardDAOImpl implements BoardDAO{
         sqlSession.commit();
     }
 
+    // 게시글 삭제
     @Override
     public void deleteBoardOne(Integer board_id) throws Exception {
         sqlSession.delete("mapper.board.deleteBoardOne", board_id);
         sqlSession.commit();
+    }
+
+    // 댓글 등록
+    @Override
+    public void insertReply(Reply reply) throws Exception {
+        sqlSession.insert("mapper.reply.insertReply", reply);
+        sqlSession.commit();
+    }
+
+    // 댓글 전체 조회
+    @Override
+    public List<Reply> selectReplyList(Integer board_id) throws Exception {
+        return sqlSession.selectList("mapper.reply.selectReplyList", board_id);
+    }
+
+    // 댓글 삭제
+    @Override
+    public void deleteReply(Integer reply_id) throws Exception {
+        sqlSession.delete("mapper.reply.deleteReply", reply_id);
+        sqlSession.commit();
+    }
+
+    // 댓글 조회
+    @Override
+    public Reply selectReply(Integer reply_id) throws Exception {
+        return sqlSession.selectOne("mapper.reply.selectReply", reply_id);
     }
 
     // 키워드 검색

@@ -220,6 +220,121 @@
             })
         })
     </script>
+
+    <script type="text/javascript">
+
+        $(function(){
+            var member = {
+                nickname: '<c:out value="${member.nickname}"/>'
+            };
+
+            // 페이지 로딩 시 초기 데이터 가져오기
+            $(document).ready(function() {
+                loadInitReply();
+            });
+
+            function loadInitReply(){
+                $.ajax({
+                    url : 'reply_init',
+                    type : 'get',
+                    dataType : 'json',
+                    data : {'board_id': '<c:out value="${board.board_id}"/>'},
+                    success:function(response){
+                        console.log(response.replyList);
+                        reloadReply(response.replyList);
+                    },
+                    error:function (request, status, error){
+                        console.log(error);
+                        alert("code: " + request.status + " message: " + request.responseText + " error: " + error);
+                    }
+                })
+            }
+
+            // 등록 버튼 클릭 시 실행
+            $('.reply_bnt').click(function (){
+                var nickname = $(this).data('reply-member'); // data-reply-member에서 nickname 가져오기
+                $.ajax({
+                    url : 'reply',
+                    type : 'post',
+                    dataType: 'json',
+                    data : {'board_id': '<c:out value="${board.board_id}"/>', 'content': $("#reply_contents").val()},
+                    success:function (response){
+                        console.log(response.register);
+                        console.log(response.replyList);
+
+                        reloadReply(response.replyList);
+                    },
+                    error:function (request, status, error){
+                        console.log(error);
+                        alert("code: " + request.status + " message: " + request.responseText + " error: " + error);
+                    }
+                });
+                $('#reply_contents').val('')
+            });
+
+
+            // 삭제 버튼 클릭 시 실행
+            $(".reply_del").click(function (){
+                var replyId = $(this).data('reply-id'); // data-reply-id에서 reply_id 값을 읽어옴
+                var nickname = $(this).data('reply-member'); // data-reply-member에서 nickname 가져오기
+
+                deleteReply(replyId);
+            });
+
+            // 댓글 등록 로직
+            function reloadReply(replyList) {
+                var nickname = member.nickname;
+
+                var commentSection = $("#commentSection");
+                commentSection.empty();
+
+                $.each(replyList, function (index, reply) {
+                    // 댓글 컨테이너 생성
+                    var commentDiv = $('<div class="reply_content"></div>');
+
+                    // 댓글 정보 가져오기 댓글
+                    var commentText = $('<div class="reply_one"><div style="display: inline-block;"><label>'
+                        + reply.nickname + '</label></div><div style="display: inline-block;">'
+                        + reply.content + '</div></div>');
+                    commentDiv.append(commentText);
+
+                    // 회원에 따라 삭제 버튼을 추가
+                    if (reply.nickname === nickname) {
+                        var deleteButton = $('<button class="reply_del" type="button" id="delete_button_' + reply.reply_id + '"> 삭제 </button>');
+                        commentDiv.append(deleteButton);
+
+                        // 삭제 버튼 클릭 이벤트 처리
+                        deleteButton.click(function () {
+                            var replyId = reply.reply_id;
+                            deleteReply(replyId);
+                        });
+                    }
+                    // 생성한 댓글 컨테이너 화면에 추가
+                    commentSection.append(commentDiv);
+                });
+            }
+
+            // 댓글 삭제 로직
+            function deleteReply(replyId){
+                $.ajax({
+                    url : 'reply',
+                    type : 'get',
+                    dataType: 'json',
+                    data : {'reply_id': replyId},
+                    success:function (response){
+                        console.log(response.delete);
+                        console.log(response.replyList);
+                        reloadReply(response.replyList);
+                    },
+                    error:function (request, status, error){
+                        console.log(error);
+                        alert("code: " + request.status + " message: " + request.responseText + " error: " + error);
+                    }
+                });
+            }
+        });
+    </script>
+
 </head>
 <body>
 <jsp:include page="header.jsp"/>
@@ -323,49 +438,19 @@
 
     <div class="all_reply">
         <div class="reply">
-            <textarea class="reply_register" placeholder="댓글을 입력하세요."></textarea>
-            <button class="reply_bnt" type="submit" id="reply_register" name="reply_register" formaction="reply"
-                    formmethod="post"> 등록
-            </button>
+            <textarea class="reply_register" id="reply_contents" placeholder="댓글을 입력하세요."></textarea>
+            <button class="reply_bnt" type="submit" id="reply_register" data-reply-member="${member.nickname}" name="reply_register"> 등록 </button>
         </div>
-        <div class="reply_content">
-            <div class="reply_one">
-                <div style="display: inline-block;"><label>닉네임 </label></div>
-                <div style="display: inline-block;"> 너무 맛있어 보여요~~</div>
-            </div>
-            <button class="reply_del" type="submit" id="reply_delete" name="reply_delete" formmethod="get"
-                    formaction="reply"> 삭제
-            </button>
+
+        <div class="reply_content" id="commentSection">
+                <div class="reply_one">
+                    <!--<div style="display: inline-block;"><label> ${reply.nickname} </label></div>
+                    <div style="display: inline-block;"> ${reply.content} </div>-->
+                </div>
+                <!-- <c:if test="${reply.nickname eq member.nickname}">
+                    <button class="reply_del" type="button" data-reply-id="${reply.reply_id}" data-reply-member="${member.nickname}"> 삭제 </button>
+                </c:if>-->
         </div>
-        <div class="reply_content">
-            <div class="reply_one">
-                <div style="display: inline-block;"><label>닉네임 </label></div>
-                <div style="display: inline-block;"> 너무 맛있어 보여요~~</div>
-            </div>
-            <button class="reply_del" type="submit"> 삭제</button>
-        </div>
-        <div class="reply_content">
-            <div class="reply_one">
-                <div style="display: inline-block;"><label>닉네임 </label></div>
-                <div style="display: inline-block;"> 너무 맛있어 보여요~~</div>
-            </div>
-            <button class="reply_del" type="submit"> 삭제</button>
-        </div>
-        <div class="reply_content">
-            <div class="reply_one">
-                <div style="display: inline-block;"><label>닉네임 </label></div>
-                <div style="display: inline-block;"> 너무 맛있어 보여요~~</div>
-            </div>
-            <button class="reply_del" type="submit"> 삭제</button>
-        </div>
-        <div class="reply_content">
-            <div class="reply_one">
-                <div style="display: inline-block;"><label>닉네임 </label></div>
-                <div style="display: inline-block;"> 너무 맛있어 보여요~~</div>
-            </div>
-            <button class="reply_del" type="submit"></button>
-        </div>
-    </div>
 
 
 <jsp:include page="footer.jsp"/>
