@@ -2,6 +2,7 @@ package controller;
 
 import bean.Board;
 import bean.Member;
+import bean.Reply;
 import service.BoardService;
 import service.BoardServiceImpl;
 
@@ -53,6 +54,8 @@ public class BoardDetail extends HttpServlet {
                     req.setAttribute("wish_select", false);
                 }
             }
+            /*List<Reply> replyList = boardService.selectReplyList(board_id);
+            req.setAttribute("replyList", replyList);*/
             req.getRequestDispatcher("detail.jsp").forward(req, res);
         } catch (Exception e) {
             e.printStackTrace();
