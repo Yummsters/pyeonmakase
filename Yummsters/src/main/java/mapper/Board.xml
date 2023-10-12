@@ -135,4 +135,15 @@
 			delete from board where board_id=#{board_id}
 		]]>
 	</delete>
+
+	<update id="updateBoard" parameterType="Board">
+		update board
+			<trim prefix="SET" suffixOverrides=",">
+				<if test="title != null"> title = #{title}, </if>
+				<if test="picture != null"> picture = #{picture}, </if>
+				<if test="content != null"> content = #{content}, </if>
+				<if test="food_category_id != null"> food_category_id = #{food_category_id},</if>
+			</trim>
+		where board_id = #{board_id}
+	</update>
 </mapper>

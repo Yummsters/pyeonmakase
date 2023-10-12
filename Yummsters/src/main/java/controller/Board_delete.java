@@ -25,6 +25,6 @@ public class Board_delete extends HttpServlet {
             req.setAttribute("err", "게시글 수정 실패");
             req.getRequestDispatcher("error.jsp").forward(req, res);
         }
-        res.sendRedirect("main_list.jsp");
+        res.sendRedirect("main_list");
     }
 }

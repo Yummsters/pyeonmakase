@@ -195,7 +195,14 @@ public class BoardDAOImpl implements BoardDAO{
         return sqlSession.selectOne("mapper.reply.selectReply", reply_id);
     }
 
-   // 키워드 검색
+    // 게시글 수정
+    @Override
+    public void updateBoard(Board board) throws Exception {
+        sqlSession.update("mapper.board.updateBoard", board);
+        sqlSession.commit();
+    }
+
+    // 키워드 검색
   // main-list by category(food, store) sj
 	@Override
 	public List<Board> selectBoardByCate(Integer foodId, List<String> storeNames) {

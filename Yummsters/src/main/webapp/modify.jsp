@@ -164,27 +164,31 @@
 
             // 체크 개수 확인
             for(var i=0; i<arr_store.length; i++){
+                console.log(arr_store[i].checked)
                 if(arr_store[i].checked){
                     store_num++;
                 }
             }
 
             for(var i=0; i<arr_food.length; i++){
+                console.log(arr_food[i].checked)
                 if(arr_food[i].checked){
                     food_num++;
                 }
             }
 
-            if(!store_num && !food_num){
+            if(!store_num && !food_num) {
                 alert('편의점 및 카테고리를 하나 이상 선택해주세요.')
                 return false;
-            }else if(!store_num){
+            }
+            if(!store_num) {
                 alert('편의점을 하나 이상 선택해주세요.')
                 return false;
-            }else{
-
-            }alert('카테고리를 하나 이상 선택해주세요.')
-            return false;
+            }
+            if(!food_num){
+                alert('카테고리를 하나 이상 선택해주세요.')
+                return false;
+            }
         }
     </script>
 
@@ -214,17 +218,17 @@
 <body>
 <jsp:include page="header.jsp"/>
 
-<form name="recipe_modify" onsubmit="return categoryCheck(this)">
+<form name="recipe_modify" enctype="multipart/form-data" id="modifyForm" onsubmit="return categoryCheck(this)">
     <input type="hidden" name="board_id" value="${board.board_id}">
     <div class="title_picture">
         <!-- 제목 입력 및 취소/저장 버튼 -->
         <div class="register_title">
             레시피명 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input id="title" type="text" name=board_title value="${board.title}"> &nbsp;
-            <button class="red" type="submit" id="cancel" name="cancel" formaction="modify" formmethod="get">
+            <input id="title" type="text" name=board_title value="${board.title}" required="required"> &nbsp;
+            <button class="red" id="cancel" name="cancel" onclick="location.href='boardDetail?board_id=${board.board_id}'; return false;">
                 취소
             </button>
-            <button class="green" type="submit" id="modify" name="modify" formaction="modify" formmethod="post"> 수정
+            <button class="green" type="submit" id="modifyButton" name="modify" formaction="board_modify" formmethod="post" formenctype="multipart/form-data"> 수정
             </button>
         </div>
         <br>
@@ -241,10 +245,9 @@
     <div class="store_category">
         &nbsp;&nbsp; 편의점 선택 &nbsp&nbsp;&nbsp; &nbsp;&nbsp;
         <!-- TODO : 이미 선택되어 있는 편의점들 가져와서 체크표시 -->
-        <c:out value="${board.store_category_name}"/>
         <c:set var = "store_category_name" value="${board.store_category_name}"/>
         <c:choose>
-            <c:when test="${fn:contains(store_category_name,'all')}">
+            <c:when test="${fn:contains(store_category_name,'전체')}">
                 <input type="checkbox" name="store" id="all" value="1" checked>
             </c:when>
             <c:otherwise>
@@ -331,6 +334,7 @@
 
     <!-- 토스트 에디터 넣기 -->
     <div id="content"></div>
+
     <!-- TUI 에디터 JS CDN -->
     <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
 
@@ -383,7 +387,6 @@
                 }
             }*/
         });
-        console.log('${board.content}');
         editor.setHTML('${board.content}');
 
         //editor.getHtml()을 사용해서 에디터 내용 수신
@@ -391,6 +394,17 @@
         // 콘솔창에 표시(브라우저에서 content 값 확인)
         // console.log(editor.getHTML());
     </script>
+
+    <!-- 토스트 에디터에 작성한 내용 디비 저장을 위한 div -->
+    <input type="hidden" name="editorContent" id="editorContent" value="">
+    <script>
+        // 버튼 클릭시 토스트 에디터에 작성한 내용을 div에 저장해서 req로 보내기
+        document.getElementById("modifyButton").addEventListener("click", function (){
+            document.getElementById("editorContent").value = editor.getHTML();
+            document.getElementById("board_modify").submit();
+        });
+    </script>
+
 </form>
 <jsp:include page="footer.jsp"/>
 </body>

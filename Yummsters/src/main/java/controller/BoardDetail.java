@@ -38,7 +38,7 @@ public class BoardDetail extends HttpServlet {
                 store_category_name += "#" + b.getStore_category_name() + " ";
             }
             board.setStore_category_name(store_category_name);
-            board.setStore_category_list(store_category_list);
+            // board.setStore_category_list(store_category_list);
 
             req.setAttribute("board", board);
             // 로그인 정보를 통해 디테일 페이지에 로그인한 회원에 따른 정보 변경(추천, 찜)
@@ -54,8 +54,6 @@ public class BoardDetail extends HttpServlet {
                     req.setAttribute("wish_select", false);
                 }
             }
-            /*List<Reply> replyList = boardService.selectReplyList(board_id);
-            req.setAttribute("replyList", replyList);*/
             req.getRequestDispatcher("detail.jsp").forward(req, res);
         } catch (Exception e) {
             e.printStackTrace();
