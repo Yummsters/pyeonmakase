@@ -1,16 +1,14 @@
 package service;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import bean.Board;
-import bean.Board_Store;
-import bean.Member;
-import bean.Wish;
+import bean.*;
 import dao.BoardDAO;
 import dao.BoardDAOImpl;
+import org.json.JSONArray;
 import org.json.simple.JSONObject;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -105,14 +103,12 @@ public class BoardServiceImpl implements BoardService{
 
         // Wish가 존재하지 않는다면
         if(wish_id == null){
-            System.out.println("if문 진입 insert문 실행 필요");
             // 테이블에 찜 저장
             boardDao.insertWish(map);
             System.out.println(map);
             // response 값 넣기
             response.put("wish_select", true);
         }else{
-            System.out.println("if문 진입 delete문 실행 필요");
             // Wish가 존재한다면
             boardDao.deleteWish(map);
             // response에 값 넣기
@@ -131,7 +127,6 @@ public class BoardServiceImpl implements BoardService{
         Map<String, Object> map = new HashMap<>();
         map.put("nickname", nickname);
         map.put("board_id", board_id);
-        System.out.println(boardDao.selectWish(map));
 
         // 추천을 누른 정보 조회
         return boardDao.selectWish(map) != null;
@@ -149,6 +144,67 @@ public class BoardServiceImpl implements BoardService{
         boardDao.deleteRecommandBoard(board_id);
         boardDao.deleteBoard_store(board_id);
         boardDao.deleteBoardOne(board_id);
+    }
+
+    // 댓글 등록 및 조회
+    @Override
+    public String replyRegisterAndList(Reply reply) throws Exception {
+        Map<String, Object> response = new HashMap<>();
+        Integer board_id = reply.getBoard_id();
+
+        // 댓글 저장
+        try{
+            boardDao.insertReply(reply);
+            response.put("register", true);
+        }catch (Exception e){
+            response.put("register", false);
+        }
+
+        // 댓글 조회
+        List<Reply> replyList = boardDao.selectReplyList(board_id);
+        JSONArray jsonArray = new JSONArray(replyList);
+        response.put("replyList", jsonArray);
+
+        // JSON 형식으로 응답 변경
+        JSONObject jsonObject = new JSONObject(response);
+        return jsonObject.toJSONString();
+    }
+
+    // 게시글에 따른 댓글 조회
+    @Override
+    public String selectReplyList(Integer board_id) throws Exception {
+        // 댓글 조회
+        Map<String, Object> response = new HashMap<>();
+        List<Reply> replyList = boardDao.selectReplyList(board_id);
+        JSONArray jsonArray = new JSONArray(replyList);
+        response.put("replyList", jsonArray);
+
+        // JSON 형식으로 응답 변경
+        JSONObject jsonObject = new JSONObject(response);
+        return jsonObject.toJSONString();
+    }
+
+    // 댓글 삭제
+    @Override
+    public String deleteReply(Integer reply_id) throws Exception {
+        Map<String, Object> response = new HashMap<>();
+        Reply reply = boardDao.selectReply(reply_id);
+
+        try{
+            boardDao.deleteReply(reply_id);
+            response.put("delete", true);
+        }catch (Exception e){
+            response.put("delete", false);
+        }
+
+        // 댓글 조회
+        List<Reply> replyList = boardDao.selectReplyList(reply.getBoard_id());
+        JSONArray jsonArray = new JSONArray(replyList);
+        response.put("replyList", jsonArray);
+
+        // JSON 형식으로 응답 변경
+        JSONObject jsonObject = new JSONObject(response);
+        return jsonObject.toJSONString();
     }
 
     // home에서 추천 Top10 게시글 조회

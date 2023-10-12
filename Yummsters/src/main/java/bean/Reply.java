@@ -48,15 +48,4 @@ public class Reply {
 	public void setRegdate(LocalDateTime regdate) {
 		this.regdate = regdate;
 	}
-
-	public Reply(Integer reply_id, String content, String nickname, Integer board_id, LocalDateTime regdate) {
-		super();
-		this.reply_id = reply_id;
-		this.content = content;
-		this.nickname = nickname;
-		this.board_id = board_id;
-		this.regdate = regdate;
-	}
-
-	
 }

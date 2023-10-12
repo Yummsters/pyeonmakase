@@ -1,14 +1,11 @@
 package dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import bean.Wish;
+import bean.*;
 import org.apache.ibatis.annotations.Param;
-
-import bean.Board;
-import bean.Board_Store;
-import bean.Member;
 
 public interface BoardDAO {
     
@@ -60,4 +57,13 @@ public interface BoardDAO {
     List<Board> searchByKeyword(String keyword, List<String> storeNames) throws Exception; // 키워드 검색 sj
     
     List<Board> selectBoardByCate(Integer foodId, List<String> storeNames); // 카테고리별 리스트 sj
+
+    void insertReply(Reply reply) throws Exception; // 댓글 등록
+
+    void deleteReply(Integer reply_id) throws Exception; // 댓글 삭제
+
+    Reply selectReply(Integer reply_id) throws Exception;
+
+    List<Reply> selectReplyList(Integer board_id) throws Exception; // 전체 댓글 조회
+
 }

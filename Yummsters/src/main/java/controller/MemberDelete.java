@@ -43,7 +43,10 @@ public class MemberDelete extends HttpServlet {
 		    try {
 		       
 		        MemberService memberService = new MemberServiceImpl();
-
+		        //다른테이블에 저장된 데이터 먼저 삭제
+		        memberService.removeRelatedData(memberNickname);
+		        
+		        //회원탈퇴(정보삭제)
 		        Map<String, Object> paramMap = new HashMap<>();
 		        paramMap.put("nickname", memberNickname);
 		        paramMap.put("member_pw", member_pw);
