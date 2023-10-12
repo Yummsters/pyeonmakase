@@ -121,14 +121,35 @@
     <!-- TOAST UI Editor CDN URL(JS) -->
     <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
 
-    <!---->
-    <script>
-        $(function () {
-            $('#accordion').accordion({
-                // jQuery UI accordion 본문 축소기능 활성화
-                collapsible: true,
-                active: false
-            });
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            // 체크박스 전체선택, 해제
+            $("#all").click(
+                function () {
+                    // 전체 하위 체크박스들을 선택 또는 해제
+                    $("input[name='store']").prop("checked",
+                        $(this).prop("checked"));
+                });
+
+            // 하위 체크박스들 중 하나라도 선택 취소되면 "전체 선택" 체크박스도 선택 취소
+            $("input[name='store']").click(
+                function () {
+                    if ($("input[name='store']:checked").length === $("input[name='store']").length) {
+                        $("#all").prop("checked", true);
+                    } else {
+                        $("#all").prop("checked", false);
+                    }
+                });
+
+            // 하위 체크박스들을 모두 선택하면 "전체 선택" 체크박스도 선택
+            $("input[name='store']").change(
+                function () {
+                    if ($("input[name='store']:checked").length === $("input[name='store']").length - 1) {
+                        $("#all").prop("checked", true);
+                    }
+                }
+            );
         });
     </script>
 
