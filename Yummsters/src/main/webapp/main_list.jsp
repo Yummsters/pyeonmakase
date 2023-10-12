@@ -191,6 +191,44 @@ $(function() {
 							$("#all").prop("checked", true);
 						}
 					});
+	
+	// 체크박스 선택값 서버로 전송
+	$("input[type='checkbox']").change(function() {
+		// 현재 url의 파라미터 값 추출
+		var storeNames = [];
+		var currentURL =  window.location.href;
+		var urlParam = new URLSearchParams(window.location.search);
+		
+		var foodId = urlParam.get("foodId");
+		var keyword = urlParam.get("keyword");
+		
+		var data = {storeNames:storeNames}; // 기본 전달 데이터
+		
+		if(foodId !== null) { // url 파라미터 foodId 있는 경우 data 함께 전달.
+			data.foodId = foodId;
+		}
+		if(keyword !== null) { // url 파라미터 keyword 있는 경우 data 함께 전달.
+			data.keyword = keyword;
+		}
+		
+		$("input[name='store']:checked").each(function() {
+			storeNames.push($(this).val());
+		});
+		
+		$.ajax({
+			url: "mainlist",
+			type:"post",
+			data: data, // 조건부로 구성된 data 전송
+			success: function(data) {
+				$(".reloading").find(".board-box").html(data);
+				console.log("ajax 요청 성공, foodId: " + ", storeNames: " + storeNames);
+			},
+			error: function(error) {
+				console.log("ajax 요청 실패 : " + error);
+			}
+		});
+
+	});
 
 	//-------------------------------------------------------
 	// 게시글 더보기 기능
@@ -256,60 +294,23 @@ $(function() {
 	<div class="container">
 
 		<!-- 편의점 카테고리 선택 -->
-		<form class="category" action="mainlist" method="post">
-			<input type="checkbox" name="store" id="all" value="1" checked>
-			<label for="all">전체</label> 
-			
-			<input type="checkbox" name="store"id="cu" value="2" checked> 
-			<label for="cu"><img src="imgView?file=cu.png" alt=""></label>
-			
-			<input type="checkbox"name="store" id="gs" value="3" checked> 
-			<label for="gs"><img src="imgView?file=gs.png" alt="" style="height: 30px;"></label> 
-			
-			<input type="checkbox" name="store" id="seven" value="4" checked>
+		<div class="category">
+			<input type="checkbox" name="store" id="all" value="전체" checked>
+			<label for="all">전체</label>
+			<input type="checkbox" name="store" id="cu" value="CU" checked> 
+			<label for="cu"><img src="imgView?file=cu.png" alt=""></label> 
+			<input type="checkbox" name="store" id="gs" value="GS25" checked> 
+			<label for="gs"><img src="imgView?file=gs.png" alt="" style="height:30px;"></label> 
+			<input type="checkbox" name="store" id="seven" value="SEVEN" checked> 
 			<label for="seven"><img src="imgView?file=seven.png" alt=""></label>
-			
-			<input type="checkbox" name="store" id="etc" value="5" checked>
+			<input type="checkbox" name="store" id="etc" value="기타" checked>
 			<label for="etc">기타</label>
-		</form>
-
-		<!-- 전체 레시피 -->
-		<div class="title-box">
-			<div class="title">
-				<c:choose>
-					<c:when test="${foodId eq 0}">전체 레시피</c:when>
-					<c:when test="${foodId eq 1}">식사류 레시피</c:when>
-					<c:when test="${foodId eq 2}">간식류 레시피</c:when>
-					<c:when test="${foodId eq 3}">음료 레시피</c:when>
-					<c:otherwise>"${param.keyword}" 검색 결과</c:otherwise>
-				</c:choose>
-			</div>
-			<div class="register"><a href="register">레시피 등록</a></div>
 		</div>
-
-		<div class="card-box">
-		<c:choose>
-        <c:when test="${not empty boardList}">
-			<c:forEach items="${boardList}" var="board">
-				<div class="card">
-					<input type="hidden" class="boardId" value="${board.board_id}">
-					<div class="recommend">♥ ${board.recommand_count}</div>
-					<div class="thumbnail">
-						<img src="imgView?file=${board.picture}" alt="">
-					</div>
-					<div class="recipe-name">${board.title}</div>
-					<div class="store-name">#${board.store_category_name}</div>
-				</div>
-			</c:forEach>
-		</c:when>
-        <c:otherwise>
-            <p id="emptyboard">게시글이 없습니다.</p>
-        </c:otherwise>
-        </c:choose>
-		</div>
-		<div class="more_btn">더보기</div>
-		</div>
-
+		
+        <div class="reloading">
+            <jsp:include page="boardCard.jsp" />
+        </div>
+<div class="more_btn">더보기</div>
 		<div class="scroll-to-top" id="scrollToTop">↑</div>
 
 	</div>

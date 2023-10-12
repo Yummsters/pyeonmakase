@@ -229,19 +229,25 @@ public class BoardServiceImpl implements BoardService{
     // 선진 작성 부분 
     // main-list
 	@Override
-	public List<Board> boardAllList() throws Exception {
-		return boardDao.selectBoardList();
+	public List<Board> boardAllList(List<String> storeNames) throws Exception {
+		return boardDao.selectBoardList(storeNames);
 	}
     // main-list by food
-	@Override
-	public List<Board> boardListByFood(Integer foodId) throws Exception {
-		return boardDao.selectBoardByFood(foodId);
-	}
+//	@Override
+//	public List<Board> boardListByFood(Integer foodId) throws Exception {
+//		return boardDao.selectBoardByFood(foodId);
+//	}
 	
 	// 키워드 검색
 	@Override
-	public List<Board> boardSearch(String keyword) throws Exception {
-		return boardDao.searchByKeyword(keyword);
+	public List<Board> boardSearch(String keyword , List<String> storeNames) throws Exception {
+		return boardDao.searchByKeyword(keyword, storeNames);
+	}
+	
+	// food, store 카테고리별 리스트
+	@Override
+	public List<Board> boardListByCate(Integer foodId, List<String> storeNames) {
+		return boardDao.selectBoardByCate(foodId, storeNames);
 	}
 }
 

@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -35,12 +37,21 @@ public class Home extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("utf-8");
+		String[] storeNameParam = request.getParameterValues("storeNames[]"); 
+        List<String> storeNames = new ArrayList<>();
+        
+        if (storeNameParam != null) {
+            storeNames = Arrays.asList(storeNameParam);
+        } else {
+        	System.out.println("기본값-store전체선택");
+        }
 		try {
 			BoardService boardService = new BoardServiceImpl();
 			List<Board> boardListTop10 = boardService.boardListTop10();
 			request.setAttribute("boardListTop10", boardListTop10);
 			
-			List<Board> boardList = boardService.boardAllList();
+			List<Board> boardList = boardService.boardAllList(storeNames);
 			request.setAttribute("boardList", boardList);
 			request.getRequestDispatcher("home.jsp").forward(request, response);			
 		} catch(Exception e) {

@@ -138,11 +138,12 @@
     $(function() {
     	$("#searchBtn").click(function() {
 		var keyword = $("#search").val().trim(); // 값을 추출하여 앞뒤 공백제거 후 저장
-        if (keyword.length < 2 || /^\s+$/.test(keyword)) { // 2글자 이상 입력, 공백 입력 방지
+        // 2글자 이상 입력, 공백 입력 방지
+        if (keyword.length < 2 || /^\s+$/.test(keyword)) {
         	$("#search").val("").attr("placeholder", "검색어를 2글자 이상 입력해주세요.");
             return;
         }
-		window.location.href = "search?keyword=" + keyword;
+		window.location.href = "mainlist?keyword=" + keyword;
     	});
 	});
 	</script>

@@ -1,6 +1,5 @@
 package dao;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 
 import util.MybatisSqlSessionFactory;
+
 
 public class BoardDAOImpl implements BoardDAO{
     SqlSession sqlSession = MybatisSqlSessionFactory.getSqlSessionFactory().openSession();
@@ -35,8 +35,10 @@ public class BoardDAOImpl implements BoardDAO{
     }
   // 최신 게시글 목록 조회
     @Override
-    public List<Board> selectBoardList() throws Exception {
-    	return sqlSession.selectList("mapper.board.selectBoardList");
+    public List<Board> selectBoardList(List<String> storeNames) {
+    	Map<String, Object> params = new HashMap<>();
+	    params.put("storeNames", storeNames);
+    	return sqlSession.selectList("mapper.board.selectBoardList", params);
     }
   // 추천순 Top10 목록 조회
 	@Override
@@ -45,10 +47,10 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 
     // main-list by foodCategory
-	@Override
-	public List<Board> selectBoardByFood(Integer foodId) throws Exception {
-		return sqlSession.selectList("mapper.board.selectBoardByFood", foodId);
-	}
+//	@Override
+//	public List<Board> selectBoardByFood(Integer foodId) throws Exception {
+//		return sqlSession.selectList("mapper.board.selectBoardByFood", foodId);
+//	}
 
   // 내가 찜한 게시글 목록 조회
 	@Override
@@ -158,6 +160,15 @@ public class BoardDAOImpl implements BoardDAO{
         sqlSession.commit();
     }
 
+   // 키워드 검색 sj
+	@Override
+	public List<Board> searchByKeyword(String keyword, List<String> storeNames) throws Exception {
+		Map<String, Object> params = new HashMap<>();
+		params.put("keyword", keyword);
+		params.put("storeNames", storeNames);
+		return sqlSession.selectList("mapper.board.searchByKeyword", params);
+	}
+
     // 댓글 등록
     @Override
     public void insertReply(Reply reply) throws Exception {
@@ -184,9 +195,13 @@ public class BoardDAOImpl implements BoardDAO{
         return sqlSession.selectOne("mapper.reply.selectReply", reply_id);
     }
 
-    // 키워드 검색
+   // 키워드 검색
+  // main-list by category(food, store) sj
 	@Override
-	public List<Board> searchByKeyword(String keyword) throws Exception {
-		return sqlSession.selectList("mapper.board.searchByKeyword", "%" + keyword + "%");
+	public List<Board> selectBoardByCate(Integer foodId, List<String> storeNames) {
+	    Map<String, Object> params = new HashMap<>();
+	    params.put("foodId", foodId);
+	    params.put("storeNames", storeNames);
+	    return sqlSession.selectList("mapper.board.selectBoardByCate", params);
 	}
 }

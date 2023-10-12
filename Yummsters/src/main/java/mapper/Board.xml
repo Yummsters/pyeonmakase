@@ -20,37 +20,55 @@
 	</select>
 	
 	<!-- 선진 작성 부분 -->
-	<!-- main_list -->
+	<!-- main_list(board, board_store, store_category 조인 -->
 	<select id="selectBoardList" resultType="Board">
-		<![CDATA[
-			SELECT b.*,s.*
-			FROM board b
-			JOIN board_store bs ON b.board_id = bs.board_id
-			JOIN store_category s ON bs.store_category_id = s.store_category_id
-			GROUP BY b.board_id
-			ORDER BY b.regdate DESC
-		]]>
+	    select b.*, GROUP_CONCAT(s.store_category_name SEPARATOR ' #') AS store_category_name
+	    from board b join board_store bs using(board_id)
+		join store_category s using(store_category_id)
+		    <if test="storeNames != null and !storeNames.isEmpty()">
+		        where
+		        <foreach collection="storeNames" item="storeName" separator=" OR ">
+		            s.store_category_name LIKE CONCAT('%', #{storeName}, '%')
+		        </foreach>
+		    </if>
+		group by b.board_id
+		order by regdate desc
 	</select>
 	
-	<!-- foodCategory별 list 출력 -->
-	<select id="selectBoardByFood" parameterType="Integer" resultType="Board">
-		<![CDATA[
-			select b.*, s.* from board b join board_store bs using(board_id)
-				join store_category s using(store_category_id)
-			where b.food_category_id = #{foodId} 
-			order by regdate desc
-		]]>
+	<!-- food/store 카테고리별 list -->
+	<select id="selectBoardByCate" resultType="Board"> 
+	    select b.*, GROUP_CONCAT(s.store_category_name SEPARATOR ' #') AS store_category_name
+	    from board b join board_store bs using(board_id)
+		join store_category s using(store_category_id)
+		where b.food_category_id = #{foodId}
+	    <if test="storeNames != null and !storeNames.isEmpty()">
+	        AND (
+	        <foreach collection="storeNames" item="storeName" separator=" OR ">
+	            s.store_category_name LIKE CONCAT('%', #{storeName}, '%')
+	        </foreach>
+	        )
+	    </if>
+        group by b.board_id
+		order by regdate DESC
 	</select>
+	
 	
 	<!-- 검색 -->
-	  <select id="searchByKeyword" resultType="Board">
-  		<![CDATA[
-  			select b.*, s.* from board b join board_store bs using(board_id)
-			join store_category s using(store_category_id)
-			where title like #{title}
-			order by regdate desc
-		]]>
-	  </select>
+  <select id="searchByKeyword" resultType="Board">
+		select b.*, GROUP_CONCAT(s.store_category_name SEPARATOR ' #') AS store_category_name
+		from board b join board_store bs using(board_id)
+		join store_category s using(store_category_id)
+		where title like CONCAT('%', #{keyword}, '%')
+	    <if test="storeNames != null and !storeNames.isEmpty()">
+	        AND (
+	        <foreach collection="storeNames" item="storeName" separator=" OR ">
+	            s.store_category_name LIKE CONCAT('%', #{storeName}, '%')
+	        </foreach>
+	        )
+	    </if>
+		group by b.board_id
+		order by regdate desc
+  </select>
 	
 	<!-- 선진 끝 -->
 	<select id="selectWishList" resultType="Board">
