@@ -261,8 +261,7 @@
         const editor = new toastui.Editor({
             el: document.querySelector('#content'), // 에디터를 적용할 요소 (컨테이너)
             height: '500px',                        // 에디터 영역의 높이 값 (OOOpx || auto)
-            initialEditType: 'markdown',            // 최초로 보여줄 에디터 타입 (markdown || wysiwyg)
-            initialValue: '${board.content}',     // 내용의 초기 값으로, 반드시 마크다운 문자열 형태여야 함
+            initialEditType: 'wysiwyg',            // 최초로 보여줄 에디터 타입 (markdown || wysiwyg)
             previewStyle: 'vertical'//,                // 마크다운 ß프리뷰 스타일 (tab || vertical)
 
             // 이미지가 Base64 형식으로 입력되는 것 가로채주는 옵션
@@ -306,6 +305,9 @@
                 }
             }*/
         });
+        console.log('${board.content}');
+        editor.setHTML('${board.content}');
+
         //editor.getHtml()을 사용해서 에디터 내용 수신
         //document.querySelector('#contents').insertAdjacentHTML('afterbegin', editor.getHTML());
         // 콘솔창에 표시(브라우저에서 content 값 확인)
