@@ -154,6 +154,7 @@
     </script>
 
     <script>
+        // 편의점 및 음식 카테고리를 한 개 이상 선택
         function categoryCheck(form){
             var arr_store = document.getElementsByName('store');
             var arr_food = document.getElementsByName('food');
@@ -161,6 +162,7 @@
             var store_num = 0;
             var food_num = 0;
 
+            // 체크 개수 확인
             for(var i=0; i<arr_store.length; i++){
                 if(arr_store[i].checked){
                     store_num++;
@@ -183,6 +185,27 @@
 
             }alert('카테고리를 하나 이상 선택해주세요.')
             return false;
+        }
+    </script>
+
+    <script>
+        // 음식 카테고리 한 개만 선택 가능
+        function foodCheckboxGroup(currentCheckbox) {
+            const checkboxes = document.getElementsByName("food");
+            let checkedCount = 0;
+
+            for (let i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].checked) {
+                    checkedCount++;
+                    if (checkboxes[i] !== currentCheckbox) {
+                        checkboxes[i].checked = false;
+                    }
+                }
+            }
+
+            if (checkedCount === 0) {
+                currentCheckbox.checked = true;
+            }
         }
     </script>
 
@@ -276,30 +299,30 @@
         &nbsp;&nbsp;카테고리 선택 &nbsp;&nbsp;
         <c:choose>
             <c:when test="${board.food_category_id == 1}">
-                <input type="checkbox" name="food" id="meal" value="1" checked>
+                <input type="checkbox" name="food" id="meal" value="1" checked onchange="foodCheckboxGroup(this)">
             </c:when>
             <c:otherwise>
-                <input type="checkbox" name="food" id="meal" value="1">
+                <input type="checkbox" name="food" id="meal" value="1" onchange="foodCheckboxGroup(this)">
             </c:otherwise>
         </c:choose>
         <label for="meal">식사류</label>
 
         <c:choose>
             <c:when test="${board.food_category_id == 2}">
-                <input type="checkbox" name="food" id="desert" value="2" checked>
+                <input type="checkbox" name="food" id="desert" value="2" onchange="foodCheckboxGroup(this)" checked>
             </c:when>
             <c:otherwise>
-                <input type="checkbox" name="food" id="desert" value="2">
+                <input type="checkbox" name="food" id="desert" value="2" onchange="foodCheckboxGroup(this)">
             </c:otherwise>
         </c:choose>
         <label for="desert">간식류</label>
 
         <c:choose>
             <c:when test="${board.food_category_id == 3}">
-                <input type="checkbox" name="food" id="drink" value="3" checked>
+                <input type="checkbox" name="food" id="drink" value="3" onchange="foodCheckboxGroup(this)" checked>
             </c:when>
             <c:otherwise>
-                <input type="checkbox" name="food" id="drink" value="3">
+                <input type="checkbox" name="food" id="drink" value="3" onchange="foodCheckboxGroup(this)">
             </c:otherwise>
         </c:choose>
         <label for="drink">음료</label>
