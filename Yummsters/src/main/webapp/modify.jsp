@@ -345,54 +345,8 @@
             height: '500px',                        // 에디터 영역의 높이 값 (OOOpx || auto)
             initialEditType: 'wysiwyg',            // 최초로 보여줄 에디터 타입 (markdown || wysiwyg)
             previewStyle: 'vertical'//,                // 마크다운 ß프리뷰 스타일 (tab || vertical)
-
-            // 이미지가 Base64 형식으로 입력되는 것 가로채주는 옵션
-            // 추후 jsp 파일로 바꾼 이후 서블릿의 메서드를 이용해 매핑하여 업로드 이미지를 처리할 컨트롤러 생성 필요
-            /*hooks: {
-                addImageBlobHook: (blob, callback) => {
-                    // blob : Java Script 파일 객체
-                    console.log(blob);
-
-                    // 에디터에 업로드한 이미지를 FormData 객체에 저장
-                    const formData = new FormData();
-                    formData.append('image', blob);
-
-                    let url = '/images/';
-                    $.ajax({ // 이미지 업로드 시 로직 처리 필요s
-                        type: 'POST',
-                        enctype: 'multipart/form-data',
-                        url: '/ImageUploadServlet', // 매핑할 서블릿 경로 설정하여 호출 진행
-                        dasta: formData,
-                        dataType: 'json',
-                        processData: false,
-                        contentType: false,
-                        cache: false,
-                        timeout: 600000,
-                        success: function (data) {
-                            //console.log('ajax 이미지 업로드 성공');
-                            url += data.filename;
-
-                            // callback : 에디터(마크다운 편집기)에 표시할 텍스트, 뷰어에는 imageUrl 주소에 저장된 사진으로 나옴
-                            // ImageUploadServlet을 실행해서 나온 결과값을 callback 함수를 통해 url을 추출해 이미지를 삽입 (서블릿에서 설정한 키의 값으로 불러와야 함)
-                            // 형식 : ![대체 텍스트](주소)
-                            callback(url, '사진 대체 텍스트 입력');
-                        },
-                        error: function (e) {
-                            //console.log('ajax 이미지 업로드 실패');
-                            //console.log(e.abort([statusText]));
-
-                            callback('image_load_fail', '사진 대체 텍스트 입력');
-                        }
-                    });
-                }
-            }*/
         });
         editor.setHTML('${board.content}');
-
-        //editor.getHtml()을 사용해서 에디터 내용 수신
-        //document.querySelector('#contents').insertAdjacentHTML('afterbegin', editor.getHTML());
-        // 콘솔창에 표시(브라우저에서 content 값 확인)
-        // console.log(editor.getHTML());
     </script>
 
     <!-- 토스트 에디터에 작성한 내용 디비 저장을 위한 div -->
