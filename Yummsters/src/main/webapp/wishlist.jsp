@@ -149,7 +149,8 @@
          }
     </style>
 
-    <script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	<script type="text/javascript">
        
             //-------------------------------------------------------
             // 게시글 더보기 기능
@@ -218,12 +219,15 @@
         <div class="card-box">
             <c:forEach var="board" items="${wishList}">
 				<div class="card">
+				<c:if test="${not empty wishList}">
+					<input type="hidden" class="boardId" value="${board.board_id}">
 					<div class="recommend">♥ ${board.recommand_count}</div>
 					<div class="thumbnail">
 						<img src="imgView?file=${board.picture}" alt="">
 					</div>
 					<div class="store-name">#${board.store_category_name}</div>
 					<div class="recipe-name">${board.title}</div>
+				</c:if>
 				</div>
 			</c:forEach>
         </div>

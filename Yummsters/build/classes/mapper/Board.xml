@@ -9,18 +9,141 @@
     </insert>
 	<select id="selectBoardListTop10" parameterType="Integer" resultType="Board">
 		<![CDATA[
-			select b.title,b.picture,b.recommand_count,sc.store_category_name
+			select b.*,group_concat(sc.store_category_name SEPARATOR ' #') as store_category_name
 			from board b
-			join board_store bs on b.board_id=bs.board.id
-			join store_category sc on bs.store_category_id=sc.store_category_id
+			left join board_store bs on b.board_id=bs.board_id
+			left join store_category sc on bs.store_category_id=sc.store_category_id
 			group by b.board_id
 			order by b.recommand_count desc
 			limit 10;
 		]]>
 	</select>
-	<select id="selectBoardOne" parameterType="Integer" resultType="Board">
+	
+	<!-- 선진 작성 부분 -->
+	<!-- main_list(board, board_store, store_category 조인 -->
+	<select id="selectBoardList" resultType="Board">
+	    select b.*, GROUP_CONCAT(s.store_category_name SEPARATOR ' #') AS store_category_name
+	    from board b join board_store bs using(board_id)
+		join store_category s using(store_category_id)
+		    <if test="storeNames != null and !storeNames.isEmpty()">
+		        where
+		        <foreach collection="storeNames" item="storeName" separator=" OR ">
+		            s.store_category_name LIKE CONCAT('%', #{storeName}, '%')
+		        </foreach>
+		    </if>
+		group by b.board_id
+		order by regdate desc
+	</select>
+	
+	<!-- food/store 카테고리별 list -->
+	<select id="selectBoardByCate" resultType="Board"> 
+	    select b.*, GROUP_CONCAT(s.store_category_name SEPARATOR ' #') AS store_category_name
+	    from board b join board_store bs using(board_id)
+		join store_category s using(store_category_id)
+		where b.food_category_id = #{foodId}
+	    <if test="storeNames != null and !storeNames.isEmpty()">
+	        AND (
+	        <foreach collection="storeNames" item="storeName" separator=" OR ">
+	            s.store_category_name LIKE CONCAT('%', #{storeName}, '%')
+	        </foreach>
+	        )
+	    </if>
+        group by b.board_id
+		order by regdate DESC
+	</select>
+	
+	
+	<!-- 검색 -->
+  <select id="searchByKeyword" resultType="Board">
+		select b.*, GROUP_CONCAT(s.store_category_name SEPARATOR ' #') AS store_category_name
+		from board b join board_store bs using(board_id)
+		join store_category s using(store_category_id)
+		where title like CONCAT('%', #{keyword}, '%')
+	    <if test="storeNames != null and !storeNames.isEmpty()">
+	        AND (
+	        <foreach collection="storeNames" item="storeName" separator=" OR ">
+	            s.store_category_name LIKE CONCAT('%', #{storeName}, '%')
+	        </foreach>
+	        )
+	    </if>
+		group by b.board_id
+		order by regdate desc
+  </select>
+	
+	<!-- 선진 끝 -->
+	<select id="selectWishList" resultType="Board">
 		<![CDATA[
-			select * from board where board_id=#{board_id}
+			select b.*,group_concat(sc.store_category_name SEPARATOR ' #') as store_category_name
+			from board b
+			left join board_store bs on b.board_id=bs.board_id
+			left join store_category sc on bs.store_category_id=sc.store_category_id
+			join wish w on b.board_id = w.board_id
+			WHERE w.nickname=#{member.nickname}
+			group by b.board_id
+			order by w.wish_id desc
+			limit ${row};
 		]]>
 	</select>
+	<select id="selectMyList" resultType="Board">
+		<![CDATA[
+			select b.*,group_concat(sc.store_category_name SEPARATOR ' #') as store_category_name
+			from board b
+			left join board_store bs on b.board_id=bs.board_id
+			left join store_category sc on bs.store_category_id=sc.store_category_id
+			WHERE b.nickname=#{member.nickname}
+			group by b.board_id
+			order by b.board_id desc
+			limit ${row};
+		]]>
+	</select>
+
+	<!-- 희진 작성 부분 -->
+	<select id="selectBoardOne" parameterType="Integer" resultType="Board">
+		<![CDATA[
+		select * from board where board_id=#{board_id}
+		]]>
+	</select>
+
+	<update id="plusRecommandCount" parameterType="Integer">
+		<![CDATA[
+			update board set recommand_count=recommand_count+1 where board_id=#{board_id}
+		]]>
+	</update>
+	<update id="minusRecommandCount" parameterType="Integer">
+		<![CDATA[
+		update board set recommand_count=recommand_count-1 where board_id=#{board_id}
+		]]>
+	</update>
+
+	<select id="selectRecommandCount" parameterType="Integer" resultType="Integer">
+        <![CDATA[
+		select recommand_count from board where board_id=#{board_id}
+		]]>
+    </select>
+
+	<select id="selectStoreCategoryList" parameterType="Integer" resultType="Board">
+		<![CDATA[
+		select b.*, s.* from board b
+		    join board_store bs using(board_id)
+			join store_category s using(store_category_id)
+		where board_id = #{board_id}
+		]]>
+	</select>
+
+	<delete id="deleteBoardOne" parameterType="Integer">
+		<![CDATA[
+			delete from board where board_id=#{board_id}
+		]]>
+	</delete>
+
+	<update id="updateBoard" parameterType="Board">
+		update board
+			<trim prefix="SET" suffixOverrides=",">
+				<if test="title != null"> title = #{title}, </if>
+				<if test="picture != null"> picture = #{picture}, </if>
+				<if test="content != null"> content = #{content}, </if>
+				<if test="food_category_id != null"> food_category_id = #{food_category_id},</if>
+			</trim>
+		where board_id = #{board_id}
+	</update>
 </mapper>
