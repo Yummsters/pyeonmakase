@@ -9,7 +9,7 @@
     </insert>
 	<select id="selectBoardListTop10" parameterType="Integer" resultType="Board">
 		<![CDATA[
-			select b.*,group_concat(sc.store_category_name) as store_category_name
+			select b.*,group_concat(sc.store_category_name SEPARATOR ' #') as store_category_name
 			from board b
 			left join board_store bs on b.board_id=bs.board_id
 			left join store_category sc on bs.store_category_id=sc.store_category_id
@@ -73,7 +73,7 @@
 	<!-- 선진 끝 -->
 	<select id="selectWishList" resultType="Board">
 		<![CDATA[
-			select b.title,b.picture,b.recommand_count,group_concat(sc.store_category_name) as store_category_name
+			select b.*,group_concat(sc.store_category_name SEPARATOR ' #') as store_category_name
 			from board b
 			left join board_store bs on b.board_id=bs.board_id
 			left join store_category sc on bs.store_category_id=sc.store_category_id
@@ -86,7 +86,7 @@
 	</select>
 	<select id="selectMyList" resultType="Board">
 		<![CDATA[
-			select b.title,b.picture,b.recommand_count,group_concat(sc.store_category_name) as store_category_name
+			select b.*,group_concat(sc.store_category_name SEPARATOR ' #') as store_category_name
 			from board b
 			left join board_store bs on b.board_id=bs.board_id
 			left join store_category sc on bs.store_category_id=sc.store_category_id

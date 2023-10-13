@@ -368,8 +368,16 @@
         <!-- 제목, 조회수, 추천수 -->
         <div class="content_title">
             <div class="title_store" style="display: inline-block;">
-                <div class="title">${board.title} </div> <!-- TODO css 깨지는 부분 수정 필요 -->
-                <div class="store"> 편의점 : ${board.store_category_name}</div>
+            	<c:choose>
+            		<c:when test="${board.store_category_name ne '전체'}">
+		                <div class="title">${board.title} </div> <!-- TODO css 깨지는 부분 수정 필요 -->
+		                <div class="store"> 편의점 : ${board.store_category_name}</div>
+            		</c:when>
+            		<c:otherwise>
+            			<div class="title">${board.title} </div> <!-- TODO css 깨지는 부분 수정 필요 -->
+		                <div class="store"> 편의점 : #CU #GS25 #7Eleven #기타</div>
+            		</c:otherwise>
+            	</c:choose>
             </div>
             <table class="recommand_date">
                 <tr>

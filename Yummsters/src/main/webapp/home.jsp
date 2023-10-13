@@ -171,14 +171,27 @@
 		<div class="card-slider">
 			<c:forEach var="board" items="${boardListTop10}">
 				<div class="card">
-				<c:if test="${not empty board.board_id}">
-					<input type="hidden" class="boardId" value="${board.board_id}">
-					<div class="recommend">♥ ${board.recommand_count}</div>
-					<div class="thumbnail">
-						<img src="imgView?file=${board.picture}" alt="">
-					</div>
-					<div class="recipe-name">${board.title}</div>
-					<div class="store-name">#${board.store_category_name}</div>
+				<c:if test="${not empty boardListTop10}">
+					<c:choose>
+						<c:when test="${board.store_category_name ne '전체'}">
+							<input type="hidden" class="boardId" value="${board.board_id}">
+							<div class="recommend">♥ ${board.recommand_count}</div>
+							<div class="thumbnail">
+								<img src="imgView?file=${board.picture}" alt="">
+							</div>
+							<div class="recipe-name">${board.title}</div>
+							<div class="store-name">#${board.store_category_name}</div>
+						</c:when>
+						<c:otherwise>
+							<input type="hidden" class="boardId" value="${board.board_id}">
+							<div class="recommend">♥ ${board.recommand_count}</div>
+							<div class="thumbnail">
+								<img src="imgView?file=${board.picture}" alt="">
+							</div>
+							<div class="recipe-name">${board.title}</div>
+							<div class="store-name">#CU #GS25 #7Eleven #기타</div>
+						</c:otherwise>
+					</c:choose>
 					</c:if>
 				</div>
 			</c:forEach>
@@ -197,16 +210,29 @@
 	<div class="card-box">
 		<c:forEach var="board" items="${boardList}">
 			<div class="card">
-				<c:if test="${not empty board.board_id}">
-					<input type="hidden" class="boardId" value="${board.board_id}">
-					<div class="recommend">♥ ${board.recommand_count}</div>
-					<div class="thumbnail">
-						<img src="imgView?file=${board.picture}" alt="">
-					</div>
-					<div class="recipe-name">${board.title}</div>
-					<div class="store-name">#${board.store_category_name}</div>
-					</c:if>
-				</div>
+				<c:if test="${not empty boardList}">
+					<c:choose>
+						<c:when test="${board.store_category_name ne '전체'}">
+							<input type="hidden" class="boardId" value="${board.board_id}">
+							<div class="recommend">♥ ${board.recommand_count}</div>
+							<div class="thumbnail">
+								<img src="imgView?file=${board.picture}" alt="">
+							</div>
+							<div class="recipe-name">${board.title}</div>
+							<div class="store-name">#${board.store_category_name}</div>
+						</c:when>
+						<c:otherwise>
+							<input type="hidden" class="boardId" value="${board.board_id}">
+							<div class="recommend">♥ ${board.recommand_count}</div>
+							<div class="thumbnail">
+								<img src="imgView?file=${board.picture}" alt="">
+							</div>
+							<div class="recipe-name">${board.title}</div>
+							<div class="store-name">#CU #GS25 #7Eleven #기타</div>
+						</c:otherwise>
+					</c:choose>
+				</c:if>
+			</div>
 		</c:forEach>
 	</div>
 

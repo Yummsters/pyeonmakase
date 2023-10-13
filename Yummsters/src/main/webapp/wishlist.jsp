@@ -218,12 +218,28 @@
         <div class="card-box">
             <c:forEach var="board" items="${wishList}">
 				<div class="card">
-					<div class="recommend">♥ ${board.recommand_count}</div>
-					<div class="thumbnail">
-						<img src="imgView?file=${board.picture}" alt="">
-					</div>
-					<div class="store-name">#${board.store_category_name}</div>
-					<div class="recipe-name">${board.title}</div>
+				<c:if test="${not empty board.board_id}">
+					<c:choose>
+						<c:when test="${board.store_category_name ne '전체'}">
+							<input type="hidden" class="boardId" value="${board.board_id}">
+							<div class="recommend">♥ ${board.recommand_count}</div>
+							<div class="thumbnail">
+								<img src="imgView?file=${board.picture}" alt="">
+							</div>
+							<div class="recipe-name">${board.title}</div>
+							<div class="store-name">#${board.store_category_name}</div>
+						</c:when>
+						<c:otherwise>
+							<input type="hidden" class="boardId" value="${board.board_id}">
+							<div class="recommend">♥ ${board.recommand_count}</div>
+							<div class="thumbnail">
+								<img src="imgView?file=${board.picture}" alt="">
+							</div>
+							<div class="recipe-name">${board.title}</div>
+							<div class="store-name">#CU #GS25 #7Eleven #기타</div>
+						</c:otherwise>
+					</c:choose>
+				</c:if>
 				</div>
 			</c:forEach>
         </div>

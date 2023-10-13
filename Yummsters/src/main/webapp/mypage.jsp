@@ -100,16 +100,9 @@ a {
 	color: black;
 }
 </style>
-<script>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script type="text/javascript">
 	$(function() {
-		$('.card-slider').slick({
-			slidesToShow : 5, // 한 번에 보여줄 개수
-			slidesToScroll : 5, // 다섯개씩 넘기며 보여주기 (총 2페이지로 구성)
-			autoplay : true,
-			autoplaySpeed : 2500, // 넘기는 속도
-			dots : true,
-		});
-
 		// 게시글 더보기 기능
 		// 초기에는 처음 12개 카드만 보이도록 설정
 		$(".card-box > .card").slice(12).hide();
@@ -168,7 +161,7 @@ a {
 	<jsp:include page="header.jsp" />
 
 	<div class="title-box">
-		<div class="title">${member.nickname}마이페이지</div>
+		<div class="title">${member.nickname} 마이페이지</div>
 		<p>
 			<a href="userinfo"><input id="user_btn" type="submit"
 				value="회원정보"></a>
@@ -188,12 +181,28 @@ a {
 	<div class="card-box">
 	<c:forEach var="board" items="${myList}">
 		<div class="card">
-			<div class="recommend">♥ ${board.recommand_count}</div>
-			<div class="thumbnail">
-				<img src="imgView?file=${board.picture}" alt="">
-			</div>
-			<div class="store-name">#${board.store_category_name}</div>
-			<div class="recipe-name">${board.title}</div>
+		<c:if test="${not empty myList}">
+			<c:choose>
+				<c:when test="${board.store_category_name ne '전체'}">
+					<input type="hidden" class="boardId" value="${board.board_id}">
+					<div class="recommend">♥ ${board.recommand_count}</div>
+					<div class="thumbnail">
+						<img src="imgView?file=${board.picture}" alt="">
+					</div>
+					<div class="store-name">#${board.store_category_name}</div>
+					<div class="recipe-name">${board.title}</div>
+				</c:when>
+				<c:otherwise>
+					<input type="hidden" class="boardId" value="${board.board_id}">
+					<div class="recommend">♥ ${board.recommand_count}</div>
+					<div class="thumbnail">
+						<img src="imgView?file=${board.picture}" alt="">
+					</div>
+					<div class="store-name">#CU #GS25 #7Eleven #기타</div>
+					<div class="recipe-name">${board.title}</div>
+				</c:otherwise>
+			</c:choose>
+		</c:if>
 		</div>
 	</c:forEach>
 	</div>
@@ -214,12 +223,28 @@ a {
 	<div class="card-box">
 		<c:forEach var="board" items="${wishList}">
 			<div class="card">
-				<div class="recommend">♥ ${board.recommand_count}</div>
-				<div class="thumbnail">
-					<img src="imgView?file=${board.picture}" alt="">
-				</div>
-				<div class="store-name">#${board.store_category_name}</div>
-				<div class="recipe-name">${board.title}</div>
+			<c:if test="${not empty wishList}">
+				<c:choose>
+					<c:when test="${board.store_category_name ne '전체'}">
+						<input type="hidden" class="boardId" value="${board.board_id}">
+						<div class="recommend">♥ ${board.recommand_count}</div>
+						<div class="thumbnail">
+							<img src="imgView?file=${board.picture}" alt="">
+						</div>
+						<div class="recipe-name">${board.title}</div>
+						<div class="store-name">#${board.store_category_name}</div>
+					</c:when>
+					<c:otherwise>
+						<input type="hidden" class="boardId" value="${board.board_id}">
+						<div class="recommend">♥ ${board.recommand_count}</div>
+						<div class="thumbnail">
+							<img src="imgView?file=${board.picture}" alt="">
+						</div>
+						<div class="recipe-name">${board.title}</div>
+						<div class="store-name">#CU #GS25 #7Eleven #기타</div>
+					</c:otherwise>
+				</c:choose>
+				</c:if>
 			</div>
 		</c:forEach>
 	</div>

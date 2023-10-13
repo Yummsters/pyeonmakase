@@ -25,15 +25,30 @@
 			<c:when test="${not empty boardList}">
 				<c:forEach items="${boardList}" var="board">
 					<div class="card">
-						<input type="hidden" name="foodId"
-							value="${board.food_category_id}"> <input type="hidden"
-							class="boardId" value="${board.board_id}">
-						<div class="recommend">♥ ${board.recommand_count}</div>
-						<div class="thumbnail">
-							<img src="imgView?file=${board.picture}" alt="">
-						</div>
-						<div class="recipe-name">${board.title}</div>
-						<div class="store-name">#${board.store_category_name}</div>
+						<c:choose>
+							<c:when test="${board.store_category_name ne '전체'}">
+								<input type="hidden" name="foodId"
+									value="${board.food_category_id}"> <input type="hidden"
+									class="boardId" value="${board.board_id}">
+								<div class="recommend">♥ ${board.recommand_count}</div>
+								<div class="thumbnail">
+									<img src="imgView?file=${board.picture}" alt="">
+								</div>
+								<div class="recipe-name">${board.title}</div>
+								<div class="store-name">#${board.store_category_name}</div>
+							</c:when>
+							<c:otherwise>
+								<input type="hidden" name="foodId"
+									value="${board.food_category_id}"> <input type="hidden"
+									class="boardId" value="${board.board_id}">
+								<div class="recommend">♥ ${board.recommand_count}</div>
+								<div class="thumbnail">
+									<img src="imgView?file=${board.picture}" alt="">
+								</div>
+								<div class="recipe-name">${board.title}</div>
+								<div class="store-name">#CU #GS25 #7Eleven #기타</div>
+							</c:otherwise>
+						</c:choose>
 					</div>
 				</c:forEach>
 			</c:when>
