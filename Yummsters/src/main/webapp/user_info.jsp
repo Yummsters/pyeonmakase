@@ -164,19 +164,11 @@
 $(document).ready(function() {
     // 회원정보 수정 버튼 이벤트 핸들러
     $('#user_btn1').click(function() {
-        var placeholder = "비밀번호를 입력하세요.";
-        var message = prompt("회원정보를 수정하시려면 \n 비밀번호를 입력해주세요.", placeholder);
-        var memberPw = "${sessionScope.member.member_pw}";
-        if (message === memberPw) {
-            location.href = "user_modify.jsp";
-        } else {
-            alert("비밀번호가 일치하지 않습니다.");
-        }
+        location.href = "user_modify.jsp";
     });
                
     // 회원탈퇴 버튼 이벤트 핸들러
     $('#user_btn2').click(function() {
-               //         var placeholder = "비밀번호를 입력하세요.";
         var message = prompt("정말 탈퇴하시겠습니까? \n 탈퇴하시면 회원정보를 되돌릴 수 없습니다.", "비밀번호를 입력하세요.");
                
         if (message) {
