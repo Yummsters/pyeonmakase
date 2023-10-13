@@ -55,18 +55,23 @@ public class MemberServiceImpl implements MemberService{
 		return "exist";
 	}
 	//회원탈퇴
-	@Override
-	public void memberRemove(Map<String, Object> paramMap) throws Exception {
-	    memberDAO.deleteMember(paramMap);
-	}
-	//탈퇴할때..
-	@Override
-	public void removeRelatedData(String nickname) throws Exception {
-		memberDAO.removeRelatedDataBoard(nickname);
-		memberDAO.removeRelatedDataBoard2(nickname);
-		memberDAO.removeRelatedData(nickname);
-		
-	}
+	   @Override
+	   public void removeMember(Map<String, Object> paramMap) throws Exception {
+	       memberDAO.deleteMember(paramMap);
+	   }
+	   //탈퇴할때..
+	   @Override
+	   public void updateNickname(String nickname) throws Exception {
+	      memberDAO.updateBoardNickname(nickname);
+	      memberDAO.updateRecommandNickname(nickname);
+	      memberDAO.updateReplyNickname(nickname);
+	   }
+	   
+	   // Wish 삭제
+	   @Override
+	   public void removeWish(String nickname) throws Exception {
+	      memberDAO.deleteWish(nickname);
+	   }
 	//회원정보수정
 	@Override
 	public void updateMember(Map<String, Object> paramMap) throws Exception {

@@ -17,15 +17,14 @@ public interface MemberDAO {
 	// 회원가입 이메일 중복확인
 	Member selectEmail(String email) throws Exception;
 	
-	//회원탈퇴
-		void deleteMember(Map<String, Object> paramMap) throws Exception;
-	//탈퇴할정보들을 nickname으로 부름
-		void removeRelatedData(String nickname) throws Exception;
-		void removeRelatedDataBoard(String nickname) throws Exception;
-		void removeRelatedDataBoard2(String nickname) throws Exception;
-		void removeRelatedDataRecommand(String nickname) throws Exception;
-		void removeRelatedDataReply(String nickname) throws Exception;
-		void removeRelatedDataWish(String nickname) throws Exception;
+	 //회원탈퇴
+	   void deleteMember(Map<String, Object> paramMap) throws Exception;
+	   //탈퇴할정보들을 nickname으로 부름
+	   void updateBoardNickname(String nickname) throws Exception;
+	   void updateRecommandNickname(String nickname) throws Exception;
+	   void updateReplyNickname(String nickname) throws Exception;
+	   void deleteWish(String nickname) throws Exception;
+
 	//회원정보 수정	
 	    void updateMember(Map<String, Object> paramMap) throws Exception;
 	    

@@ -1,76 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
-	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="mapper.member">
-	<!-- 회원가입 - 회원 등록 -->
-	<insert id="insertMember" parameterType="Member">
-		<![CDATA[
-			insert into member (member_name, nickname, email, member_id, member_pw) 
-				values(#{member_name}, #{nickname}, #{email}, #{member_id}, #{member_pw})
-		]]>
-	</insert>
+   <!-- 회원가입 - 회원 등록 -->
+   <insert id="insertMember" parameterType="Member">
+      <![CDATA[
+         insert into member (member_name, nickname, email, member_id, member_pw) 
+            values(#{member_name}, #{nickname}, #{email}, #{member_id}, #{member_pw})
+      ]]>
+   </insert>
 
-	<!-- 회원가입 아이디 중복확인 및 로그인 아이디 찾기 -->
-	<select id="selectId" parameterType="String" resultType="Member">
-		<![CDATA[
-			select * from member where member_id = #{member_id}
-		]]>
-	</select>
+   <!-- 회원가입 아이디 중복확인 및 로그인 아이디 찾기 -->
+   <select id="selectId" parameterType="String" resultType="Member">
+      <![CDATA[
+         select * from member where member_id = #{member_id}
+      ]]>
+   </select>
 
-	<select id="selectEmail" parameterType="String"
-		resultType="Member">
-		<![CDATA[
-			select * from member where email = #{email}
-		]]>
-	</select>
+   <select id="selectEmail" parameterType="String"
+      resultType="Member">
+      <![CDATA[
+         select * from member where email = #{email}
+      ]]>
+   </select>
 
-	<select id="selectNickname" parameterType="String"
-		resultType="Member">
-		<![CDATA[
-			select * from member where nickname = #{nickname}
-		]]>
-	</select>
+   <select id="selectNickname" parameterType="String"
+      resultType="Member">
+      <![CDATA[
+         select * from member where nickname = #{nickname}
+      ]]>
+   </select>
 
-	<!-- 회원 탈퇴 -->
-	<delete id="deleteMember" parameterType="Map">
-		<![CDATA[
-			delete from member where nickname = #{nickname} AND member_pw = #{member_pw}
-		]]>
-	</delete>
-	<!-- 탈퇴할때 데이터 삭제 -->
-	<delete id="removeRelatedDataBoard">
-    <![CDATA[
-        DELETE FROM board_store WHERE board_id IN (SELECT board_id FROM board WHERE nickname = #{nickname});
-    ]]>
-	</delete>
 
-	<delete id="removeRelatedDataBoard2">
-    <![CDATA[
-        DELETE FROM board WHERE nickname = #{nickname};
-    ]]>
-	</delete>
+   <!-- 회원 탈퇴 -->
+   <delete id="deleteMember" parameterType="Map">
+      <![CDATA[
+         delete from member where nickname = #{nickname} AND member_pw = #{member_pw}
+      ]]>
+   </delete>
+   
+   
+   <!-- 탈퇴할때 게시물, 댓글, 추천 남기기 -->
+   <update id="updateBoardNickname" parameterType="String">
+   <![CDATA[
+      UPDATE board
+        SET nickname = "탈퇴회원"
+        WHERE nickname = #{nickname};
+   ]]>
+   </update>
+   <update id="updateRecommandNickname" parameterType="String">
+   <![CDATA[
+      UPDATE recommand
+        SET nickname = "탈퇴회원"
+        WHERE nickname = #{nickname};
+   ]]>
+   </update>
+   <update id="updateReplyNickname" parameterType="String">
+   <![CDATA[
+      UPDATE reply
+        SET nickname = "탈퇴회원"
+        WHERE nickname = #{nickname};
+   ]]>
+   </update>
 
-	<delete id="removeRelatedDataRecommand">
-    <![CDATA[     
-        DELETE FROM recommand WHERE nickname = #{nickname}
-    ]]>
-	</delete>
-
-	<delete id="removeRelatedDataReply">
-    <![CDATA[     
-        DELETE FROM reply WHERE nickname = #{nickname}
-    ]]>
-	</delete>
-
-	<delete id="removeRelatedDataWish">
+   <!-- 찜하기는 삭제 -->
+   <delete id="deleteWish">
     <![CDATA[     
         DELETE FROM wish WHERE nickname = #{nickname}
     ]]>
-	</delete>
+   </delete>
 
-	<!-- 회원정보 수정 -->
-	<update id="updateMember" parameterType="Map">
+   <!-- 회원정보 수정 -->
+   <update id="updateMember" parameterType="Map">
     <![CDATA[
         update member
         set nickname = #{newNickname},
@@ -78,5 +80,5 @@
             member_pw = #{newPassword}
         where nickname = #{nickname}
     ]]>
-	</update>
+   </update>
 </mapper>
