@@ -21,10 +21,18 @@ public interface MemberService {
 	// 아이디 중복확인
 	String isIdCheck(String member_id) throws Exception;
 	
-	//회원탈퇴
-		void memberRemove(Map<String, Object> paramMap) throws Exception;
-    //탈퇴할때
-		void removeRelatedData(String nickname) throws Exception;
+
+	   //회원탈퇴
+	   void removeMember(Map<String, Object> paramMap) throws Exception;
+	   
+	    //탈퇴 전 nickname 변경
+	   void updateNickname(String nickname) throws Exception;
+	   
+	   //탈퇴 전 찜 삭제
+	   void removeWish(String nickname) throws Exception;
+
+	   
+
 	//회원정보수정
 		void updateMember(Map<String, Object> paramMap) throws Exception;
 

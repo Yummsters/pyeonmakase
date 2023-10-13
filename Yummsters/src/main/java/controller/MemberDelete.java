@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.Member;
+
 import service.MemberService;
 import service.MemberServiceImpl;
 
@@ -20,7 +20,7 @@ import service.MemberServiceImpl;
  */
 @WebServlet("/memberdelete")
 public class MemberDelete extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+   private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -30,52 +30,36 @@ public class MemberDelete extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		 Member loggedInMember = (Member) request.getSession().getAttribute("member");
+   /**
+    * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+    */
+   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      request.setCharacterEncoding("utf-8");
+       String nickname = request.getParameter("nickname");
+       String password = request.getParameter("password");
 
-		    String memberNickname = loggedInMember.getNickname();
-		    String member_pw = loggedInMember.getMember_pw();
+          try {
+              MemberService memberService = new MemberServiceImpl();
+              memberService.removeWish(nickname); // 위시 삭제
+              memberService.updateNickname(nickname); // 게시글, 댓글, 추천 닉네임 변경
+              
+              //회원탈퇴(정보삭제)
+              Map<String, Object> paramMap = new HashMap<>();
+              paramMap.put("nickname", nickname);
+              paramMap.put("member_pw", password);
+              memberService.removeMember(paramMap);
+              
+              HttpSession session = request.getSession();
+              session.removeAttribute("member");
 
-		    try {
-		       
-		        MemberService memberService = new MemberServiceImpl();
-		        //다른테이블에 저장된 데이터 먼저 삭제
-		        memberService.removeRelatedData(memberNickname);
-		        
-		        //회원탈퇴(정보삭제)
-		        Map<String, Object> paramMap = new HashMap<>();
-		        paramMap.put("nickname", memberNickname);
-		        paramMap.put("member_pw", member_pw);
+          } catch (Exception e) {
+              e.printStackTrace();
 
-		        memberService.memberRemove(paramMap);
-		        
-		        HttpSession session = request.getSession();
-		        session.removeAttribute("member");
+              request.setAttribute("err", "회원탈퇴 오류");
 
-		        response.sendRedirect("home.jsp");
-		    } catch (Exception e) {
-		        e.printStackTrace();
-
-		        request.setAttribute("err", "회원탈퇴 오류");
-
-		        request.getRequestDispatcher("error.jsp").forward(request, response);
-		    }
-	    }
-	
-
-
-	
-	
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+              request.getRequestDispatcher("error.jsp").forward(request, response);
+              System.out.println(e.getMessage());
+          }
+       }
 
 }

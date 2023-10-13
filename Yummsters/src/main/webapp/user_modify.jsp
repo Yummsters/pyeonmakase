@@ -291,7 +291,7 @@
 				<b>닉네임</b>
 			</div>
 			<input id="nickname" type="text" name="nickname" required
-				placeholder="${member.nickname}"> <span id="nicknameErr"></span>
+				vlaue"${member.nickname}"> <span id="nicknameErr"></span>
 			<button class="checkDuplicate" id="confirm1" type="button"
 				data-type="nickname">중복확인</button>
 			<p id="nicknameInfo"></p>
@@ -302,7 +302,7 @@
 				<b>이메일</b>
 			</div>
 			<input id="email" type="text" name="email" required
-				placeholder="${member.email }"> <span id="emailErr"></span>
+				value="${member.email }"> <span id="emailErr"></span>
 			<button class="checkDuplicate" id="confirm2" type="button"
 				data-type="email">중복확인</button>
 			<p id="emailInfo"></p>
@@ -377,7 +377,6 @@
 						$("#" + dataType + "Err").text("");
 						return;
 					}
-
 					$.ajax({
 						url : "duplicateCheck",  // 서블릿 주소
 						type : "post", // method 타입
