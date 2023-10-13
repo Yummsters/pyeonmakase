@@ -200,6 +200,14 @@
         // 찜하기 버튼 클릭 시
         $(function(){
             $('#wish_bnt').click(function (){
+                var member = {
+                    member : '<c:out value="${member}"/>'
+                };
+                if(member.member == null){
+                    alert("로그인 후 이용하세요.")
+                    return false;
+                }
+
                 $.ajax({
                     url : 'wish',
                     type : 'post',
@@ -222,7 +230,6 @@
     </script>
 
     <script type="text/javascript">
-
         $(function(){
             var member = {
                 nickname: '<c:out value="${member.nickname}"/>'
@@ -335,6 +342,24 @@
         });
     </script>
 
+    <script type="text/javascript">
+        $(function(){
+            $("#commentSection").scroll(function(){
+                var innerHeight = $(this).innerHeight();
+                var scroll = $(this).scrollTop() + $(this).innerHeight();
+                var height = $(this)[0].scrollHeight;
+
+                console.log(innerHeight);
+                console.log(scroll);
+                console.log(height);
+
+                if(scroll>=height){
+
+                }
+            });
+        });
+    </script>
+
 </head>
 <body>
 <jsp:include page="header.jsp"/>
@@ -436,13 +461,14 @@
     <br><br><br>
     </form>
 
-    <div class="all_reply">
+    <div class="all_reply" >
         <div class="reply">
             <textarea class="reply_register" id="reply_contents" placeholder="댓글을 입력하세요."></textarea>
             <button class="reply_bnt" type="submit" id="reply_register" data-reply-member="${member.nickname}" name="reply_register"> 등록 </button>
         </div>
+        <br>
 
-        <div class="reply_content" id="commentSection">
+        <div class="reply_content" id="commentSection" style="height: 320px;  overflow:auto;">
                 <div class="reply_one">
                     <!--<div style="display: inline-block;"><label> ${reply.nickname} </label></div>
                     <div style="display: inline-block;"> ${reply.content} </div>-->
@@ -451,7 +477,7 @@
                     <button class="reply_del" type="button" data-reply-id="${reply.reply_id}" data-reply-member="${member.nickname}"> 삭제 </button>
                 </c:if>-->
         </div>
-
+    </div>
 
 <jsp:include page="footer.jsp"/>
 
