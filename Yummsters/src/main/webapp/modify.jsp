@@ -358,7 +358,6 @@
             document.getElementById("board_modify").submit();
         });
     </script>
-
 </form>
 <jsp:include page="footer.jsp"/>
 </body>

@@ -236,6 +236,13 @@
     </script>
 
     <script type="text/javascript">
+        function boardDeleteCheck(){
+            return confirm("정말 삭제 하시겠습니까?");
+        }
+
+    </script>
+
+    <script type="text/javascript">
         $(function(){
             var member = {
                 nickname: '<c:out value="${member.nickname}"/>'
@@ -265,7 +272,6 @@
 
             // 등록 버튼 클릭 시 실행
             $('.reply_bnt').click(function (){
-                var nickname = $(this).data('reply-member'); // data-reply-member에서 nickname 가져오기
                 $.ajax({
                     url : 'reply',
                     type : 'post',
@@ -295,7 +301,6 @@
             // 삭제 버튼 클릭 시 실행
             $(".reply_del").click(function (){
                 var replyId = $(this).data('reply-id'); // data-reply-id에서 reply_id 값을 읽어옴
-                var nickname = $(this).data('reply-member'); // data-reply-member에서 nickname 가져오기
 
                 deleteReply(replyId);
             });
@@ -354,24 +359,6 @@
         });
     </script>
 
-    <script type="text/javascript">
-        $(function(){
-            $("#commentSection").scroll(function(){
-                var innerHeight = $(this).innerHeight();
-                var scroll = $(this).scrollTop() + $(this).innerHeight();
-                var height = $(this)[0].scrollHeight;
-
-                console.log(innerHeight);
-                console.log(scroll);
-                console.log(height);
-
-                if(scroll>=height){
-
-                }
-            });
-        });
-    </script>
-
 </head>
 <body>
 <jsp:include page="header.jsp"/>
@@ -401,33 +388,11 @@
         <div class="picture"><img src="imgView?file=${board.picture}" alt="" style="width:350px"></div>
         <br>
 
-        <!-- TODO : 토스트 에디터 이미지 url 변경 로직 작성 필요 -->
         <div class="content">
             <div  style="text-align: center">
             ${board.content}
             </div>
-            <!--
-            <div style="text-align : center;"> 재료 : 오감자, 체다치즈, 스트링치즈</div>
-            <br><br>
-            <div class="picture_text"><img src="imgView?file=mirro.jpg" alt="" style="padding-left: 20%;">1. 오감자를 접시에
-                얹어준다.
-            </div>
-            <br>
-            <div class="picture_text"><img src="imgView?file=mirro.jpg" alt="" style="padding-left: 20%;">2. 체다치즈와
-                스트링치즈를 찢어서 얹는다
-            </div>
-            <br>
-            <div class="picture_text"><img src="imgView?file=mirro.jpg" alt="" style="padding-left: 20%;">3. 전자레인지에 1분
-                정도 돌리면 완성
-            </div>
-            <br>
 
-            <br>
-            <div style="text-align : center;">
-                이것만큼 맛있는 안주는 없었다. 이것은 그라탕인가 오감자인가<br>
-                오감자치즈후라이로 불금 어떠신가요??
-            </div>
-        -->
          <br><br>
         </div>
         <!-- 추천하기 버튼 -->
@@ -466,8 +431,9 @@
             <button class="mod_del" type="submit" id="board_modify" name="board_id" value="${board.board_id}" formaction="board_modify?" formmethod="get">
                 수정
             </button>
-            <button class="mod_del" type="submit" id="board_delete" name="board_id" value="${board.board_id}" formaction="board_delete?"
-                    formmethod="get"> 삭제
+            <button class="mod_del" id="board_delete" type="submit" name="board_id" value="${board.board_id}" formaction="board_delete?"
+                    formmethod="get"
+                    onclick="return boardDeleteCheck();"> 삭제
             </button>
         </c:if>
     <br><br><br>
