@@ -34,13 +34,8 @@ public class BoardDetail extends HttpServlet {
             // 게시글에 해당하는 편의점 카테고리 조회
             List<Board> store_category_list = boardService.boardStoreCategoryList(board_id);
             String store_category_name = "";
-            int i = 0;
-            if(store_category_list.size() == 5){
-                i=1;
-            }
-            while(i<store_category_list.size()){
+            for(int i = 0; i<store_category_list.size(); i++){
                 store_category_name += "#" + store_category_list.get(i).getStore_category_name() + " ";
-                i++;
             }
             System.out.println(store_category_name);
             board.setStore_category_name(store_category_name);

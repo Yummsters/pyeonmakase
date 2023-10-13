@@ -15,7 +15,7 @@ import java.io.IOException;
 public class Board_delete extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        // TODO : 해당 게시글 삭제 로직 작성
+
         try{
             BoardService boardService = new BoardServiceImpl();
             Integer board_id = Integer.parseInt(req.getParameter("board_id"));

@@ -66,10 +66,12 @@ public class Register extends HttpServlet {
 
             // 게시글 등록시 선택한 편의점 카테고리 전부 데이터 추가
             for(String s : store_category){
-                Board_Store boardStore = new Board_Store();
-                boardStore.setBoard_id(board.getBoard_id());
-                boardStore.setStore_category_id(Integer.parseInt(s));
-                boardService.board_store(boardStore);
+                if(Integer.parseInt(s) != 1){
+                    Board_Store boardStore = new Board_Store();
+                    boardStore.setBoard_id(board.getBoard_id());
+                    boardStore.setStore_category_id(Integer.parseInt(s));
+                    boardService.board_store(boardStore);
+                }
             }
             res.sendRedirect("main_list");
         }catch (Exception e){

@@ -1,6 +1,8 @@
 package controller;
 
 import bean.Member;
+import org.apache.ibatis.jdbc.Null;
+import org.json.simple.JSONObject;
 import service.BoardService;
 import service.BoardServiceImpl;
 
@@ -11,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @WebServlet("/recommand")
 public class Recommand extends HttpServlet {
@@ -30,9 +34,23 @@ public class Recommand extends HttpServlet {
         Integer board_id = Integer.parseInt(req.getParameter("board_id"));
         try{
             BoardService boardService = new BoardServiceImpl();
-            String response = boardService.boardRecommand(member.getNickname(), board_id);
-            res.getWriter().print(response);
-            System.out.println(response.toString());
+
+            // 반환 객체 생성 및 반환 값 넣기
+            Map<String, Object> response = new HashMap<>();
+
+            // 로그인 한 회원이 아닐 경우
+            if(member == null){
+                response.put("login", false);
+            } else{
+                // 로그인 한 회원일 경우
+                response = boardService.boardRecommand(member.getNickname(), board_id);
+                response.put("login", true);
+            }
+
+            // JSON 형식으로 응답 변경
+            JSONObject jsonObject = new JSONObject(response);
+            res.getWriter().print(jsonObject.toJSONString());
+            System.out.println(jsonObject.toJSONString());
         }catch (Exception e){
             e.printStackTrace();
             req.setAttribute("err", e.getMessage());

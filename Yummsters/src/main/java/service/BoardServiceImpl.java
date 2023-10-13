@@ -6,6 +6,7 @@ import java.util.List;
 import bean.*;
 import dao.BoardDAO;
 import dao.BoardDAOImpl;
+import org.apache.ibatis.reflection.wrapper.ObjectWrapper;
 import org.json.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -40,7 +41,7 @@ public class BoardServiceImpl implements BoardService{
 
     // 추천하기 기능 구현
     @Override
-    public String boardRecommand(String nickname, Integer board_id) throws Exception {
+    public Map<String, Object> boardRecommand(String nickname, Integer board_id) throws Exception {
         // Recommand 존재 여부 확인
         Map<String, Object> map = new HashMap<>();
         map.put("nickname", nickname);
@@ -71,9 +72,7 @@ public class BoardServiceImpl implements BoardService{
         Integer recommandCount = boardDao.selectRecommandCount(board_id);
         response.put("recommandCount", recommandCount);
 
-        // JSON 형식으로 응답 변경
-        JSONObject jsonObject = new JSONObject(response);
-        return jsonObject.toJSONString();
+        return response;
     }
 
     // 추천 여부 조회
@@ -90,7 +89,7 @@ public class BoardServiceImpl implements BoardService{
 
     // 찜하기 기능 구현
     @Override
-    public String boardWish(String nickname, Integer board_id) throws Exception {
+    public Map<String, Object> boardWish(String nickname, Integer board_id) throws Exception {
         // Wish 존재 여부 확인
         Map<String, Object> map = new HashMap<>();
         map.put("nickname", nickname);
@@ -117,9 +116,7 @@ public class BoardServiceImpl implements BoardService{
         }
         System.out.println("BoardServiceImpl wish_select : " + response.get("wish_select"));
 
-        // JSON 형식으로 응답 변경
-        JSONObject jsonObject = new JSONObject(response);
-        return jsonObject.toJSONString();
+       return response;
     }
 
     // 찜 여부 조회
@@ -150,7 +147,7 @@ public class BoardServiceImpl implements BoardService{
 
     // 댓글 등록 및 조회
     @Override
-    public String replyRegisterAndList(Reply reply) throws Exception {
+    public Map<String, Object> replyRegisterAndList(Reply reply) throws Exception {
         Map<String, Object> response = new HashMap<>();
         Integer board_id = reply.getBoard_id();
 
@@ -167,9 +164,7 @@ public class BoardServiceImpl implements BoardService{
         JSONArray jsonArray = new JSONArray(replyList);
         response.put("replyList", jsonArray);
 
-        // JSON 형식으로 응답 변경
-        JSONObject jsonObject = new JSONObject(response);
-        return jsonObject.toJSONString();
+        return response;
     }
 
     // 게시글에 따른 댓글 조회
