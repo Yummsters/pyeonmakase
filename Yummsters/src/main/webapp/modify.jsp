@@ -121,32 +121,114 @@
     <!-- TOAST UI Editor CDN URL(JS) -->
     <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
 
-    <!---->
-    <script>
-        $(function () {
-            $('#accordion').accordion({
-                // jQuery UI accordion 본문 축소기능 활성화
-                collapsible: true,
-                active: false
-            });
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            // 체크박스 전체선택, 해제
+            $("#all").click(
+                function () {
+                    // 전체 하위 체크박스들을 선택 또는 해제
+                    $("input[name='store']").prop("checked",
+                        $(this).prop("checked"));
+                });
+
+            // 하위 체크박스들 중 하나라도 선택 취소되면 "전체 선택" 체크박스도 선택 취소
+            $("input[name='store']").click(
+                function () {
+                    if ($("input[name='store']:checked").length === $("input[name='store']").length) {
+                        $("#all").prop("checked", true);
+                    } else {
+                        $("#all").prop("checked", false);
+                    }
+                });
+
+            // 하위 체크박스들을 모두 선택하면 "전체 선택" 체크박스도 선택
+            $("input[name='store']").change(
+                function () {
+                    if ($("input[name='store']:checked").length === $("input[name='store']").length - 1) {
+                        $("#all").prop("checked", true);
+                    }
+                }
+            );
         });
+    </script>
+
+    <script>
+        // 편의점 및 음식 카테고리를 한 개 이상 선택
+        function categoryCheck(form){
+            var arr_store = document.getElementsByName('store');
+            var arr_food = document.getElementsByName('food');
+
+            var store_num = 0;
+            var food_num = 0;
+
+            // 체크 개수 확인
+            for(var i=0; i<arr_store.length; i++){
+                console.log(arr_store[i].checked)
+                if(arr_store[i].checked){
+                    store_num++;
+                }
+            }
+
+            for(var i=0; i<arr_food.length; i++){
+                console.log(arr_food[i].checked)
+                if(arr_food[i].checked){
+                    food_num++;
+                }
+            }
+
+            if(!store_num && !food_num) {
+                alert('편의점 및 카테고리를 하나 이상 선택해주세요.')
+                return false;
+            }
+            if(!store_num) {
+                alert('편의점을 하나 이상 선택해주세요.')
+                return false;
+            }
+            if(!food_num){
+                alert('카테고리를 하나 이상 선택해주세요.')
+                return false;
+            }
+        }
+    </script>
+
+    <script>
+        // 음식 카테고리 한 개만 선택 가능
+        function foodCheckboxGroup(currentCheckbox) {
+            const checkboxes = document.getElementsByName("food");
+            let checkedCount = 0;
+
+            for (let i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].checked) {
+                    checkedCount++;
+                    if (checkboxes[i] !== currentCheckbox) {
+                        checkboxes[i].checked = false;
+                    }
+                }
+            }
+
+            if (checkedCount === 0) {
+                currentCheckbox.checked = true;
+            }
+        }
     </script>
 
 </head>
 
 <body>
 <jsp:include page="header.jsp"/>
-<form name="recipe_modify">
+
+<form name="recipe_modify" enctype="multipart/form-data" id="modifyForm" onsubmit="return categoryCheck(this)">
     <input type="hidden" name="board_id" value="${board.board_id}">
     <div class="title_picture">
         <!-- 제목 입력 및 취소/저장 버튼 -->
         <div class="register_title">
             레시피명 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input id="title" type="text" name=board_title value="${board.title}"> &nbsp;
-            <button class="red" type="submit" id="cancel" name="cancel" formaction="modify" formmethod="get">
+            <input id="title" type="text" name=board_title value="${board.title}" required="required"> &nbsp;
+            <button class="red" id="cancel" name="cancel" onclick="location.href='boardDetail?board_id=${board.board_id}'; return false;">
                 취소
             </button>
-            <button class="green" type="submit" id="modify" name="modify" formaction="modify" formmethod="post"> 수정
+            <button class="green" type="submit" id="modifyButton" name="modify" formaction="board_modify" formmethod="post" formenctype="multipart/form-data"> 수정
             </button>
         </div>
         <br>
@@ -163,10 +245,9 @@
     <div class="store_category">
         &nbsp;&nbsp; 편의점 선택 &nbsp&nbsp;&nbsp; &nbsp;&nbsp;
         <!-- TODO : 이미 선택되어 있는 편의점들 가져와서 체크표시 -->
-        <c:out value="${board.store_category_name}"/>
         <c:set var = "store_category_name" value="${board.store_category_name}"/>
         <c:choose>
-            <c:when test="${fn:contains(store_category_name,'all')}">
+            <c:when test="${fn:contains(store_category_name,'전체')}">
                 <input type="checkbox" name="store" id="all" value="1" checked>
             </c:when>
             <c:otherwise>
@@ -221,30 +302,30 @@
         &nbsp;&nbsp;카테고리 선택 &nbsp;&nbsp;
         <c:choose>
             <c:when test="${board.food_category_id == 1}">
-                <input type="checkbox" name="food" id="meal" value="1" checked>
+                <input type="checkbox" name="food" id="meal" value="1" checked onchange="foodCheckboxGroup(this)">
             </c:when>
             <c:otherwise>
-                <input type="checkbox" name="food" id="meal" value="1">
+                <input type="checkbox" name="food" id="meal" value="1" onchange="foodCheckboxGroup(this)">
             </c:otherwise>
         </c:choose>
         <label for="meal">식사류</label>
 
         <c:choose>
             <c:when test="${board.food_category_id == 2}">
-                <input type="checkbox" name="food" id="desert" value="2" checked>
+                <input type="checkbox" name="food" id="desert" value="2" onchange="foodCheckboxGroup(this)" checked>
             </c:when>
             <c:otherwise>
-                <input type="checkbox" name="food" id="desert" value="2">
+                <input type="checkbox" name="food" id="desert" value="2" onchange="foodCheckboxGroup(this)">
             </c:otherwise>
         </c:choose>
         <label for="desert">간식류</label>
 
         <c:choose>
             <c:when test="${board.food_category_id == 3}">
-                <input type="checkbox" name="food" id="drink" value="3" checked>
+                <input type="checkbox" name="food" id="drink" value="3" onchange="foodCheckboxGroup(this)" checked>
             </c:when>
             <c:otherwise>
-                <input type="checkbox" name="food" id="drink" value="3">
+                <input type="checkbox" name="food" id="drink" value="3" onchange="foodCheckboxGroup(this)">
             </c:otherwise>
         </c:choose>
         <label for="drink">음료</label>
@@ -253,6 +334,7 @@
 
     <!-- 토스트 에디터 넣기 -->
     <div id="content"></div>
+
     <!-- TUI 에디터 JS CDN -->
     <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
 
@@ -261,8 +343,7 @@
         const editor = new toastui.Editor({
             el: document.querySelector('#content'), // 에디터를 적용할 요소 (컨테이너)
             height: '500px',                        // 에디터 영역의 높이 값 (OOOpx || auto)
-            initialEditType: 'markdown',            // 최초로 보여줄 에디터 타입 (markdown || wysiwyg)
-            initialValue: '${board.content}',     // 내용의 초기 값으로, 반드시 마크다운 문자열 형태여야 함
+            initialEditType: 'wysiwyg',            // 최초로 보여줄 에디터 타입 (markdown || wysiwyg)
             previewStyle: 'vertical'//,                // 마크다운 ß프리뷰 스타일 (tab || vertical)
 
             // 이미지가 Base64 형식으로 입력되는 것 가로채주는 옵션
@@ -306,11 +387,24 @@
                 }
             }*/
         });
+        editor.setHTML('${board.content}');
+
         //editor.getHtml()을 사용해서 에디터 내용 수신
         //document.querySelector('#contents').insertAdjacentHTML('afterbegin', editor.getHTML());
         // 콘솔창에 표시(브라우저에서 content 값 확인)
         // console.log(editor.getHTML());
     </script>
+
+    <!-- 토스트 에디터에 작성한 내용 디비 저장을 위한 div -->
+    <input type="hidden" name="editorContent" id="editorContent" value="">
+    <script>
+        // 버튼 클릭시 토스트 에디터에 작성한 내용을 div에 저장해서 req로 보내기
+        document.getElementById("modifyButton").addEventListener("click", function (){
+            document.getElementById("editorContent").value = editor.getHTML();
+            document.getElementById("board_modify").submit();
+        });
+    </script>
+
 </form>
 <jsp:include page="footer.jsp"/>
 </body>

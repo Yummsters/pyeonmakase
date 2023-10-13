@@ -44,4 +44,6 @@ public interface BoardService {
     String deleteReply(Integer reply_id) throws Exception; // 댓글 삭제
 
     void deleteBoardAll(Integer board_id) throws Exception; // 게시글 삭제를 위한 모든 참조 삭제
+
+    void modifyBoard(Board board, Integer board_id) throws Exception; // 게시글 수정 및 편의점 카테고리 삭성
 }

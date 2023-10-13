@@ -1,5 +1,6 @@
 package service;
 
+import java.util.Arrays;
 import java.util.List;
 
 import bean.*;
@@ -143,6 +144,7 @@ public class BoardServiceImpl implements BoardService{
         boardDao.deleteWishBoard(board_id);
         boardDao.deleteRecommandBoard(board_id);
         boardDao.deleteBoard_store(board_id);
+        boardDao.deleteReplyBoard(board_id);
         boardDao.deleteBoardOne(board_id);
     }
 
@@ -206,6 +208,14 @@ public class BoardServiceImpl implements BoardService{
         JSONObject jsonObject = new JSONObject(response);
         return jsonObject.toJSONString();
     }
+
+    // 게시글 수정 및 편의점 카테고리 삭제
+    @Override
+    public void modifyBoard(Board board, Integer board_id) throws Exception {
+        boardDao.updateBoard(board);
+        boardDao.deleteBoard_store(board_id);
+    }
+
 
     // home에서 추천 Top10 게시글 조회
 	@Override

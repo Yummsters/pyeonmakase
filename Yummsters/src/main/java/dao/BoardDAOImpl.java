@@ -33,6 +33,7 @@ public class BoardDAOImpl implements BoardDAO{
     public Board selectBoardOne(Integer board_id) throws Exception {
         return sqlSession.selectOne("mapper.board.selectBoardOne", board_id);
     }
+
   // 최신 게시글 목록 조회
     @Override
     public List<Board> selectBoardList(List<String> storeNames) {
@@ -153,6 +154,13 @@ public class BoardDAOImpl implements BoardDAO{
         sqlSession.commit();
     }
 
+    // 삭제할 게시글의 댓글 삭제
+    @Override
+    public void deleteReplyBoard(Integer board_id) throws Exception {
+        sqlSession.delete("mapper.reply.deleteReplyBoard", board_id);
+        sqlSession.commit();
+    }
+
     // 게시글 삭제
     @Override
     public void deleteBoardOne(Integer board_id) throws Exception {
@@ -195,7 +203,14 @@ public class BoardDAOImpl implements BoardDAO{
         return sqlSession.selectOne("mapper.reply.selectReply", reply_id);
     }
 
-   // 키워드 검색
+    // 게시글 수정
+    @Override
+    public void updateBoard(Board board) throws Exception {
+        sqlSession.update("mapper.board.updateBoard", board);
+        sqlSession.commit();
+    }
+
+    // 키워드 검색
   // main-list by category(food, store) sj
 	@Override
 	public List<Board> selectBoardByCate(Integer foodId, List<String> storeNames) {
