@@ -1,6 +1,7 @@
 package service;
 
 import java.util.List;
+import java.util.Map;
 
 import bean.*;
 
@@ -23,11 +24,11 @@ public interface BoardService {
 
     Board boardDetail(Integer board_id) throws Exception; // 게시글 한 개 조회
 
-    String boardRecommand(String nickname, Integer board_id) throws Exception; // 추천하기 기능 구현 메서드
+    Map<String, Object> boardRecommand(String nickname, Integer board_id) throws Exception; // 추천하기 기능 구현 메서드
 
     Boolean isboardRecommand(String nickname, Integer board_id) throws Exception; // 추천 여부 조회 메서드
 
-    String boardWish(String nickname, Integer board_id) throws Exception; // 찜하기 기능 구현 메서드
+    Map<String, Object> boardWish(String nickname, Integer board_id) throws Exception; // 찜하기 기능 구현 메서드
 
     boolean isboardWish(String nickname, Integer board_id) throws Exception; // 찜 여부 조회 메서드
 
@@ -37,7 +38,7 @@ public interface BoardService {
  	
  	List<Board> boardListByCate(Integer foodId, List<String> storeNames); // 카테고리별 리스트
 
-    String replyRegisterAndList(Reply reply) throws Exception; // 댓글 등록 및 모든 댓글 조회
+    Map<String, Object> replyRegisterAndList(Reply reply) throws Exception; // 댓글 등록 및 모든 댓글 조회
 
     String selectReplyList(Integer board_id) throws Exception; // 게시글에 해당하는 댓글 출력
 

@@ -179,8 +179,14 @@
                     dataType : 'json',
                     data : {'board_id': '<c:out value="${board.board_id}"/>'},
                     success:function (response){
+                        console.log(response);
                         console.log(response.recommand_select);
                         console.log(response.recommandCount);
+                        if(response.login === false){
+                            alert("로그인 후 이용해 주세요.");
+                            location.href="login";
+                            return false;
+                        }
                         if(response.recommand_select){
                             $("#recommand_bnt").attr("src", "imgView?file=heart_fill.png")
                         }else{
@@ -200,13 +206,6 @@
         // 찜하기 버튼 클릭 시
         $(function(){
             $('#wish_bnt').click(function (){
-                var member = {
-                    member : '<c:out value="${member}"/>'
-                };
-                if(member.member == null){
-                    alert("로그인 후 이용하세요.")
-                    return false;
-                }
 
                 $.ajax({
                     url : 'wish',
@@ -214,7 +213,14 @@
                     dataType : 'json',
                     data : {'board_id': '<c:out value="${board.board_id}"/>'},
                     success:function (response){
+                        console.log(response);
                         console.log(response.wish_select);
+
+                        if(response.login === false){
+                            alert("로그인 후 이용해 주세요.");
+                            location.href="login";
+                            return false;
+                        }
                         if(response.wish_select){
                             $("#wish_bnt").attr("src", "imgView?file=star_fill.png")
                         }else{
@@ -266,9 +272,15 @@
                     dataType: 'json',
                     data : {'board_id': '<c:out value="${board.board_id}"/>', 'content': $("#reply_contents").val()},
                     success:function (response){
+                        console.log(response);
                         console.log(response.register);
                         console.log(response.replyList);
 
+                        if(response.login === false){
+                            alert("로그인 후 이용해 주세요.");
+                            location.href="login";
+                            return false;
+                        }
                         reloadReply(response.replyList);
                     },
                     error:function (request, status, error){

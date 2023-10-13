@@ -1,6 +1,7 @@
 package controller;
 
 import bean.Member;
+import org.json.simple.JSONObject;
 import service.BoardService;
 import service.BoardServiceImpl;
 
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @WebServlet("/wish")
 public class Wish extends HttpServlet {
@@ -29,15 +32,33 @@ public class Wish extends HttpServlet {
 
         // 찜하기 버튼 클릭 시 넘겨준 게시글 아이디를 이용해 어떤 게시글인지 판별 후 찜하기 여부 처리
         Integer board_id = Integer.parseInt(req.getParameter("board_id"));
+
+
+
         try{
             BoardService boardService = new BoardServiceImpl();
-            String response = boardService.boardWish(member.getNickname(), board_id);
-            res.getWriter().print(response);
-            System.out.println(response.toString());
+
+            // 반환 객체 생성 및 반환값 넣기
+            Map<String, Object> response = new HashMap<>();
+
+            // 로그인 한 회원이 아닐 경우
+            if(member == null){
+                response.put("login", false);
+            }else{
+                // 로그인 한 회원일 경우
+                response = boardService.boardWish(member.getNickname(), board_id);
+                response.put("login", true);
+            }
+
+            // JSON 형식으로 응답 변경
+            JSONObject jsonObject = new JSONObject(response);
+            res.getWriter().print(jsonObject.toJSONString());
+            System.out.println(jsonObject.toJSONString());
         }catch (Exception e){
             e.printStackTrace();
             req.setAttribute("err", e.getMessage());
             req.getRequestDispatcher("/error.jsp").forward(req, res);
         }
+
     }
 }
