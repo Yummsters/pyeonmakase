@@ -171,7 +171,7 @@
 		<div class="card-slider">
 			<c:forEach var="board" items="${boardListTop10}">
 				<div class="card">
-				<c:if test="${not empty boardListTop10}">
+				<c:if test="${not empty board.board_id}">
 					<input type="hidden" class="boardId" value="${board.board_id}">
 					<div class="recommend">♥ ${board.recommand_count}</div>
 					<div class="thumbnail">
@@ -197,7 +197,7 @@
 	<div class="card-box">
 		<c:forEach var="board" items="${boardList}">
 			<div class="card">
-				<c:if test="${not empty boardList}">
+				<c:if test="${not empty board}">
 					<input type="hidden" class="boardId" value="${board.board_id}">
 					<div class="recommend">♥ ${board.recommand_count}</div>
 					<div class="thumbnail">

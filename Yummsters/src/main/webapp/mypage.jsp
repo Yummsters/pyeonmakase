@@ -104,7 +104,7 @@ a {
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script type="text/javascript">
 	$(function() {
-		$('.card-slider').slick({
+		$('.card-slider').click({
 			slidesToShow : 5, // 한 번에 보여줄 개수
 			slidesToScroll : 5, // 다섯개씩 넘기며 보여주기 (총 2페이지로 구성)
 			autoplay : true,
@@ -190,7 +190,7 @@ a {
 	<div class="card-box">
 	<c:forEach var="board" items="${myList}">
 		<div class="card">
-		<c:if test="${not empty myList}">
+		<c:if test="${not empty board}">
 			<input type="hidden" class="boardId" value="${board.board_id}">
 			<div class="recommend">♥ ${board.recommand_count}</div>
 			<div class="thumbnail">
@@ -219,7 +219,7 @@ a {
 	<div class="card-box">
 		<c:forEach var="board" items="${wishList}">
 			<div class="card">
-			<c:if test="${not empty wishList}">
+			<c:if test="${not empty board}">
 				<input type="hidden" class="boardId" value="${board.board_id}">
 				<div class="recommend">♥ ${board.recommand_count}</div>
 				<div class="thumbnail">

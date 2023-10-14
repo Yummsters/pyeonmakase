@@ -219,7 +219,7 @@
         <div class="card-box">
             <c:forEach var="board" items="${wishList}">
 				<div class="card">
-				<c:if test="${not empty wishList}">
+				<c:if test="${not empty board}">
 					<input type="hidden" class="boardId" value="${board.board_id}">
 					<div class="recommend">♥ ${board.recommand_count}</div>
 					<div class="thumbnail">
