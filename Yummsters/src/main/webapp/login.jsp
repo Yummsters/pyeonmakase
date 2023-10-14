@@ -1,92 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<style>
-/* form 전체 틀 */
-.login-box {
-	border-radius: 20px;
-	border: 5px solid #EEC595;
-	background: #FFF;
-	width: 800px;
-	margin: 100px auto;
-	text-align: center;
-}
-
-/* form 제목 */
-.title {
-	font-size: 20px;
-	color: #524434;
-	font-weight: bold;
-	margin: 20px auto;
-}
-
-/* input 태그 */
-.login-form-wrap {
-	width: 80%;
-	padding: 13px 10px;
-	margin: 40px auto;
-	border-bottom: 3px solid #EEC595;
-	display: flex;
-	flex-flow: row wrap;
-	justify-content: space-between;
-	height: 26px;
-}
-
-.login-form-wrap>input {
-	border: none;
-	font-size: 17px;
-	outline: none;
-	height: 26px;
-	width: 100%;
-}
-
-/* input 태그 클릭 시 테두리 표시되지 않도록 설정 */
-.login-form>input:focus {
-	outline: none;
-}
-
-/* 로그인 버튼 */
-.login-form #loginBtn {
-	display: inline-block;
-	margin: 5px auto 30px auto;
-	width: 75%;
-	height: 35px;
-	border-radius: 5px;
-	border: 1px solid #EEC595;
-	background: #EEC595;
-	color: black;
-	text-align: center;
-	font-weight: bold;
-	font-size: 17px;
-}
-
-/* join 페이지 이동 */
-.join, .join>a {
-	text-align: right;
-	margin: 0 30px 30px 0;
-	color: #524434;
-}
-
-.join>a {
-	text-decoration: underline;
-}
-/* 소셜 로그인 */
-.social-title {
-	color: #524434;
-	text-align: center;
-	font-size: 17px;
-}
-
-.login-form>#loginErr {
-	margin-bottom: 10px;
-}
-</style>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+<link rel="stylesheet" href="<c:url value='/css/mainStyle.css'/>">
 
 <body>
 	<jsp:include page="header.jsp" />
 	<div class="login-box">
-		<div class="title">로그인</div>
+		<div class="mem-title">로그인</div>
 
 		<form class="login-form" method="post" action="login">
 			<div class="login-form-wrap">
