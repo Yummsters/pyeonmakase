@@ -5,22 +5,34 @@
 
 <configuration>
 	<typeAliases>
-		<typeAlias type="bean.Board" alias="Board"/>
-		<typeAlias type="bean.Member" alias="Member"/>
+		<typeAlias type="bean.Board" alias="Board" />
+		<typeAlias type="bean.Member" alias="Member" />
+		<typeAlias type="bean.Board_Store" alias="Board_Store" />
+		<typeAlias type="bean.Recommand" alias="Recommand" />
+		<typeAlias type="bean.Wish" alias="Wish" />
+		<typeAlias type="bean.Reply" alias="Reply" />
+
+
 	</typeAliases>
-	
+
 	<environments default="development">
 		<environment id="development">
-			<transactionManager type="JDBC"/>
-  			<dataSource type="JNDI">
-				<property name="data_source" value="java:comp/env/jdbc/MYDB2"/>
+			<transactionManager type="JDBC" />
+			<dataSource type="JNDI">
+				<property name="data_source"
+					value="java:comp/env/jdbc/kosta" />
 			</dataSource>
-   		</environment>
+		</environment>
 	</environments>
-	
+
 	<mappers>
-		<mapper resource="/mapper/Board.xml"/>
-		<mapper resource="/mapper/Member.xml"/>	
+		<mapper resource="/mapper/Board.xml" />
+		<mapper resource="/mapper/Member.xml" />
+		<mapper resource="/mapper/Board_Store.xml" />
+		<mapper resource="/mapper/Recommand.xml" />
+		<mapper resource="mapper/Wish.xml"/>
+		<mapper resource="mapper/Reply.xml"/>
+		
 	</mappers>
 
 </configuration>
