@@ -1,7 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+<link rel="stylesheet" href="<c:url value='/css/mainStyle.css'/>">
 
-<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <style>
     /* form 전체 틀 */
     .login-box {
@@ -85,33 +86,33 @@
 </style>
 
 <body>
-<jsp:include page="header.jsp"/>
-<div class="login-box">
-    <div class="title">로그인</div>
+	<jsp:include page="header.jsp" />
+	<div class="login-box">
+		<div class="mem-title">로그인</div>
 
-    <form class="login-form" method="post" action="login">
-        <div class="login-form-wrap">
-            <input type="text" id="id" name="id" required
-                   placeholder="아이디를 입력하세요"/>
-        </div>
-        <div class="login-form-wrap">
-            <input type="password" id="password" name="password" required
-                   placeholder="비밀번호를 입력하세요">
-        </div>
-        <div id="loginErr"></div>
-        <input type="submit" value="로그인" id="loginBtn">
+		<form class="login-form" method="post" action="login">
+			<div class="login-form-wrap">
+				<input type="text" id="id" name="id" required
+					placeholder="아이디를 입력하세요" />
+			</div>
+			<div class="login-form-wrap">
+				<input type="password" id="password" name="password" required
+					placeholder="비밀번호를 입력하세요">
+			</div>
+			<div id="loginErr"></div>
+			<input type="submit" value="로그인" id="loginBtn">
 
-        <div class="join">
-            회원이 아니신가요? <a href="signup">회원가입</a>
-        </div>
-    </form>
+			<div class="join">
+				회원이 아니신가요? <a href="signup">회원가입</a>
+			</div>
+		</form>
 
-    <div class="social-title">
-        <a href="javascript:kakaoLogin()"><img src="imgView?file=kakao_login.png" style="width: 300px"></a>
-    </div>
-</div>
+		<div class="social-title">
+			소셜 로그인 / 회원가입<br>추후 구현
+		</div>
+	</div>
 
-<jsp:include page="footer.jsp"/>
+	<jsp:include page="footer.jsp" />
 </body>
 <script>
     $(function () {

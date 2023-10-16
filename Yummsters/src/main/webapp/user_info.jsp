@@ -1,174 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<head>
-<style>
-/*박스*/
-.box {
-	border-radius: 30px;
-	margin: 0 auto;
-	width: 800px;
-	height: 800px;
-	background-color: #FFF8E2;
-	position: relative;
-}
-/*동그라미*/
-.c1 {
-	float: left;
-	margin: 10px;
-	background-color: #EEC595;
-	width: 30px;
-	height: 30px;
-	border-radius: 30px;
-}
-
-.c2 {
-	float: right;
-	margin: 10px;
-	background-color: #EEC595;
-	width: 30px;
-	height: 30px;
-	border-radius: 30px;
-}
-
-.c3 {
-	float: left;
-	margin: 10px;
-	background-color: #EEC595;
-	width: 30px;
-	height: 30px;
-	border-radius: 30px;
-	position: absolute;
-	bottom: 0;
-}
-
-.c4 {
-	position: absolute;
-	bottom: 0;
-	right: 0;
-	margin: 10px;
-	background-color: #EEC595;
-	width: 30px;
-	height: 30px;
-	border-radius: 30px;
-}
-/*회원정보*/
-.title {
-	position: absolute;
-	top: 10%;
-	left: 35%;
-	font-size: 70px;
-	line-height: 0px;
-	-webkit-text-stroke: 4px #524434;
-	color: white;
-}
-
-.img {
-	position: absolute;
-	top: 1%;
-	left: 17%;
-	width: 150px;
-	height: 120px;
-}
-
-.name1 {
-	position: absolute;
-	color: #524434;
-	font-size: 25px;
-	top: 35%;
-	left: 12%;
-}
-
-.name2 {
-	position: absolute;
-	color: #524434;
-	font-size: 25px;
-	top: 35%;
-	left: 20%;
-}
-
-.nickname1 {
-	position: absolute;
-	color: #524434;
-	font-size: 25px;
-	top: 45%;
-	left: 10%;
-}
-
-.nickname2 {
-	position: absolute;
-	color: #524434;
-	font-size: 25px;
-	width: 500px;
-	top: 45%;
-	left: 20%;
-}
-
-.email1 {
-	position: absolute;
-	color: #524434;
-	font-size: 25px;
-	top: 55%;
-	left: 10%;
-}
-
-.email2 {
-	position: absolute;
-	color: #524434;
-	font-size: 25px;
-	width: 500px;
-	top: 55%;
-	left: 20%;
-}
-/*버튼*/
-#user_btn1 {
-	position: absolute;
-	left: 15%;
-	bottom: 10%;
-	border: none;
-	width: 250px;
-	height: 30px;
-	font-size: 20px;
-	color: #524434;
-	background-color: #EEC595;
-	border-radius: 30px;
-}
-
-#user_btn2 {
-	position: absolute;
-	right: 15%;
-	bottom: 10%;
-	border: none;
-	width: 250px;
-	height: 30px;
-	font-size: 20px;
-	color: #524434;
-	background-color: #EEC595;
-	border-radius: 30px;
-}
-
-.popup {
-	display: none;
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	padding: 20px;
-	background-color: #fff;
-	border: 1px solid #ccc;
-	z-index: 1000;
-}
-</style>
-  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+<link rel="stylesheet" href="<c:url value='/css/mainStyle.css'/>">
 <script>
-   
 $(document).ready(function() {
     // 회원정보 수정 버튼 이벤트 핸들러
-    $('#user_btn1').click(function() {
+    $('#userRegister').click(function() {
         location.href = "user_modify.jsp";
     });
                
     // 회원탈퇴 버튼 이벤트 핸들러
-    $('#user_btn2').click(function() {
+    $('#userDelete').click(function() {
         var message = prompt("정말 탈퇴하시겠습니까? \n 탈퇴하시면 회원정보를 되돌릴 수 없습니다.", "비밀번호를 입력하세요.");
                
         if (message) {
@@ -201,11 +43,8 @@ $(document).ready(function() {
 });
 </script>
 
-
-
 </head>
 <body>
-	<!-- header  -->
 	<jsp:include page="header.jsp" />
 	<!-- 박스-->
 	<br>
@@ -218,7 +57,7 @@ $(document).ready(function() {
 
 		<!-- 회원정보-->
 		<img class="img" src="imgView?file=로고.png" alt="">
-		<div class="title">
+		<div class="user-title">
 			<b>회원정보</b>
 		</div>
 
@@ -236,15 +75,12 @@ $(document).ready(function() {
 		<div class="email2">${member.email }</div>
 
       <!-- 버튼-->
-      <p><button id="user_btn1">회원정보 수정</button></p>
+      <p><button id="userRegister">회원정보 수정</button></p>
 
-      <p><button id="user_btn2">회원탈퇴</button></p>
+      <p><button id="userDelete">회원탈퇴</button></p>
 
 	</div>
 	<br>
-
-
-
 
 	<jsp:include page="footer.jsp" />
 </body>
