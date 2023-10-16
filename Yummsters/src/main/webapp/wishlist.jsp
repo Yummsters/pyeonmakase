@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="<c:url value='/css/mainStyle.css'/>">
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script type="text/javascript">
-       
+$(function() {  
             //-------------------------------------------------------
             // 게시글 더보기 기능
             // 초기에는 처음 12개 카드만 보이도록 설정
@@ -52,7 +52,8 @@
             $(".card").click(function() {
                 var boardId = $(this).find(".boardId").val();
                 window.location.href = "boardDetail?board_id=" + boardId;
-             })
+             });
+});
         
     </script>
 

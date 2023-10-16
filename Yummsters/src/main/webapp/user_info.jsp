@@ -15,10 +15,10 @@ $(document).ready(function() {
             // 모달 배경 표시
             $('body').append(modalBackground);
             var modal = $('<div class="modal">' +
-                    '<p>정말 탈퇴하시겠습니까? <br> 탈퇴하시면 회원 정보를 되돌릴 수 없습니다.</p>' +
-                    '<input type="password" id="passwordInput" placeholder="비밀번호 입력">' +
-                    '<br><button id="confirmButton2">취소</button>' +'<button id="confirmButton1">확인</button>' +
-                    '</div>');
+            	    '<p>정말 탈퇴하시겠습니까? <br> 탈퇴하시면 회원 정보를 되돌릴 수 없습니다.</p>' +
+            	    '<input type="password" id="passwordInput" placeholder="비밀번호 입력">' +
+            	    '<br><br><button id="confirmButton2">취소</button>' + '<button id="confirmButton1">확인</button>' +
+            	    '</div>');
             $('body').append(modal);
             // 모달 표시
             modal.show();
