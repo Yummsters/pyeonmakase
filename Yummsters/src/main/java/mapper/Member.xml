@@ -82,4 +82,26 @@
     ]]>
 	</update>
 	
+	<!-- 아이디 찾기 -->
+   <select id="findId" parameterType="Map" resultType="String">
+        <![CDATA[
+            select member_id 
+            from member 
+            where member_name =#{member_name} 
+            and nickname=#{nickname} 
+            and email=#{email}
+        ]]>
+   </select>
+   <!-- 비밀번호 찾기 -->
+   <select id="findPw" parameterType="Map" resultType="String">
+        <![CDATA[
+            select member_pw 
+            from member 
+            where member_name =#{member_name} 
+            and nickname=#{nickname} 
+            and email=#{email}
+            and member_id=#{member_id}
+        ]]>
+   </select>
+	
 </mapper>
