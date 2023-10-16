@@ -2,9 +2,11 @@
 <%@ taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 <link rel="stylesheet" href="<c:url value='/css/mainStyle.css'/>">
+
 <!-- 네이버로그인 -->
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
 <body>
 	<jsp:include page="header.jsp" />
 	<div class="login-box">
@@ -47,40 +49,107 @@
   
 
 <script>
-$(function() {
-    $("#loginBtn").click(function(e) {
-        e.preventDefault(); // 폼 제출 방지
-        var id = $("#id").val();
-        var password = $("#password").val();
-        
-    	$.ajax({
-    		url: "login", // 서블릿 주소
-            type: "post", // method 타입
-            data: { // 서버로 보낼 데이터
-				id: id,
-				password: password
-            },
-            success: function(res) {
-            	if(res === "fail") {
-            		console.log("로그인 실패");
-	        		$("#loginErr").text("아이디 또는 비밀번호를 잘못 입력했습니다").css("color", "red");
-            	} else {
-            		$(".loginForm").submit();
-            		console.log("로그인 성공");
-            		history.pushState(null, null, "./");
-            		window.location.reload();
-            	}
-			},
-            error: function(err) {
-            	console.log(err);
-            }
-    	})
+    $(function () {
+        $("#loginBtn").click(function (e) {
+            e.preventDefault(); // 폼 제출 방지
+            var id = $("#id").val();
+            var password = $("#password").val();
+
+            $.ajax({
+                url: "login", // 서블릿 주소
+                type: "post", // method 타입
+                data: { // 서버로 보낼 데이터
+                    id: id,
+                    password: password
+                },
+                success: function (res) {
+                    if (res === "fail") {
+                        console.log("로그인 실패");
+                        $("#loginErr").text("아이디 또는 비밀번호를 잘못 입력했습니다").css("color", "red");
+                    } else {
+                        $(".loginForm").submit();
+                        console.log("로그인 성공");
+                        history.pushState(null, null, "./");
+                        window.location.reload();
+                    }
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+        })
+
+        // 폼 제출 전 안내 초기화
+        $(".login-form").on("input", function () {
+            $("#loginErr").text("");
+        });
     })
-    
-    // 폼 제출 전 안내 초기화
-    $(".login-form").on("input", function() {
-        $("#loginErr").text("");
-    });
-})
 </script>
-</html>
+
+
+<script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+
+<script>
+    Kakao.init('${kakao.javascript.key}');
+
+    function kakaoLogin() {
+        Kakao.Auth.login({
+            success: function () {
+                Kakao.API.request({
+                    url: '/v2/user/me',
+                    success: function (response2) {
+                        console.log(response2);
+                        var email = response2.kakao_account.email;
+                        var nickname = response2.kakao_account.profile.nickname;
+
+                        $.ajax({
+                            url: 'kakaoLogin',
+                            type: 'post',
+                            data: {'email': email, 'nickname': nickname},
+                            dataType: 'json',
+                            success: function (response) {
+                                console.log("로그인 성공")
+                                alert("로그인 성공");
+                                if (response.signup === true) {
+                                    alert("회원가입 후 로그인이 완료되었습니다.");
+                                    location.href = "home";
+                                    return false;
+                                }
+                                if (response.login === true) {
+                                    alert("로그인 완료되었습니다.");
+                                    location.href = "home";
+                                    return false;
+                                }
+                            },
+                            error: function (request, status, error, response) {
+								console.log(response);
+                                console.log(error);
+                                alert("code: " + request.status + " message: " + request.responseText + " error: " + error);
+                            }
+                        })
+                    },
+                    fail: function (error) {
+                        alert(JSON.stringify(error))
+                    },
+                })
+            },
+            fail: function (error) {
+                alert(JSON.stringify(error))
+            },
+        })
+
+        function kakaoDelete() {
+            Kakao.API.request({
+                url: '/v1/user/unlink'
+            }).then(function(response){
+                console.log(response);
+            })
+                .catch(function (error){
+                    console.log(error);
+                })
+
+        }
+    }
+</script>
+
