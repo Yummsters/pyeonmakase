@@ -250,7 +250,7 @@
         <!-- 제목, 조회수, 추천수 -->
         <div class="content_title">
             <div class="title_store" style="display: inline-block;">
-                <div class="title">${board.title} </div> <!-- TODO css 깨지는 부분 수정 필요 -->
+                <div class="title">${board.title} </div>
                 <div class="store"> 편의점 : ${board.store_category_name}</div>
             </div>
             <table class="recommand_date">
@@ -260,7 +260,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>${board.regdate} &nbsp; ${board.nickname}</td> <!-- TODO 날짜 형식 수정 필요 -->
+                    <td>${date} &nbsp; ${board.nickname}</td>
                 </tr>
             </table>
         </div>

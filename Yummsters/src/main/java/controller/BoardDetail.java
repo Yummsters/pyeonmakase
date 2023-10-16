@@ -42,6 +42,8 @@ public class BoardDetail extends HttpServlet {
             board.setStore_category_name(store_category_name);
 
             req.setAttribute("board", board);
+            req.setAttribute("date", String.valueOf(board.getRegdate()).replace("T", " "));
+
             // 로그인 정보를 통해 디테일 페이지에 로그인한 회원에 따른 정보 변경(추천, 찜)
             HttpSession session = req.getSession();
             Member member = (Member)session.getAttribute("member");

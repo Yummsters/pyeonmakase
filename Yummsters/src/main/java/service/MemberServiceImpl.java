@@ -25,7 +25,7 @@ public class MemberServiceImpl implements MemberService{
 			return member;
 		}
 	}
-	
+
 	// 로그인
 	@Override
 	public Member login(String member_id, String member_pw) throws Exception {
