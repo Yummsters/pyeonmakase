@@ -3,87 +3,9 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 <link rel="stylesheet" href="<c:url value='/css/mainStyle.css'/>">
 
-<style>
-    /* form 전체 틀 */
-    .login-box {
-        border-radius: 20px;
-        border: 5px solid #EEC595;
-        background: #FFF;
-        width: 800px;
-        margin: 100px auto;
-        text-align: center;
-    }
-
-    /* form 제목 */
-    .title {
-        font-size: 20px;
-        color: #524434;
-        font-weight: bold;
-        margin: 20px auto;
-    }
-
-    /* input 태그 */
-    .login-form-wrap {
-        width: 80%;
-        padding: 13px 10px;
-        margin: 40px auto;
-        border-bottom: 3px solid #EEC595;
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: space-between;
-        height: 26px;
-    }
-
-    .login-form-wrap > input {
-        border: none;
-        font-size: 17px;
-        outline: none;
-        height: 26px;
-        width: 100%;
-    }
-
-    /* input 태그 클릭 시 테두리 표시되지 않도록 설정 */
-    .login-form > input:focus {
-        outline: none;
-    }
-
-    /* 로그인 버튼 */
-    .login-form #loginBtn {
-        display: inline-block;
-        margin: 5px auto 30px auto;
-        width: 75%;
-        height: 35px;
-        border-radius: 5px;
-        border: 1px solid #EEC595;
-        background: #EEC595;
-        color: black;
-        text-align: center;
-        font-weight: bold;
-        font-size: 17px;
-    }
-
-    /* join 페이지 이동 */
-    .join, .join > a {
-        text-align: right;
-        margin: 0 30px 30px 0;
-        color: #524434;
-    }
-
-    .join > a {
-        text-decoration: underline;
-    }
-
-    /* 소셜 로그인 */
-    .social-title {
-        color: #524434;
-        text-align: center;
-        font-size: 17px;
-    }
-
-    .login-form > #loginErr {
-        margin-bottom: 10px;
-    }
-</style>
+<!-- 네이버로그인 -->
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 
 <body>
 	<jsp:include page="header.jsp" />
@@ -108,12 +30,24 @@
 		</form>
 
 		<div class="social-title">
-			소셜 로그인 / 회원가입<br>추후 구현
+		  	<div id="naver_id_login"></div> <!-- 네이버 -->
 		</div>
 	</div>
 
 	<jsp:include page="footer.jsp" />
 </body>
+
+  <script type="text/javascript">
+  	var naver_id_login = new naver_id_login("{YOUR_CLIENT_ID}", "http://localhost:8090/yum/naverLogin.jsp");
+  	var state = naver_id_login.getUniqState();
+  	naver_id_login.setButton("green", 2,40);
+  	naver_id_login.setDomain("login.jsp"); // 처음엔 안됐는데 왜 지금은 되는거임?
+  	naver_id_login.setState(state);
+  	naver_id_login.setPopup(); // 팝업형태로 callbackURL 여는 것
+  	naver_id_login.init_naver_id_login();
+  </script>
+  
+
 <script>
     $(function () {
         $("#loginBtn").click(function (e) {
