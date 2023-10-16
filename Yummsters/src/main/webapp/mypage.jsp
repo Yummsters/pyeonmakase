@@ -95,7 +95,6 @@
 	</c:forEach>
 	</div>
 						
-
 	<!-- wishlist  -->
 	<div class="title-box">
 		<div class="list-title">찜한 레시피</div>

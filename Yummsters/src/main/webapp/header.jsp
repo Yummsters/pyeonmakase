@@ -13,12 +13,11 @@ $(function() {
    	});
 });
 </script>
-
 <div class="container">
     <div class="header">
         <div class="logo">
-            <img src="imgView?file=market.png" alt="My Image">
-            <a href="./" style="display: inline;"><span>편마카세</span></a>
+            <img src="imgView?file=market.png" alt="My Image" id="market">
+            <a href="./" style="display: inline;"><img src="imgView?file=편마카세 로고.png" alt="My Image" id="편마카세"></a>
         </div>
         <div class="search">
             <input type="text" id="search" name="search" placeholder="레시피 검색">

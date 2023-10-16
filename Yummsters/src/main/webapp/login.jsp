@@ -135,18 +135,6 @@
                 alert(JSON.stringify(error))
             },
         })
-
-        function kakaoDelete() {
-            Kakao.API.request({
-                url: '/v1/user/unlink'
-            }).then(function(response){
-                console.log(response);
-            })
-                .catch(function (error){
-                    console.log(error);
-                })
-
-        }
     }
 </script>
 

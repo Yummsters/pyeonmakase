@@ -186,8 +186,14 @@ public class BoardDAOImpl implements BoardDAO{
 
     // 댓글 전체 조회
     @Override
-    public List<Reply> selectReplyList(Integer board_id) throws Exception {
-        return sqlSession.selectList("mapper.reply.selectReplyList", board_id);
+    public List<Reply> selectReplyList(Integer board_id, Integer curPage) throws Exception {
+        Map<String, Integer> params = new HashMap<>();
+        params.put("board_id", board_id);
+        Integer count = 5;
+        //count는 5로 고정, curPage는 1부터 시작, offset은 건너뛰기니까 처음에는 0으로 시작해야 함
+        params.put("offset", (curPage-1)*count);
+        params.put("count", count);
+    	return sqlSession.selectList("mapper.reply.selectReplyList", params);
     }
 
     // 댓글 삭제
@@ -218,5 +224,10 @@ public class BoardDAOImpl implements BoardDAO{
 	    params.put("foodId", foodId);
 	    params.put("storeNames", storeNames);
 	    return sqlSession.selectList("mapper.board.selectBoardByCate", params);
+	}
+
+	@Override
+	public Integer selectReplyCount(Integer board_id) throws Exception {
+		return sqlSession.selectOne("mapper.reply.selectReplyCount", board_id);
 	}
 }

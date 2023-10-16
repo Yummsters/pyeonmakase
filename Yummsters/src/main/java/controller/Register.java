@@ -73,7 +73,7 @@ public class Register extends HttpServlet {
                     boardService.board_store(boardStore);
                 }
             }
-            res.sendRedirect("main_list");
+            res.sendRedirect("mainlist");
         }catch (Exception e){
             // TODO : 에러가 날 경우 어떻게 처리할지 논의 필요
             e.printStackTrace();

@@ -88,5 +88,14 @@ public class MemberServiceImpl implements MemberService{
 	public void updateMember(Map<String, Object> paramMap) throws Exception {
 	    memberDAO.updateMember(paramMap);
 	}
-	
+	//아이디 찾기
+	   @Override
+	   public String findId(Map<String, Object> paramMap) throws Exception {
+	      return memberDAO.findId(paramMap);
+	   }
+	 //아이디 찾기
+	   @Override
+	   public String findPw(Map<String, Object> paramMap) throws Exception {
+	      return memberDAO.findPw(paramMap);
+	   }
 }

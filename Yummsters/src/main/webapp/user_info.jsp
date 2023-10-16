@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core"  %>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="<c:url value='/css/mainStyle.css'/>">
 <script>
 $(document).ready(function() {
@@ -15,10 +15,10 @@ $(document).ready(function() {
             // 모달 배경 표시
             $('body').append(modalBackground);
             var modal = $('<div class="modal">' +
-                    '<p>정말 탈퇴하시겠습니까? <br> 탈퇴하시면 회원 정보를 되돌릴 수 없습니다.</p>' +
-                    '<input type="password" id="passwordInput" placeholder="비밀번호 입력">' +
-                    '<br><button id="confirmButton2">취소</button>' +'<button id="confirmButton1">확인</button>' +
-                    '</div>');
+            	    '<p>정말 탈퇴하시겠습니까? <br> 탈퇴하시면 회원 정보를 되돌릴 수 없습니다.</p>' +
+            	    '<input type="password" id="passwordInput" placeholder="비밀번호 입력">' +
+            	    '<br><br><button id="confirmButton2">취소</button>' + '<button id="confirmButton1">확인</button>' +
+            	    '</div>');
             $('body').append(modal);
             // 모달 표시
             modal.show();
@@ -69,7 +69,8 @@ $(document).ready(function() {
           
        });
    });
-    $('#socialDelete').click(function() {
+
+    $('#naverDelete').click(function() {
         var message = confirm("정말 탈퇴하시겠습니까? \n 탈퇴하시면 회원정보를 되돌릴 수 없습니다.");
 	    $.ajax({
 	        url: "naverDelete",
@@ -99,8 +100,46 @@ $(document).ready(function() {
     });
 });
 </script>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script>
+	// 탈퇴 시 디비에서 정보 삭제하는 로직 추가 필요
+	Kakao.init('${kakao.javascript.key}');
 
-</head>
+	document.addEventListener("DOMContentLoaded", function () {
+		document.getElementById("kakaoDeleteLink").addEventListener("click", function (event) {
+			event.preventDefault(); // 기본 링크 동작 방지
+
+			var nickname = this.getAttribute('data-member-id');
+
+			Kakao.API.request({
+				url: '/v1/user/unlink'
+			}).then(function (response) {
+				console.log(response);
+				$.ajax({
+					url: 'memberdelete',
+					type: 'POST',
+					data: {
+						nickname: nickname,
+						password: "kakaoLogin"
+					},
+					success: function(res) {
+						alert("회원 탈퇴가 완료되었습니다.");
+					},
+					error: function() {
+						alert("서버 오류가 발생했습니다.");
+					}
+				});
+				location.href = "home";
+
+			}).catch(function (error) {
+				console.log(error);
+			});
+		});
+	});
+</script>
+
 <body>
 	<jsp:include page="header.jsp" />
 	<!-- 박스-->
@@ -132,12 +171,21 @@ $(document).ready(function() {
 		<div class="email2">${member.email }</div>
 
       <!-- 버튼-->
-      <p><button id="userRegister">회원정보 수정</button></p>
+		<c:if test='${member.member_pw ne "kakaoLogin" && member.member_pw ne "naverLogin"}'>
+			<p><button id="userRegister">회원정보 수정</button></p>
+		</c:if>
 
-      <p><button id="userDelete">회원탈퇴</button></p>
-      
-      <p><button id="socialDelete">소셜로그인 회원탈퇴</button></p>
-
+		<c:choose>
+			<c:when test='${member.member_pw eq "kakaoLogin"}'>
+				<p><button id="kakaoDeleteLink" href="#" > 카카오 회원탈퇴</button></p>
+			</c:when>
+			<c:when test='${member.member_pw eq "naverLogin"}'>
+				<p><button id="naverDelete"> 네이버 회원탈퇴</button></p>
+			</c:when>
+			<c:otherwise>
+				<p><button id="userDelete"> 회원탈퇴 </button></p>
+			</c:otherwise>
+		</c:choose>
 	</div>
 	<br>
 

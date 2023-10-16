@@ -1,10 +1,7 @@
 package controller;
 
-import bean.Board;
-import bean.Member;
-import bean.Reply;
-import service.BoardService;
-import service.BoardServiceImpl;
+import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,8 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.util.List;
+
+import bean.Board;
+import bean.Member;
+import service.BoardService;
+import service.BoardServiceImpl;
+import util.Pager;
 
 @WebServlet("/boardDetail")
 public class BoardDetail extends HttpServlet {
@@ -41,6 +42,8 @@ public class BoardDetail extends HttpServlet {
             board.setStore_category_name(store_category_name);
 
             req.setAttribute("board", board);
+            req.setAttribute("date", String.valueOf(board.getRegdate()).replace("T", " "));
+
             // 로그인 정보를 통해 디테일 페이지에 로그인한 회원에 따른 정보 변경(추천, 찜)
             HttpSession session = req.getSession();
             Member member = (Member)session.getAttribute("member");
@@ -54,6 +57,14 @@ public class BoardDetail extends HttpServlet {
                     req.setAttribute("wish_select", false);
                 }
             }
+            //혜리 추가
+            Integer count = boardService.selectReplyCount(board_id);
+            Integer curPage = 1;
+            Pager page = new Pager(count, curPage);
+            Integer totPage = page.getTotPage();
+            
+            req.setAttribute("board_id", board_id);
+			req.setAttribute("totPage", totPage );
             req.getRequestDispatcher("detail.jsp").forward(req, res);
         } catch (Exception e) {
             e.printStackTrace();

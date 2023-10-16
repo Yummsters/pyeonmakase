@@ -3,7 +3,12 @@ package service;
 import java.util.List;
 import java.util.Map;
 
-import bean.*;
+import org.apache.ibatis.annotations.Param;
+
+import bean.Board;
+import bean.Board_Store;
+import bean.Member;
+import bean.Reply;
 
 public interface BoardService {    
     // 선진 작성 부분
@@ -40,11 +45,13 @@ public interface BoardService {
 
     Map<String, Object> replyRegisterAndList(Reply reply) throws Exception; // 댓글 등록 및 모든 댓글 조회
 
-    String selectReplyList(Integer board_id) throws Exception; // 게시글에 해당하는 댓글 출력
+    List<Reply> selectReplyList(@Param("board_id") Integer board_id, @Param("curPage") Integer curPage) throws Exception; // 게시글에 해당하는 댓글 출력
 
     String deleteReply(Integer reply_id) throws Exception; // 댓글 삭제
 
     void deleteBoardAll(Integer board_id) throws Exception; // 게시글 삭제를 위한 모든 참조 삭제
 
     void modifyBoard(Board board, Integer board_id) throws Exception; // 게시글 수정 및 편의점 카테고리 삭성
+
+    Integer selectReplyCount(Integer board_id) throws Exception; // 댓글 개수 count
 }

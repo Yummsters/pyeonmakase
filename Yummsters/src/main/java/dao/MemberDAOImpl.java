@@ -72,5 +72,16 @@ public class MemberDAOImpl implements MemberDAO {
 	public void updateMember(Map<String, Object> paramMap) throws Exception {
 		sqlSession.update("mapper.member.updateMember", paramMap);
 		sqlSession.commit();
+	
 	}
+	// 아이디찾기
+	   @Override
+	   public String findId(Map<String, Object> paramMap) throws Exception {
+	       return sqlSession.selectOne("mapper.member.findId", paramMap);
+	   }
+	// 비밀번호찾기
+	   @Override
+	   public String findPw(Map<String, Object> paramMap) throws Exception {
+	       return sqlSession.selectOne("mapper.member.findPw", paramMap);
+	   }
 }

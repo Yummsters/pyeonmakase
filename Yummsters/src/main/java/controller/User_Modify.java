@@ -39,7 +39,7 @@ public class User_Modify extends HttpServlet {
 			throws ServletException, IOException {
 		 HttpSession session = request.getSession();
 	        if (session.getAttribute("member") == null) {
-	            request.getRequestDispatcher("signup.jsp").forward(request, response);
+	            request.getRequestDispatcher("login.jsp").forward(request, response);
 	        } else {
 	            request.getRequestDispatcher("user_modify.jsp").forward(request, response);
 	        }
