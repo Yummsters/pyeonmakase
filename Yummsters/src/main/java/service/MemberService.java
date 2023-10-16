@@ -8,6 +8,9 @@ public interface MemberService {
 
 	// 회원가입
 	void signup(Member member) throws Exception;
+
+	// 회원 여부 확인
+	Member existMember(String member_id, String member_pw) throws Exception;
 	
 	// 로그인
 	Member login(String member_id, String member_pw) throws Exception;

@@ -22,6 +22,13 @@ public class MemberServiceImpl implements MemberService{
 		memberDAO.insertMember(member);
 	}
 
+	// 회원 여부 확인
+	@Override
+	public Member existMember(String member_id, String member_pw) throws Exception {
+		Member member = memberDAO.selectId(member_id);
+		return member;
+	}
+
 	// 로그인
 	@Override
 	public Member login(String member_id, String member_pw) throws Exception {
