@@ -2,7 +2,9 @@
 <%@ taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 <link rel="stylesheet" href="<c:url value='/css/mainStyle.css'/>">
-
+<!-- 네이버로그인 -->
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <body>
 	<jsp:include page="header.jsp" />
 	<div class="login-box">
@@ -26,12 +28,24 @@
 		</form>
 
 		<div class="social-title">
-			소셜 로그인 / 회원가입<br>추후 구현
+		  	<div id="naver_id_login"></div> <!-- 네이버 -->
 		</div>
 	</div>
 
 	<jsp:include page="footer.jsp" />
 </body>
+
+  <script type="text/javascript">
+  	var naver_id_login = new naver_id_login("{YOUR_CLIENT_ID}", "http://localhost:8090/yum/naverLogin.jsp");
+  	var state = naver_id_login.getUniqState();
+  	naver_id_login.setButton("green", 2,40);
+  	naver_id_login.setDomain("login.jsp"); // 처음엔 안됐는데 왜 지금은 되는거임?
+  	naver_id_login.setState(state);
+  	naver_id_login.setPopup(); // 팝업형태로 callbackURL 여는 것
+  	naver_id_login.init_naver_id_login();
+  </script>
+  
+
 <script>
 $(function() {
     $("#loginBtn").click(function(e) {

@@ -11,7 +11,6 @@ $(document).ready(function() {
                
  // 회원탈퇴 버튼 이벤트 핸들러
     $('#userDelete').click(function() {
-       
             var modalBackground = $('<div class="modal-background"></div>');
             // 모달 배경 표시
             $('body').append(modalBackground);
@@ -70,6 +69,34 @@ $(document).ready(function() {
           
        });
    });
+    $('#socialDelete').click(function() {
+        var message = confirm("정말 탈퇴하시겠습니까? \n 탈퇴하시면 회원정보를 되돌릴 수 없습니다.");
+	    $.ajax({
+	        url: "naverDelete",
+	        type: "POST",
+	        success: function (response) {
+	            alert("탈퇴통신성공");
+                $.ajax({
+                    url: 'memberdelete',
+                    type: 'POST',
+                    data: {
+                        nickname: "${sessionScope.member.nickname}",
+                        password: "${sessionScope.member.member_pw}"
+                    },
+                    success: function(response) {
+                           alert("회원 탈퇴가 완료되었습니다.");
+                    },
+                    error: function() {
+                       alert("서버 오류가 발생했습니다.");
+                    }
+                });
+	            location.href = "home";
+	        },
+	        error: function (res) {
+	            alert("탈퇴통신실패");
+	        }
+	    });
+    });
 });
 </script>
 
@@ -108,6 +135,8 @@ $(document).ready(function() {
       <p><button id="userRegister">회원정보 수정</button></p>
 
       <p><button id="userDelete">회원탈퇴</button></p>
+      
+      <p><button id="socialDelete">소셜로그인 회원탈퇴</button></p>
 
 	</div>
 	<br>
