@@ -88,4 +88,5 @@ public class MemberServiceImpl implements MemberService{
 	public void updateMember(Map<String, Object> paramMap) throws Exception {
 	    memberDAO.updateMember(paramMap);
 	}
+	
 }

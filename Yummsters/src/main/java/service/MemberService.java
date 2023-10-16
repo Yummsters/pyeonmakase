@@ -38,5 +38,5 @@ public interface MemberService {
 
 	//회원정보수정
 		void updateMember(Map<String, Object> paramMap) throws Exception;
-
+	
 }

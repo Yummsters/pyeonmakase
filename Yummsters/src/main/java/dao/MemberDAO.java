@@ -27,5 +27,5 @@ public interface MemberDAO {
 
 	//회원정보 수정	
 	    void updateMember(Map<String, Object> paramMap) throws Exception;
-	    
+	  
 }
