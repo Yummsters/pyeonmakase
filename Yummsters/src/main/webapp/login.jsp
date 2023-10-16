@@ -24,25 +24,26 @@
 			<div id="loginErr"></div>
 			<input type="submit" value="로그인" id="loginBtn">
 
-			<div class="join">
-				회원이 아니신가요? <a href="signup">회원가입</a>
+			<div class="loginSub">
+				<div class="join">회원이 아니신가요? <a href="signup">회원가입</a></div>
+				<div class="findIdPw"><a href="findmemberid">아이디</a>/<a href="findmemberpw">비밀번호</a>를 잊으셨나요?</div>
 			</div>
 		</form>
 
-		<div class="social-title">
-		  	<div id="naver_id_login"></div> <!-- 네이버 -->
-			<a href="javascript:kakaoLogin()"><img src="imgView?file=kakao_login.png" style="width: 200px"></a>
+		<div class="social-title">소셜 로그인/회원가입</div>
+		<div class="social-box">
+			 <div id="naver_id_login"></div> <!-- 네이버 -->
+			 <a href="javascript:kakaoLogin()"><img src="imgView?file=kakao_logo.png" id="kakaoLogo"></a> <!-- 카카오 -->
 		</div>
 	</div>
-
 	<jsp:include page="footer.jsp" />
 </body>
 
   <script type="text/javascript">
-  	var naver_id_login = new naver_id_login("{YOUR_CLIENT_ID}", "http://localhost:8090/yum/naverLogin.jsp");
+  	var naver_id_login = new naver_id_login("${client_id} ", "http://localhost:8090/naverLogin.jsp");
   	var state = naver_id_login.getUniqState();
-  	naver_id_login.setButton("green", 2,40);
-  	naver_id_login.setDomain("login.jsp"); // 처음엔 안됐는데 왜 지금은 되는거임?
+  	naver_id_login.setButton("green", 1, 50);
+  	naver_id_login.setDomain("login.jsp"); 
   	naver_id_login.setState(state);
   	naver_id_login.setPopup(); // 팝업형태로 callbackURL 여는 것
   	naver_id_login.init_naver_id_login();
@@ -59,10 +60,7 @@
             $.ajax({
                 url: "login", // 서블릿 주소
                 type: "post", // method 타입
-                data: { // 서버로 보낼 데이터
-                    id: id,
-                    password: password
-                },
+                data: { id: id, password: password}, // 서버로 보낼 데이터
                 success: function (res) {
                     if (res === "fail") {
                         console.log("로그인 실패");
@@ -79,7 +77,6 @@
                 }
             })
         })
-
         // 폼 제출 전 안내 초기화
         $(".login-form").on("input", function () {
             $("#loginErr").text("");

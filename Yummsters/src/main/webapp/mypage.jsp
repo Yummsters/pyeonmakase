@@ -4,8 +4,6 @@
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script type="text/javascript">
 	$(function() {
-		
-
 		// 게시글 더보기 기능
 		// 초기에는 처음 12개 카드만 보이도록 설정
 		$(".card-box > .card").slice(12).hide();
@@ -54,14 +52,12 @@
 
 		// 게시글 디테일(boardDetail) 이동
 		$(".card").click(function() {
-			console.log("click");
 			var boardId = $(this).find(".boardId").val();
 			window.location.href = "boardDetail?board_id=" + boardId;
-		});
-		
+		})
 	});
 </script>
-
+</head>
 <body>
 	<jsp:include page="header.jsp" />
 
@@ -99,7 +95,6 @@
 	</c:forEach>
 	</div>
 						
-
 	<!-- wishlist  -->
 	<div class="title-box">
 		<div class="list-title">찜한 레시피</div>

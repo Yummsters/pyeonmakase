@@ -114,7 +114,6 @@ $(function() {
                 	updateCase(dataType, "중복된 " + infoType + "입니다", "red");
                 }
             },
-            
             error: function(err) {
                 console.log(err);
             }
@@ -199,7 +198,7 @@ $(function() {
     // 닉네임 유효성 검사 (2글자 이상 영문 소문자, 한글, 숫자)
     $("#nickname").on("blur", function() {
         const nickname = $(this).val();
-        if (!/^[A-Za-z가-힣0-9]{2,8}$/.test(nickname) && nickname!=null) {
+        if (!/^[A-Za-z가-힣0-9]{2,5}$/.test(nickname) && nickname!=null) {
             $("#nicknameInfo").text("⚠️ 2~8자의 영소문자, 한글, 숫자만 입력 가능합니다");
             validNickname = false;
             console.log("닉네임유효성"+validNickname);

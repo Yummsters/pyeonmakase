@@ -1,29 +1,29 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+<link rel="stylesheet" href="<c:url value='/css/mainStyle.css'/>">
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>¾ÆÀÌµğ Ã£±â</title>
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<title>ì•„ì´ë”” ì°¾ê¸°</title>
 <script>
     $(document).ready(function() {
-        // ¾ÆÀÌµğ Ã£±â ¹öÆ° Å¬¸¯ ÀÌº¥Æ®
+        // ì•„ì´ë”” ì°¾ê¸° ë²„íŠ¼ í´ë¦­ ì´ë²¤íŠ¸
         $('#findPw').click(function() {
             var name = $('#name').val();
             var nickname = $('#nickname').val();
             var email = $('#email').val();
             var member_id = $('#member_id').val();
 
-            // ÀÔ·Â°ªÀÌ ºñ¾îÀÖ´ÂÁö È®ÀÎ
+            // ì…ë ¥ê°’ì´ ë¹„ì–´ìˆëŠ”ì§€ í™•ì¸
             if (name === "" || nickname === "" || email === "" || member_id === "") {
-                alert("¸ğµç Á¤º¸¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.");
+                alert("ëª¨ë“  ì •ë³´ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.");
                 return;
             }
 
-            // ¼­¹ö·Î ¿äÃ»À» º¸³» ¾ÆÀÌµğ¸¦ Ã£À½
+            // ì„œë²„ë¡œ ìš”ì²­ì„ ë³´ë‚´ ì•„ì´ë””ë¥¼ ì°¾ìŒ
             $.ajax({
                 type: 'POST',
-                url: 'findmemberpw', // ½ÇÁ¦ ¼­ºí¸´ URL·Î º¯°æÇØ¾ß ÇÔ
+                url: 'findmemberpw', // ì‹¤ì œ ì„œë¸”ë¦¿ URLë¡œ ë³€ê²½í•´ì•¼ í•¨
                 data: {
                     member_name: name,
                     nickname: nickname,
@@ -31,12 +31,11 @@
                     member_id: member_id
                 },
                 success: function(response) {
-                    // ¼­¹ö¿¡¼­ ¹ŞÀº ÀÀ´äÀ» Ã³¸®
-                   
+                    // ì„œë²„ì—ì„œ ë°›ì€ ì‘ë‹µì„ ì²˜ë¦¬
                     $('#PwInfo').text(response);
                 },
                 error: function() {
-                    alert("¼­¹ö ¿À·ù°¡ ¹ß»ıÇß½À´Ï´Ù.");
+                    alert("ì„œë²„ ì˜¤ë¥˜ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤.");
                 }
             });
         });
@@ -44,27 +43,28 @@
 </script>
 </head>
 <body>
-    <div id="name1" style="display: inline">
-        <b>ÀÌ¸§</b>
-    </div>
-    <input id="name" type="text" name="name" required placeholder="ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä."><br>
+	<jsp:include page="header.jsp" />
+	<div class="login-box">
+		<div class="mem-title">ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°</div>
+		<form class="login-form" method="post" action="login">
+			<div class="login-form-wrap">
+				<input type="text" id="name" name="name" required placeholder="ì´ë¦„ì„ ì…ë ¥í•˜ì„¸ìš”" />
+			</div>
+			<div class="login-form-wrap">
+				<input type="text" id="nickname" name="nickname" required placeholder="ë‹‰ë„¤ì„ì„ ì…ë ¥í•˜ì„¸ìš”">
+				<span id="nicknameErr"></span><br>
+			</div>
+			<div class="login-form-wrap">
+				<input type="email" id="email" name="email" required placeholder="ì´ë©”ì¼ì„ ì…ë ¥í•˜ì„¸ìš”">
+			</div>
+			<div class="login-form-wrap">
+				<input type="text" id="id" name="id" required placeholder="ì•„ì´ë””ë¥¼ ì…ë ¥í•˜ì„¸ìš”">
+			</div>
+			<input type="submit" value="ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°" id="findPw" >
+		</form>
+			<p>íšŒì›ë‹˜ì˜ ë¹„ë°€ë²ˆí˜¸ëŠ”:</p><p id="PwInfo"></p>
+	</div>
 
-    <div id="nickname1" style="display: inline">
-        <b>´Ğ³×ÀÓ</b>
-    </div>
-    <input id="nickname" type="text" name="nickname" required placeholder="´Ğ³×ÀÓÀ» ÀÔ·ÂÇÏ¼¼¿ä."><br>
-
-    <div id="email1" style="display: inline">
-        <b>ÀÌ¸ŞÀÏ</b>
-    </div>
-    <input id="email" type="text" name="email" required placeholder="ÀÌ¸ŞÀÏÀ» ÀÔ·ÂÇÏ¼¼¿ä."><br>
-    
-     <div id="member_id1" style="display: inline">
-        <b>¾ÆÀÌµğ</b>
-    </div>
-    <input id="member_id" type="text" name="member_id" required placeholder="¾ÆÀÌµğ¸¦ ÀÔ·ÂÇÏ¼¼¿ä.">
-    <p>È¸¿ø´ÔÀÇ ºñ¹Ğ¹øÈ£´Â:</p><p id="PwInfo"></p>
-
-    <button class="findPw" id="findPw" type="button" style="display: inline">ºñ¹Ğ¹øÈ£Ã£±â</button>
+	<jsp:include page="footer.jsp" />
 </body>
 </html>
