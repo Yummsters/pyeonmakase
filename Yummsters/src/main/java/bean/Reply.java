@@ -8,6 +8,8 @@ public class Reply {
 	private String nickname;
 	private Integer board_id;
 	private LocalDateTime regdate;
+	//추가
+	private Integer count = 0;
 
 	public Integer getReply_id() {
 		return reply_id;
@@ -48,4 +50,14 @@ public class Reply {
 	public void setRegdate(LocalDateTime regdate) {
 		this.regdate = regdate;
 	}
+
+	public Integer getCount() {
+		return count;
+	}
+
+	public void setCount(Integer count) {
+		this.count = count;
+	}
+	
+	
 }

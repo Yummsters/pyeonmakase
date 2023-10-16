@@ -160,7 +160,7 @@ public class BoardServiceImpl implements BoardService{
         }
 
         // 댓글 조회
-        List<Reply> replyList = boardDao.selectReplyList(board_id);
+        List<Reply> replyList = boardDao.selectReplyList(board_id, 1);
         JSONArray jsonArray = new JSONArray(replyList);
         response.put("replyList", jsonArray);
 
@@ -169,16 +169,20 @@ public class BoardServiceImpl implements BoardService{
 
     // 게시글에 따른 댓글 조회
     @Override
-    public String selectReplyList(Integer board_id) throws Exception {
-        // 댓글 조회
-        Map<String, Object> response = new HashMap<>();
-        List<Reply> replyList = boardDao.selectReplyList(board_id);
-        JSONArray jsonArray = new JSONArray(replyList);
-        response.put("replyList", jsonArray);
-
-        // JSON 형식으로 응답 변경
-        JSONObject jsonObject = new JSONObject(response);
-        return jsonObject.toJSONString();
+    public List<Reply> selectReplyList(Integer board_id, Integer curPage) throws Exception {
+//        // 댓글 조회
+//        Map<String, Object> response = new HashMap<>();
+//        List<Reply> replyList = boardDao.selectReplyList(board_id);
+//        JSONArray jsonArray = new JSONArray(replyList);
+//        response.put("replyList", jsonArray);
+//
+//        // JSON 형식으로 응답 변경
+//        JSONObject jsonObject = new JSONObject(response);
+//        return jsonObject.toJSONString();
+//    }
+    	//수정한 코드
+    	List<Reply> replyList = boardDao.selectReplyList(board_id, curPage);
+    	return replyList;
     }
 
     // 댓글 삭제
@@ -195,7 +199,7 @@ public class BoardServiceImpl implements BoardService{
         }
 
         // 댓글 조회
-        List<Reply> replyList = boardDao.selectReplyList(reply.getBoard_id());
+        List<Reply> replyList = boardDao.selectReplyList(reply.getBoard_id(), 1);
         JSONArray jsonArray = new JSONArray(replyList);
         response.put("replyList", jsonArray);
 
@@ -253,6 +257,12 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public List<Board> boardListByCate(Integer foodId, List<String> storeNames) {
 		return boardDao.selectBoardByCate(foodId, storeNames);
+	}
+
+	//댓글 개수
+	@Override
+	public Integer selectReplyCount(Integer board_id) throws Exception {
+		return boardDao.selectReplyCount(board_id);
 	}
 }
 
