@@ -70,11 +70,18 @@
             align-items: center;
             margin-right: 50px;
         }
-
-        .logo img {
+		
+		.logo img {
+			height: 50px;
+			margin-right: 10px;
+		}
+		
+        #market {
             width: 50px;
-            height: 50px;
-            margin-right: 10px;
+        }
+        
+        #편마카세 {
+        	margin-right: 40px;
         }
 
         .search {
@@ -153,8 +160,8 @@
 <div class="container">
     <div class="header">
         <div class="logo">
-            <img src="imgView?file=market.png" alt="My Image">
-            <a href="./" style="display: inline;"><span>편마카세</span></a>
+            <img src="imgView?file=market.png" alt="My Image" id="market">
+            <a href="./" style="display: inline;"><img src="imgView?file=편마카세 로고.png" alt="My Image" id="편마카세"></a>
         </div>
         <div class="search">
             <input type="text" id="search" name="search" placeholder="레시피 검색">
