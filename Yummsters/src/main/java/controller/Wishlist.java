@@ -34,17 +34,25 @@ public class Wishlist extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
-			HttpSession session = request.getSession();
-			Member member = (Member) session.getAttribute("member");
-			BoardService boardService = new BoardServiceImpl();
-			List<Board> wishList = boardService.wishList(member, 12);
-			request.setAttribute("wishList", wishList);
-			request.getRequestDispatcher("wishlist.jsp").forward(request, response);			
-		} catch(Exception e) {
-			e.printStackTrace();
-			request.setAttribute("err", e.getMessage());
-			request.getRequestDispatcher("error.jsp").forward(request, response);
-		}
+		
+		   try {
+		        HttpSession session = request.getSession();
+		        Member member = (Member) session.getAttribute("member");
+
+		        // 로그인한 사용자가 없으면 로그인 페이지로 이동
+		        if (member == null) {
+		            response.sendRedirect("login.jsp"); // 로그인 페이지로 이동
+		            return; // 더 이상 진행하지 않도록 메서드 종료
+		        }
+
+		        BoardService boardService = new BoardServiceImpl();
+		        List<Board> wishList = boardService.wishList(member, 12);
+		        request.setAttribute("wishList", wishList);
+		        request.getRequestDispatcher("wishlist.jsp").forward(request, response);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		        request.setAttribute("err", e.getMessage());
+		        request.getRequestDispatcher("error.jsp").forward(request, response);
+		    }
 	}
 }

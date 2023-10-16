@@ -33,26 +33,26 @@ public class Kakao_login extends HttpServlet {
         System.out.println(email + " " + nickname);
 
         try {
-            // 데이터베이스에 있는지 확인 후 없을 경우 회원가입 진행
+            // �뜲�씠�꽣踰좎씠�뒪�뿉 �엳�뒗吏� �솗�씤 �썑 �뾾�쓣 寃쎌슦 �쉶�썝媛��엯 吏꾪뻾
             MemberService memberService = new MemberServiceImpl();
             Member member = memberService.existMember(email, "kakaoLogin");
             System.out.println(member);
 
             if (member == null) {
-                // 회원이 아닌 경우 가입 진행
+                // �쉶�썝�씠 �븘�땶 寃쎌슦 媛��엯 吏꾪뻾
                 member = new Member(nickname, nickname, email, email, "kakaoLogin");
                 memberService.signup(member);
                 response.put("signup", true);
                 response.put("login", true);
             } else {
-                // 이미 회원인 경우 로그인만 진행
+                // �씠誘� �쉶�썝�씤 寃쎌슦 濡쒓렇�씤留� 吏꾪뻾
                 response.put("signup", false);
                 response.put("login", true);
             }
             HttpSession session = req.getSession();
             session.setAttribute("member", member);
 
-            // JSON 형태로 변경
+            // JSON �삎�깭濡� 蹂�寃�
             JSONObject jsonObject = new JSONObject(response);
             res.getWriter().print(jsonObject.toJSONString());
 

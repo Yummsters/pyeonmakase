@@ -1,9 +1,7 @@
 package controller;
 
-import bean.Board;
-import bean.Member;
-import service.BoardService;
-import service.BoardServiceImpl;
+import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,8 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.util.List;
+
+import bean.Board;
+import bean.Member;
+import service.BoardService;
+import service.BoardServiceImpl;
+import util.Pager;
 
 @WebServlet("/boardDetail")
 public class BoardDetail extends HttpServlet {
@@ -55,6 +57,14 @@ public class BoardDetail extends HttpServlet {
                     req.setAttribute("wish_select", false);
                 }
             }
+            //혜리 추가
+            Integer count = boardService.selectReplyCount(board_id);
+            Integer curPage = 1;
+            Pager page = new Pager(count, curPage);
+            Integer totPage = page.getTotPage();
+            
+            req.setAttribute("board_id", board_id);
+			req.setAttribute("totPage", totPage );
             req.getRequestDispatcher("detail.jsp").forward(req, res);
         } catch (Exception e) {
             e.printStackTrace();
