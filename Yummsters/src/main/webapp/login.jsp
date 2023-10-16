@@ -31,6 +31,7 @@
 
 		<div class="social-title">
 		  	<div id="naver_id_login"></div> <!-- 네이버 -->
+			<a href="javascript:kakaoLogin()"><img src="imgView?file=kakao_login.png" style="width: 200px"></a>
 		</div>
 	</div>
 
@@ -110,7 +111,6 @@
                             dataType: 'json',
                             success: function (response) {
                                 console.log("로그인 성공")
-                                alert("로그인 성공");
                                 if (response.signup === true) {
                                     alert("회원가입 후 로그인이 완료되었습니다.");
                                     location.href = "home";
