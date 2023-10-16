@@ -51,6 +51,31 @@
     </script>
 
     <script>
+        $(function() {
+            var store_num = 0;
+            var food_num = 0;
+            $("#register").submit(function (e) {
+                store_num = $("input[name='store']:checked").length;
+                food_num = $("input[name='food']:checked").length;
+
+                alert(store_num);
+                alert(food_num);
+                if(store_num===0){
+                    alert('편의점을 하나 이상 선택해주세요.')
+                    e.preventDefault();
+                    return false;
+                }
+                if(food_num===0){
+                    alert('카테고리를 하나 이상 선택해주세요.')
+                    e.preventDefault();
+                    return false;
+                }
+
+                $("#editorContent").val(editor.getHTML());
+                return true;
+            })
+
+        })
         // 편의점 및 음식 카테고리를 한 개 이상 선택
         function categoryCheck(form){
             var arr_store = document.getElementsByName('store');
@@ -72,15 +97,11 @@
                 }
             }
 
-            if(!store_num && !food_num){
-                alert('편의점 및 카테고리를 하나 이상 선택해주세요.')
-                return false;
-            }
-            if(!store_num){
+            if(store_num===0){
                 alert('편의점을 하나 이상 선택해주세요.')
                 return false;
             }
-            if(!food_num){
+            if(food_num===0){
                 alert('카테고리를 하나 이상 선택해주세요.')
                 return false;
             }
@@ -88,6 +109,7 @@
     </script>
 
     <script>
+
         // 음식 카테고리 한 개만 선택 가능
         function foodCheckboxGroup(currentCheckbox) {
             const checkboxes = document.getElementsByName("food");
@@ -101,7 +123,6 @@
                     }
                 }
             }
-
             if (checkedCount === 0) {
                 currentCheckbox.checked = true;
             }
@@ -112,16 +133,16 @@
 <body>
 <jsp:include page="header.jsp"/>
 
-<form name="recipe_register" enctype="multipart/form-data" id="register" onsubmit="return categoryCheck(this)" >
+<form name="recipe_register" enctype="multipart/form-data" id="register" action="register" method="post" >
     <div class="title_picture">
         <!-- 제목 입력 및 취소/저장 버튼 -->
         <div class="register_title">
             레시피명 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input id="title" type="text" name=board_title placeholder="대표 제목을 입력하세요." required="required"> &nbsp;
-            <button class="red" id="cancel" name="cancel" onclick="location.href='main_list'">
+            <input id="title" type="text" name=board_title placeholder="대표 제목을 입력하세요." required> &nbsp;
+            <button class="red" id="cancel" name="cancel" onclick="location.href='mainlist'">
                 취소
             </button>
-            <button class="green" type="submit" id="registerButton" name="register" formaction="register" formmethod="post" formenctype="multipart/form-data">
+            <button class="green" type="submit" id="registerButton" name="register" >
                 등록
             </button>
         </div>
@@ -130,7 +151,7 @@
         <!-- 썸네일 선택 -->
         <div class="picture">
             썸네일 선택 &nbsp;
-            <input type="file" name="board_picture" required="required">
+            <input type="file" name="board_picture" required>
         </div>
     </div>
     <br>
@@ -183,14 +204,7 @@
 
     <!-- 토스트 에디터에 작성한 내용 디비 저장을 위한 div -->
     <input type="hidden" name="editorContent" id="editorContent" value="">
-    <script>
-        // 버튼 클릭시 토스트 에디터에 작성한 내용을 div에 저장해서 req로 보내기
-        document.getElementById("registerButton").addEventListener("click", function (){
-            document.getElementById("editorContent").value = editor.getHTML();
-            console.log(editor.getHTML);
-            document.getElementById("register").submit();
-        });
-    </script>
+
 </form>
 
 <jsp:include page="footer.jsp"/>
