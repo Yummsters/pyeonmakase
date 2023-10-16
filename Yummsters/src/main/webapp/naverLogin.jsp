@@ -9,7 +9,7 @@
 </head>
 <body>
 <script type="text/javascript">
-  var naver_id_login = new naver_id_login("{YOUR_CLIENT_ID}", "http://localhost:8090/yum/naverLogin.jsp");
+  var naver_id_login = new naver_id_login("${client_id}", "http://localhost:8090/naverLogin.jsp");
   // 접근 토큰 값 출력
 //   alert(naver_id_login.oauthParams.access_token);
   // 네이버 사용자 프로필 조회
@@ -22,7 +22,7 @@
     let nickname = naver_id_login.getProfileData('nickname');
     let email = naver_id_login.getProfileData('email');
     let token = naver_id_login.oauthParams.access_token;
-    alert("id="+id + ",name="+name+",nickname="+nickname+",email="+email+",token:"+token);
+//     alert("id="+id + ",name="+name+",nickname="+nickname+",email="+email+",token:"+token);
 
     $.ajax({
     	url: "naverlogin",
@@ -30,11 +30,11 @@
     	data: {id:id, name:name, nickname:nickname, email:email, token:token},
     	success: function(res) {
     		if(res == "signupAndLoginSuccess") {
-    			alert(res + "//회원가입 및 로그인 성공");
+    			alert("회원가입 후 로그인이 완료되었습니다.");
     		} else if (res = "loginSuccess") {
-    			alert(res + "//로그인 성공");
+    			alert("로그인 완료되었습니다.");
     		} else {
-    			alert(res + "//회원가입 또는 로그인 실패");
+    			alert("회원가입 또는 로그인에 실패했습니다.");
     		}
    			window.opener.location.href = "home";
 	        window.close();

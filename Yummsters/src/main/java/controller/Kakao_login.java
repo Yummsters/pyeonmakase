@@ -1,7 +1,6 @@
 package controller;
 
 import bean.Member;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.simple.JSONObject;
 import service.MemberService;
 import service.MemberServiceImpl;

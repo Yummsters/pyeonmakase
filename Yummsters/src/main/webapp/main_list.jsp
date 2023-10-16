@@ -8,33 +8,27 @@
 // 체크박스 전체선택, 해제
 $(function() {
 	// 체크박스 전체선택, 해제
-	$("#all").click(
-			function() {
-				// 전체 하위 체크박스들을 선택 또는 해제
-				$("input[name='store']").prop("checked",
-						$(this).prop("checked"));
-			});
+	$("#all").click(function() {
+		// 전체 하위 체크박스들을 선택 또는 해제
+		$("input[name='store']").prop("checked",
+				$(this).prop("checked"));
+	});
 
 	// 하위 체크박스들 중 하나라도 선택 취소되면 "전체 선택" 체크박스도 선택 취소
-	$("input[name='store']")
-			.click(
-					function() {
-						if ($("input[name='store']:checked").length === $("input[name='store']").length) {
-							$("#all").prop("checked", true);
-						} else {
-							$("#all")
-									.prop("checked", false);
-						}
-					});
+	$("input[name='store']").click(function() {
+		if ($("input[name='store']:checked").length === $("input[name='store']").length) {
+			$("#all").prop("checked", true);
+		} else {
+			$("#all").prop("checked", false);
+		}
+	});
 
 	// 하위 체크박스들을 모두 선택하면 "전체 선택" 체크박스도 선택
-	$("input[name='store']")
-			.change(
-					function() {
-						if ($("input[name='store']:checked").length === $("input[name='store']").length - 1) {
-							$("#all").prop("checked", true);
-						}
-					});
+	$("input[name='store']").change(function() {
+		if ($("input[name='store']:checked").length === $("input[name='store']").length - 1) {
+			$("#all").prop("checked", true);
+		}
+	});
 	
 	// 체크박스 선택값 서버로 전송
 	$("input[type='checkbox']").change(function() {
@@ -48,10 +42,10 @@ $(function() {
 		
 		var data = {storeNames:storeNames}; // 기본 전달 데이터
 		
-		if(foodId !== null) { // url 파라미터 foodId 있는 경우 data 함께 전달.
+		if(foodId !== null) { // url 파라미터 foodId 있는 경우 data 함께 전달
 			data.foodId = foodId;
 		}
-		if(keyword !== null) { // url 파라미터 keyword 있는 경우 data 함께 전달.
+		if(keyword !== null) { // url 파라미터 keyword 있는 경우 data 함께 전달
 			data.keyword = keyword;
 		}
 		
@@ -71,44 +65,24 @@ $(function() {
 				console.log("ajax 요청 실패 : " + error);
 			}
 		});
-
 	});
 
-	//-------------------------------------------------------
-	// 게시글 더보기 기능
-	// 초기에는 처음 12개 카드만 보이도록 설정
+	// 게시글 더보기 기능 -------------------------------------------------------
 	$(".card-box > .card").slice(12).hide();
-	// $(".card-box > .card").slice(0, 3).show();
+    if ($(".card:visible").length === $(".card").length) { // 모든 카드가 출력되어 있는 경우 더보기 버튼 숨기기
+        $(".more_btn").hide();
+    }
+	$(".more_btn").click(function() {
+	    var visibleCards = $(".card:visible").length;
+	    var cardsToShow = 12;
+	
+	    if (visibleCards < $(".card").length) {
+	        $(".card").slice(visibleCards, visibleCards + cardsToShow).fadeIn();
+	    }
+	});
 
-	// // "더 보기" 버튼 클릭 시 추가 카드 12개를 보이도록 설정
-	$(".more_btn").click(
-		function() {
-			// 현재 표시되고 있는 카드의 개수를 가져옵니다.
-			var visibleCards = $(".card:visible").length;
-
-			// 추가로 표시할 카드의 개수를 설정합니다.
-			var cardsToShow = 12;
-
-			// 추가로 표시할 카드가 남아있는 경우에만 처리
-			if (visibleCards < $(".card").length) {
-				// 다음 12개 카드를 보이도록 설정
-				$(".card").slice(
-						visibleCards,
-						visibleCards
-								+ cardsToShow)
-						.fadeIn();
-
-				// 모든 카드가 표시되면 "더 보기" 버튼 숨김
-				if ($(".card:visible").length === $(".card").length) {
-					$(".more_btn").hide();
-				}
-			}
-		});
-
-	//-------------------------------------------------------
-	// 최상단으로 이동하기
-	// 버튼 노출
-	$(window).scroll(function() {
+	// 최상단으로 이동하기 -------------------------------------------------------
+	$(window).scroll(function() { // 버튼 노출
 		if ($(this).scrollTop() > 400) {
 			$('#scrollToTop').fadeIn();
 		} else {
@@ -116,19 +90,19 @@ $(function() {
 		}
 	});
 
-	// 버튼 클릭시 상단 스크롤
-	$('#scrollToTop').click(function() {
+	$('#scrollToTop').click(function() { // 버튼 클릭시 상단 스크롤
 		$('html, body').animate({
-			scrollTop : 0
-		}, 500);
+			scrollTop : 0}, 
+			500);
 		return false;
 	});
 	
-	// 게시글 디테일(boardDetail) 이동
-	$(".card").click(function() {
-		var boardId = $(this).find(".boardId").val();
-		window.location.href = "boardDetail?board_id=" + boardId;
-	})
+	// 게시글 디테일(boardDetail) 이동 -------------------------------------------------------
+	$(document).on("click", ".card", function() {
+	    var boardId = $(this).find(".boardId").val();
+	    window.location.href = "boardDetail?board_id=" + boardId;
+	});
+	
 });
 </script>
 </head>
@@ -154,7 +128,7 @@ $(function() {
         <div class="reloading">
             <jsp:include page="boardCard.jsp" />
         </div>
-<div class="more_btn">더보기</div>
+		<div class="more_btn">더보기</div>
 		<div class="scroll-to-top" id="scrollToTop">↑</div>
 
 	</div>

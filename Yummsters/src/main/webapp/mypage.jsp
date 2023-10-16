@@ -4,14 +4,6 @@
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script type="text/javascript">
 	$(function() {
-		$('.card-slider').slick({
-			slidesToShow : 5, // 한 번에 보여줄 개수
-			slidesToScroll : 5, // 다섯개씩 넘기며 보여주기 (총 2페이지로 구성)
-			autoplay : true,
-			autoplaySpeed : 2500, // 넘기는 속도
-			dots : true,
-		});
-
 		// 게시글 더보기 기능
 		// 초기에는 처음 12개 카드만 보이도록 설정
 		$(".card-box > .card").slice(12).hide();
@@ -62,7 +54,7 @@
 		$(".card").click(function() {
 			var boardId = $(this).find(".boardId").val();
 			window.location.href = "boardDetail?board_id=" + boardId;
-		});
+		})
 	});
 </script>
 </head>
