@@ -1,95 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+<link rel="stylesheet" href="<c:url value='/css/mainStyle.css'/>">
 
-
-    <style>
-/* form 전체 틀 */
-.join-box {
-	border-radius: 20px;
-	border: 5px solid #EEC595;
-	background: #FFF;
-	width: 800px;
-	margin: 100px auto;
-	text-align: center;
-}
-
-/* form 제목 */
-.title {
-	font-size: 20px;
-	color: #524434;
-	font-weight: bold;
-	margin: 20px auto;
-}
-
-/* input 태그 */
-.input-with-button {
-	width: 80%;
-	padding: 13px 10px;
-	margin: 40px auto;
-	border-bottom: 3px solid #EEC595;
-	display: flex;
-	flex-flow: row wrap;
-	justify-content: space-between;
-	height: 26px;
-}
-
-.input-with-button>input {
-	border: none;
-	font-size: 17px;
-	width: 60%;
-	outline: none;
-	height: 26px;
-}
-
-.input-with-button>button {
-	border-radius: 5px;
-	border: 1px solid #EEC595;
-	background: #EEC595;
-	font-size: 17px;
-	cursor: pointer;
-	outline: none;
-	height: 26px;
-	margin: auto 0;
-}
-/* 중복확인 여부 */
-.input-with-button>span {
-	font-size: small;
-	margin: auto 5px;
-}
-/* 유효성 안내 */
-.input-with-button>p {
-	display: block;
-	margin: 25px auto;
-	text-align: left;
-	color: red;
-	width: 100%;
-	font-size: small;
-}
-.join-form>#signupErr {
-	margin-bottom: 10px;
-}
-
-/* 가입하기 버튼 */
-.join-form>input[type="submit"] {
-	display: inline-block;
-	margin: 5px auto 30px auto;
-	width: 75%;
-	height: 35px;
-	border-radius: 5px;
-	border: 1px solid #EEC595;
-	background: #EEC595;
-	color: black;
-	text-align: center;
-	font-weight: bold;
-	font-size: 17px;
-}
-</style>
-    
 <body>
 <jsp:include page="header.jsp" />
     <div class="join-box">
-        <div class="title">회원가입</div>
+        <div class="mem-title">회원가입</div>
 
         <form class="join-form" method="post" action="signup">
             <div class="input-with-button">
@@ -124,7 +41,7 @@
            	</div>
 
             <div class="input-with-button">
-            	<input type="password" id="check_password" name="check_password" required placeholder="비밀번호를 다시 입력하세요"> 
+            	<input type="password" id="checkPassword" name="checkPassword" required placeholder="비밀번호를 다시 입력하세요"> 
             	<span id="pwErr"></span>
             	<p id="pwErr"></p>
             </div>  
@@ -205,9 +122,9 @@ $(function() {
     })
     
     // 비밀번호 일치 여부
-    $("#check_password").on("input", function() {
+    $("#checkPassword").on("input", function() {
         let pw = $("#password").val();
-        let checkPw = $("#check_password").val();    
+        let checkPw = $("#checkPassword").val();    
         if (!validPw) {
             $("#pwErr").text("비밀번호 형식을 확인해 주세요").css("color", "red");
         } else {

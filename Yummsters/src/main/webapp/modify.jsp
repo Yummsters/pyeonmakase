@@ -1,110 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>레시피 수정 페이지</title>
-    <style>
+    <link rel="stylesheet" href="<c:url value='/css/mainStyle.css'/>">
 
-        .title_picture {
-            margin: 0 auto;
-            margin-left: 200px;
-        }
-
-
-        /* 레시피명 입력칸 관련 스타일 적용 */
-        #title {
-            width: 500px;
-            height: 30px;
-            background-color: white;
-            border: 3px solid #EEC595;
-            border-radius: 10px;
-        }
-
-        /* 버튼 관련 스타일 적용 */
-        button {
-            position: relative;
-            border: none;
-            display: inline-block;
-            padding: 5px 20px;
-            border-radius: 10px;
-            font-family: "paybooc-Light", sans-serif;
-            box-shadow: 0 10px 320px rgba(0, 0, 0, 0.2);
-            text-decoration: none;
-            font-weight: 400;
-            transition: 0.25s;
-        }
-
-        .red {
-            border-style: solid;
-            border-color: #EEC595;
-            background-color: rgb(252, 101, 101);
-        }
-
-        .green {
-            border-style: solid;
-            border-color: #EEC595;
-            background-color: rgb(83, 227, 83);
-        }
-
-        /* 카테고리 관련 스타일 적용 */
-        /* 편의점 카테고리 */
-        .store_category {
-            background: #EEC595;
-            margin: 10px auto;
-            padding: 10px;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            /* 수직 가운데 정렬*/
-            justify-content: space-between;
-            /* 수평 정렬*/
-            height: 30px;
-            width: 600px;
-            border-radius: 10px;
-        }
-
-        .store_category img {
-            width: 30px;
-            height: 20px;
-        }
-
-        .store_category label {
-            display: inline-block;
-            margin-right: 20px;
-        }
-
-        /* 음식 카테고리 */
-        .food_category {
-            background: #FAE3C8;
-            margin: 10px auto;
-            padding: 10px;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            /* 수직 가운데 정렬*/
-            justify-content: space-between;
-            /* 수평 정렬*/
-            height: 30px;
-            width: 600px;
-            border-radius: 10px;
-        }
-
-        .food_category label {
-            display: inline-block;
-            margin-right: 20px;
-        }
-
-
-        input[type="checkbox"] {
-            width: 15px;
-            height: 15px;
-        }
-
-    </style>
     <!-- jQuery CDN -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- jQuery UI CDN -->
@@ -229,7 +132,7 @@
                 취소
             </button>
             <button class="green" type="submit" id="modifyButton" name="modify" formaction="board_modify" formmethod="post" formenctype="multipart/form-data"> 수정
-            </button>
+			</button>
         </div>
         <br>
 
@@ -243,7 +146,7 @@
 
     <!-- 편의점 선택 -->
     <div class="store_category">
-        &nbsp;&nbsp; 편의점 선택 &nbsp&nbsp;&nbsp; &nbsp;&nbsp;
+        &nbsp;&nbsp; 편의점 선택 &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
         <!-- TODO : 이미 선택되어 있는 편의점들 가져와서 체크표시 -->
         <c:set var = "store_category_name" value="${board.store_category_name}"/>
         <c:choose>

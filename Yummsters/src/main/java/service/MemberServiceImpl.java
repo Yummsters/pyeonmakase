@@ -16,10 +16,21 @@ public class MemberServiceImpl implements MemberService{
 
 	// 회원가입
 	@Override
-	public void signup(Member member) throws Exception {
+	public Member signup(Member member) throws Exception {
 		Member mem = memberDAO.selectId(member.getMember_id());
-		if(mem != null) throw new Exception("아이디 중복 오류");
-		memberDAO.insertMember(member);
+		if(mem != null) {
+			throw new Exception("아이디 중복 오류");
+		} else {
+			memberDAO.insertMember(member);
+			return member;
+		}
+	}
+
+	// 회원 여부 확인
+	@Override
+	public Member existMember(String member_id, String member_pw) throws Exception {
+		Member member = memberDAO.selectId(member_id);
+		return member;
 	}
 
 	// 로그인
@@ -28,6 +39,13 @@ public class MemberServiceImpl implements MemberService{
 		Member member = memberDAO.selectId(member_id);
 		if(member == null) throw new Exception("아이디가 틀렸습니다.");
 		if(member.getMember_pw().equals(member_pw) == false) throw new Exception("비밀번호가 틀렸습니다.");
+		return member;
+	}
+	
+	// 회원 여부 확인
+	@Override
+	public Member existMember(String member_id, String member_pw) throws Exception {
+		Member member = memberDAO.selectId(member_id);
 		return member;
 	}
 
@@ -77,4 +95,5 @@ public class MemberServiceImpl implements MemberService{
 	public void updateMember(Map<String, Object> paramMap) throws Exception {
 	    memberDAO.updateMember(paramMap);
 	}
+	
 }
