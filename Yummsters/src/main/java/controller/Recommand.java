@@ -1,7 +1,6 @@
 package controller;
 
 import bean.Member;
-import org.apache.ibatis.jdbc.Null;
 import org.json.simple.JSONObject;
 import service.BoardService;
 import service.BoardServiceImpl;
