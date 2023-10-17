@@ -9,6 +9,7 @@
 
 <body>
 	<jsp:include page="header.jsp" />
+	<div class="body_container">
 	<div class="login-box">
 		<div class="mem-title">로그인</div>
 
@@ -35,6 +36,7 @@
 			 <div id="naver_id_login"></div> <!-- 네이버 -->
 			 <a href="javascript:kakaoLogin()"><img src="imgView?file=kakao_logo.png" id="kakaoLogo"></a> <!-- 카카오 -->
 		</div>
+	</div>
 	</div>
 	<jsp:include page="footer.jsp" />
 </body>
@@ -89,7 +91,7 @@
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 
 <script>
-    Kakao.init('${kakao.javascript.key}');
+    Kakao.init('${kakao.script.key}'); // commit 할 때는 얘 제외하고 하기
 
     function kakaoLogin() {
         Kakao.Auth.login({

@@ -60,7 +60,7 @@
 </head>
 <body>
 	<jsp:include page="header.jsp" />
-
+	<div class="body_container">
 	<div class="title-box">
 		<div class="list-title">${member.nickname} 셰프님 마이페이지</div>
 		<p>
@@ -88,8 +88,8 @@
 			<div class="thumbnail">
 				<img src="imgView?file=${board.picture}" alt="">
 			</div>
-			<div class="store-name">#${board.store_category_name}</div>
 			<div class="recipe-name">${board.title}</div>
+			<div class="store-name">#${board.store_category_name}</div>
 		</c:if>
 		</div>
 	</c:forEach>
@@ -113,13 +113,13 @@
 				<div class="thumbnail">
 					<img src="imgView?file=${board.picture}" alt="">
 				</div>
-				<div class="store-name">#${board.store_category_name}</div>
 				<div class="recipe-name">${board.title}</div>
+				<div class="store-name">#${board.store_category_name}</div>
 			</c:if>
 			</div>
 		</c:forEach>
 	</div>
-
+	</div>
 	<jsp:include page="footer.jsp" />
 </body>
 </html>

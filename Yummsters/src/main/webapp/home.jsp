@@ -38,8 +38,8 @@
 
 <body>
 	<jsp:include page="header.jsp" />
-	<div class="container">
-
+	<div class="body_container">
+	<div class="list_container">
 		<!-- 추천 TOP10 -->
 		<div class="list-title">추천 TOP 10</div>
 		<!-- 카드 부분 db생기면 {data} 반복 돌리기 -->
@@ -84,7 +84,7 @@
 			</div>
 		</c:forEach>
 	</div>
-
+	</div>
 	<jsp:include page="footer.jsp" />
 </body>
 
