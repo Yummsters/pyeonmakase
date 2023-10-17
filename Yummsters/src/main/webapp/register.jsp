@@ -71,40 +71,9 @@
             })
 
         })
-        // 편의점 및 음식 카테고리를 한 개 이상 선택
-        function categoryCheck(form){
-            var arr_store = document.getElementsByName('store');
-            var arr_food = document.getElementsByName('food');
-
-            var store_num = 0;
-            var food_num = 0;
-
-            // 체크 개수 확인
-            for(var i=0; i<arr_store.length; i++){
-                if(arr_store[i].checked){
-                    store_num++;
-                }
-            }
-
-            for(var i=0; i<arr_food.length; i++){
-                if(arr_food[i].checked){
-                    food_num++;
-                }
-            }
-
-            if(store_num===0){
-                alert('편의점을 하나 이상 선택해주세요.')
-                return false;
-            }
-            if(food_num===0){
-                alert('카테고리를 하나 이상 선택해주세요.')
-                return false;
-            }
-        }
     </script>
 
     <script>
-
         // 음식 카테고리 한 개만 선택 가능
         function foodCheckboxGroup(currentCheckbox) {
             const checkboxes = document.getElementsByName("food");
@@ -118,6 +87,7 @@
                     }
                 }
             }
+
             if (checkedCount === 0) {
                 currentCheckbox.checked = true;
             }
@@ -169,11 +139,11 @@
     <!-- 카테고리 선택 -->
     <div class="food_category">
         &nbsp;&nbsp;카테고리 선택 &nbsp;&nbsp;
-        <input type="checkbox" name="food" id="meal" value="1">
+        <input type="checkbox" name="food" id="meal" value="1" onchange="foodCheckboxGroup(this)">
         <label for="meal">식사류</label>
-        <input type="checkbox" name="food" id="desert" value="2">
+        <input type="checkbox" name="food" id="desert" value="2" onchange="foodCheckboxGroup(this)">
         <label for="desert">간식류</label>
-        <input type="checkbox" name="food" id="drink" value="3">
+        <input type="checkbox" name="food" id="drink" value="3" onchange="foodCheckboxGroup(this)">
         <label for="drink">음료</label>
     </div>
     <br>

@@ -44,44 +44,38 @@
     </script>
 
     <script>
-        // 편의점 및 음식 카테고리를 한 개 이상 선택
-        function categoryCheck(form){
-            var arr_store = document.getElementsByName('store');
-            var arr_food = document.getElementsByName('food');
-
+        $(function() {
             var store_num = 0;
             var food_num = 0;
+            $("#modify").submit(function (e) {
+                store_num = $("input[name='store']:checked").length;
+                food_num = $("input[name='food']:checked").length;
 
-            // 체크 개수 확인
-            for(var i=0; i<arr_store.length; i++){
-                console.log(arr_store[i].checked)
-                if(arr_store[i].checked){
-                    store_num++;
+                if(store_num===0){
+                    alert('편의점을 하나 이상 선택해주세요.')
+                    e.preventDefault();
+                    return false;
                 }
-            }
-
-            for(var i=0; i<arr_food.length; i++){
-                console.log(arr_food[i].checked)
-                if(arr_food[i].checked){
-                    food_num++;
+                if(food_num===0) {
+                    alert('카테고리를 하나 이상 선택해주세요.')
+                    e.preventDefault();
+                    return false;
                 }
-            }
 
-            if(!store_num && !food_num) {
-                alert('편의점 및 카테고리를 하나 이상 선택해주세요.')
-                return false;
-            }
-            if(!store_num) {
-                alert('편의점을 하나 이상 선택해주세요.')
-                return false;
-            }
-            if(!food_num){
-                alert('카테고리를 하나 이상 선택해주세요.')
-                return false;
-            }
-        }
+                var content = editor.getHTML();
+                content=content.replaceAll(' ','');
+                console.log(content);
+                if(content == "<p><br></p>"||content == "<p></p>"||content ==""||content == null) {
+                    alert("내용을 입력해 주세요");
+                    e.preventDefault();
+                    return false;
+                }
+
+                $("#editorContent").val(editor.getHTML());
+                return true;
+            })
+        })
     </script>
-
     <script>
         // 음식 카테고리 한 개만 선택 가능
         function foodCheckboxGroup(currentCheckbox) {
@@ -108,11 +102,11 @@
 <body>
 <jsp:include page="header.jsp"/>
 <div class="body_container">
-<form name="recipe_modify" enctype="multipart/form-data" id="modifyForm" onsubmit="return categoryCheck(this)">
+<form name="recipe_modify" enctype="multipart/form-data" id="modify">
     <input type="hidden" name="board_id" value="${board.board_id}">
     <div class="title_picture">
         <!-- 제목 입력 및 취소/저장 버튼 -->
-        <div class="register_title">
+        <div class="register_title" style="font-size: 20px">
             레시피명 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <input id="title" type="text" name=board_title value="${board.title}" required="required"> &nbsp;
             <button class="red" id="cancel" name="cancel" onclick="location.href='boardDetail?board_id=${board.board_id}'; return false;">
@@ -124,7 +118,7 @@
         <br>
 
         <!-- 썸네일 선택 -->
-        <div class="picture">
+        <div class="picture" style="font-size: 20px">
             썸네일 선택 &nbsp;
             <input type="file" name="board_picture">
         </div>
@@ -164,7 +158,7 @@
                 <input type="checkbox" name="store" id="gs" value="3">
             </c:otherwise>
         </c:choose>
-        <label for="gs"><img src="imgView?file=gs.png" alt=""></label>
+        <label for="gs"><img src="imgView?file=gs.png" style="height: 30px" alt=""></label>
 
         <c:choose>
             <c:when test="${fn:contains(store_category_name,'SevenEleven')}">
@@ -241,13 +235,7 @@
 
     <!-- 토스트 에디터에 작성한 내용 디비 저장을 위한 div -->
     <input type="hidden" name="editorContent" id="editorContent" value="">
-    <script>
-        // 버튼 클릭시 토스트 에디터에 작성한 내용을 div에 저장해서 req로 보내기
-        document.getElementById("modifyButton").addEventListener("click", function (){
-            document.getElementById("editorContent").value = editor.getHTML();
-            document.getElementById("board_modify").submit();
-        });
-    </script>
+
 </form>
 </div>
 <jsp:include page="footer.jsp"/>
