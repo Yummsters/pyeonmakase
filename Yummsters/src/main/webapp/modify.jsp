@@ -8,21 +8,8 @@
     <title>레시피 수정 페이지</title>
     <link rel="stylesheet" href="<c:url value='/css/mainStyle.css'/>">
 
-    <!-- jQuery CDN -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <!-- jQuery UI CDN -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
-    <!-- jQuery UI CSS CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"/>
-    <!-- codemirror CDN URL -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.css"/>
-
     <!-- TOAST UI Editor CDN URL(CSS) -->
     <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css"/>
-
-    <!-- TOAST UI Editor CDN URL(JS) -->
-    <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script type="text/javascript">

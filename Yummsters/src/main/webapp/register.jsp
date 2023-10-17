@@ -2,21 +2,8 @@
 <%@ taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <link rel="stylesheet" href="<c:url value='/css/mainStyle.css'/>">
 <head>
-    <!-- jQuery CDN
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
-    <!-- jQuery UI CDN 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>-->
-    <!-- jQuery UI CSS CDN 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"/>-->
-    <!-- codemirror CDN URL 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.css"/>-->
-
     <!-- TOAST UI Editor CDN URL(CSS) -->
     <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css"/>
-
-    <!-- TOAST UI Editor CDN URL(JS) 
-    <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>-->
 
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script type="text/javascript">
@@ -58,15 +45,23 @@
                 store_num = $("input[name='store']:checked").length;
                 food_num = $("input[name='food']:checked").length;
 
-                alert(store_num);
-                alert(food_num);
+
                 if(store_num===0){
                     alert('편의점을 하나 이상 선택해주세요.')
                     e.preventDefault();
                     return false;
                 }
-                if(food_num===0){
+                if(food_num===0) {
                     alert('카테고리를 하나 이상 선택해주세요.')
+                    e.preventDefault();
+                    return false;
+                }
+
+                var content = editor.getHTML();
+                content=content.replaceAll(' ','');
+                console.log(content);
+                if(content == "<p><br></p>"||content == "<p></p>"||content ==""||content == null) {
+                    alert("내용을 입력해 주세요");
                     e.preventDefault();
                     return false;
                 }
@@ -136,9 +131,9 @@
 <form name="recipe_register" enctype="multipart/form-data" id="register" action="register" method="post" >
     <div class="title_picture">
         <!-- 제목 입력 및 취소/저장 버튼 -->
-        <div class="register_title">
+        <div class="register_title" style="font-size:20px">
             레시피명 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input id="title" type="text" name=board_title placeholder="대표 제목을 입력하세요." required> &nbsp;
+            <input id="title" type="text" name=board_title placeholder="대표 제목을 입력하세요.(30자 이내)" maxlength='30' required> &nbsp;
             <button class="red" id="cancel" name="cancel" onclick="location.href='mainlist'">
                 취소
             </button>
@@ -149,7 +144,7 @@
         <br>
 
         <!-- 썸네일 선택 -->
-        <div class="picture">
+        <div class="picture" style="font-size:20px">
             썸네일 선택 &nbsp;
             <input type="file" name="board_picture" required>
         </div>
@@ -164,7 +159,7 @@
         <input type="checkbox" name="store" id="cu" value="2">
         <label for="cu"><img src="imgView?file=cu.png" alt=""></label>
         <input type="checkbox" name="store" id="gs" value="3">
-        <label for="gs"><img src="imgView?file=gs.png" alt=""></label>
+        <label for="gs"><img src="imgView?file=gs.png" style="height:30px" alt=""></label>
         <input type="checkbox" name="store" id="seven" value="4">
         <label for="seven"><img src="imgView?file=seven.png" alt=""></label>
         <input type="checkbox" name="store" id="etc" value="5">
@@ -196,7 +191,8 @@
             height: '600px',                        // 에디터 영역의 높이 값 (OOOpx || auto)
             initialEditType: 'wysiwYg',            // 최초로 보여줄 에디터 타입 (markdown || wysiwyg)
             initialValue: '레시피를 작성해주세요.',     // 내용의 초기 값으로, 반드시 마크다운 문자열 형태여야 함
-            previewStyle: 'vertical'                // 마크다운 ß프리뷰 스타일 (tab || vertical)
+            previewStyle: 'vertical'
+            // 마크다운 ß프리뷰 스타일 (tab || vertical)
         });
 
         console.log(editor.getHTML());
