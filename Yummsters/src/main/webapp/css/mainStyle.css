@@ -13,7 +13,7 @@ a {
 
 body {
 	margin: 0 auto;
-	background-color: #FBF9F3;
+	background-color: #FFF;
 	width: 1000px;
 	height: 200px;
 }
@@ -184,27 +184,55 @@ li a {
 .card-slider {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: flex-start;
+	justify-content: space-between;
 	margin: 0 auto 100px auto;
 	max-width: 1000px;
-	height: 300px;
+	height: 330px;
 }
 
 /* 카드 영역 */
-#card {
+#card, .card-slider .card {
 	margin: 10px;
 	padding: 10px;
 	box-sizing: border-box;
-	background-color: white;
-	border-radius: 10px;
+	background-color: #FBF9F3;
 	width: calc(20% - 20px);
-	height: 300px;
+	border-radius: 20px;
+	height: 270px;
+	border: 2px solid #EAE6D5;
 	margin-bottom: 20px;
 }
 
-#card #recipe-name {
+#recommend {
+	color: #00000080;
+	font-size: 17px;
+	margin: 0 10px;
+}
+
+#thumbnail, .card-slider .thumbnail {
+	position: relative;
+}
+
+#thumbnail img, .card-slider .thumbnail img {
+	max-width: 100%;
+	height: 150px;
+	width: 150px;
+	display: block;
+	margin: 5px auto 20px auto;
+	border-radius: 10px;
+}
+
+#recipe-name {
 	text-align: center;
 	font-size: 20px;
+	color: #524434;
+}
+
+#store-name {
+	margin-top: 10px;
+	text-align: center;
+	font-size: 15px;
+	color: #524434;
 }
 
 #card:nth-child(n+6) {
@@ -225,7 +253,7 @@ li a {
 	color: #524434;
 	font-weight: 800;
 	font-size: 1.5rem;
-	margin: 30px 0 10px 10px;
+	margin: 0 0 10px 10px;
 }
 
 .more {
@@ -274,13 +302,13 @@ li a {
 /* 카테고리 영역 */
 .category {
 	background: #EEC595;
-	margin: 100px auto 30px auto;
+	margin: 0 auto 30px auto;
 	padding: 0 30px;
 	display: flex;
 	flex-direction: row;
 	align-items: center; /* 수직 가운데 정렬 */
 	justify-content: space-between; /* 수평 정렬*/
-	height: 100px;
+	height: 80px;
 	font-size: 20px;
 	border-radius: 10px;
 }
@@ -298,6 +326,11 @@ li a {
 	width: 30px;
 	height: 30px;
 }
+
+/* .category > input[type="checkbox"]:checked + label {
+    background-color: yellow;
+    color: white; 
+} */
 
 /* 더보기 버튼 */
 .more_btn {
@@ -370,15 +403,18 @@ li a {
 	margin: 10px;
 	padding: 10px;
 	box-sizing: border-box;
-	background-color: white;
-	border-radius: 10px;
+	background-color: #FBF9F3;
 	width: calc(33.33% - 20px);
 	margin-bottom: 20px;
+	border-radius: 20px;
+	height: 410px;
+	border: 2px solid #EAE6D5;
 }
 
 .recommend {
 	color: #00000080;
 	font-size: 20px;
+	margin: 0 10px;
 }
 
 .thumbnail {
@@ -387,20 +423,24 @@ li a {
 
 .thumbnail img {
 	max-width: 100%;
-	height: auto;
+	height: 280px;
+	width: 280px;
 	display: block;
-	margin: 5px auto 30px auto;
+	margin: 5px auto 20px auto;
+	border-radius: 10px;
 }
 
 .recipe-name {
 	text-align: center;
 	font-size: 25px;
+	color: #524434;
 }
 
 .store-name {
 	margin-top: 10px;
 	text-align: center;
 	font-size: 15px;
+	color: #524434;
 }
 
 /* detail.jsp */
@@ -643,11 +683,6 @@ li a {
 	margin-right: 20px;
 }
 
-input[type="checkbox"] {
-	width: 15px;
-	height: 15px;
-}
-
 /* login.jsp */
 /* form 전체 틀 */
 .login-box, .join-box {
@@ -655,7 +690,7 @@ input[type="checkbox"] {
 	border: 5px solid #EEC595;
 	background: #FFF;
 	width: 800px;
-	margin: 100px auto;
+	margin: 0 auto;
 	text-align: center;
 }
 

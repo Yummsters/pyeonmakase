@@ -218,7 +218,7 @@ $(function() {
     $("#user_btn1").click(function(e) {
     	if("${sessionScope.member.member_pw}" == $('#password1').val()) {
     	    if ($("#password1").val() && !$("#newPassword").val()) {
-    	        $("#newPassword").val() = $("#password1").val(); // 새 비밀번호 입력하지 않은 경우 현재 비밀번호 값 복사.
+    	        $("#newPassword").val($("#password1").val()); // 새 비밀번호 입력하지 않은 경우 현재 비밀번호 값 복사.
     	        console.log($("#password1").val());
     	    }
 	        // 중복확인 여부 및 기타 유효성 검사를 확인하여 폼 제출 여부 결정

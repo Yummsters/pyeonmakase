@@ -24,10 +24,10 @@
 
 		// 게시글 더보기 기능
 		// 초기에는 처음 5개 카드만 보이도록 설정
-		$(".card-box > .card").slice(5).hide();
+		$(".card-box > #card").slice(5).hide();
 
 		// 게시글 디테일(boardDetail) 이동
-		$(".card, #card").click(function() {
+		$("#card").click(function() {
 			var boardId = $(this).find(".boardId").val();
 			window.location.href = "boardDetail?board_id=" + boardId;
 		});
@@ -46,14 +46,14 @@
 		<div class="card-slider">
 			<c:forEach var="board" items="${boardListTop10}">
 				<div class="card">
-				<c:if test="${not empty boardListTop10}">
-					<input type="hidden" class="boardId" value="${board.board_id}">
-					<div class="recommend">♥ ${board.recommand_count}</div>
-					<div class="thumbnail">
-						<img src="imgView?file=${board.picture}" alt="">
-					</div>
-					<div class="recipe-name">${board.title}</div>
-					<div class="store-name">#${board.store_category_name}</div>
+					<c:if test="${not empty boardList}">
+						<input type="hidden" class="boardId" value="${board.board_id}">
+						<div id="recommend">♥ ${board.recommand_count}</div>
+						<div class="thumbnail">
+							<img src="imgView?file=${board.picture}" alt="">
+						</div>
+						<div id="recipe-name">${board.title}</div>
+						<div id="store-name">#${board.store_category_name}</div>
 					</c:if>
 				</div>
 			</c:forEach>
@@ -74,12 +74,12 @@
 			<div id="card">
 				<c:if test="${not empty boardList}">
 					<input type="hidden" class="boardId" value="${board.board_id}">
-					<div class="recommend">♥ ${board.recommand_count}</div>
-					<div class="thumbnail">
+					<div id="recommend">♥ ${board.recommand_count}</div>
+					<div id="thumbnail">
 						<img src="imgView?file=${board.picture}" alt="">
 					</div>
 					<div id="recipe-name">${board.title}</div>
-					<div class="store-name">#${board.store_category_name}</div>
+					<div id="store-name">#${board.store_category_name}</div>
 				</c:if>
 			</div>
 		</c:forEach>
