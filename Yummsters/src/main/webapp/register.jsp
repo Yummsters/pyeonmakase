@@ -94,6 +94,24 @@
         }
     </script>
 
+    <!-- 썸네일 선택 여부에 따른 text 변경 -->
+    <script>
+        function checkFileSelected() {
+            const fileInput = document.getElementById('file');
+            const fileLabel = document.querySelector('.file-label');
+
+
+            if (fileInput.files.length > 0) {
+                // 파일이 선택된 경우
+                var fileName = fileInput.files[0].name;
+                fileLabel.textContent = '파일 첨부 : '+fileName;
+            } else {
+                // 파일이 선택되지 않은 경우
+                fileLabel.textContent = '대표 사진을 등록하세요';
+            }
+        }
+    </script>
+
 </head>
 <body>
 <jsp:include page="header.jsp"/>
@@ -114,9 +132,12 @@
         <br>
 
         <!-- 썸네일 선택 -->
-        <div class="picture" style="font-size:20px">
+        <div class="picture" style="font-size: 20px">
             썸네일 선택 &nbsp;
-            <input type="file" name="board_picture" required>
+            <label for="file" class="file-label">
+                대표 사진을 등록하세요
+            </label>
+            <input type="file" id="file" name="board_picture" style="display: none;" onchange="checkFileSelected()">
         </div>
     </div>
     <br>

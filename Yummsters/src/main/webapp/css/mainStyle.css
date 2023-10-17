@@ -508,9 +508,39 @@ li a {
     margin-top: 10px;
 }
 
+/* 썸네일 첨부 */
+.picture input[type="file"] {
+    width: 200px;
+    height: 30px;
+    opacity: 0; /* 파일 입력 요소 자체를 숨깁니다. */
+    position: absolute;
+    z-index: -1; /* 다른 요소 뒤에 숨깁니다. */
+}
+
+/* 레이블 스타일 적용 */
+.picture label {
+    width: 600px;
+    height: 40px;
+    background: #fff;
+    border: 5px solid #EEC595;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 20px;
+    display: inline-block;
+    text-align: center;
+    line-height: 30px;
+    color : gray;
+}
+
+/* hover 스타일 적용 */
+.picture label:hover {
+    background: #EEC595;
+    color: #fff;
+}
+
 .content_detail {
     border: 2px solid #EEC595;
-}정
+}
 
 .picture_text {
     display: flex;
