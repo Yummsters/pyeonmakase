@@ -502,7 +502,6 @@ li a {
 /* 댓글 관련 스타일 적용 */
 .all_reply {
 	width: 1000px;
-	height: 500px;
 	border: 2px solid #EEC595;
 }
 
