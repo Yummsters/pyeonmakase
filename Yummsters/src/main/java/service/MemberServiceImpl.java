@@ -87,6 +87,8 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public void updateMember(Map<String, Object> paramMap) throws Exception {
 	    memberDAO.updateMember(paramMap);
+	    
+	    
 	}
 	//아이디 찾기
 	   @Override
