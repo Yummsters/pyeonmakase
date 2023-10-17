@@ -60,7 +60,7 @@
 </head>
 <body>
 	<jsp:include page="header.jsp" />
-
+	<div class="body_container">
 	<div class="title-box">
 		<div class="list-title">${member.nickname} 셰프님 마이페이지</div>
 		<p>
@@ -119,7 +119,7 @@
 			</div>
 		</c:forEach>
 	</div>
-
+	</div>
 	<jsp:include page="footer.jsp" />
 </body>
 </html>

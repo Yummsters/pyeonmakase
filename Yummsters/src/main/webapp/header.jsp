@@ -13,7 +13,7 @@ $(function() {
    	});
 });
 </script>
-<div class="container">
+<div class="header_container">
     <div class="header">
         <div class="logo">
             <img src="imgView?file=market.png" alt="My Image" id="market">

@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<div class="container">
-    <div class="footer">
+<div class="footer">
+	<div class="footer_container">
         <div class="foot_logo">
             <img src="imgView?file=foot_market.png" alt="My Image">
-            <a href=""><span>편마카세</span></a>
+            <a href="https://github.com/Yummsters/pyeonmakase"><span>편마카세</span></a>
         </div>
         <div class="sns">
             김희진&nbsp;&nbsp;&nbsp;

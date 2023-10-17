@@ -43,6 +43,7 @@
 </head>
 <body>
 	<jsp:include page="header.jsp" />
+	<div class="body_container">
 	<div class="login-box">
 		<div class="mem-title">아이디 찾기</div>
 		<form class="login-form" method="post" action="login">
@@ -60,7 +61,7 @@
 		</form>
 			<p>회원님의 아이디는:</p><p id="IdInfo"></p>
 	</div>
-
+	</div>
 	<jsp:include page="footer.jsp" />
 </body>
 </html>

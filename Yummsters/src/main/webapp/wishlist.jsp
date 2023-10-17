@@ -39,7 +39,7 @@ $(function() {
 
 <body>
     <jsp:include page="header.jsp" />
-    <div class="container">
+    <div class="body_container">
 
         <!-- 전체 레시피 -->
         <div class="title-box">
