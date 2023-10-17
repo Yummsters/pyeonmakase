@@ -57,7 +57,6 @@ public class User_Modify extends HttpServlet {
         Member member = (Member) session.getAttribute("member");
         
         // JSP에서 전송한 수정된 회원 정보를 가져옴
-        String newNickname = request.getParameter("nickname");
         String newEmail = request.getParameter("email");
         String newPassword = request.getParameter("newPassword");
 
@@ -65,7 +64,6 @@ public class User_Modify extends HttpServlet {
             MemberService service = new MemberServiceImpl();
             Map<String, Object> paramMap = new HashMap<>();
             paramMap.put("nickname", member.getNickname());
-            paramMap.put("newNickname", newNickname);
             paramMap.put("newEmail", newEmail);
             paramMap.put("newPassword", newPassword);
             
@@ -73,7 +71,6 @@ public class User_Modify extends HttpServlet {
             service.updateMember(paramMap);
 
             // 회원 정보 수정 성공 시 세션 정보 업데이트
-            member.setNickname(newNickname);
             member.setEmail(newEmail);
             member.setMember_pw(newPassword);
             // 패스워드 수정이 필요한 경우, 이 부분을 수정

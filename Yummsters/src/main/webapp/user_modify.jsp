@@ -4,10 +4,11 @@
 <link rel="stylesheet" href="<c:url value='/css/mainStyle.css'/>">
 <body>
 	<jsp:include page="header.jsp" />
-
+	<div class="body_container">
 	<!-- 박스-->
 	<br>
-	<div class="box" style="border: 3px solid #EEC595">
+	<div class="box" style="border: 5px solid #EEC595">
+
 		<!-- 원-->
 		<div class="c1" style="display: inline"></div>
 		<div class="c2"></div>
@@ -17,11 +18,11 @@
 		<!-- 회원정보-->
 		<img class="img" src="imgView?file=로고.png" alt="">
 		<div class="user-title">
-			<b>회원정보수정</b>
+			회원정보수정
 		</div>
 		
       <div class="name1" style="display: inline">
-         <b>이름</b>
+         이름
       </div>
       <div class="userline1"></div>
       <div class="name2">${member.member_name }</div>
@@ -30,19 +31,16 @@
 
       <div class="input-with-btn">
          <div class="nickname1" style="display: inline">
-            <b>닉네임</b>
+            닉네임
          </div>
          <div class="userline2"></div>
-         <input class="nickname2" type="text" name="nickname" 
-            value="${member.nickname}"> <span id="nicknameErr" class="nicknameErr"></span>
-         <button class="checkDuplicate" id="confirm1" type="button"
-            data-type="nickname" disabled="disabled">중복확인</button>
-         <p id="nicknameInfo" class="nicknameInfo"></p>
+
+         <div class="nickname2" name="nickname">${member.nickname}</div>
       </div>
 
       <div class="input-with-btn">
          <div class="email1" style="display: inline">
-            <b>이메일</b>
+            이메일
          </div>
          <div class="userline3"></div>
          <input class="email2" type="text" name="email"
@@ -52,22 +50,25 @@
          <p id="emailInfo" class="emailInfo"></p>
       </div>
       <div class="pw" style="display: inline">
-            <b>현재 비밀번호</b>
+            현재 비밀번호
          </div>
          <div class="userline4"></div>
          <input id="password1" type="password" name="password" required="required"  placeholder="현재 비밀번호를 입력하세요">
       
       <div class="input-with-btn">
          <div class="pw1" style="display: inline">
-            <b>변경할 비밀번호</b>
+            변경할 비밀번호
          </div>
          <div class="userline5"></div>
          <input name="newPassword" type="password" id="newPassword" placeholder="변경할 비밀번호를 입력하세요">
          <p id="pwInfo" class="pwInfo"></p>
       </div>
       <div class="input-with-btn">
+        <div class="chpw" style="display: inline">
+            비밀번호 확인
+         </div>
          <input id="check_password" type="password"
-            placeholder="변경할 비밀번호를 다시 입력하세요"> <span id="pwErr" class="pwErr"></span>
+            placeholder="변경할 비밀번호를 다시 입력하세요">
          <p id="pwErr" class="pwErr"></p>
       </div>
       <div class="userline6"></div>
@@ -80,6 +81,7 @@
 					value="회원정보 저장"></a>
 			</p>
 		</form>
+	</div>
 	</div>
 	<br>
 
@@ -225,11 +227,15 @@ $(function() {
 	        if (nicknameCheck && emailCheck && pwCheck && validPw) { // 유효할 경우 폼을 제출
 	            $(".userForm").submit();
 	        } else { // 유효하지 않을 경우 에러 메시지 표시 등 추가 로직 수행
-	            e.preventDefault();
+
 	            $("#signupErr").text("입력 형식 또는 중복확인 여부를 확인해 주세요").css("color", "red");
+                e.preventDefault();
+                return false;
 	        }
     	} else {
     		$("#signupErr").text("비밀번호가 틀렸습니다").css("color", "red");
+            e.preventDefault();
+            return false;
     	}
     });
 	 

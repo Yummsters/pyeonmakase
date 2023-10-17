@@ -4,10 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import bean.*;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 
+import bean.Board;
+import bean.Board_Store;
+import bean.Member;
+import bean.Reply;
 import util.MybatisSqlSessionFactory;
 
 

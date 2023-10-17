@@ -75,8 +75,7 @@
 	<update id="updateMember" parameterType="Map">
     <![CDATA[
         update member
-        set nickname = #{newNickname},
-            email = #{newEmail},
+        set email = #{newEmail},
             member_pw = #{newPassword}
         where nickname = #{nickname}
     ]]>

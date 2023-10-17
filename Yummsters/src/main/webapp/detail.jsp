@@ -246,23 +246,23 @@
 <body>
 <jsp:include page="header.jsp"/>
 
+<div class="body_container">
     <div class="all_content">
         <!-- 제목, 조회수, 추천수 -->
         <div class="content_title">
-            <div class="title_store" style="display: inline-block;">
-                <div class="title">${board.title} </div>
-                <div class="store"> 편의점 : ${board.store_category_name}</div>
+            <div class="title_store">
+                <div style="float:left; width: 700px;" >
+                    <div class="title">${board.title}</div>
+                    <div style="clear:both"></div>
+                    <div class="store"> 편의점 : ${board.store_category_name}</div>
+                </div>
+
+                <div class="right" style="float:right; margin-right: 10px">
+                    <div class="recommand_count" style="text-align: right"> 추천수 : ${board.recommand_count}</div>
+                    <div class="recommand_date">${date} &nbsp; ${board.nickname}</div>
+                </div>
+
             </div>
-            <table class="recommand_date">
-                <tr>
-                    <td>
-                         추천수 : <span  id = "recommandCount">${board.recommand_count}</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>${date} &nbsp; ${board.nickname}</td>
-                </tr>
-            </table>
         </div>
     </div>
 
@@ -340,7 +340,7 @@
                 </c:if>-->
         </div>
     </div>
-
+</div>
 <jsp:include page="footer.jsp"/>
 
 </body>
