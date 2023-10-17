@@ -131,7 +131,7 @@
 <form name="recipe_register" enctype="multipart/form-data" id="register" action="register" method="post" >
     <div class="title_picture">
         <!-- 제목 입력 및 취소/저장 버튼 -->
-        <div class="register_title">
+        <div class="register_title" style="font-size:20px">
             레시피명 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <input id="title" type="text" name=board_title placeholder="대표 제목을 입력하세요.(30자 이내)" maxlength='30' required> &nbsp;
             <button class="red" id="cancel" name="cancel" onclick="location.href='mainlist'">
@@ -144,7 +144,7 @@
         <br>
 
         <!-- 썸네일 선택 -->
-        <div class="picture">
+        <div class="picture" style="font-size:20px">
             썸네일 선택 &nbsp;
             <input type="file" name="board_picture" required>
         </div>
@@ -159,7 +159,7 @@
         <input type="checkbox" name="store" id="cu" value="2">
         <label for="cu"><img src="imgView?file=cu.png" alt=""></label>
         <input type="checkbox" name="store" id="gs" value="3">
-        <label for="gs"><img src="imgView?file=gs.png" alt=""></label>
+        <label for="gs"><img src="imgView?file=gs.png" style="height:30px" alt=""></label>
         <input type="checkbox" name="store" id="seven" value="4">
         <label for="seven"><img src="imgView?file=seven.png" alt=""></label>
         <input type="checkbox" name="store" id="etc" value="5">
