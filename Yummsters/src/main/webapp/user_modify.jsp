@@ -4,9 +4,8 @@
 <link rel="stylesheet" href="<c:url value='/css/mainStyle.css'/>">
 <body>
 	<jsp:include page="header.jsp" />
-
+	<div class="body_container">
 	<!-- 박스-->
-	<br>
 	<div class="box" style="border: 3px solid #EEC595">
 		<!-- 원-->
 		<div class="c1" style="display: inline"></div>
@@ -76,6 +75,7 @@
 					value="회원정보 저장"></a>
 			</p>
 		</form>
+	</div>
 	</div>
 	<br>
 

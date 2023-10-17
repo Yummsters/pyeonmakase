@@ -246,6 +246,7 @@
 <body>
 <jsp:include page="header.jsp"/>
 
+<div class="body_container">
     <div class="all_content">
         <!-- 제목, 조회수, 추천수 -->
         <div class="content_title">
@@ -339,7 +340,7 @@
                 </c:if>-->
         </div>
     </div>
-
+</div>
 <jsp:include page="footer.jsp"/>
 
 </body>

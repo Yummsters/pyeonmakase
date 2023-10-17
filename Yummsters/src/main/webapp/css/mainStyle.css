@@ -12,10 +12,27 @@ a {
 }
 
 body {
-    margin: 0 auto;
-    background-color: #FBF9F3;
-    width: 1000px;
-    height: 200px;
+	background-color: #FBF9F3;
+	height: 200px;
+}
+
+.body_container, .header_container {
+	width: 1000px;
+	margin: 0 auto;
+}
+
+.header_container {
+	width: 1000px;
+	margin: 0 auto;
+	margin-bottom: 50px;
+}
+
+ .footer_container {
+	width: 1000px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 /* header.jsp */
@@ -68,9 +85,16 @@ li a {
 }
 
 .logo img {
-    width: 50px;
-    height: 50px;
-    margin-right: 10px;
+	height: 50px;
+	margin-right: 10px;
+}
+
+#market {
+	width: 50px;	
+}
+
+#편마카세 {
+	margin-right: 40px;
 }
 
 .search {
@@ -131,11 +155,14 @@ li a {
 
 /* footer.jsp */
 .footer {
-    margin: 100px auto;
-    background-color: #EEC595;
-    position: relative;
-    display: flex;
-    align-items: center;
+	width: 100%;
+	margin: 50px 0 0 auto;
+	background-color: #EEC595;
+	position: relative;
+	display: flex;
+	align-items: center;
+	padding: 10px 0;
+	justify-content: center;
 }
 
 .foot_logo {
@@ -144,34 +171,38 @@ li a {
 }
 
 .foot_logo a span {
-    color: rgba(255, 45, 0, 1);
-    font-weight: 900;
-    -webkit-text-stroke: 1.5px #FFE4C3;
-    font-size: 3em;
-    text-align: center;
-    align-items: center;
-    margin-right: 150px;
-    position: absolute;
-    transform: translate(-105%, 200%);
+	color: rgba(255, 45, 0, 1);
+	font-weight: 900;
+	-webkit-text-stroke: 1.5px #FFE4C3;
+	font-size: 2.5em;
+	text-align: center;
+	align-items: center;
+	margin-right: 150px;
+	position: absolute;
+	transform: translate(-135%, 185%);
 }
 
 .foot_logo img {
-    width: 200px;
-    height: 200px;
-    vertical-align: middle;
+	width: 150px;
+	height: 150px;
+	vertical-align: middle;
+	margin-left: 50px;
+	margin-right: 50px;
 }
 
 .sns {
-    display: inline;
-    flex-grow: 1;
-    font-weight: 900;
-    color: #524434;
-    margin-left: 50px;
+	display: inline;
+	flex-grow: 1;
+	font-weight: 700;
+	color: #524434;
+	margin-left: 50px;
+	line-height: 10px;
+	width: 800px;
 }
 
 .sns a {
-    font-weight: 900;
-    color: #524434;
+	font-weight: 700;
+	color: #524434;
 }
 
 .sns img {
@@ -478,9 +509,9 @@ li a {
 
 /* 댓글 관련 스타일 적용 */
 .all_reply {
-    width: 1000px;
-    height: 500px;
-    border: 2px solid #EEC595;
+	width: 1000px;
+	border: 2px solid #EEC595;
+	padding-bottom: 40px;
 }
 
 .reply_register {
@@ -515,34 +546,49 @@ li a {
 }
 
 .reply_one {
-    padding: 10px;
-    border: 2px solid #EEC595;
-    border-radius: 20px;
-    background-color: white;
-    width: 785px;
-    height: 20px;
-    margin: 20px 0px 0px 100px;
+	padding: 10px;
+	border: 2px solid #EEC595;
+	border-radius: 20px;
+	background-color: white;
+	width: 785px;
+	height: 20px;
+	margin: 10px 10px 10px 100px;
+}
+
+.reply_box {
+   display:flex;
+   align-items: center;
 }
 
 .reply_del {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    border: none;
-    padding: 5px 20px;
-    border-radius: 10px;
-    font-family: "paybooc-Light", sans-serif;
-    box-shadow: 0 10px 320px rgba(0, 0, 0, 0.2);
-    text-decoration: none;
-    font-weight: 400;
-    transition: 0.25s;
-    background-color: #EEC595;
-    margin-right: 5px;
+	right: 10px;
+	top: 10px;
+	border: none;
+	padding: 5px 20px;
+	border-radius: 10px;
+	font-family: "paybooc-Light", sans-serif;
+	box-shadow: 0 10px 320px rgba(0, 0, 0, 0.2);
+	text-decoration: none;
+	font-weight: 400;
+	transition: 0.25s;
+	background-color: #EEC595;
+	margin-right: 5px;
+	float: right;
 }
 
 .reply_one label {
     margin-left: 10px;
     margin-right: 40px;
+}
+
+.replyNickname {
+	width: 100px;
+	float: left;
+	font-weight: 700;
+}
+
+.replyContent {
+	float: left;
 }
 
 /* modify.jsp, register.jsp */
@@ -934,11 +980,11 @@ input[type="checkbox"] {
 }
 /*버튼*/
 #userRegister {
-    position: absolute;
+	position: absolute;
     left: 15%;
     bottom: 10%;
     border: none;
-    width: 250px;
+    width: 200px;
     height: 30px;
     font-size: 20px;
     color: #524434;
@@ -951,7 +997,7 @@ input[type="checkbox"] {
     right: 15%;
     bottom: 10%;
     border: none;
-    width: 250px;
+    width: 200px;
     height: 30px;
     font-size: 20px;
     color: #524434;

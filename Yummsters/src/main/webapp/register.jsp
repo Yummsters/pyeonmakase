@@ -127,7 +127,7 @@
 </head>
 <body>
 <jsp:include page="header.jsp"/>
-
+<div class="body_container">
 <form name="recipe_register" enctype="multipart/form-data" id="register" action="register" method="post" >
     <div class="title_picture">
         <!-- 제목 입력 및 취소/저장 버튼 -->
@@ -202,6 +202,6 @@
     <input type="hidden" name="editorContent" id="editorContent" value="">
 
 </form>
-
+</div>
 <jsp:include page="footer.jsp"/>
 </body>

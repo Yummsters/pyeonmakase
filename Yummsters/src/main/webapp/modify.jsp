@@ -107,7 +107,7 @@
 
 <body>
 <jsp:include page="header.jsp"/>
-
+<div class="body_container">
 <form name="recipe_modify" enctype="multipart/form-data" id="modifyForm" onsubmit="return categoryCheck(this)">
     <input type="hidden" name="board_id" value="${board.board_id}">
     <div class="title_picture">
@@ -249,5 +249,6 @@
         });
     </script>
 </form>
+</div>
 <jsp:include page="footer.jsp"/>
 </body>

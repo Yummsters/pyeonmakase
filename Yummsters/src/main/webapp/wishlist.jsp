@@ -39,7 +39,7 @@ $(function() {
 
 <body>
     <jsp:include page="header.jsp" />
-    <div class="container">
+    <div class="body_container">
 
         <!-- 전체 레시피 -->
         <div class="title-box">
@@ -57,8 +57,8 @@ $(function() {
 					<div class="thumbnail">
 						<img src="imgView?file=${board.picture}" alt="">
 					</div>
-					<div class="store-name">#${board.store_category_name}</div>
 					<div class="recipe-name">${board.title}</div>
+					<div class="store-name">#${board.store_category_name}</div>
 				</c:if>
 				</div>
 			</c:forEach>

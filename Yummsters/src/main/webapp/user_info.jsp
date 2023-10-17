@@ -104,8 +104,8 @@ $(document).ready(function() {
 <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script>
-	// 탈퇴 시 디비에서 정보 삭제하는 로직 추가 필요
-	Kakao.init('${kakao.javascript.key}');
+	// 탈퇴 시 디비에서 정보 삭제하는 로직 추가 필요. commit 할 때는 얘 제외하고 하기
+	Kakao.init('${kakao.script.key}');
 
 	document.addEventListener("DOMContentLoaded", function () {
 		document.getElementById("kakaoDeleteLink").addEventListener("click", function (event) {
@@ -144,48 +144,44 @@ $(document).ready(function() {
 	<jsp:include page="header.jsp" />
 	<!-- 박스-->
 	<br>
-	<div class="box" style="border: 3px solid #EEC595">
-		<!-- 원-->
-		<div class="c1" style="display: inline"></div>
-		<div class="c2"></div>
-		<div class="c3"></div>
-		<div class="c4"></div>
-
-		<!-- 회원정보-->
-		<img class="img" src="imgView?file=로고.png" alt="">
-		<div class="user-title">
-			<b>회원정보</b>
+	<div class="body_container">
+		<div class="box" style="border: 5px solid #EEC595">
+			<!-- 원-->
+			<div class="c1" style="display: inline"></div>
+			<div class="c2"></div>
+			<div class="c3"></div>
+			<div class="c4"></div>
+	
+			<!-- 회원정보-->
+			<img class="img" src="imgView?file=로고.png" alt="">
+			<div class="user-title">회원정보</div>
+	
+			<div class="name1" style="display: inline">이름</div>
+			<div class="name2">${member.member_name }</div>
+			
+			<div class="nickname1" style="display: inline">닉네임</div>
+			<div class="nickname2">${member.nickname }</div>
+			
+			<div class="email1" style="display: inline">이메일</div>
+			<div class="email2">${member.email }</div>
+	
+	      <!-- 버튼-->
+			<c:if test='${member.member_pw ne "kakaoLogin" && member.member_pw ne "naverLogin"}'>
+				<p><button id="userRegister">회원정보 수정</button></p>
+			</c:if>
+	
+			<c:choose>
+				<c:when test='${member.member_pw eq "kakaoLogin"}'>
+					<p><button id="kakaoDeleteLink" href="#" > 카카오 회원탈퇴</button></p>
+				</c:when>
+				<c:when test='${member.member_pw eq "naverLogin"}'>
+					<p><button id="naverDelete"> 네이버 회원탈퇴</button></p>
+				</c:when>
+				<c:otherwise>
+					<p><button id="userDelete"> 회원탈퇴 </button></p>
+				</c:otherwise>
+			</c:choose>
 		</div>
-
-		<div class="name1" style="display: inline">
-			<b>이름</b>
-		</div>
-		<div class="name2">${member.member_name }</div>
-		<div class="nickname1" style="display: inline">
-			<b>닉네임</b>
-		</div>
-		<div class="nickname2">${member.nickname }</div>
-		<div class="email1" style="display: inline">
-			<b>이메일</b>
-		</div>
-		<div class="email2">${member.email }</div>
-
-      <!-- 버튼-->
-		<c:if test='${member.member_pw ne "kakaoLogin" && member.member_pw ne "naverLogin"}'>
-			<p><button id="userRegister">회원정보 수정</button></p>
-		</c:if>
-
-		<c:choose>
-			<c:when test='${member.member_pw eq "kakaoLogin"}'>
-				<p><button id="kakaoDeleteLink" href="#" > 카카오 회원탈퇴</button></p>
-			</c:when>
-			<c:when test='${member.member_pw eq "naverLogin"}'>
-				<p><button id="naverDelete"> 네이버 회원탈퇴</button></p>
-			</c:when>
-			<c:otherwise>
-				<p><button id="userDelete"> 회원탈퇴 </button></p>
-			</c:otherwise>
-		</c:choose>
 	</div>
 	<br>
 
