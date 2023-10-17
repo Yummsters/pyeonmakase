@@ -21,6 +21,12 @@ body {
 	margin: 0 auto;
 }
 
+.header_container {
+	width: 1000px;
+	margin: 0 auto;
+	margin-bottom: 50px;
+}
+
  .footer_container {
 	width: 1000px;
 	margin: 0 auto;
@@ -150,7 +156,7 @@ li a {
 /* footer.jsp */
 .footer {
 	width: 100%;
-	margin: auto;
+	margin: 50px 0 0 auto;
 	background-color: #EEC595;
 	position: relative;
 	display: flex;
@@ -191,6 +197,7 @@ li a {
 	color: #524434;
 	margin-left: 50px;
 	line-height: 10px;
+	width: 800px;
 }
 
 .sns a {

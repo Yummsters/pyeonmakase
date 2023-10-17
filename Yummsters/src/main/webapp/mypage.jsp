@@ -88,8 +88,8 @@
 			<div class="thumbnail">
 				<img src="imgView?file=${board.picture}" alt="">
 			</div>
-			<div class="store-name">#${board.store_category_name}</div>
 			<div class="recipe-name">${board.title}</div>
+			<div class="store-name">#${board.store_category_name}</div>
 		</c:if>
 		</div>
 	</c:forEach>
@@ -113,8 +113,8 @@
 				<div class="thumbnail">
 					<img src="imgView?file=${board.picture}" alt="">
 				</div>
-				<div class="store-name">#${board.store_category_name}</div>
 				<div class="recipe-name">${board.title}</div>
+				<div class="store-name">#${board.store_category_name}</div>
 			</c:if>
 			</div>
 		</c:forEach>
