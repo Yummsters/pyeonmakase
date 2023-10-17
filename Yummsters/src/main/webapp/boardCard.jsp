@@ -3,7 +3,7 @@
 
 <div class="board-box">
 	<div class="title-box">
-		<div class="title">
+		<div class="list-title">
 			<c:choose>
 				<c:when test="${foodId eq 1}">식사류 레시피</c:when>
 				<c:when test="${foodId eq 2}">간식류 레시피</c:when>

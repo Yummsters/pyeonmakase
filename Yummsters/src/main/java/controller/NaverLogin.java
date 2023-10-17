@@ -44,7 +44,7 @@ public class NaverLogin extends HttpServlet {
 		String nickname = request.getParameter("nickname");
 		String email = request.getParameter("email");
 		String id = request.getParameter("id");
-		String password = ""; // pw 존재하지 않음, 공백
+		String password = "naverLogin"; // pw 존재하지 않음, 공백
 		
 		try {
 			MemberService service = new MemberServiceImpl();
