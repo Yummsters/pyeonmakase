@@ -153,16 +153,14 @@ $(document).ready(function() {
 
 		<!-- 회원정보-->
 		<img class="img" src="imgView?file=로고.png" alt="">
-		<div class="user-title">
-			<b>회원정보</b>
-		</div>
+		<div class="user-title">회원정보</div>
 
 		<div class="name1" style="display: inline">이름</div>
 		<div class="name2">${member.member_name }</div>
-		<div class="nickname1" style="display: inline">
-			닉네임
-		</div>
+		
+		<div class="nickname1" style="display: inline">닉네임</div>
 		<div class="nickname2">${member.nickname }</div>
+		
 		<div class="email1" style="display: inline">이메일</div>
 		<div class="email2">${member.email }</div>
 
