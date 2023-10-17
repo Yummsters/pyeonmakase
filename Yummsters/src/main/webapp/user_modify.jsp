@@ -33,11 +33,7 @@
             <b>닉네임</b>
          </div>
          <div class="userline2"></div>
-         <input class="nickname2" type="text" name="nickname" 
-            value="${member.nickname}"> <span id="nicknameErr" class="nicknameErr"></span>
-         <button class="checkDuplicate" id="confirm1" type="button"
-            data-type="nickname" disabled="disabled">중복확인</button>
-         <p id="nicknameInfo" class="nicknameInfo"></p>
+         <div class="nickname2" name="nickname">${member.nickname}</div>
       </div>
 
       <div class="input-with-btn">
@@ -67,7 +63,7 @@
       </div>
       <div class="input-with-btn">
          <input id="check_password" type="password"
-            placeholder="변경할 비밀번호를 다시 입력하세요"> <span id="pwErr" class="pwErr"></span>
+            placeholder="변경할 비밀번호를 다시 입력하세요">
          <p id="pwErr" class="pwErr"></p>
       </div>
       <div class="userline6"></div>
@@ -218,18 +214,22 @@ $(function() {
     $("#user_btn1").click(function(e) {
     	if("${sessionScope.member.member_pw}" == $('#password1').val()) {
     	    if ($("#password1").val() && !$("#newPassword").val()) {
-    	        $("#newPassword").val() = $("#password1").val(); // 새 비밀번호 입력하지 않은 경우 현재 비밀번호 값 복사.
+    	        $("#newPassword").val($("#password1").val()); // 새 비밀번호 입력하지 않은 경우 현재 비밀번호 값 복사.
     	        console.log($("#password1").val());
     	    }
 	        // 중복확인 여부 및 기타 유효성 검사를 확인하여 폼 제출 여부 결정
 	        if (nicknameCheck && emailCheck && pwCheck && validPw) { // 유효할 경우 폼을 제출
 	            $(".userForm").submit();
 	        } else { // 유효하지 않을 경우 에러 메시지 표시 등 추가 로직 수행
-	            e.preventDefault();
+
 	            $("#signupErr").text("입력 형식 또는 중복확인 여부를 확인해 주세요").css("color", "red");
+                e.preventDefault();
+                return false;
 	        }
     	} else {
     		$("#signupErr").text("비밀번호가 틀렸습니다").css("color", "red");
+            e.preventDefault();
+            return false;
     	}
     });
 	 
