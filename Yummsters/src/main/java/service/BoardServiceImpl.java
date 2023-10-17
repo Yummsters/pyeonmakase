@@ -1,18 +1,19 @@
 package service;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import bean.*;
-import dao.BoardDAO;
-import dao.BoardDAOImpl;
-import org.apache.ibatis.reflection.wrapper.ObjectWrapper;
 import org.json.JSONArray;
 import org.json.simple.JSONObject;
 
-import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.Map;
+import bean.Board;
+import bean.Board_Store;
+import bean.Member;
+import bean.Reply;
+import dao.BoardDAO;
+import dao.BoardDAOImpl;
 
 public class BoardServiceImpl implements BoardService{
     private BoardDAO boardDao;
@@ -160,11 +161,26 @@ public class BoardServiceImpl implements BoardService{
         }
 
         // 댓글 조회
-        List<Reply> replyList = boardDao.selectReplyList(board_id, 1);
-        JSONArray jsonArray = new JSONArray(replyList);
-        response.put("replyList", jsonArray);
-
+//        List<Reply> replyList = boardDao.selectReplyList(board_id, 1);
+//        JSONArray jsonArray = new JSONArray(replyList);
+//        response.put("replyList", jsonArray);
+//        return response;
+        
+        //1018 혜리 수정
+        List<Reply> replyList = new ArrayList<>();
+        try {
+        	replyList.add(reply);
+        	response.put("replyList", replyList);
+        } catch(Exception e) {
+        	e.printStackTrace();
+        }
         return response;
+
+        //이미 불러와져 있는 댓글은 놔두고 방금 작성한 댓글, 즉 최신 댓글 1개만 불러오게(ServiceImpl)
+        //불러온 댓글을 setAttribute로 해서 reply.jsp로 보내고(Reply.java servlet)
+        //#commentSection 가장 위에 추가하도록 하기(ajax)
+        
+        
     }
 
     // 게시글에 따른 댓글 조회

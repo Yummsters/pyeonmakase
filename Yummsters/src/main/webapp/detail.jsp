@@ -115,7 +115,6 @@
                 $.ajax({
                     url : 'reply',
                     type : 'post',
-                    dataType: 'json',
                     data : {'board_id': '<c:out value="${board.board_id}"/>',
                     		'content': $("#reply_contents").val()}, //사용자가 입력한 댓글 내용
                     success:function (response){
@@ -123,12 +122,12 @@
                         console.log(response.register);
                         console.log(response.replyList);
 
-                        if(response.login === false){
+                        if(response.length == 0){
                             alert("로그인 후 이용해 주세요.");
                             location.href="login";
                             return false;
                         }
-                        reloadReply(response.replyList);
+                        $("#commentSection").prepend(response); //prepend 앞에 추가
                     },
                     error:function (request, status, error){
                         console.log(error);
