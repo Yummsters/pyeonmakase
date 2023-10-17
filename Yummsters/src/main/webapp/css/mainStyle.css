@@ -68,9 +68,16 @@ li a {
 }
 
 .logo img {
-	width: 50px;
 	height: 50px;
 	margin-right: 10px;
+}
+
+#market {
+	width: 50px;	
+}
+
+#편마카세 {
+	margin-right: 40px;
 }
 
 .search {
@@ -156,6 +163,7 @@ li a {
 }
 
 .foot_logo img {
+	margin-left: 40px;
 	width: 200px;
 	height: 200px;
 	vertical-align: middle;
@@ -536,11 +544,15 @@ li a {
 	background-color: white;
 	width: 785px;
 	height: 20px;
-	margin: 20px 0px 0px 100px;
+	margin: 10px 10px 10px 100px;
+}
+
+.reply_box {
+   display:flex;
+   align-items: center;
 }
 
 .reply_del {
-	position: absolute;
 	right: 10px;
 	top: 10px;
 	border: none;
@@ -553,11 +565,22 @@ li a {
 	transition: 0.25s;
 	background-color: #EEC595;
 	margin-right: 5px;
+	float: right;
 }
 
 .reply_one label {
 	margin-left: 10px;
 	margin-right: 40px;
+}
+
+.replyNickname {
+	width: 100px;
+	float: left;
+	font-weight: 700;
+}
+
+.replyContent {
+	float: left;
 }
 
 /* modify.jsp, register.jsp */
