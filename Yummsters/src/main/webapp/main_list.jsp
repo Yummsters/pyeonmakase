@@ -109,7 +109,7 @@ $(function() {
 
 <body>
 	<jsp:include page="header.jsp" />
-	<div class="<div class="body_container">">
+	<div class="body_container">
 
 		<!-- 편의점 카테고리 선택 -->
 		<div class="category">
