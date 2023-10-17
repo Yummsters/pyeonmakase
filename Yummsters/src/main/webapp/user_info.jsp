@@ -104,8 +104,8 @@ $(document).ready(function() {
 <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script>
-	// 탈퇴 시 디비에서 정보 삭제하는 로직 추가 필요
-	Kakao.init('${kakao.javascript.key}');
+	// 탈퇴 시 디비에서 정보 삭제하는 로직 추가 필요. commit 할 때는 얘 제외하고 하기
+	Kakao.init('188996546800623ceb876632a8b8ecca');
 
 	document.addEventListener("DOMContentLoaded", function () {
 		document.getElementById("kakaoDeleteLink").addEventListener("click", function (event) {
@@ -157,17 +157,13 @@ $(document).ready(function() {
 			<b>회원정보</b>
 		</div>
 
-		<div class="name1" style="display: inline">
-			<b>이름</b>
-		</div>
+		<div class="name1" style="display: inline">이름</div>
 		<div class="name2">${member.member_name }</div>
 		<div class="nickname1" style="display: inline">
-			<b>닉네임</b>
+			닉네임
 		</div>
 		<div class="nickname2">${member.nickname }</div>
-		<div class="email1" style="display: inline">
-			<b>이메일</b>
-		</div>
+		<div class="email1" style="display: inline">이메일</div>
 		<div class="email2">${member.email }</div>
 
       <!-- 버튼-->

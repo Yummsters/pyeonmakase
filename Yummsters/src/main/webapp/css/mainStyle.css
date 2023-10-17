@@ -973,15 +973,15 @@ input[type="checkbox"] {
 /*버튼*/
 #userRegister {
 	position: absolute;
-	left: 15%;
-	bottom: 10%;
-	border: none;
-	width: 250px;
-	height: 30px;
-	font-size: 20px;
-	color: #524434;
-	background-color: #EEC595;
-	border-radius: 30px;
+    left: 15%;
+    bottom: 10%;
+    border: none;
+    width: 200px;
+    height: 30px;
+    font-size: 20px;
+    color: #524434;
+    background-color: #EEC595;
+    border-radius: 30px;
 }
 
 #userDelete {
@@ -989,7 +989,7 @@ input[type="checkbox"] {
 	right: 15%;
 	bottom: 10%;
 	border: none;
-	width: 250px;
+	width: 200px;
 	height: 30px;
 	font-size: 20px;
 	color: #524434;
