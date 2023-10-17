@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="<c:url value='/css/mainStyle.css'/>">
 
 <body>
+<div class="body_container">
 <jsp:include page="header.jsp" />
     <div class="join-box">
         <div class="mem-title">회원가입</div>
@@ -49,7 +50,7 @@
             <div id="signupErr"></div>
             <input type="submit" name="signup" value="가입하기">
         </form>
-        
+    </div>
     </div>
 
 <jsp:include page="footer.jsp" />
