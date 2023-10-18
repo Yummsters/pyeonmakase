@@ -47,21 +47,21 @@
 	<div class="body_container">
 	<div class="login-box">
 		<div class="mem-title">비밀번호 찾기</div>
-		<form class="login-form" method="post" action="findmemberpw">
+		<form class="login-form" >
 			<div class="login-form-wrap">
 				<input type="text" id="name" name="name" required placeholder="이름을 입력하세요" />
 			</div>
 			<div class="login-form-wrap">
 				<input type="text" id="nickname" name="nickname" required placeholder="닉네임을 입력하세요">
-				<span id="nicknameErr"></span><br>
+				<br>
 			</div>
 			<div class="login-form-wrap">
 				<input type="email" id="email" name="email" required placeholder="이메일을 입력하세요">
 			</div>
 			<div class="login-form-wrap">
-				<input type="text" id="id" name="id" required placeholder="아이디를 입력하세요">
+				<input type="text" id="member_id" name="member_id" required placeholder="아이디를 입력하세요">
 			</div>
-			<input type="submit" value="비밀번호 찾기" id="findPw" >
+			<input type="button" value="비밀번호 찾기" id="findPw" >
 		</form>
 			<p>회원님의 비밀번호는:</p><p id="PwInfo"></p>
 	</div>

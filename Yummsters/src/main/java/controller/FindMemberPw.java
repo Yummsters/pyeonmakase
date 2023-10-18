@@ -52,14 +52,15 @@ public class FindMemberPw extends HttpServlet {
         paramMap.put("nickname", request.getParameter("nickname"));
         paramMap.put("email", request.getParameter("email"));
         paramMap.put("member_id", request.getParameter("member_id"));
+   
 
         try {
             // MemberService를 통해 아이디를 찾습니다.
             MemberService memberService = new MemberServiceImpl(); // MemberService에 대한 의존성 주입 필요
             String memberPw = memberService.findPw(paramMap);
-
             // memberId를 클라이언트에 응답합니다.
             response.getWriter().write(memberPw != null ? memberPw : "비밀번호를 찾을 수 없습니다.");
+            
         } catch (Exception e) {
             e.printStackTrace();
             response.getWriter().write("서비스 처리 중 오류가 발생했습니다.");
