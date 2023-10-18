@@ -58,7 +58,10 @@
 			</div>
 			<input type="button" value="아이디 찾기" id="findId">
 		</form>
-			<p>회원님의 아이디는:</p><p id="IdInfo"></p>
+			<div class="loginSub">
+				<div class="findIdPw"><a href="login">로그인</a> 하기 / <a href="findmemberpw">비밀번호</a> 찾기</div>
+			</div>
+			<p id="IdInfo"></p>
 	</div>
 	</div>
 	<jsp:include page="footer.jsp" />

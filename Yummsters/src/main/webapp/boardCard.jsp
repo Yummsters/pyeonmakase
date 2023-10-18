@@ -21,7 +21,7 @@
 
 	<div class="card-box">
 		<c:choose>
-			<c:when test="${not empty boardList}">
+			<c:when test="${not empty boardList and not empty storeNames}">
 				<c:forEach items="${boardList}" var="board">
 					<div class="card">
 						<input type="hidden" name="foodId"

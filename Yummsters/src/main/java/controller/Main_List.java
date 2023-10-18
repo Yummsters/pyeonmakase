@@ -38,14 +38,15 @@ public class Main_List extends HttpServlet {
         String foodIdParam = request.getParameter("foodId"); // mainlist?foodId=
 		String keyword = request.getParameter("keyword"); // mainlist?keyword=
         String[] storeNameParam = request.getParameterValues("storeNames[]"); 
-        
+        String[] defaultStoreName = {"전체","CU","GS25","SEVEN","기타"};
         Integer foodId = 0;
         List<String> storeNames = new ArrayList<>();
         
         if (storeNameParam != null) {
             storeNames = Arrays.asList(storeNameParam);
         } else {
-        	System.out.println("기본값-store전체선택");
+        	storeNames = Arrays.asList(defaultStoreName);
+        	System.out.println("기본값-store전체선택"+storeNames);
         }
 
         try {

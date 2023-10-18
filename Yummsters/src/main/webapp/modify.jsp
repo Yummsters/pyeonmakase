@@ -191,7 +191,7 @@
                 <input type="checkbox" name="store" id="seven" value="4">
             </c:otherwise>
         </c:choose>
-        <label for="seven"><img src="imgView?file=seven.png" alt=""></label>
+        <label for="seven"><img src="imgView?file=7eleven.png" alt="" style="width: 140px; height:45px"></label>
 
         <c:choose>
             <c:when test="${fn:contains(store_category_name,'기타')}">

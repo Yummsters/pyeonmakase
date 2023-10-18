@@ -63,7 +63,10 @@
 			</div>
 			<input type="button" value="비밀번호 찾기" id="findPw" >
 		</form>
-			<p>회원님의 비밀번호는:</p><p id="PwInfo"></p>
+			<p id="PwInfo"></p>
+			<div class="loginSub">
+				<div class="findIdPw"><a href="login">로그인</a> 하기</div>
+			</div>
 	</div>
 	</div>
 	<jsp:include page="footer.jsp" />
