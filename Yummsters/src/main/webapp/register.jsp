@@ -169,11 +169,11 @@
     <!-- 카테고리 선택 -->
     <div class="food_category">
         &nbsp;&nbsp;카테고리 선택 &nbsp;&nbsp;
-        <input type="checkbox" name="food" id="meal" value="1">
+        <input type="checkbox" name="food" id="meal" value="1" onchange="foodCheckboxGroup(this)">
         <label for="meal">식사류</label>
-        <input type="checkbox" name="food" id="desert" value="2">
+        <input type="checkbox" name="food" id="desert" value="2" onchange="foodCheckboxGroup(this)">
         <label for="desert">간식류</label>
-        <input type="checkbox" name="food" id="drink" value="3">
+        <input type="checkbox" name="food" id="drink" value="3" onchange="foodCheckboxGroup(this)">
         <label for="drink">음료</label>
     </div>
     <br>

@@ -45,41 +45,38 @@
 
     <script>
         // 편의점 및 음식 카테고리를 한 개 이상 선택
-        function categoryCheck(form){
-            var arr_store = document.getElementsByName('store');
-            var arr_food = document.getElementsByName('food');
-
+         $(function() {
             var store_num = 0;
             var food_num = 0;
+            $("#modify").submit(function (e) {
+                store_num = $("input[name='store']:checked").length;
+                food_num = $("input[name='food']:checked").length;
 
-            // 체크 개수 확인
-            for(var i=0; i<arr_store.length; i++){
-                console.log(arr_store[i].checked)
-                if(arr_store[i].checked){
-                    store_num++;
+                if(store_num===0){
+                    alert('편의점을 하나 이상 선택해주세요.')
+                    e.preventDefault();
+                    return false;
                 }
-            }
-
-            for(var i=0; i<arr_food.length; i++){
-                console.log(arr_food[i].checked)
-                if(arr_food[i].checked){
-                    food_num++;
+                if(food_num===0) {
+                    alert('카테고리를 하나 이상 선택해주세요.')
+                    e.preventDefault();
+                    return false;
                 }
-            }
 
-            if(!store_num && !food_num) {
-                alert('편의점 및 카테고리를 하나 이상 선택해주세요.')
-                return false;
-            }
-            if(!store_num) {
-                alert('편의점을 하나 이상 선택해주세요.')
-                return false;
-            }
-            if(!food_num){
-                alert('카테고리를 하나 이상 선택해주세요.')
-                return false;
-            }
-        }
+                var content = editor.getHTML();
+                content=content.replaceAll(' ','');
+                console.log(content);
+                if(content == "<p><br></p>"||content == "<p></p>"||content ==""||content == null) {
+                    alert("내용을 입력해 주세요");
+                    e.preventDefault();
+                    return false;
+                }
+
+                $("#editorContent").val(editor.getHTML());
+                return true;
+            })
+        })
+
     </script>
 
     <script>
@@ -106,9 +103,10 @@
 </head>
 
 <body>
+
 <jsp:include page="header.jsp"/>
 <div class="body_container">
-<form name="recipe_modify" enctype="multipart/form-data" id="modifyForm" onsubmit="return categoryCheck(this)">
+<form name="recipe_modify" enctype="multipart/form-data" id="modify">
     <input type="hidden" name="board_id" value="${board.board_id}">
     <div class="title_picture">
         <!-- 제목 입력 및 취소/저장 버튼 -->

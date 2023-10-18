@@ -91,33 +91,14 @@
 <script>
 $(function() {
 	// 중복체크 여부
-	let nicknameCheck = true;
 	let emailCheck = true;
 	// 비밀번호 일치 여부
 	let pwCheck = true;
 	// 유효성 충족 여부
-	let validNickname = true;
 	let validEmail = true;
 	let validPw = true;		
 
-	// 닉네임을 변경하는 경우 중복확인 버튼 활성화 후 중복확인 및 유효성 검사 실시
-	$(".nickname2").on("input", function() {
-	    nicknameCheck = false;
-	    $("#confirm1").prop("disabled", false);
-	    $(".nickname2").on("blur", function() { // 닉네임 유효성 검사
-	        const nickname = $(this).val();
-	        if (!/^[A-Za-z가-힣0-9]{2,5}$/.test(nickname) && nickname != null) {
-	            $("#nicknameInfo").text("⚠️ 2~8자의 영소문자, 한글, 숫자만 입력 가능합니다");
-	            validNickname = false;
-	            console.log("닉네임 유효성: " + validNickname);
-	        } else {
-	            $("#nicknameInfo").text("");
-	            validNickname = true;
-	            console.log("닉네임 유효성: " + validNickname);
-	        }
-	    });
-	});
-	
+	//이메일 유효성 검사
 	$(".email2").on("input", function() {
 		emailCheck = false;
 		$("#confirm2").prop("disabled", false);
@@ -160,7 +141,7 @@ $(function() {
 	// 중복체크 결과 업데이트 함수
 	function updateCheckResult(dataType, msg, color, validCheck) {
 		if (validCheck) {
-			if ((dataType === "nickname" && validNickname) || (dataType === "email" && validEmail)) {
+			if (dataType === "email" && validEmail) {
 				$("#" + dataType + "Err").text(msg).css("color", color);
 			} else {
 				$("#" + dataType + "Err").text("형식을 확인해 주세요").css("color","red");
