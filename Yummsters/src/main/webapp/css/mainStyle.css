@@ -2,7 +2,6 @@
 
 /* 기본 틀 */
 * {
-    /* margin:0 auto; */
     font-family: 'NanumSquareRound', sans-serif;
 }
 
@@ -12,11 +11,11 @@ a {
 }
 
 body {
-	background-color: #FBF9F3;
+	background-color: #FFF;
 	height: 200px;
 }
 
-.body_container, .header_container {
+.body_container {
 	width: 1000px;
 	margin: 0 auto;
 }
@@ -224,14 +223,17 @@ li a {
 /* 카드 영역 */
 #card, .card-slider .card {
 	margin: 10px;
-	padding: 10px;
+	padding: 10px 5px;
 	box-sizing: border-box;
 	background-color: #FBF9F3;
+	border: 2px solid #EAE6D5;
 	width: calc(20% - 20px);
 	border-radius: 20px;
-	height: 270px;
-	border: 2px solid #EAE6D5;
 	margin-bottom: 20px;
+	height: auto;
+	min-height: 300px;
+	display: flex;
+	flex-direction: column;
 }
 
 #recommend {
@@ -256,14 +258,19 @@ li a {
 #recipe-name {
 	text-align: center;
 	font-size: 20px;
+	font-weight: bold;
 	color: #524434;
+	display: flex; /* flexbox 사용 */
+	align-items: center; /* 세로 가운데 정렬 */
+	justify-content: center;
+	height: 100%;
 }
 
 #store-name {
-	margin-top: 10px;
 	text-align: center;
 	font-size: 15px;
 	color: #524434;
+	margin-top: auto;
 }
 
 #card:nth-child(n+6) {
@@ -274,10 +281,10 @@ li a {
 .title-box {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    /* align-items: center; */
+	align-items: baseline;
     margin: 30px 10px 10px 0;
     color: #524434;
-    clear: left;
 }
 
 .list-title {
@@ -295,6 +302,10 @@ li a {
 
 /* 슬라이더 */
 /* 슬라이더에서 버튼 표시하지 않았으나 계속해서 노출되어 따로 css 지정해줌 */
+.slick-initialized .slick-slide {
+	display: grid;
+}
+
 .slick-prev, .slick-next {
     display: none !important;
 }
@@ -358,10 +369,10 @@ li a {
     height: 30px;
 }
 
-/* .category > input[type="checkbox"]:checked + label {
-    background-color: yellow;
-    color: white; 
-} */
+.category > input[type="checkbox"]:checked + label {
+    /* background-color: #FBF9F3; */
+	background-color: #EEC595;
+}
 
 /* 더보기 버튼 */
 .more_btn {
@@ -435,11 +446,15 @@ li a {
 	padding: 10px;
 	box-sizing: border-box;
 	background-color: #FBF9F3;
+	border: 2px solid #EAE6D5;
 	width: calc(33.33% - 20px);
 	margin-bottom: 20px;
 	border-radius: 20px;
-	height: 410px;
-	border: 2px solid #EAE6D5;
+	height: auto;
+	min-height: 440px;
+	display: flex;
+	flex-direction: column;
+	/* justify-content: center; */
 }
 
 .recommend {
@@ -464,14 +479,19 @@ li a {
 .recipe-name {
 	text-align: center;
 	font-size: 25px;
+	font-weight: bold;
 	color: #524434;
+	display: flex; /* flexbox 사용 */
+	align-items: center; /* 세로 가운데 정렬 */
+	justify-content: center;
+	height: 100%;
 }
 
 .store-name {
-	margin-top: 10px;
 	text-align: center;
 	font-size: 15px;
 	color: #524434;
+	margin-top: auto;
 }
 
 /* detail.jsp */
@@ -510,7 +530,7 @@ li a {
 
 .content_detail {
     border: 2px solid #EEC595;
-}정
+}
 
 .picture_text {
     display: flex;
@@ -535,13 +555,13 @@ li a {
 
 /* 좋아요 찜 버튼 스타일 적용 */
 .heart_btn {
-    background: #FBF9F3;
+	background: #FFF;
     outline: none;
     border: none;
 }
 
 .star_btn {
-    background: #FBF9F3;
+	background: #FFF;
     color: black;
     outline: none;
     border: none;
@@ -723,7 +743,7 @@ li a {
 .login-box, .join-box {
 	border-radius: 20px;
 	border: 5px solid #EEC595;
-	background: #FFF;
+	background: #FBF9F3;
 	width: 800px;
 	margin: 0 auto;
 	text-align: center;
@@ -755,6 +775,7 @@ li a {
     outline: none;
     height: 26px;
     width: 100%;
+	background-color: #FBF9F3;
 }
 
 /* input 태그 클릭 시 테두리 표시되지 않도록 설정 */
@@ -833,6 +854,7 @@ li a {
     width: 60%;
     outline: none;
     height: 26px;
+	background-color: #FBF9F3;
 }
 
 .input-with-button>button {
@@ -906,7 +928,7 @@ li a {
     margin: 0 auto;
     width: 800px;
     height: 800px;
-    background-color: #FFF8E2;
+    background-color: #FBF9F3;
     position: relative;
 }
 /*동그라미*/
@@ -1003,7 +1025,7 @@ li a {
     left: 30%;
     border: none;
     font-size: 20px;
-    background-color: #FFF8E2;
+    background-color: #FBF9F3;
     outline: none;
     height: 40px;
     width: 400px;
@@ -1028,7 +1050,7 @@ li a {
     left: 30%;
     border: none;
     font-size: 20px;
-    background-color: #FFF8E2;
+    background-color: #FBF9F3;
     outline: none;
     height: 40px;
     width: 400px;
@@ -1123,7 +1145,7 @@ li a {
     left: 30%;
     border: none;
     font-size: 20px;
-    background-color: #FFF8E2;
+    background-color: #FBF9F3;
     outline: none;
     height: 40px;
     width: 400px;
@@ -1136,7 +1158,7 @@ li a {
     left: 30%;
     border: none;
     font-size: 20px;
-    background-color: #FFF8E2;
+    background-color: #FBF9F3;
     outline: none;
     height: 40px;
     width: 400px;
@@ -1150,7 +1172,7 @@ li a {
     left: 30%;
     border: none;
     font-size: 20px;
-    background-color: #FFF8E2;
+    background-color: #FBF9F3;
     outline: none;
     height: 40px;
     width: 400px;
