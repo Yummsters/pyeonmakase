@@ -47,13 +47,13 @@
 	<div class="body_container">
 	<div class="login-box">
 		<div class="mem-title">비밀번호 찾기</div>
-		<form class="login-form">
+		<form class="login-form" >
 			<div class="login-form-wrap">
 				<input type="text" id="name" name="name" required placeholder="이름을 입력하세요" />
 			</div>
 			<div class="login-form-wrap">
 				<input type="text" id="nickname" name="nickname" required placeholder="닉네임을 입력하세요">
-				<span id="nicknameErr"></span><br>
+				<br>
 			</div>
 			<div class="login-form-wrap">
 				<input type="email" id="email" name="email" required placeholder="이메일을 입력하세요">

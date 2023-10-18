@@ -95,7 +95,7 @@ public class MemberServiceImpl implements MemberService{
 	   public String findId(Map<String, Object> paramMap) throws Exception {
 	      return memberDAO.findId(paramMap);
 	   }
-	 //아이디 찾기
+	 //비밀번호 찾기
 	   @Override
 	   public String findPw(Map<String, Object> paramMap) throws Exception {
 	      return memberDAO.findPw(paramMap);

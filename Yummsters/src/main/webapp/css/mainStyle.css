@@ -549,6 +549,12 @@ li a {
     margin-top : 20px;
 }
 
+.picture_register {
+    display: flex;
+    justify-content: center;
+    margin-top : 20px;
+}
+
 /* 썸네일 첨부 */
 .picture input[type="file"] {
     width: 200px;
@@ -708,6 +714,14 @@ li a {
 .title_picture {
 	margin: 0 auto;
 	margin-left: 70px;
+}
+
+.store_category input{
+    accent-color:#EEC595;
+}
+
+.food_category input{
+    accent-color: #FAE3C8;
 }
 
 /* 레시피명 입력칸 관련 스타일 적용 */
@@ -1160,7 +1174,7 @@ li a {
 	box-shadow: 0 10px 320px rgba(0, 0, 0, 0.2);
 	background-color: #EEC595;
 	font-weight: 600;
-	margin-left: 20;
+	margin-left: 20px;
 }
 #confirmButton2{
     width:100px;
