@@ -30,7 +30,7 @@
                         }else{
                             $("#recommand_bnt").attr("src", "imgView?file=heart_empty.png")
                         }
-                        $("#recommandCount").text(response.recommandCount);
+                        $("#recommand_count").text(response.recommandCount);
                     },
                     error:function (error){
                         console.log(error)
@@ -257,7 +257,7 @@
                 </div>
 
                 <div class="right" style="float:right; margin-right: 10px">
-                    <div class="recommand_count" style="text-align: right; margin-bottom:12px;"> 추천수 : ${board.recommand_count}</div>
+                    <div class="recommand_count" style="text-align: right; margin-bottom:12px;"> 추천수 : <span id="recommand_count">${board.recommand_count}</span></div>
                     <div class="recommand_date">${date} &nbsp; ${board.nickname}</div>
                 </div>
 

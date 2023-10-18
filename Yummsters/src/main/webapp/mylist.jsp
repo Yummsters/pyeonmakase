@@ -21,7 +21,7 @@ $(function() {
 
 	// 최상단으로 이동하기 -------------------------------------------------------
 	$(window).scroll(function() { // 버튼 노출
-		if ($(this).scrollTop() > 400) {
+		if ($(this).scrollTop() > 500) {
 			$('#scrollToTop').fadeIn();
 		} else {
 			$('#scrollToTop').fadeOut();
@@ -29,12 +29,16 @@ $(function() {
 	});
 
 	$('#scrollToTop').click(function() { // 버튼 클릭시 상단 스크롤
-		$('html, body').animate({
-			scrollTop : 0}, 
-			500);
+		$('html, body').animate({scrollTop : 0}, 500);
 		return false;
 	});
-)};
+	
+	// 게시글 디테일(boardDetail) 이동 -------------------------------------------------------
+	$(document).on("click", ".card", function() {
+	    var boardId = $(this).find(".boardId").val();
+	    window.location.href = "boardDetail?board_id=" + boardId;
+	});
+});
 </script>
 
 <body>
@@ -57,8 +61,8 @@ $(function() {
 					<div class="thumbnail">
 						<img src="imgView?file=${board.picture}" alt="">
 					</div>
-					<div class="store-name">#${board.store_category_name}</div>
 					<div class="recipe-name">${board.title}</div>
+					<div class="store-name">#${board.store_category_name}</div>
 				</c:if>
 				</div>
 			</c:forEach>
