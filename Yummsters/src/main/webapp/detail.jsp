@@ -115,7 +115,6 @@
                 $.ajax({
                     url : 'reply',
                     type : 'post',
-                    dataType: 'json',
                     data : {'board_id': '<c:out value="${board.board_id}"/>',
                           'content': $("#reply_contents").val()}, //사용자가 입력한 댓글 내용
                     success:function (response){
@@ -123,12 +122,12 @@
                         console.log(response.register);
                         console.log(response.replyList);
 
-                        if(response.login === false){
+                        if(response.length == 0){
                             alert("로그인 후 이용해 주세요.");
                             location.href="login";
                             return false;
                         }
-                        reloadReply(response.replyList);
+                        $("#commentSection").prepend(response); //prepend 앞에 추가
                     },
                     error:function (request, status, error){
                         console.log(error);
@@ -206,21 +205,22 @@
         var isLoading = false; //현재 페이지가 로딩중인지 여부
 
         $(window).on("scroll", function() { //scroll 이벤트 발생 시 실행됨
-           if (isLoading) return;
-           var scrollTop = $(window).scrollTop(); //위로 스크롤된 길이
-           var windowsHeight = $(window).height(); //웹브라우저의 창의 높이
-           var isBottom = scrollTop + windowsHeight > commentSection.offsetTop + commentSection.offsetHeight + 200; //바닥에 갔는지 여부
-           //숫자 10은 약간의 여유 여백. 사용자가 스크롤을 더 아래로 내릴 때 추가 데이터를 로드하는 동작이 보다 자연스럽게 동작
-           
-           if(isBottom) {
-              //만일 현재 마지막 페이지라면
-              if(curPage >= ${totPage}) {
-                 return false; //함수 종료
-              } else {
-                 curPage++; //현재 페이지 1 증가
-                 getList(curPage); //추가로 받을 리스트 ajax 처리
-              }
-           }
+
+        	if (isLoading) return;
+        	var scrollTop = $(window).scrollTop(); //위로 스크롤된 길이
+        	var windowsHeight = $(window).height(); //웹브라우저의 창의 높이
+        	var isBottom = scrollTop + windowsHeight > commentSection.offsetTop + commentSection.offsetHeight + 200; //바닥에 갔는지 여부
+        	//숫자 10은 약간의 여유 여백. 사용자가 스크롤을 더 아래로 내릴 때 추가 데이터를 로드하는 동작이 보다 자연스럽게 동작
+        	
+        	if(isBottom) {
+        		//만일 현재 마지막 페이지라면
+        		if(curPage >= ${totPage}) {
+        			return false; //함수 종료
+        		} else {
+        			curPage++; //현재 페이지 1 증가
+        			getList(curPage); //추가로 받을 리스트 ajax 처리
+        		}
+        	}
         });
         
         //댓글 리스트 불러오기 함수

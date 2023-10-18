@@ -54,14 +54,12 @@ public class Reply extends HttpServlet {
         HttpSession session = req.getSession();
         Member member = (Member) session.getAttribute("member");
 
-
-
         try{
             // 반환할 객체 생성 및 반환 값 넣기
             Map<String, Object> response = new HashMap<>();
 
             if(member == null){
-                response.put("login", false);
+                return; //Json 형식이 아닌 걸로 바꿔서 return 주고 끝내버림. 암것도 출력 x
             }else{
                 // 댓글 객체 생성
                 bean.Reply reply = new bean.Reply();
@@ -72,13 +70,18 @@ public class Reply extends HttpServlet {
                 // 입력한 댓글 정보 저장 및 조회 정보 가져오기
                 BoardService boardService = new BoardServiceImpl();
                 response = boardService.replyRegisterAndList(reply);
-                response.put("login", true);
+//                response.put("login", true);
             }
-
+            
             // JSON 형식으로 응답 변경
-            JSONObject jsonObject = new JSONObject(response);
-            res.getWriter().print(jsonObject.toJSONString());
-            System.out.println(jsonObject.toJSONString());
+//            JSONObject jsonObject = new JSONObject(response);
+//            res.getWriter().print(jsonObject.toJSONString());
+//            System.out.println(jsonObject.toJSONString());
+            
+            //1018 수 혜리 수정
+            req.setAttribute("replyList", response.get("replyList"));
+            req.getRequestDispatcher("/reply.jsp").forward(req, res);
+            
         }catch (Exception e){
             e.printStackTrace();
             req.setAttribute("err", e.getMessage());
