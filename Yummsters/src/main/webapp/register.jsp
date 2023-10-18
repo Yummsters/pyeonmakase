@@ -71,40 +71,9 @@
             })
 
         })
-        // 편의점 및 음식 카테고리를 한 개 이상 선택
-        function categoryCheck(form){
-            var arr_store = document.getElementsByName('store');
-            var arr_food = document.getElementsByName('food');
-
-            var store_num = 0;
-            var food_num = 0;
-
-            // 체크 개수 확인
-            for(var i=0; i<arr_store.length; i++){
-                if(arr_store[i].checked){
-                    store_num++;
-                }
-            }
-
-            for(var i=0; i<arr_food.length; i++){
-                if(arr_food[i].checked){
-                    food_num++;
-                }
-            }
-
-            if(store_num===0){
-                alert('편의점을 하나 이상 선택해주세요.')
-                return false;
-            }
-            if(food_num===0){
-                alert('카테고리를 하나 이상 선택해주세요.')
-                return false;
-            }
-        }
     </script>
 
     <script>
-
         // 음식 카테고리 한 개만 선택 가능
         function foodCheckboxGroup(currentCheckbox) {
             const checkboxes = document.getElementsByName("food");
@@ -118,8 +87,27 @@
                     }
                 }
             }
+
             if (checkedCount === 0) {
                 currentCheckbox.checked = true;
+            }
+        }
+    </script>
+
+    <!-- 썸네일 선택 여부에 따른 text 변경 -->
+    <script>
+        function checkFileSelected() {
+            const fileInput = document.getElementById('file');
+            const fileLabel = document.querySelector('.file-label');
+
+
+            if (fileInput.files.length > 0) {
+                // 파일이 선택된 경우
+                var fileName = fileInput.files[0].name;
+                fileLabel.textContent = '파일 첨부 : '+fileName;
+            } else {
+                // 파일이 선택되지 않은 경우
+                fileLabel.textContent = '썸네일을 등록하세요';
             }
         }
     </script>
@@ -133,7 +121,7 @@
         <!-- 제목 입력 및 취소/저장 버튼 -->
         <div class="register_title" style="font-size:20px">
             레시피명 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input id="title" type="text" name=board_title placeholder="대표 제목을 입력하세요.(30자 이내)" maxlength='30' required> &nbsp;
+            <input id="title" type="text" name=board_title placeholder="레시피명을 입력하세요.(15자 이내)" maxlength='15' required> &nbsp;
             <button class="red" id="cancel" name="cancel" onclick="location.href='mainlist'">
                 취소
             </button>
@@ -144,9 +132,12 @@
         <br>
 
         <!-- 썸네일 선택 -->
-        <div class="picture" style="font-size:20px">
+        <div class="picture" style="font-size: 20px">
             썸네일 선택 &nbsp;
-            <input type="file" name="board_picture" required>
+            <label for="file" class="file-label">
+                썸네일을 등록하세요
+            </label>
+            <input type="file" id="file" name="board_picture" style="display: none;" onchange="checkFileSelected()">
         </div>
     </div>
     <br>

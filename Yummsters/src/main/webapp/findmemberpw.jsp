@@ -47,7 +47,7 @@
 	<div class="body_container">
 	<div class="login-box">
 		<div class="mem-title">비밀번호 찾기</div>
-		<form class="login-form" method="post" action="login">
+		<form class="login-form" method="post" action="findmemberpw">
 			<div class="login-form-wrap">
 				<input type="text" id="name" name="name" required placeholder="이름을 입력하세요" />
 			</div>

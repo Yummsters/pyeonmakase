@@ -29,8 +29,7 @@
                     email: email
                 },
                 success: function(response) {
-                    // 서버에서 받은 응답을 처리
-                   
+                    // 서버에서 받은 응답을 처리                   
                     $('#IdInfo').text(response);
                 },
                 error: function() {
@@ -46,7 +45,7 @@
 	<div class="body_container">
 	<div class="login-box">
 		<div class="mem-title">아이디 찾기</div>
-		<form class="login-form" method="post" action="login">
+		<form class="login-form" method="post" action="findmemberid">
 			<div class="login-form-wrap">
 				<input type="text" id="name" name="name" required placeholder="이름을 입력하세요" />
 			</div>

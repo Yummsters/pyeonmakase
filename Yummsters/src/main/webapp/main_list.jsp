@@ -10,8 +10,7 @@ $(function() {
 	// 체크박스 전체선택, 해제
 	$("#all").click(function() {
 		// 전체 하위 체크박스들을 선택 또는 해제
-		$("input[name='store']").prop("checked",
-				$(this).prop("checked"));
+		$("input[name='store']").prop("checked", $(this).prop("checked"));
 	});
 
 	// 하위 체크박스들 중 하나라도 선택 취소되면 "전체 선택" 체크박스도 선택 취소
@@ -91,9 +90,7 @@ $(function() {
 	});
 
 	$('#scrollToTop').click(function() { // 버튼 클릭시 상단 스크롤
-		$('html, body').animate({
-			scrollTop : 0}, 
-			500);
+		$('html, body').animate({scrollTop : 0}, 500);
 		return false;
 	});
 	
@@ -120,7 +117,7 @@ $(function() {
 			<input type="checkbox" name="store" id="gs" value="GS25" checked> 
 			<label for="gs"><img src="imgView?file=gs.png" alt="" style="height:30px;"></label> 
 			<input type="checkbox" name="store" id="seven" value="SEVEN" checked> 
-			<label for="seven"><img src="imgView?file=seven.png" alt=""></label>
+			<label for="seven"><img src="imgView?file=7eleven.png" alt="" style="width:130px;"></label>
 			<input type="checkbox" name="store" id="etc" value="기타" checked>
 			<label for="etc">기타</label>
 		</div>

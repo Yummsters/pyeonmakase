@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-	<link rel="stylesheet" href="<c:url value='/css/mainStyle.css'/>">
+   <link rel="stylesheet" href="<c:url value='/css/mainStyle.css'/>">
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script type="text/javascript">
         // 추천하기 버튼 클릭 시
@@ -99,7 +99,7 @@
                     alert("code: " + request.status + " message: " + request.responseText + " error: " + error);
                 }
             })  */
-        	getList(1);
+           getList(1);
         }
         
         $(function(){
@@ -115,20 +115,19 @@
                 $.ajax({
                     url : 'reply',
                     type : 'post',
-                    dataType: 'json',
                     data : {'board_id': '<c:out value="${board.board_id}"/>',
-                    		'content': $("#reply_contents").val()}, //사용자가 입력한 댓글 내용
+                          'content': $("#reply_contents").val()}, //사용자가 입력한 댓글 내용
                     success:function (response){
                         console.log(response);
                         console.log(response.register);
                         console.log(response.replyList);
 
-                        if(response.login === false){
+                        if(response.length == 0){
                             alert("로그인 후 이용해 주세요.");
                             location.href="login";
                             return false;
                         }
-                        reloadReply(response.replyList);
+                        $("#commentSection").prepend(response); //prepend 앞에 추가
                     },
                     error:function (request, status, error){
                         console.log(error);
@@ -159,9 +158,9 @@
 
                 // 댓글 정보 가져오기 댓글
                 var commentText = $('<div class="reply_one">' + 
-				'<input type="hidden" class="replyId" value="${reply.reply_id}">' + 
-				'<div class="replyNickname">' + reply.nickname + '</div>' + 
-				'<div class="replyContent">' + reply.content + '</div></div>');
+            '<input type="hidden" class="replyId" value="${reply.reply_id}">' + 
+            '<div class="replyNickname">' + reply.nickname + '</div>' + 
+            '<div class="replyContent">' + reply.content + '</div></div>');
                 commentDiv.append(commentText);
 
                 // 회원에 따라 삭제 버튼을 추가
@@ -172,7 +171,7 @@
                     // 삭제 버튼 클릭 이벤트 처리
                     deleteButton.click(function () {
                         var replyId = reply.reply_id;
-                        deleteReply(replyId);
+                        deleteReply(replyId, event);
                     });
                 }
                 // 생성한 댓글 컨테이너 화면에 추가
@@ -200,17 +199,17 @@
         }
     </script>
     
-    </script>
     <!-- 혜리 작성 부분. 댓글 infinite scroll 구현 -->
     <script type="text/javascript">
         var curPage = 1; //페이지 초기값
         var isLoading = false; //현재 페이지가 로딩중인지 여부
 
         $(window).on("scroll", function() { //scroll 이벤트 발생 시 실행됨
+
         	if (isLoading) return;
         	var scrollTop = $(window).scrollTop(); //위로 스크롤된 길이
         	var windowsHeight = $(window).height(); //웹브라우저의 창의 높이
-        	var isBottom = scrollTop + windowsHeight > commentSection.offsetTop + commentSection.offsetHeight; //바닥에 갔는지 여부
+        	var isBottom = scrollTop + windowsHeight > commentSection.offsetTop + commentSection.offsetHeight + 200; //바닥에 갔는지 여부
         	//숫자 10은 약간의 여유 여백. 사용자가 스크롤을 더 아래로 내릴 때 추가 데이터를 로드하는 동작이 보다 자연스럽게 동작
         	
         	if(isBottom) {
@@ -226,19 +225,19 @@
         
         //댓글 리스트 불러오기 함수
         function getList(curPage) {
-        	if (isLoading) return;
-     		isLoading = true; //위에서 종료되지 않으면 로딩 상태를 true로 변경
-        	$.ajax({
-        		type: "get",
-        		url: "infinitescrollreply",
-        		data: {"board_id" :  ${board_id},
-        			"curPage" : curPage},
-        		success:function(data) {
-        			//서버에서 전송된 데이터를 reply_one에 추가하기
-        			$("#commentSection").append(data);
-        			isLoading = false; //로딩여부를 false로 변경
-        		}
-        	});
+           if (isLoading) return;
+           isLoading = true; //위에서 종료되지 않으면 로딩 상태를 true로 변경
+           $.ajax({
+              type: "get",
+              url: "infinitescrollreply",
+              data: {"board_id" :  ${board_id},
+                 "curPage" : curPage},
+              success:function(data) {
+                 //서버에서 전송된 데이터를 reply_one에 추가하기
+                 $("#commentSection").append(data);
+                 isLoading = false; //로딩여부를 false로 변경
+              }
+           });
         }
     </script>
 
