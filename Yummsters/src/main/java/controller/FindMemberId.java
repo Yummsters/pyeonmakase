@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import service.MemberService;
 import service.MemberServiceImpl;
@@ -32,8 +33,12 @@ public class FindMemberId extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	    HttpSession session = request.getSession();
+	    if (session.getAttribute("member") == null) {
+	    	request.getRequestDispatcher("findmemberid.jsp").forward(request, response);
+	    } else {
+	    	request.getRequestDispatcher("home.jsp").forward(request, response);
+	    }
 	}
 
 	/**

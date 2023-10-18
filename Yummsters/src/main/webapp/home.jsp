@@ -27,7 +27,7 @@
 		$(".card-box > #card").slice(5).hide();
 
 		// 게시글 디테일(boardDetail) 이동
-		$("#card").click(function() {
+		$(".card, #card").click(function() {
 			var boardId = $(this).find(".boardId").val();
 			window.location.href = "boardDetail?board_id=" + boardId;
 		});
@@ -43,16 +43,16 @@
 		<!-- 추천 TOP10 -->
 		<div class="list-title">추천 TOP 10</div>
 		<!-- 카드 부분 db생기면 {data} 반복 돌리기 -->
-		<div class="card-slider">
+		<div class="card-slider" style="min-height: 300px;">
 			<c:forEach var="board" items="${boardListTop10}">
-				<div class="card">
+				<div class="card"  style="display: flex; flex-direction: column;">
 					<c:if test="${not empty boardList}">
 						<input type="hidden" class="boardId" value="${board.board_id}">
-						<div id="recommend">♥ ${board.recommand_count}</div>
+						<div id="recommend" style="">♥ ${board.recommand_count}</div>
 						<div class="thumbnail">
 							<img src="imgView?file=${board.picture}" alt="">
 						</div>
-						<div id="recipe-name">${board.title}</div>
+						<div id="recipe-name" style="height:60px;">${board.title}</div>
 						<div id="store-name">#${board.store_category_name}</div>
 					</c:if>
 				</div>

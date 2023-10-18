@@ -47,7 +47,7 @@
   	naver_id_login.setButton("green", 1, 50);
   	naver_id_login.setDomain("login.jsp"); 
   	naver_id_login.setState(state);
-  	naver_id_login.setPopup(); // 팝업형태로 callbackURL 여는 것
+  	naver_id_login.setPopup();
   	naver_id_login.init_naver_id_login();
   </script>
   
