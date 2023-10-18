@@ -45,7 +45,7 @@
 	<div class="body_container">
 	<div class="login-box">
 		<div class="mem-title">아이디 찾기</div>
-		<form class="login-form" method="post" action="findmemberid">
+		<form class="login-form">
 			<div class="login-form-wrap">
 				<input type="text" id="name" name="name" required placeholder="이름을 입력하세요" />
 			</div>
@@ -56,7 +56,7 @@
 			<div class="login-form-wrap">
 				<input type="email" id="email" name="email" required placeholder="이메일을 입력하세요">
 			</div>
-			<input type="submit" value="아이디 찾기" id="findId">
+			<input type="button" value="아이디 찾기" id="findId">
 		</form>
 			<p>회원님의 아이디는:</p><p id="IdInfo"></p>
 	</div>
