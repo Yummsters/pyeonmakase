@@ -115,7 +115,6 @@
                 $.ajax({
                     url : 'reply',
                     type : 'post',
-                    dataType: 'json',
                     data : {'board_id': '<c:out value="${board.board_id}"/>',
                     		'content': $("#reply_contents").val()}, //사용자가 입력한 댓글 내용
                     success:function (response){
@@ -123,12 +122,12 @@
                         console.log(response.register);
                         console.log(response.replyList);
 
-                        if(response.login === false){
+                        if(response.length == 0){
                             alert("로그인 후 이용해 주세요.");
                             location.href="login";
                             return false;
                         }
-                        reloadReply(response.replyList);
+                        $("#commentSection").prepend(response); //prepend 앞에 추가
                     },
                     error:function (request, status, error){
                         console.log(error);
@@ -172,7 +171,7 @@
                     // 삭제 버튼 클릭 이벤트 처리
                     deleteButton.click(function () {
                         var replyId = reply.reply_id;
-                        deleteReply(replyId);
+                        deleteReply(replyId, event);
                     });
                 }
                 // 생성한 댓글 컨테이너 화면에 추가
@@ -200,7 +199,6 @@
         }
     </script>
     
-    </script>
     <!-- 혜리 작성 부분. 댓글 infinite scroll 구현 -->
     <script type="text/javascript">
         var curPage = 1; //페이지 초기값
@@ -210,7 +208,7 @@
         	if (isLoading) return;
         	var scrollTop = $(window).scrollTop(); //위로 스크롤된 길이
         	var windowsHeight = $(window).height(); //웹브라우저의 창의 높이
-        	var isBottom = scrollTop + windowsHeight > commentSection.offsetTop + commentSection.offsetHeight; //바닥에 갔는지 여부
+        	var isBottom = scrollTop + windowsHeight > commentSection.offsetTop + commentSection.offsetHeight + 200; //바닥에 갔는지 여부
         	//숫자 10은 약간의 여유 여백. 사용자가 스크롤을 더 아래로 내릴 때 추가 데이터를 로드하는 동작이 보다 자연스럽게 동작
         	
         	if(isBottom) {
