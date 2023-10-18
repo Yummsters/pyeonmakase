@@ -107,7 +107,7 @@
                 fileLabel.textContent = '파일 첨부 : '+fileName;
             } else {
                 // 파일이 선택되지 않은 경우
-                fileLabel.textContent = '대표 사진을 등록하세요';
+                fileLabel.textContent = '썸네일을 등록하세요';
             }
         }
     </script>
@@ -121,7 +121,7 @@
         <!-- 제목 입력 및 취소/저장 버튼 -->
         <div class="register_title" style="font-size:20px">
             레시피명 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input id="title" type="text" name=board_title placeholder="대표 제목을 입력하세요.(30자 이내)" maxlength='30' required> &nbsp;
+            <input id="title" type="text" name=board_title placeholder="레시피명을 입력하세요.(15자 이내)" maxlength='15' required> &nbsp;
             <button class="red" id="cancel" name="cancel" onclick="location.href='mainlist'">
                 취소
             </button>
@@ -135,7 +135,7 @@
         <div class="picture" style="font-size: 20px">
             썸네일 선택 &nbsp;
             <label for="file" class="file-label">
-                대표 사진을 등록하세요
+                썸네일을 등록하세요
             </label>
             <input type="file" id="file" name="board_picture" style="display: none;" onchange="checkFileSelected()">
         </div>

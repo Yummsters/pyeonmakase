@@ -523,13 +523,15 @@ li a {
     height: 40px;
     background: #fff;
     border: 5px solid #EEC595;
-    border-radius: 20px;
+    border-radius: 30px;
     cursor: pointer;
     font-size: 20px;
     display: inline-block;
-    text-align: center;
-    line-height: 30px;
+    text-align: left;
+    line-height: 40px;
+    padding-left: 20px;
     color : gray;
+    overflow: hidden;
 }
 
 /* hover 스타일 적용 */

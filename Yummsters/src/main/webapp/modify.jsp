@@ -97,6 +97,23 @@
         }
     </script>
 
+    <!-- 썸네일 선택 여부에 따른 text 변경 -->
+    <script>
+        function checkFileSelected() {
+            const fileInput = document.getElementById('file');
+            const fileLabel = document.querySelector('.file-label');
+
+            if (fileInput.files.length > 0) {
+                // 파일이 선택된 경우
+                var fileName = fileInput.files[0].name;
+                fileLabel.textContent = '파일 첨부 : '+fileName;
+            } else {
+                // 파일이 선택되지 않은 경우
+                fileLabel.textContent = '썸네일을 등록하세요';
+            }
+        }
+    </script>
+
 </head>
 
 <body>
@@ -108,7 +125,7 @@
         <!-- 제목 입력 및 취소/저장 버튼 -->
         <div class="register_title" style="font-size: 20px">
             레시피명 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input id="title" type="text" name=board_title value="${board.title}" required="required"> &nbsp;
+            <input id="title" type="text" name=board_title value="${board.title}" maxlength='15' required="required"> &nbsp;
             <button class="red" id="cancel" name="cancel" onclick="location.href='boardDetail?board_id=${board.board_id}'; return false;">
                 취소
             </button>
@@ -120,7 +137,10 @@
         <!-- 썸네일 선택 -->
         <div class="picture" style="font-size: 20px">
             썸네일 선택 &nbsp;
-            <input type="file" name="board_picture">
+            <label for="file" class="file-label">
+                썸네일을 등록하세요
+            </label>
+            <input type="file" id="file" name="board_picture" style="display: none;" onchange="checkFileSelected()">
         </div>
     </div>
     <br>
