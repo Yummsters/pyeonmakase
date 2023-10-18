@@ -152,7 +152,7 @@
         <input type="checkbox" name="store" id="gs" value="3">
         <label for="gs"><img src="imgView?file=gs.png" style="height:30px" alt=""></label>
         <input type="checkbox" name="store" id="seven" value="4">
-        <label for="seven"><img src="imgView?file=seven.png" alt=""></label>
+        <label for="seven"><img src="imgView?file=7eleven.png" alt="" style="width: 140px; height:45px"></label>        
         <input type="checkbox" name="store" id="etc" value="5">
         <label for="etc">기타</label>
     </div>

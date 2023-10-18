@@ -253,11 +253,11 @@
                 <div style="float:left; width: 700px;" >
                     <div class="title">${board.title}</div>
                     <div style="clear:both"></div>
-                    <div class="store"> 편의점 : ${board.store_category_name}</div>
+                    <div class="store" style="margin-top: 3px;"> 편의점 : ${board.store_category_name}</div>
                 </div>
 
                 <div class="right" style="float:right; margin-right: 10px">
-                    <div class="recommand_count" style="text-align: right"> 추천수 : ${board.recommand_count}</div>
+                    <div class="recommand_count" style="text-align: right; margin-bottom:12px;"> 추천수 : ${board.recommand_count}</div>
                     <div class="recommand_date">${date} &nbsp; ${board.nickname}</div>
                 </div>
 
@@ -267,7 +267,7 @@
 
     <!-- 내용 -->
     <div class="content_detail">
-        <div class="picture"><img src="imgView?file=${board.picture}" alt="" style="width:350px"></div>
+        <div class="picture_register "><img src="imgView?file=${board.picture}" alt="" style="width:350px"></div>
         <br>
 
         <div class="content">
