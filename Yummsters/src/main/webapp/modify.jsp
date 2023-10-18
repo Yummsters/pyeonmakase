@@ -44,7 +44,8 @@
     </script>
 
     <script>
-        $(function() {
+        // 편의점 및 음식 카테고리를 한 개 이상 선택
+         $(function() {
             var store_num = 0;
             var food_num = 0;
             $("#modify").submit(function (e) {
@@ -75,6 +76,7 @@
                 return true;
             })
         })
+
     </script>
     <script>
         // 음식 카테고리 한 개만 선택 가능
@@ -117,6 +119,7 @@
 </head>
 
 <body>
+
 <jsp:include page="header.jsp"/>
 <div class="body_container">
 <form name="recipe_modify" enctype="multipart/form-data" id="modify">
