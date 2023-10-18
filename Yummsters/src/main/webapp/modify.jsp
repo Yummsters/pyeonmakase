@@ -58,7 +58,7 @@
                     return false;
                 }
                 if(food_num===0) {
-                    alert('카테고리를 하나 이상 선택해주세요.')
+                    alert('카테고리를 하나 선택해주세요.')
                     e.preventDefault();
                     return false;
                 }
@@ -246,7 +246,7 @@
     <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
 
     <script>
-        // 에터 객체 생성
+        // 에디터 객체 생성
         const editor = new toastui.Editor({
             el: document.querySelector('#content'), // 에디터를 적용할 요소 (컨테이너)
             height: '500px',                        // 에디터 영역의 높이 값 (OOOpx || auto)

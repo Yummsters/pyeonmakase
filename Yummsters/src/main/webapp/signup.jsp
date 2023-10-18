@@ -44,7 +44,6 @@
             <div class="input-with-button">
             	<input type="password" id="checkPassword" name="checkPassword" required placeholder="비밀번호를 다시 입력하세요"> 
             	<span id="pwErr"></span>
-            	<p id="pwErr"></p>
             </div>  
 
             <div id="signupErr"></div>

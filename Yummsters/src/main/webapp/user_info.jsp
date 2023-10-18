@@ -6,7 +6,7 @@
 $(document).ready(function() {
     // 회원정보 수정 버튼 이벤트 핸들러
     $('#userRegister').click(function() {
-        location.href = "user_modify.jsp";
+        location.href = "usermodify";
     });
                
  // 회원탈퇴 버튼 이벤트 핸들러
@@ -60,7 +60,7 @@ $(document).ready(function() {
               //취소 버튼 클릭 이벤트
                 $('#confirmButton2').click(function() {
                       
-                           location.href = "user_info.jsp";
+                           location.href = "userinfo";
                            // 모달 닫기
                            modal.hide();
                            //모달 배경 닫기

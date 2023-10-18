@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="<c:url value='/css/mainStyle.css'/>">
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script type="text/javascript">
-$(function() {
+$(function() {	
 	// 게시글 더보기 기능 -------------------------------------------------------
 	$(".card-box > .card").slice(12).hide();
     if ($(".card:visible").length === $(".card").length) { // 모든 카드가 출력되어 있는 경우 더보기 버튼 숨기기
@@ -21,7 +21,7 @@ $(function() {
 
 	// 최상단으로 이동하기 -------------------------------------------------------
 	$(window).scroll(function() { // 버튼 노출
-		if ($(this).scrollTop() > 400) {
+		if ($(this).scrollTop() > 500) {
 			$('#scrollToTop').fadeIn();
 		} else {
 			$('#scrollToTop').fadeOut();
@@ -29,12 +29,16 @@ $(function() {
 	});
 
 	$('#scrollToTop').click(function() { // 버튼 클릭시 상단 스크롤
-		$('html, body').animate({
-			scrollTop : 0}, 
-			500);
+		$('html, body').animate({scrollTop : 0}, 500);
 		return false;
 	});
-)};
+	
+	// 게시글 디테일(boardDetail) 이동 -------------------------------------------------------
+	$(document).on("click", ".card", function() {
+	    var boardId = $(this).find(".boardId").val();
+	    window.location.href = "boardDetail?board_id=" + boardId;
+	});
+});
 </script>
 
 <body>

@@ -69,7 +69,7 @@
          </div>
          <input id="check_password" type="password"
             placeholder="변경할 비밀번호를 다시 입력하세요">
-         <p id="pwErr" class="pwErr"></p>
+        <span id="pwErr"></span>
       </div>
       <div class="userline6"></div>
 

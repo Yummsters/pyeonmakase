@@ -137,7 +137,7 @@
             <label for="file" class="file-label">
                 썸네일을 등록하세요
             </label>
-            <input type="file" id="file" name="board_picture" style="display: none;" onchange="checkFileSelected()">
+            <input type="file" id="file" name="board_picture" style="display: none;" onchange="checkFileSelected()" required="required">
         </div>
     </div>
     <br>

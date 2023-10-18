@@ -59,7 +59,7 @@ public class FindMemberId extends HttpServlet {
 	            String memberId = memberService.findId(paramMap);
 
 	            // memberId를 클라이언트에 응답합니다.
-	            response.getWriter().write(memberId != null ? "회원님의 아이디는 ["+ memberId+"]입니다."  : "아이디를 찾을 수 없습니다.");
+	            response.getWriter().write(memberId != null ? "회원님의 아이디는 ["+ memberId+"] 입니다."  : "아이디를 찾을 수 없습니다.");
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	            response.getWriter().write("서비스 처리 중 오류가 발생했습니다.");

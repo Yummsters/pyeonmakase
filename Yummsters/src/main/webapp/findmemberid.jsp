@@ -30,7 +30,7 @@
                 },
                 success: function(response) {
                     // 서버에서 받은 응답을 처리                   
-                    $('#IdInfo').text(response);
+                    $('#IdResult').text(response);
                 },
                 error: function() {
                     alert("서버 오류가 발생했습니다.");
@@ -61,7 +61,7 @@
 			<div class="loginSub">
 				<div class="findIdPw"><a href="login">로그인</a> 하기 / <a href="findmemberpw">비밀번호</a> 찾기</div>
 			</div>
-			<p id="IdInfo"></p>
+			<p id="IdResult"></p>
 	</div>
 	</div>
 	<jsp:include page="footer.jsp" />

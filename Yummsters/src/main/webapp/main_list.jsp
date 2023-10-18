@@ -33,7 +33,7 @@ $(function() {
 	$("input[type='checkbox']").change(function() {
 		// 현재 url의 파라미터 값 추출
 		var storeNames = [];
-		var currentURL =  window.location.href;
+// 		var currentURL =  window.location.href;
 		var urlParam = new URLSearchParams(window.location.search);
 		
 		var foodId = urlParam.get("foodId");
@@ -82,7 +82,7 @@ $(function() {
 
 	// 최상단으로 이동하기 -------------------------------------------------------
 	$(window).scroll(function() { // 버튼 노출
-		if ($(this).scrollTop() > 400) {
+		if ($(this).scrollTop() > 500) {
 			$('#scrollToTop').fadeIn();
 		} else {
 			$('#scrollToTop').fadeOut();
@@ -99,7 +99,6 @@ $(function() {
 	    var boardId = $(this).find(".boardId").val();
 	    window.location.href = "boardDetail?board_id=" + boardId;
 	});
-	
 });
 </script>
 </head>
@@ -131,5 +130,3 @@ $(function() {
 	</div>
 	<jsp:include page="footer.jsp" />
 </body>
-
-</html>
