@@ -149,7 +149,7 @@
         }
     </script>
     
-    <!-- 혜리 작성 부분. 댓글 infinite scroll 구현 -->
+    <!-- 댓글 infinite scroll 구현 -->
     <script type="text/javascript">
         var curPage = 1; //페이지 초기값
         var isLoading = false; //현재 페이지가 로딩중인지 여부
