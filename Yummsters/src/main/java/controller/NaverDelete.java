@@ -33,7 +33,7 @@ public class NaverDelete extends HttpServlet {
 		String url;
     	url = "https://nid.naver.com/oauth2.0/token?grant_type=delete";
     	url += "&client_id=" + "${client_id}";
-    	url += "&client_secret=" + "${client_secret}"; // 이거 숨겨야 함
+    	url += "&client_secret=" + "${client_secret}";
     	url +=  "&access_token=" + token; // 접근 토큰 값
     	url +=  "&service_provider=NAVER";
     	

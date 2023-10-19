@@ -55,7 +55,6 @@ public class Login extends HttpServlet {
 			// 세션 생성 및 "member"라는 이름으로 로그인한 회원 정보 저장
 			HttpSession session = request.getSession();
 			session.setAttribute("member", member);
-			request.getRequestDispatcher("home.jsp").forward(request, response);
 			
 		} catch (Exception e) {
 			response.getWriter().print("fail");

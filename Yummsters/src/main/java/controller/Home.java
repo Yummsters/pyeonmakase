@@ -40,9 +40,8 @@ public class Home extends HttpServlet {
         
         if (storeNameParam != null) {
             storeNames = Arrays.asList(storeNameParam);
-        } else {
-        	System.out.println("기본값-store전체선택");
-        }
+        } 
+        
 		try {
 			BoardService boardService = new BoardServiceImpl();
 			List<Board> boardListTop10 = boardService.boardListTop10();

@@ -81,7 +81,6 @@ $(function() {
         }
         var errMsg = "#" + dataType + "Err";
         $(errMsg).text(msg).css("color", color);
-        console.log(dataType === "nickname" ? nicknameCheck : dataType === "email" ? emailCheck : idCheck);
 	}
     
     // 중복체크 여부 ajax
@@ -115,7 +114,7 @@ $(function() {
                 }
             },
             error: function(err) {
-                console.log(err);
+                alert("에러발생");
             }
         })
     })
