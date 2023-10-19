@@ -163,6 +163,11 @@
             '<div class="replyContent">' + reply.content + '</div></div>');
                 commentDiv.append(commentText);
 
+                // 댓글 날짜 가져오기
+                var regDate = $('<div class="replyRegdate">' + reply.regdate + '</div>');
+                console.log(reply.regdate);
+                commentDiv.append(regDate);
+                
                 // 회원에 따라 삭제 버튼을 추가
                 if (reply.nickname === nickname) {
                     var deleteButton = $('<button class="reply_del" type="button" id="delete_button_' + reply.reply_id + '"> 삭제 </button>');

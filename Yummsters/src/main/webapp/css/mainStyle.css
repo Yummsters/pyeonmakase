@@ -670,13 +670,17 @@ li a {
 	border-radius: 20px;
 	background-color: white;
 	width: 785px;
-	height: 20px;
+	min-height: 20px;
 	margin: 10px 10px 10px 100px;
+	display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .reply_box {
    display:flex;
    align-items: center;
+   position: relative;
 }
 
 .reply_del {
@@ -708,6 +712,14 @@ li a {
 
 .replyContent {
 	float: left;
+	width: 680px;
+}
+
+.replyRegdate {
+	position: absolute;
+    bottom: -5%;
+    left: 78%;
+    font-size: 12px;
 }
 
 /* modify.jsp, register.jsp */

@@ -1,9 +1,9 @@
 package controller;
 
-import bean.Member;
-import org.json.simple.JSONObject;
-import service.BoardService;
-import service.BoardServiceImpl;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,9 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+
+import bean.Member;
+import service.BoardService;
+import service.BoardServiceImpl;
 
 @WebServlet("/reply")
 public class Reply extends HttpServlet {
@@ -66,6 +67,12 @@ public class Reply extends HttpServlet {
                 reply.setBoard_id(board_id);
                 reply.setContent(req.getParameter("content"));
                 reply.setNickname(member.getNickname());
+                
+                LocalDateTime currentDateTime = LocalDateTime.now();
+               
+                reply.setRegdate(currentDateTime);
+                
+                System.out.println(reply.getRegdate());
 
                 // 입력한 댓글 정보 저장 및 조회 정보 가져오기
                 BoardService boardService = new BoardServiceImpl();
