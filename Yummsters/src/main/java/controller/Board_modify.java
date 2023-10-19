@@ -1,20 +1,13 @@
 package controller;
 
-import bean.Board;
-import bean.Board_Store;
-import bean.Member;
-import bean.Store_category;
+import bean.*;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-import service.BoardService;
-import service.BoardServiceImpl;
+import service.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.util.List;
 
@@ -48,10 +41,8 @@ public class Board_modify extends HttpServlet {
                 res.sendRedirect("boardDetail?board_id=" + board_id);
             }else{
                 req.setAttribute("board", board);
-                System.out.println(board.getStore_category_name());
                 req.getRequestDispatcher("modify.jsp").forward(req, res);
             }
-
         }catch (Exception e){
             e.printStackTrace();
             req.setAttribute("err", "게시글 수정 실패");
@@ -82,7 +73,6 @@ public class Board_modify extends HttpServlet {
         board.setContent(content);
         board.setFood_category_id(food_category_id);
 
-
         try{
             BoardService boardService = new BoardServiceImpl();
             // 변경된 내용 게시글 수정 및 편의점 카테고리 삭제
@@ -103,5 +93,4 @@ public class Board_modify extends HttpServlet {
             req.getRequestDispatcher("error.jsp").forward(req, res);
         }
     }
-
 }

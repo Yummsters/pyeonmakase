@@ -2,9 +2,6 @@
 <%@ taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <link rel="stylesheet" href="<c:url value='/css/mainStyle.css'/>">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
    <link rel="stylesheet" href="<c:url value='/css/mainStyle.css'/>">
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script type="text/javascript">
@@ -17,9 +14,6 @@
                     dataType : 'json',
                     data : {'board_id': '<c:out value="${board.board_id}"/>'},
                     success:function (response){
-                        console.log(response);
-                        console.log(response.recommand_select);
-                        console.log(response.recommandCount);
                         if(response.login === false){
                             alert("로그인 후 이용해 주세요.");
                             location.href="login";
@@ -44,16 +38,12 @@
         // 찜하기 버튼 클릭 시
         $(function(){
             $('#wish_bnt').click(function (){
-
                 $.ajax({
                     url : 'wish',
                     type : 'post',
                     dataType : 'json',
                     data : {'board_id': '<c:out value="${board.board_id}"/>'},
                     success:function (response){
-                        console.log(response);
-                        console.log(response.wish_select);
-
                         if(response.login === false){
                             alert("로그인 후 이용해 주세요.");
                             location.href="login";
@@ -196,8 +186,9 @@
 <jsp:include page="header.jsp"/>
 
 <div class="body_container">
+
+    <!-- 제목, 조회수, 추천수 -->
     <div class="all_content">
-        <!-- 제목, 조회수, 추천수 -->
         <div class="content_title">
             <div class="title_store">
                 <div style="float:left; width: 700px;" >
@@ -205,7 +196,6 @@
                     <div style="clear:both"></div>
                     <div class="store" style="margin-top: 3px;"> 편의점 : ${board.store_category_name}</div>
                 </div>
-
                 <div class="right" style="float:right; margin-right: 10px">
                     <div class="recommand_count" style="text-align: right; margin-bottom:12px;"> 추천수 : <span id="recommand_count">${board.recommand_count}</span></div>
                     <div class="recommand_date">${date} &nbsp; ${board.nickname}</div>
@@ -217,16 +207,11 @@
 
     <!-- 내용 -->
     <div class="content_detail">
-        <div class="picture_register "><img src="imgView?file=${board.picture}" alt="" style="width:350px"></div>
-        <br>
-
+        <div class="picture_register "><img src="imgView?file=${board.picture}" alt="" style="width:350px"></div><br>
         <div class="content">
-            <div  style="text-align: center">
-            ${board.content}
-            </div>
-
-         <br><br>
+            <div  style="text-align: center">${board.content}</div><br><br>
         </div>
+
         <!-- 추천하기 버튼 -->
         <button class="heart_btn" style="margin-left:43%"  name="recommand">
         <c:choose>
@@ -240,6 +225,7 @@
             </c:otherwise>
         </c:choose>
         </button>
+
         <!-- 찜하기 버튼 -->
         <button class="star_btn" id="wish" name="wish_bnt">
             <c:choose>
@@ -256,9 +242,7 @@
     </div>
 
     <!-- 수정, 삭제 버튼 -->
-    <!-- 각 페이지로 이동하는 링크 추가 필요 -->
-    <form name="modify_delete">
-    <br>
+    <form name="modify_delete"><br>
         <c:if test="${member.nickname eq board.nickname}">
             <button class="mod_del" type="submit" id="board_modify" name="board_id" value="${board.board_id}" formaction="board_modify?" formmethod="get">
                 수정
@@ -267,16 +251,14 @@
                     formmethod="get"
                     onclick="return boardDeleteCheck();"> 삭제
             </button>
-        </c:if>
-    <br><br><br>
+        </c:if><br><br><br>
     </form>
 
     <div class="all_reply" >
         <div class="reply">
             <textarea class="reply_register" id="reply_contents" placeholder="댓글을 입력하세요."></textarea>
             <button class="reply_bnt" type="submit" id="reply_register" data-reply-member="${member.nickname}" name="reply_register"> 등록 </button>
-        </div>
-        <br>
+        </div><br>
 
         <div class="reply_content" id="commentSection">
         	<!-- 이 부분에 reply.jsp가 나타남 -->
@@ -284,5 +266,4 @@
     </div>
 </div>
 <jsp:include page="footer.jsp"/>
-
 </body>

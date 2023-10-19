@@ -110,8 +110,14 @@ $(document).ready(function() {
 	document.addEventListener("DOMContentLoaded", function () {
 		document.getElementById("kakaoDeleteLink").addEventListener("click", function (event) {
 			event.preventDefault(); // 기본 링크 동작 방지
-
 			var nickname = this.getAttribute('data-member-id');
+
+			// 질문 후 취소 클릭 시 작동 멈춤
+			var message = confirm("정말 탈퇴하시겠습니까? \n 탈퇴하시면 회원정보를 되돌릴 수 없습니다.");
+			if(!message){
+				event.preventDefault();
+				return false;
+			}
 
 			Kakao.API.request({
 				url: '/v1/user/unlink'

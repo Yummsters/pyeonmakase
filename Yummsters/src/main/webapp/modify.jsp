@@ -3,14 +3,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>레시피 수정 페이지</title>
     <link rel="stylesheet" href="<c:url value='/css/mainStyle.css'/>">
 
     <!-- TOAST UI Editor CDN URL(CSS) -->
     <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css"/>
-
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script type="text/javascript">
         $(function() {
@@ -115,11 +111,8 @@
             }
         }
     </script>
-
 </head>
-
 <body>
-
 <jsp:include page="header.jsp"/>
 <div class="body_container">
 <form name="recipe_modify" enctype="multipart/form-data" id="modify">
@@ -134,8 +127,7 @@
             </button>
             <button class="green" type="submit" id="modifyButton" name="modify" formaction="board_modify" formmethod="post" formenctype="multipart/form-data"> 수정
 			</button>
-        </div>
-        <br>
+        </div><br>
 
         <!-- 썸네일 선택 -->
         <div class="picture" style="font-size: 20px">
@@ -145,16 +137,14 @@
             </label>
             <input type="file" id="file" name="board_picture" style="display: none;" onchange="checkFileSelected()">
         </div>
-    </div>
-    <br>
+    </div><br>
 
     <!-- 편의점 선택 -->
     <div class="store_category">
         &nbsp;&nbsp; 편의점 선택 &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
-        <!-- TODO : 이미 선택되어 있는 편의점들 가져와서 체크표시 -->
         <c:set var = "store_category_name" value="${board.store_category_name}"/>
         <c:choose>
-            <c:when test="${fn:contains(store_category_name,'전체')}">
+            <c:when test="${fn:contains(store_category_name,'#CU #GS #SEVEN #기타')}">
                 <input type="checkbox" name="store" id="all" value="1" checked>
             </c:when>
             <c:otherwise>
@@ -174,7 +164,7 @@
         <label for="cu"><img src="imgView?file=cu.png" alt=""></label>
 
         <c:choose>
-            <c:when test="${fn:contains(store_category_name,'GS25')}">
+            <c:when test="${fn:contains(store_category_name,'GS')}">
                 <input type="checkbox" name="store" id="gs" value="3" checked>
             </c:when>
             <c:otherwise>
@@ -184,7 +174,7 @@
         <label for="gs"><img src="imgView?file=gs.png" style="height: 30px" alt=""></label>
 
         <c:choose>
-            <c:when test="${fn:contains(store_category_name,'SevenEleven')}">
+            <c:when test="${fn:contains(store_category_name,'SEVEN')}">
                 <input type="checkbox" name="store" id="seven" value="4" checked>
             </c:when>
             <c:otherwise>
@@ -236,8 +226,7 @@
             </c:otherwise>
         </c:choose>
         <label for="drink">음료</label>
-    </div>
-    <br>
+    </div><br>
 
     <!-- 토스트 에디터 넣기 -->
     <div id="content"></div>
@@ -258,7 +247,6 @@
 
     <!-- 토스트 에디터에 작성한 내용 디비 저장을 위한 div -->
     <input type="hidden" name="editorContent" id="editorContent" value="">
-
 </form>
 </div>
 <jsp:include page="footer.jsp"/>

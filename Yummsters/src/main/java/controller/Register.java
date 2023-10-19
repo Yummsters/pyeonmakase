@@ -5,16 +5,12 @@ import bean.Board_Store;
 import bean.Member;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-import service.BoardService;
-import service.BoardServiceImpl;
+import service.*;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 
 
 @WebServlet("/register")
@@ -26,12 +22,10 @@ public class Register extends HttpServlet {
             res.sendRedirect("login");
             return;
         }
-
         req.getRequestDispatcher("register.jsp").forward(req, res);
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        // TODO : 레시피 관련 DB 저장 로직 작성 필요
         req.setCharacterEncoding("utf-8");
 
         // 이미지 업로드 관련 코드 및 입력 정보 가져오기
@@ -43,8 +37,6 @@ public class Register extends HttpServlet {
         String content = multi.getParameter("editorContent");
         Integer food_category_id  = Integer.parseInt(multi.getParameter("food"));
         String[] store_category = multi.getParameterValues("store");
-
-        System.out.println("content = " + content);
 
         // 로그인 한 회원 조회
         HttpSession session = req.getSession();
@@ -75,7 +67,6 @@ public class Register extends HttpServlet {
             }
             res.sendRedirect("mainlist");
         }catch (Exception e){
-            // TODO : 에러가 날 경우 어떻게 처리할지 논의 필요
             e.printStackTrace();
             req.setAttribute("err", e.getMessage());
             req.getRequestDispatcher("error.jsp").forward(req, res);
