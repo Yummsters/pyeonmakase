@@ -15,9 +15,7 @@
 				<button class="reply_del" type="button"
 					id="delete_button_${reply.reply_id}" onclick="deleteReply(${reply.reply_id}, event)">삭제</button>
 			</c:if>
-			<div class="replyRegdate">
-				<fmt:formatDate value="${reply.regdate}" pattern="yyyy-MM-dd HH:mm:ss" />
-			</div>
+			<div class="replyRegdate">${reply.regdate}</div>
 		</div>
 	</c:if>
 </c:forEach>

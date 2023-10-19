@@ -151,25 +151,12 @@ public class BoardServiceImpl implements BoardService{
     public Map<String, Object> replyRegisterAndList(Reply reply) throws Exception {
         Map<String, Object> response = new HashMap<>();
         Integer board_id = reply.getBoard_id();
-
-        // 댓글 저장
-        try{
-            boardDao.insertReply(reply);
-            response.put("register", true);
-        }catch (Exception e){
-            response.put("register", false);
-        }
-
-        // 댓글 조회
-//        List<Reply> replyList = boardDao.selectReplyList(board_id, 1);
-//        JSONArray jsonArray = new JSONArray(replyList);
-//        response.put("replyList", jsonArray);
-//        return response;
         
         //1018 혜리 수정
         List<Reply> replyList = new ArrayList<>();
         try {
-        	replyList.add(reply);
+        	Reply new_reply =  boardDao.selectReply(reply.getReply_id());
+        	replyList.add(new_reply);
         	response.put("replyList", replyList);
         } catch(Exception e) {
         	e.printStackTrace();
@@ -179,8 +166,7 @@ public class BoardServiceImpl implements BoardService{
         //이미 불러와져 있는 댓글은 놔두고 방금 작성한 댓글, 즉 최신 댓글 1개만 불러오게(ServiceImpl)
         //불러온 댓글을 setAttribute로 해서 reply.jsp로 보내고(Reply.java servlet)
         //#commentSection 가장 위에 추가하도록 하기(ajax)
-        
-        
+           
     }
 
     // 게시글에 따른 댓글 조회
@@ -280,6 +266,13 @@ public class BoardServiceImpl implements BoardService{
 	public Integer selectReplyCount(Integer board_id) throws Exception {
 		return boardDao.selectReplyCount(board_id);
 	}
+
+	@Override
+	public Reply selectReply(Integer reply_id) throws Exception {
+		Reply reply = boardDao.selectReply(reply_id);
+    	return reply;
+	}
+
 }
 
 

@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -67,16 +68,10 @@ public class Reply extends HttpServlet {
                 reply.setBoard_id(board_id);
                 reply.setContent(req.getParameter("content"));
                 reply.setNickname(member.getNickname());
-                
-                LocalDateTime currentDateTime = LocalDateTime.now();
-               
-                reply.setRegdate(currentDateTime);
-                
-                System.out.println(reply.getRegdate());
-
                 // 입력한 댓글 정보 저장 및 조회 정보 가져오기
                 BoardService boardService = new BoardServiceImpl();
                 response = boardService.replyRegisterAndList(reply);
+                
 //                response.put("login", true);
             }
             
@@ -86,6 +81,7 @@ public class Reply extends HttpServlet {
 //            System.out.println(jsonObject.toJSONString());
             
             //1018 수 혜리 수정
+            System.out.println(response.get("replyList"));
             req.setAttribute("replyList", response.get("replyList"));
             req.getRequestDispatcher("/reply.jsp").forward(req, res);
             
