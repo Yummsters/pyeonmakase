@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import service.BoardService;
 import service.BoardServiceImpl;
-import util.Pager;
 
 import bean.Reply;
 
