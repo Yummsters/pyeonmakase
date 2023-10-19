@@ -85,20 +85,6 @@
         };
         
         function loadInitReply(){
-            /* $.ajax({
-                url : 'reply_init',
-                type : 'get',
-                dataType : 'json',
-                data : {'board_id': '<c:out value="${board.board_id}"/>'},
-                success:function(response){
-                    console.log(response.replyList);
-                    reloadReply(response.replyList);
-                },
-                error:function (request, status, error){
-                    console.log(error);
-                    alert("code: " + request.status + " message: " + request.responseText + " error: " + error);
-                }
-            })  */
            getList(1);
         }
         
@@ -119,7 +105,6 @@
                           'content': $("#reply_contents").val()}, //사용자가 입력한 댓글 내용
                     success:function (response){
                         console.log(response);
-                        //console.log(response.replyList);
 
                         if(response.length == 0){
                             alert("로그인 후 이용해 주세요.");
@@ -143,46 +128,6 @@
             var replyId = $(this).data('reply-id'); // data-reply-id에서 reply_id 값을 읽어옴
             deleteReply(replyId);
         });
-            
-        // 댓글 등록 로직
-        function reloadReply(replyList) {
-            var nickname = member.nickname;
-
-            var commentSection = $("#commentSection");
-            commentSection.empty();
-
-            $.each(replyList, function (index, reply) {
-                // 댓글 컨테이너 생성
-                var commentDiv = $('<div class="reply_box"></div>');
-
-                // 댓글 정보 가져오기 댓글
-                var commentText = $('<div class="reply_one">' + 
-            '<input type="hidden" class="replyId" value="${reply.reply_id}">' + 
-            '<div class="replyNickname">' + reply.nickname + '</div>' + 
-            '<div class="replyContent">' + reply.content + '</div></div>');
-                commentDiv.append(commentText);
-                
-                // 회원에 따라 삭제 버튼을 추가
-                if (reply.nickname === nickname) {
-                    var deleteButton = $('<button class="reply_del" type="button" id="delete_button_' + reply.reply_id + '"> 삭제 </button>');
-                    commentDiv.append(deleteButton);
-
-                    // 삭제 버튼 클릭 이벤트 처리
-                    deleteButton.click(function () {
-                        var replyId = reply.reply_id;
-                        deleteReply(replyId, event);
-                    });
-                }
-                
-                // 댓글 날짜 가져오기
-                var regDate = $('<div class="replyRegdate">' + reply.regdate + '</div>');
-                console.log(reply.regdate);
-                commentDiv.append(regDate);
-                
-                // 생성한 댓글 컨테이너 화면에 추가
-                commentSection.append(commentDiv);
-            });
-        }
 
         // 댓글 삭제 로직. parameter 추가, success 부분 수정
         function deleteReply(replyId, event){
@@ -334,14 +279,7 @@
         <br>
 
         <div class="reply_content" id="commentSection">
-        <!--  style="height: 320px;  overflow:auto;" -->
-                <!-- <div class="reply_one"> -->
-                    <!--<div style="display: inline-block;"><label> ${reply.nickname} </label></div>
-                    <div style="display: inline-block;"> ${reply.content} </div>-->
-                <!-- </div> -->
-                <!-- <c:if test="${reply.nickname eq member.nickname}">
-                    <button class="reply_del" type="button" data-reply-id="${reply.reply_id}" data-reply-member="${member.nickname}"> 삭제 </button>
-                </c:if>-->
+        	<!-- 이 부분에 reply.jsp가 나타남 -->
         </div>
     </div>
 </div>

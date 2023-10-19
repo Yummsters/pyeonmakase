@@ -71,4 +71,5 @@ public interface BoardDAO {
     List<Reply> selectReplyList(@Param("bord_id")Integer board_id, @Param("curPage") Integer curPage) throws Exception; // 전체 댓글 조회
 
     Integer selectReplyCount(Integer board_id) throws Exception;
+
 }
