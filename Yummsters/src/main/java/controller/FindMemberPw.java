@@ -46,7 +46,6 @@ public class FindMemberPw extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		 response.setCharacterEncoding("UTF-8");
-	   // 클라이언트에서 받은 파라미터를 이용하여 Map을 만듭니다.
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("member_name", request.getParameter("member_name"));
         paramMap.put("nickname", request.getParameter("nickname"));
@@ -56,7 +55,7 @@ public class FindMemberPw extends HttpServlet {
 
         try {
             // MemberService를 통해 아이디를 찾습니다.
-            MemberService memberService = new MemberServiceImpl(); // MemberService에 대한 의존성 주입 필요
+            MemberService memberService = new MemberServiceImpl(); 
             String memberPw = memberService.findPw(paramMap);
             // memberId를 클라이언트에 응답합니다.
             response.getWriter().write(memberPw != null ? "회원님의 아이디는 ["+ memberPw+"]입니다." : "비밀번호를 찾을 수 없습니다.");
