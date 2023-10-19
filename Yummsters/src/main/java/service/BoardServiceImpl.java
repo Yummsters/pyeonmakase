@@ -150,39 +150,20 @@ public class BoardServiceImpl implements BoardService{
     @Override
     public Map<String, Object> replyRegisterAndList(Reply reply) throws Exception {
         Map<String, Object> response = new HashMap<>();
-        Integer board_id = reply.getBoard_id();
+
+        boardDao.insertReply(reply);
         
         //1018 혜리 수정
         List<Reply> replyList = new ArrayList<>();
-        try {
-        	Reply new_reply =  boardDao.selectReply(reply.getReply_id());
-        	replyList.add(new_reply);
-        	response.put("replyList", replyList);
-        } catch(Exception e) {
-        	e.printStackTrace();
-        }
-        return response;
-
-        //이미 불러와져 있는 댓글은 놔두고 방금 작성한 댓글, 즉 최신 댓글 1개만 불러오게(ServiceImpl)
-        //불러온 댓글을 setAttribute로 해서 reply.jsp로 보내고(Reply.java servlet)
-        //#commentSection 가장 위에 추가하도록 하기(ajax)
-           
+    	Reply new_reply =  boardDao.selectReply(reply.getReply_id());
+    	replyList.add(new_reply);
+    	response.put("replyList", replyList);
+        return response; 
     }
 
     // 게시글에 따른 댓글 조회
     @Override
     public List<Reply> selectReplyList(Integer board_id, Integer curPage) throws Exception {
-//        // 댓글 조회
-//        Map<String, Object> response = new HashMap<>();
-//        List<Reply> replyList = boardDao.selectReplyList(board_id);
-//        JSONArray jsonArray = new JSONArray(replyList);
-//        response.put("replyList", jsonArray);
-//
-//        // JSON 형식으로 응답 변경
-//        JSONObject jsonObject = new JSONObject(response);
-//        return jsonObject.toJSONString();
-//    }
-    	//수정한 코드
     	List<Reply> replyList = boardDao.selectReplyList(board_id, curPage);
     	return replyList;
     }
@@ -243,11 +224,6 @@ public class BoardServiceImpl implements BoardService{
 	public List<Board> boardAllList(List<String> storeNames) throws Exception {
 		return boardDao.selectBoardList(storeNames);
 	}
-    // main-list by food
-//	@Override
-//	public List<Board> boardListByFood(Integer foodId) throws Exception {
-//		return boardDao.selectBoardByFood(foodId);
-//	}
 	
 	// 키워드 검색
 	@Override
