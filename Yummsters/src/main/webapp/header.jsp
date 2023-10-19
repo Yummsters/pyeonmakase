@@ -25,7 +25,7 @@ $(function() {
         </div>
         <nav>
         <c:choose>
-        	<c:when test="${not empty member}">
+        	<c:when test="${empty member}">
 	            <ul>
 	                <li><a href="signup">회원<br>가입</a></li>
 	                <li><a href="login">로그인</a></li>

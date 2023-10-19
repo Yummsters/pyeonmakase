@@ -119,8 +119,7 @@
                           'content': $("#reply_contents").val()}, //사용자가 입력한 댓글 내용
                     success:function (response){
                         console.log(response);
-                        console.log(response.register);
-                        console.log(response.replyList);
+                        //console.log(response.replyList);
 
                         if(response.length == 0){
                             alert("로그인 후 이용해 주세요.");
@@ -162,7 +161,7 @@
             '<div class="replyNickname">' + reply.nickname + '</div>' + 
             '<div class="replyContent">' + reply.content + '</div></div>');
                 commentDiv.append(commentText);
-
+                
                 // 회원에 따라 삭제 버튼을 추가
                 if (reply.nickname === nickname) {
                     var deleteButton = $('<button class="reply_del" type="button" id="delete_button_' + reply.reply_id + '"> 삭제 </button>');
@@ -174,6 +173,12 @@
                         deleteReply(replyId, event);
                     });
                 }
+                
+                // 댓글 날짜 가져오기
+                var regDate = $('<div class="replyRegdate">' + reply.regdate + '</div>');
+                console.log(reply.regdate);
+                commentDiv.append(regDate);
+                
                 // 생성한 댓글 컨테이너 화면에 추가
                 commentSection.append(commentDiv);
             });

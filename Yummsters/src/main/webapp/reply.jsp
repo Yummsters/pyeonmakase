@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:forEach var="reply" items="${replyList}">
 	<c:if test="${not empty reply}">
@@ -14,6 +15,7 @@
 				<button class="reply_del" type="button"
 					id="delete_button_${reply.reply_id}" onclick="deleteReply(${reply.reply_id}, event)">삭제</button>
 			</c:if>
+			<div class="replyRegdate">${reply.regdate}</div>
 		</div>
 	</c:if>
 </c:forEach>

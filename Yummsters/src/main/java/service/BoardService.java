@@ -54,4 +54,7 @@ public interface BoardService {
     void modifyBoard(Board board, Integer board_id) throws Exception; // 게시글 수정 및 편의점 카테고리 삭성
 
     Integer selectReplyCount(Integer board_id) throws Exception; // 댓글 개수 count
+
+    Reply selectReply(Integer reply_id) throws Exception; // 댓글 하나 조회
+
 }
