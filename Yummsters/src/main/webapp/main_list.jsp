@@ -112,7 +112,7 @@ $(function() {
 			<label for="all">전체</label>
 			<input type="checkbox" name="store" id="cu" value="CU" checked> 
 			<label for="cu"><img src="imgView?file=cu.png" alt=""></label> 
-			<input type="checkbox" name="store" id="gs" value="GS25" checked> 
+			<input type="checkbox" name="store" id="gs" value="GS" checked> 
 			<label for="gs"><img src="imgView?file=gs.png" alt="" style="height:30px;"></label> 
 			<input type="checkbox" name="store" id="seven" value="SEVEN" checked> 
 			<label for="seven"><img src="imgView?file=7eleven.png" alt="" style="width:130px; height:45px;"></label>
