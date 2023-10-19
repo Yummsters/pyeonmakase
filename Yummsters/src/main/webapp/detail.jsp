@@ -3,11 +3,14 @@
 <link rel="stylesheet" href="<c:url value='/css/mainStyle.css'/>">
 <head>
    <link rel="stylesheet" href="<c:url value='/css/mainStyle.css'/>">
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js">
+    </script><script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
     <script type="text/javascript">
         // 추천하기 버튼 클릭 시
-        $(function(){
+        $(function(){      	
             $('#recommand_bnt').click(function (){
+            	
                 $.ajax({
                     url : 'recommand',
                     type : 'post',
@@ -15,23 +18,37 @@
                     data : {'board_id': '<c:out value="${board.board_id}"/>'},
                     success:function (response){
                         if(response.login === false){
-                            alert("로그인 후 이용해 주세요.");
-                            location.href="login";
-                            return false;
-                        }
-                        if(response.recommand_select){
-                            $("#recommand_bnt").attr("src", "imgView?file=heart_fill.png")
-                        }else{
-                            $("#recommand_bnt").attr("src", "imgView?file=heart_empty.png")
-                        }
-                        $("#recommand_count").text(response.recommandCount);
-                    },
-                    error:function (error){
-                        console.log(error)
-                    }
-                })
-            })
-        })
+                        	 swal({
+                        		 title: '로그인 후 이용해 주세요.',
+                        		    icon: 'warning',
+                        		    buttons: {
+                        		        confirm: {
+                        		            text: '예',
+                        		            value: true,
+                        		            visible: true,
+                        		            className: 'swal-custom' // 사용자 정의 클래스 추가
+                        		        }
+                        		    }
+                        		}).then((result) => {
+                        		    if (result) {
+                        		        location.href = "login";
+                        		    }
+                        		});
+                             return false;
+                         }
+                         if (response.recommand_select) {
+                             $("#recommand_bnt").attr("src", "imgView?file=heart_fill.png")
+                         } else {
+                             $("#recommand_bnt").attr("src", "imgView?file=heart_empty.png")
+                         }
+                         $("#recommand_count").text(response.recommandCount);
+                     },
+                     error: function (error) {
+                         console.log(error)
+                     }
+                 });
+             });
+         });
     </script>
 
     <script type="text/javascript">
@@ -45,10 +62,24 @@
                     data : {'board_id': '<c:out value="${board.board_id}"/>'},
                     success:function (response){
                         if(response.login === false){
-                            alert("로그인 후 이용해 주세요.");
-                            location.href="login";
-                            return false;
-                        }
+                        	 swal({
+                        		 title: '로그인 후 이용해 주세요.',
+                        		    icon: 'warning',
+                        		    buttons: {
+                        		        confirm: {
+                        		            text: '예',
+                        		            value: true,
+                        		            visible: true,
+                        		            className: 'swal-custom' // 사용자 정의 클래스 추가
+                        		        }
+                        		    }
+                        		}).then((result) => {
+                        		    if (result) {
+                        		        location.href = "login";
+                        		    }
+                        		});
+                             return false;
+                         }
                         if(response.wish_select){
                             $("#wish_bnt").attr("src", "imgView?file=star_fill.png")
                         }else{
