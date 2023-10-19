@@ -57,7 +57,7 @@ public class BoardDetail extends HttpServlet {
                     req.setAttribute("wish_select", false);
                 }
             }
-            //혜리 추가
+            
             Integer count = boardService.selectReplyCount(board_id);
             Integer curPage = 1;
             Pager page = new Pager(count, curPage);
@@ -71,10 +71,5 @@ public class BoardDetail extends HttpServlet {
             req.setAttribute("err", "레시피 조회 실패");
             req.getRequestDispatcher("error.jsp").forward(req, res);
         }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-
     }
 }

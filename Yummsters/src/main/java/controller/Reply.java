@@ -60,7 +60,7 @@ public class Reply extends HttpServlet {
             Map<String, Object> response = new HashMap<>();
 
             if(member == null){
-                return; //Json 형식이 아닌 걸로 바꿔서 return 주고 끝내버림. 암것도 출력 x
+                return;
             }else{
                 // 댓글 객체 생성
                 bean.Reply reply = new bean.Reply();
