@@ -72,11 +72,14 @@ $(document).ready(function() {
 
     $('#naverDelete').click(function() {
         var message = confirm("정말 탈퇴하시겠습니까? \n 탈퇴하시면 회원정보를 되돌릴 수 없습니다.");
+        if(!message){
+			event.preventDefault();
+			return false;
+		}
 	    $.ajax({
 	        url: "naverDelete",
 	        type: "POST",
 	        success: function (response) {
-	            alert("탈퇴통신성공");
                 $.ajax({
                     url: 'memberdelete',
                     type: 'POST',
@@ -94,7 +97,7 @@ $(document).ready(function() {
 	            location.href = "home";
 	        },
 	        error: function (res) {
-	            alert("탈퇴통신실패");
+	            alert("탈퇴통신실패" + res);
 	        }
 	    });
     });

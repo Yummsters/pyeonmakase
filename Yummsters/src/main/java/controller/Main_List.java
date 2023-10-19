@@ -46,7 +46,6 @@ public class Main_List extends HttpServlet {
             storeNames = Arrays.asList(storeNameParam);
         } else {
         	storeNames = Arrays.asList(defaultStoreName);
-        	System.out.println("기본값-store전체선택"+storeNames);
         }
 
         try {
@@ -66,12 +65,10 @@ public class Main_List extends HttpServlet {
             request.setAttribute("foodId", foodId);
             request.setAttribute("storeNames", storeNames);
             
-            System.out.println("success, foodId: " + foodId + ", keyword: " + keyword + ", storeNames: " + storeNames);
             request.getRequestDispatcher("main_list.jsp").forward(request, response);
             
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println(e.getMessage());
         }
     }
     
@@ -87,8 +84,6 @@ public class Main_List extends HttpServlet {
         
         if (storeNameParam != null) {
             storeNames = Arrays.asList(storeNameParam);
-        } else {
-        	System.out.println("기본값-store전체선택");
         }
 
         try {
@@ -108,7 +103,6 @@ public class Main_List extends HttpServlet {
             request.setAttribute("foodId", foodId);
             request.setAttribute("storeNames", storeNames);
             
-            System.out.println("success, foodId: " + foodId + ", keyword: " + keyword + ", storeNames: " + storeNames);
             request.getRequestDispatcher("boardCard.jsp").forward(request, response);
             
         } catch (Exception e) {

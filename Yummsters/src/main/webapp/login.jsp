@@ -13,7 +13,7 @@
 	<div class="login-box">
 		<div class="mem-title">로그인</div>
 
-		<form class="login-form" method="post" action="login">
+		<form class="login-form">
 			<div class="login-form-wrap">
 				<input type="text" id="id" name="id" required
 					placeholder="아이디를 입력하세요" />
@@ -26,8 +26,7 @@
 			<input type="submit" value="로그인" id="loginBtn">
 
 			<div class="loginSub">
-				<div class="join">회원이 아니신가요? <a href="signup">회원가입</a></div>
-				<div class="findIdPw"><a href="findmemberid">아이디</a>/<a href="findmemberpw">비밀번호</a>를 잊으셨나요?</div>
+				<div class="join"><a href="signup">회원가입</a> | <a href="findmemberid">아이디찾기</a> | <a href="findmemberpw">비밀번호찾기</a></div>
 			</div>
 		</form>
 
@@ -42,7 +41,7 @@
 </body>
 
   <script type="text/javascript">
-  	var naver_id_login = new naver_id_login("${client_id} ", "http://localhost:8090/naverLogin.jsp");
+  	var naver_id_login = new naver_id_login("${client_id}", "http://localhost:8090/naverLogin.jsp");
   	var state = naver_id_login.getUniqState();
   	naver_id_login.setButton("green", 1, 50);
   	naver_id_login.setDomain("login.jsp"); 
@@ -51,7 +50,6 @@
   	naver_id_login.init_naver_id_login();
   </script>
   
-
 <script>
     $(function () {
         $("#loginBtn").click(function (e) {
@@ -65,11 +63,9 @@
                 data: { id: id, password: password}, // 서버로 보낼 데이터
                 success: function (res) {
                     if (res === "fail") {
-                        console.log("로그인 실패");
                         $("#loginErr").text("아이디 또는 비밀번호를 잘못 입력했습니다").css("color", "red");
                     } else {
                         $(".loginForm").submit();
-                        console.log("로그인 성공");
                         history.pushState(null, null, "./");
                         window.location.reload();
                     }

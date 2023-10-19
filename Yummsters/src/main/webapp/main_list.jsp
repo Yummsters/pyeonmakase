@@ -33,7 +33,6 @@ $(function() {
 	$("input[type='checkbox']").change(function() {
 		// 현재 url의 파라미터 값 추출
 		var storeNames = [];
-// 		var currentURL =  window.location.href;
 		var urlParam = new URLSearchParams(window.location.search);
 		
 		var foodId = urlParam.get("foodId");

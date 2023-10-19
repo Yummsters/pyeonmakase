@@ -182,7 +182,6 @@
             </c:otherwise>
         </c:choose>
         <label for="gs"><img src="imgView?file=gs.png" style="height: 30px" alt=""></label>
-
         <c:choose>
             <c:when test="${fn:contains(store_category_name,'SevenEleven')}">
                 <input type="checkbox" name="store" id="seven" value="4" checked>
