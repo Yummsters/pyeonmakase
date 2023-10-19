@@ -4,7 +4,6 @@
 <head>
     <!-- TOAST UI Editor CDN URL(CSS) -->
     <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css"/>
-
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script type="text/javascript">
         $(function() {
@@ -44,7 +43,6 @@
             $("#register").submit(function (e) {
                 store_num = $("input[name='store']:checked").length;
                 food_num = $("input[name='food']:checked").length;
-
 
                 if(store_num===0){
                     alert('편의점을 하나 이상 선택해주세요.')
@@ -100,7 +98,6 @@
             const fileInput = document.getElementById('file');
             const fileLabel = document.querySelector('.file-label');
 
-
             if (fileInput.files.length > 0) {
                 // 파일이 선택된 경우
                 var fileName = fileInput.files[0].name;
@@ -122,21 +119,14 @@
         <div class="register_title" style="font-size:20px">
             레시피명 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <input id="title" type="text" name=board_title placeholder="레시피명을 입력하세요.(15자 이내)" maxlength='15' required> &nbsp;
-            <button class="red" id="cancel" name="cancel" onclick="location.href='mainlist'">
-                취소
-            </button>
-            <button class="green" type="submit" id="registerButton" name="register" >
-                등록
-            </button>
-        </div>
-        <br>
+            <button class="red" id="cancel" name="cancel" onclick="location.href='mainlist'">취소</button>
+            <button class="green" type="submit" id="registerButton" name="register" >등록</button>
+        </div><br>
 
         <!-- 썸네일 선택 -->
         <div class="picture" style="font-size: 20px">
             썸네일 선택 &nbsp;
-            <label for="file" class="file-label">
-                썸네일을 등록하세요
-            </label>
+            <label for="file" class="file-label">썸네일을 등록하세요</label>
             <input type="file" id="file" name="board_picture" style="display: none;" onchange="checkFileSelected()" required="required">
         </div>
     </div>
@@ -185,13 +175,10 @@
             previewStyle: 'vertical'
             // 마크다운 ß프리뷰 스타일 (tab || vertical)
         });
-
-        console.log(editor.getHTML());
     </script>
 
     <!-- 토스트 에디터에 작성한 내용 디비 저장을 위한 div -->
     <input type="hidden" name="editorContent" id="editorContent" value="">
-
 </form>
 </div>
 <jsp:include page="footer.jsp"/>

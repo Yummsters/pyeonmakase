@@ -89,20 +89,16 @@
 
 <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-
 <script>
     Kakao.init('${kakao.script.key}'); // commit 할 때는 얘 제외하고 하기
-
     function kakaoLogin() {
         Kakao.Auth.login({
             success: function () {
                 Kakao.API.request({
                     url: '/v2/user/me',
                     success: function (response2) {
-                        console.log(response2);
                         var email = response2.kakao_account.email;
                         var nickname = response2.kakao_account.profile.nickname;
-
                         $.ajax({
                             url: 'kakaoLogin',
                             type: 'post',
@@ -122,7 +118,6 @@
                                 }
                             },
                             error: function (request, status, error, response) {
-								console.log(response);
                                 console.log(error);
                                 alert("code: " + request.status + " message: " + request.responseText + " error: " + error);
                             }

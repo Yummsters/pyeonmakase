@@ -2,26 +2,16 @@ package controller;
 
 import bean.Member;
 import org.json.simple.JSONObject;
-import service.BoardService;
-import service.BoardServiceImpl;
+import service.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @WebServlet("/wish")
 public class Wish extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-
-    }
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         req.setCharacterEncoding("utf-8");
@@ -32,8 +22,6 @@ public class Wish extends HttpServlet {
 
         // 찜하기 버튼 클릭 시 넘겨준 게시글 아이디를 이용해 어떤 게시글인지 판별 후 찜하기 여부 처리
         Integer board_id = Integer.parseInt(req.getParameter("board_id"));
-
-
 
         try{
             BoardService boardService = new BoardServiceImpl();
@@ -59,6 +47,5 @@ public class Wish extends HttpServlet {
             req.setAttribute("err", e.getMessage());
             req.getRequestDispatcher("/error.jsp").forward(req, res);
         }
-
     }
 }
