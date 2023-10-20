@@ -4,6 +4,7 @@
 <head>
    <link rel="stylesheet" href="<c:url value='/css/mainStyle.css'/>">
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script type="text/javascript">
         // 추천하기 버튼 클릭 시
         $(function(){
@@ -15,9 +16,24 @@
                     data : {'board_id': '<c:out value="${board.board_id}"/>'},
                     success:function (response){
                         if(response.login === false){
-                            alert("로그인 후 이용해 주세요.");
-                            location.href="login";
-                            return false;
+                        	swal({
+                                title: '로그인 후 이용해 주세요.',
+                                   icon: 'warning',
+                                   buttons: {
+                                       confirm: {
+                                           text: '확인',
+                                           value: true,
+                                           visible: true,
+                                           className: 'swal-custom' // 사용자 정의 클래스 추가
+                                       }
+                                   }
+                               }).then((result) => {
+                                   if (result) {
+                                       location.href = "login";
+                                   }
+                               });
+                              return false;
+                          
                         }
                         if(response.recommand_select){
                             $("#recommand_bnt").attr("src", "imgView?file=heart_fill.png")
@@ -45,9 +61,24 @@
                     data : {'board_id': '<c:out value="${board.board_id}"/>'},
                     success:function (response){
                         if(response.login === false){
-                            alert("로그인 후 이용해 주세요.");
-                            location.href="login";
-                            return false;
+                        	swal({
+                                title: '로그인 후 이용해 주세요.',
+                                   icon: 'warning',
+                                   buttons: {
+                                       confirm: {
+                                           text: '확인',
+                                           value: true,
+                                           visible: true,
+                                           className: 'swal-custom' // 사용자 정의 클래스 추가
+                                       }
+                                   }
+                               }).then((result) => {
+                                   if (result) {
+                                       location.href = "login";
+                                   }
+                               });
+                              return false;
+                          
                         }
                         if(response.wish_select){
                             $("#wish_bnt").attr("src", "imgView?file=star_fill.png")
@@ -97,15 +128,40 @@
                         console.log(response);
 
                         if(response.length == 0){
-                            alert("로그인 후 이용해 주세요.");
-                            location.href="login";
-                            return false;
+                        	swal({
+                                title: '로그인 후 이용해 주세요.',
+                                   icon: 'warning',
+                                   buttons: {
+                                       confirm: {
+                                           text: '확인',
+                                           value: true,
+                                           visible: true,
+                                           className: 'swal-custom' // 사용자 정의 클래스 추가
+                                       }
+                                   }
+                               }).then((result) => {
+                                   if (result) {
+                                       location.href = "login";
+                                   }
+                               });
+                              return false;
+                          
                         }
                         $("#commentSection").prepend(response); //prepend 앞에 추가
                     },
                     error:function (request, status, error){
-                        console.log(error);
-                        alert("code: " + request.status + " message: " + request.responseText + " error: " + error);
+                    	swal({
+							title: '서버 오류가 발생했습니다 \n 관리자에게 문의하세요',
+							icon: 'error',
+							buttons: {
+								confirm: {
+									text: '확인',
+									value: true,
+									visible: true,
+									className: 'swal-custom' // 사용자 정의 클래스 추가
+								}
+							}
+						})
                     }
                 });
                 $('#reply_contents').val('') //댓글 입력창 내용 초기화
@@ -132,8 +188,18 @@
                     $(event.target).parent().remove();
                 },
                 error:function (request, status, error){
-                    console.log(error);
-                    alert("code: " + request.status + " message: " + request.responseText + " error: " + error);
+                	swal({
+						title: '서버 오류가 발생했습니다 \n 관리자에게 문의하세요',
+						icon: 'error',
+						buttons: {
+							confirm: {
+								text: '확인',
+								value: true,
+								visible: true,
+								className: 'swal-custom' // 사용자 정의 클래스 추가
+							}
+						}
+					})
                 }
             });
         }

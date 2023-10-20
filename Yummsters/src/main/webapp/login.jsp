@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core"  %>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
 <link rel="stylesheet" href="<c:url value='/css/mainStyle.css'/>">
 
 <!-- 네이버로그인 -->
@@ -71,7 +72,18 @@
                     }
                 },
                 error: function (err) {
-                    console.log(err);
+                	swal({
+						title: '서버 오류가 발생했습니다 \n 관리자에게 문의하세요',
+						icon: 'error',
+						buttons: {
+							confirm: {
+								text: '확인',
+								value: true,
+								visible: true,
+								className: 'swal-custom' // 사용자 정의 클래스 추가
+							}
+						}
+					})
                 }
             })
         })
@@ -85,6 +97,7 @@
 
 <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+
 <script>
     Kakao.init('${kakao.script.key}'); // commit 할 때는 얘 제외하고 하기
     function kakaoLogin() {
@@ -103,29 +116,89 @@
                             success: function (response) {
                                 console.log("로그인 성공")
                                 if (response.signup === true) {
-                                    alert("회원가입 후 로그인이 완료되었습니다.");
-                                    location.href = "home";
-                                    return false;
-                                }
+                                	swal({
+                                        title: '회원가입 후 로그인이 완료되었습니다.',
+                                           icon: 'success',
+                                           buttons: {
+                                               confirm: {
+                                                   text: '확인',
+                                                   value: true,
+                                                   visible: true,
+                                                   className: 'swal-custom' // 사용자 정의 클래스 추가
+                                               }
+                                           }
+                                       }).then((result) => {
+                                           if (result) {
+                                               location.href = "home";
+                                           }
+                                       });
+                                      return false;
+                                  }
                                 if (response.login === true) {
-                                    alert("로그인 완료되었습니다.");
-                                    location.href = "home";
-                                    return false;
-                                }
+                                	swal({
+                                        title: '회원가입 후 로그인이 완료되었습니다.',
+                                           icon: 'success',
+                                           buttons: {
+                                               confirm: {
+                                                   text: '확인',
+                                                   value: true,
+                                                   visible: true,
+                                                   className: 'swal-custom' // 사용자 정의 클래스 추가
+                                               }
+                                           }
+                                       }).then((result) => {
+                                           if (result) {
+                                               location.href = "home";
+                                           }
+                                       });
+                                      return false;
+                                  }
                             },
                             error: function (request, status, error, response) {
-                                console.log(error);
-                                alert("code: " + request.status + " message: " + request.responseText + " error: " + error);
+                            	swal({
+        							title: '서버 오류가 발생했습니다 \n 관리자에게 문의하세요',
+        							icon: 'error',
+        							buttons: {
+        								confirm: {
+        									text: '확인',
+        									value: true,
+        									visible: true,
+        									className: 'swal-custom' // 사용자 정의 클래스 추가
+        								}
+        							}
+        						})
                             }
                         })
                     },
                     fail: function (error) {
-                        alert(JSON.stringify(error))
+                    	swal({
+							title: '서버 오류가 발생했습니다 \n 관리자에게 문의하세요',
+							icon: 'error',
+							buttons: {
+								confirm: {
+									text: '확인',
+									value: true,
+									visible: true,
+									className: 'swal-custom' // 사용자 정의 클래스 추가
+								}
+							}
+						})
                     },
                 })
             },
             fail: function (error) {
-                alert(JSON.stringify(error))
+            	swal({
+					title: '서버 오류가 발생했습니다 \n 관리자에게 문의하세요',
+					icon: 'error',
+					buttons: {
+						confirm: {
+							text: '확인',
+							value: true,
+							visible: true,
+							className: 'swal-custom' // 사용자 정의 클래스 추가
+						}
+					}
+				})
             },
         })
     }
