@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <head>
     <link rel="stylesheet" href="<c:url value='/css/mainStyle.css'/>">
@@ -49,7 +50,18 @@
                 food_num = $("input[name='food']:checked").length;
 
                 if(store_num===0){
-                    alert('편의점을 하나 이상 선택해주세요.')
+                    swal({
+                        title: '편의점을 하나 이상 선택해주세요',
+                        icon: 'error',
+                        buttons: {
+                            confirm: {
+                                text: '확인',
+                                value: true,
+                                visible: true,
+                                className: 'swal-custom' // 사용자 정의 클래스 추가
+                            }
+                        }
+                    })
                     e.preventDefault();
                     return false;
                 }
@@ -74,7 +86,18 @@
                 content=content.replaceAll(' ','');
                 console.log(content);
                 if(content == "<p><br></p>"||content == "<p></p>"||content ==""||content == null) {
-                    alert("내용을 입력해 주세요");
+                    swal({
+                        title: '내용을 입력해주세요',
+                        icon: 'error',
+                        buttons: {
+                            confirm: {
+                                text: '확인',
+                                value: true,
+                                visible: true,
+                                className: 'swal-custom' // 사용자 정의 클래스 추가
+                            }
+                        }
+                    })
                     e.preventDefault();
                     return false;
                 }

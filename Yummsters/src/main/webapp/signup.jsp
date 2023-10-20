@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core"  %>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link rel="stylesheet" href="<c:url value='/css/mainStyle.css'/>">
 
 <body>
@@ -114,7 +115,18 @@ $(function() {
                 }
             },
             error: function(err) {
-                alert("에러발생");
+                swal({
+                    title: '서버 오류가 발생했습니다 \n 관리자에게 문의하세요',
+                    icon: 'error',
+                    buttons: {
+                        confirm: {
+                            text: '확인',
+                            value: true,
+                            visible: true,
+                            className: 'swal-custom' // 사용자 정의 클래스 추가
+                        }
+                    }
+                })
             }
         })
     })
