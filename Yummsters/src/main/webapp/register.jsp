@@ -64,7 +64,7 @@
                 }
                 if(food_num===0) {
                     swal({
-                        title: '카테고리를 하나 이상 선택해주세요',
+                        title: '카테고리를 하나 선택해주세요',
                         icon: 'error',
                         buttons: {
                             confirm: {
