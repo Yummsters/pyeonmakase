@@ -54,7 +54,18 @@
                     return false;
                 }
                 if(food_num===0) {
-                    alert('카테고리를 하나 선택해주세요.')
+                    swal({
+                        title: '카테고리를 하나 선택해주세요',
+                        icon: 'error',
+                        buttons: {
+                            confirm: {
+                                text: '확인',
+                                value: true,
+                                visible: true,
+                                className: 'swal-custom' // 사용자 정의 클래스 추가
+                            }
+                        }
+                    })
                     e.preventDefault();
                     return false;
                 }

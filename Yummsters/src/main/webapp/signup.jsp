@@ -100,7 +100,7 @@ $(function() {
                 type: dataType, // type이라는 이름으로 dataType 값을, 
                 value: inputValue // value라는 이름으로 inputValue 값을 지정
             },
-            dataType: "json", // JSON 형식의 응답을 받기 위해 dataType을 설정
+            dataType: 'json', // JSON 형식의 응답을 받기 위해 dataType을 설정
             success: function(res) {
                 var infoType = (dataType === "nickname" ? "닉네임" : dataType === "email" ? "이메일" : "아이디");
                 if (res[dataType] == "notexist") { // 사용 가능한 경우
