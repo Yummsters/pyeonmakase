@@ -2,9 +2,8 @@
 <%@ taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <link rel="stylesheet" href="<c:url value='/css/mainStyle.css'/>">
 <head>
-   <link rel="stylesheet" href="<c:url value='/css/mainStyle.css'/>">
-    <script src="https://code.jquery.com/jquery-3.7.1.js">
-    </script><script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     
     <script type="text/javascript">
         // 추천하기 버튼 클릭 시
@@ -27,7 +26,7 @@
                         		            value: true,
                         		            visible: true,
                         		            className: 'swal-custom' // 사용자 정의 클래스 추가
-                        		        }
+                        		        },
                         		    }
                         		}).then((result) => {
                         		    if (result) {
@@ -95,9 +94,48 @@
     </script>
 
     <script type="text/javascript">
-        function boardDeleteCheck(){
-            return confirm("정말 삭제 하시겠습니까?");
-        }
+        $(function(){
+            $("#board_delete").click(function (){
+                console.log("삭제 진행");
+                swal({
+                    title: '정말 삭제 하시겠습니까?',
+                    icon: 'question',
+                    buttons: {
+                        confirm: {
+                            text: '확인',
+                            value: true,
+                            visible: true,
+                            className: 'swal-custom' // 사용자 정의 클래스 추가
+                        },
+                        cancel: {
+                            text: '취소',
+                            value: null,
+                            visible: true,
+                            className: 'swal-custom' // 사용자 정의 클래스 추가
+                        }
+                    }
+                }).then((result) => {
+                    console.log(result);
+                    if(result){
+                        $.ajax({
+                            url : "board_delete",
+                            type : 'get',
+                            data : {'board_id': '<c:out value="${board.board_id}"/>'},
+                            success:function (response){
+                                console.log(response);
+                                // 삭제는 완료되지만 이동을 하지 않음
+                                location.href="mainlist";
+                            },
+                            error:function (request, status, error){
+                                console.log(error);
+                                alert("code: " + request.status + " message: " + request.responseText + " error: " + error);
+                            }
+
+                        })
+                    }
+                });
+            });
+        })
     </script>
 
     <script type="text/javascript">
@@ -278,10 +316,7 @@
             <button class="mod_del" type="submit" id="board_modify" name="board_id" value="${board.board_id}" formaction="board_modify?" formmethod="get">
                 수정
             </button>
-            <button class="mod_del" id="board_delete" type="submit" name="board_id" value="${board.board_id}" formaction="board_delete?"
-                    formmethod="get"
-                    onclick="return boardDeleteCheck();"> 삭제
-            </button>
+            <button class="mod_del" id="board_delete" name="board_id" value="${board.board_id}"> 삭제</button>
         </c:if><br><br><br>
     </form>
 
