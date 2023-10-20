@@ -3,12 +3,14 @@
 <link rel="stylesheet" href="<c:url value='/css/mainStyle.css'/>">
 <head>
    <link rel="stylesheet" href="<c:url value='/css/mainStyle.css'/>">
+
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script type="text/javascript">
         // 추천하기 버튼 클릭 시
-        $(function(){
+        $(function(){      	
             $('#recommand_bnt').click(function (){
+            	
                 $.ajax({
                     url : 'recommand',
                     type : 'post',
@@ -61,6 +63,7 @@
                     data : {'board_id': '<c:out value="${board.board_id}"/>'},
                     success:function (response){
                         if(response.login === false){
+
                         	swal({
                                 title: '로그인 후 이용해 주세요.',
                                    icon: 'warning',
@@ -78,7 +81,6 @@
                                    }
                                });
                               return false;
-                          
                         }
                         if(response.wish_select){
                             $("#wish_bnt").attr("src", "imgView?file=star_fill.png")
@@ -115,7 +117,6 @@
             $(document).ready(function() {
                 loadInitReply();
             });
-
 
             // 등록 버튼 클릭 시 실행
             $('.reply_bnt').click(function (){

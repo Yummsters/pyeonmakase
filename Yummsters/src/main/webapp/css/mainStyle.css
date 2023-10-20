@@ -1507,6 +1507,7 @@ li a {
 #findId, #findPw {
 	margin-bottom: 0;
 }
+
 .swal-custom {
     background-color: #EEC595 !important; /* 배경색 변경 */
     color: #524434 !important; /* 글자색 변경 */
