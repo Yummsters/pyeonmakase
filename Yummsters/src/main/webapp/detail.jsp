@@ -2,9 +2,10 @@
 <%@ taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <link rel="stylesheet" href="<c:url value='/css/mainStyle.css'/>">
 <head>
+   <link rel="stylesheet" href="<c:url value='/css/mainStyle.css'/>">
+
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    
     <script type="text/javascript">
         // 추천하기 버튼 클릭 시
         $(function(){      	
@@ -17,37 +18,38 @@
                     data : {'board_id': '<c:out value="${board.board_id}"/>'},
                     success:function (response){
                         if(response.login === false){
-                        	 swal({
-                        		 title: '로그인 후 이용해 주세요.',
-                        		    icon: 'warning',
-                        		    buttons: {
-                        		        confirm: {
-                        		            text: '예',
-                        		            value: true,
-                        		            visible: true,
-                        		            className: 'swal-custom' // 사용자 정의 클래스 추가
-                        		        },
-                        		    }
-                        		}).then((result) => {
-                        		    if (result) {
-                        		        location.href = "login";
-                        		    }
-                        		});
-                             return false;
-                         }
-                         if (response.recommand_select) {
-                             $("#recommand_bnt").attr("src", "imgView?file=heart_fill.png")
-                         } else {
-                             $("#recommand_bnt").attr("src", "imgView?file=heart_empty.png")
-                         }
-                         $("#recommand_count").text(response.recommandCount);
-                     },
-                     error: function (error) {
-                         console.log(error)
-                     }
-                 });
-             });
-         });
+                        	swal({
+                                title: '로그인 후 이용해 주세요.',
+                                   icon: 'warning',
+                                   buttons: {
+                                       confirm: {
+                                           text: '확인',
+                                           value: true,
+                                           visible: true,
+                                           className: 'swal-custom' // 사용자 정의 클래스 추가
+                                       }
+                                   }
+                               }).then((result) => {
+                                   if (result) {
+                                       location.href = "login";
+                                   }
+                               });
+                              return false;
+                          
+                        }
+                        if(response.recommand_select){
+                            $("#recommand_bnt").attr("src", "imgView?file=heart_fill.png")
+                        }else{
+                            $("#recommand_bnt").attr("src", "imgView?file=heart_empty.png")
+                        }
+                        $("#recommand_count").text(response.recommandCount);
+                    },
+                    error:function (error){
+                        console.log(error)
+                    }
+                })
+            })
+        })
     </script>
 
     <script type="text/javascript">
@@ -61,24 +63,25 @@
                     data : {'board_id': '<c:out value="${board.board_id}"/>'},
                     success:function (response){
                         if(response.login === false){
-                        	 swal({
-                        		 title: '로그인 후 이용해 주세요.',
-                        		    icon: 'warning',
-                        		    buttons: {
-                        		        confirm: {
-                        		            text: '예',
-                        		            value: true,
-                        		            visible: true,
-                        		            className: 'swal-custom' // 사용자 정의 클래스 추가
-                        		        }
-                        		    }
-                        		}).then((result) => {
-                        		    if (result) {
-                        		        location.href = "login";
-                        		    }
-                        		});
-                             return false;
-                         }
+
+                        	swal({
+                                title: '로그인 후 이용해 주세요.',
+                                   icon: 'warning',
+                                   buttons: {
+                                       confirm: {
+                                           text: '확인',
+                                           value: true,
+                                           visible: true,
+                                           className: 'swal-custom' // 사용자 정의 클래스 추가
+                                       }
+                                   }
+                               }).then((result) => {
+                                   if (result) {
+                                       location.href = "login";
+                                   }
+                               });
+                              return false;
+                        }
                         if(response.wish_select){
                             $("#wish_bnt").attr("src", "imgView?file=star_fill.png")
                         }else{
@@ -94,48 +97,9 @@
     </script>
 
     <script type="text/javascript">
-        $(function(){
-            $("#board_delete").click(function (){
-                console.log("삭제 진행");
-                swal({
-                    title: '정말 삭제 하시겠습니까?',
-                    icon: 'question',
-                    buttons: {
-                        confirm: {
-                            text: '확인',
-                            value: true,
-                            visible: true,
-                            className: 'swal-custom' // 사용자 정의 클래스 추가
-                        },
-                        cancel: {
-                            text: '취소',
-                            value: null,
-                            visible: true,
-                            className: 'swal-custom' // 사용자 정의 클래스 추가
-                        }
-                    }
-                }).then((result) => {
-                    console.log(result);
-                    if(result){
-                        $.ajax({
-                            url : "board_delete",
-                            type : 'get',
-                            data : {'board_id': '<c:out value="${board.board_id}"/>'},
-                            success:function (response){
-                                console.log(response);
-                                // 삭제는 완료되지만 이동을 하지 않음
-                                location.href="mainlist";
-                            },
-                            error:function (request, status, error){
-                                console.log(error);
-                                alert("code: " + request.status + " message: " + request.responseText + " error: " + error);
-                            }
-
-                        })
-                    }
-                });
-            });
-        })
+        function boardDeleteCheck(){
+            return confirm("정말 삭제 하시겠습니까?");
+        }
     </script>
 
     <script type="text/javascript">
@@ -154,7 +118,6 @@
                 loadInitReply();
             });
 
-
             // 등록 버튼 클릭 시 실행
             $('.reply_bnt').click(function (){
                 $.ajax({
@@ -166,15 +129,40 @@
                         console.log(response);
 
                         if(response.length == 0){
-                            alert("로그인 후 이용해 주세요.");
-                            location.href="login";
-                            return false;
+                        	swal({
+                                title: '로그인 후 이용해 주세요.',
+                                   icon: 'warning',
+                                   buttons: {
+                                       confirm: {
+                                           text: '확인',
+                                           value: true,
+                                           visible: true,
+                                           className: 'swal-custom' // 사용자 정의 클래스 추가
+                                       }
+                                   }
+                               }).then((result) => {
+                                   if (result) {
+                                       location.href = "login";
+                                   }
+                               });
+                              return false;
+                          
                         }
                         $("#commentSection").prepend(response); //prepend 앞에 추가
                     },
                     error:function (request, status, error){
-                        console.log(error);
-                        alert("code: " + request.status + " message: " + request.responseText + " error: " + error);
+                    	swal({
+							title: '서버 오류가 발생했습니다 \n 관리자에게 문의하세요',
+							icon: 'error',
+							buttons: {
+								confirm: {
+									text: '확인',
+									value: true,
+									visible: true,
+									className: 'swal-custom' // 사용자 정의 클래스 추가
+								}
+							}
+						})
                     }
                 });
                 $('#reply_contents').val('') //댓글 입력창 내용 초기화
@@ -201,8 +189,18 @@
                     $(event.target).parent().remove();
                 },
                 error:function (request, status, error){
-                    console.log(error);
-                    alert("code: " + request.status + " message: " + request.responseText + " error: " + error);
+                	swal({
+						title: '서버 오류가 발생했습니다 \n 관리자에게 문의하세요',
+						icon: 'error',
+						buttons: {
+							confirm: {
+								text: '확인',
+								value: true,
+								visible: true,
+								className: 'swal-custom' // 사용자 정의 클래스 추가
+							}
+						}
+					})
                 }
             });
         }
@@ -316,7 +314,10 @@
             <button class="mod_del" type="submit" id="board_modify" name="board_id" value="${board.board_id}" formaction="board_modify?" formmethod="get">
                 수정
             </button>
-            <button class="mod_del" id="board_delete" name="board_id" value="${board.board_id}"> 삭제</button>
+            <button class="mod_del" id="board_delete" type="submit" name="board_id" value="${board.board_id}" formaction="board_delete?"
+                    formmethod="get"
+                    onclick="return boardDeleteCheck();"> 삭제
+            </button>
         </c:if><br><br><br>
     </form>
 

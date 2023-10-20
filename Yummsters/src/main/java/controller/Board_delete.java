@@ -16,7 +16,7 @@ public class Board_delete extends HttpServlet {
             BoardService boardService = new BoardServiceImpl();
             Integer board_id = Integer.parseInt(req.getParameter("board_id"));
             boardService.deleteBoardAll(board_id);
-            res.sendRedirect("mainlist");
+            res.sendRedirect("main_list");
         } catch (Exception e) {
             e.printStackTrace();
             req.setAttribute("err", "게시글 수정 실패");

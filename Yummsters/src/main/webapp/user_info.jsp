@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link rel="stylesheet" href="<c:url value='/css/mainStyle.css'/>">
 <script>
 $(document).ready(function() {
@@ -41,67 +40,37 @@ $(document).ready(function() {
                         password: memberPw
                     },
                     success: function(response) {
-						swal({
-							title: '회원 탈퇴가 완료되었습니다',
-							icon: 'success',
-							buttons: {
-								confirm: {
-									text: '확인',
-									value: true,
-									visible: true,
-									className: 'swal-custom' // 사용자 정의 클래스 추가
-								}
-							}
-						})
+                           alert("회원 탈퇴가 완료되었습니다.");
                            location.href = "home"; // 탈퇴 후 리다이렉트할 페이지
                     },
                     error: function() {
-						swal({
-							title: '서버 오류가 발생했습니다 \n 관리자에게 문의하세요',
-							icon: 'error',
-							buttons: {
-								confirm: {
-									text: '확인',
-									value: true,
-									visible: true,
-									className: 'swal-custom' // 사용자 정의 클래스 추가
-								}
-							}
-						})
+                       alert("서버 오류가 발생했습니다.");
                     }
                 });
           } else {
-			  swal({
-				  title: '서버 오류가 발생했습니다 \n 관리자에게 문의하세요',
-				  icon: 'error',
-				  buttons: {
-					  confirm: {
-						  text: '확인',
-						  value: true,
-						  visible: true,
-						  className: 'swal-custom' // 사용자 정의 클래스 추가
-					  }
-				  }
-			  })
+                 alert("비밀번호가 일치하지 않습니다.");
+                 console.log("password: " + password)
+
                 }
                     // 모달 닫기
                     modal.hide();
                     //모달 배경 닫기
                     modalBackground.hide();
           });
-		//취소 버튼 클릭 이벤트
-			$('#confirmButton2').click(function() {
-
-			location.href = "userinfo";
-			// 모달 닫기
-			modal.hide();
-			//모달 배경 닫기
-			modalBackground.hide();
+              //취소 버튼 클릭 이벤트
+                $('#confirmButton2').click(function() {
+                      
+                           location.href = "userinfo";
+                           // 모달 닫기
+                           modal.hide();
+                           //모달 배경 닫기
+                           modalBackground.hide();
+                       
+          
        });
    });
 
     $('#naverDelete').click(function() {
-
 		swal({
 			title: '정말 탈퇴 하시겠습니까? \n 탈퇴 하시면 회원정보를 되돌릴 수 없습니다',
 			icon: 'question',
@@ -184,9 +153,6 @@ $(document).ready(function() {
 				});
 			}
 		});
-
-
-    });
 });
 </script>
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
@@ -202,80 +168,34 @@ $(document).ready(function() {
 			var nickname = this.getAttribute('data-member-id');
 
 			// 질문 후 취소 클릭 시 작동 멈춤
-			swal({
-				title: '정말 탈퇴하시겠습니까? \n 탈퇴하시면 회원정보를 되돌릴 수 없습니다',
-				icon: 'question',
-				buttons: {
-					confirm: {
-						text: '확인',
-						value: true,
-						visible: true,
-						className: 'swal-custom' // 사용자 정의 클래스 추가
+			var message = confirm("정말 탈퇴하시겠습니까? \n 탈퇴하시면 회원정보를 되돌릴 수 없습니다.");
+			if(!message){
+				event.preventDefault();
+				return false;
+			}
+
+			Kakao.API.request({
+				url: '/v1/user/unlink'
+			}).then(function (response) {
+				console.log(response);
+				$.ajax({
+					url: 'memberdelete',
+					type: 'POST',
+					data: {
+						nickname: nickname,
+						password: "kakaoLogin"
 					},
-					cancel: {
-						text: '취소',
-						value: null,
-						visible: true,
-						className: 'swal-custom' // 사용자 정의 클래스 추가
+					success: function(res) {
+						alert("회원 탈퇴가 완료되었습니다.");
+					},
+					error: function() {
+						alert("서버 오류가 발생했습니다.");
 					}
-				}
-				}).then((result) => {
-					if (result) {
-						Kakao.API.request({
-							url: '/v1/user/unlink'
-						}).then(function (response) {
-							console.log(response);
-							$.ajax({
-								url: 'memberdelete',
-								type: 'POST',
-								data: {
-									nickname: nickname,
-									password: "kakaoLogin"
-								},
-								success: function(res) {
-									swal({
-										title: '회원 탈퇴가 완료되었습니다',
-										icon: 'success',
-										buttons: {
-											confirm: {
-												text: '확인',
-												value: true,
-												visible: true,
-												className: 'swal-custom' // 사용자 정의 클래스 추가
-											}
-										}
-									}).then((result) => {
-										if (result) {
-											location.href = "home";
-										}
-									});
-									return false;
-								},
-								error: function(jqXHR, textStatus, errorThrown) {
-									console.log('jqXHR:', jqXHR);
-									console.log('textStatus:', textStatus);
-									console.log('errorThrown:', errorThrown);
-									swal({
-										title: '서버 오류가 발생했습니다 \n 관리자에게 문의하세요',
-										icon: 'error',
-										buttons: {
-											confirm: {
-												text: '확인',
-												value: true,
-												visible: true,
-												className: 'swal-custom' // 사용자 정의 클래스 추가
-											}
-										}
-									})
-								}
-							});
-						}).catch(function (error) {
-							console.log(error);
-						});
-					}else{
-						event.preventDefault();
-						return false;
-					}
+				});
+				location.href = "home";
+
+			}).catch(function (error) {
+				console.log(error);
 			});
 		});
 	});
