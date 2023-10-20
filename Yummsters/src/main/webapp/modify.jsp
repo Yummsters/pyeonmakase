@@ -8,8 +8,6 @@
     <!-- TOAST UI Editor CDN URL(CSS) -->
     <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css"/>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
     <script type="text/javascript">
         $(function() {
             // 체크박스 전체선택, 해제
@@ -51,34 +49,12 @@
                 food_num = $("input[name='food']:checked").length;
 
                 if(store_num===0){
-                    swal({
-                        title: '편의점을 하나 이상 선택해주세요',
-                        icon: 'error',
-                        buttons: {
-                            confirm: {
-                                text: '확인',
-                                value: true,
-                                visible: true,
-                                className: 'swal-custom' // 사용자 정의 클래스 추가
-                            }
-                        }
-                    })
+                    alert('편의점을 하나 이상 선택해주세요.')
                     e.preventDefault();
                     return false;
                 }
                 if(food_num===0) {
-                    swal({
-                        title: '카테고리를 하나 이상 선택해주세요',
-                        icon: 'error',
-                        buttons: {
-                            confirm: {
-                                text: '확인',
-                                value: true,
-                                visible: true,
-                                className: 'swal-custom' // 사용자 정의 클래스 추가
-                            }
-                        }
-                    })
+                    alert('카테고리를 하나 선택해주세요.')
                     e.preventDefault();
                     return false;
                 }
@@ -87,18 +63,7 @@
                 content=content.replaceAll(' ','');
                 console.log(content);
                 if(content == "<p><br></p>"||content == "<p></p>"||content ==""||content == null) {
-                    swal({
-                        title: '내용을 입력해주세요',
-                        icon: 'error',
-                        buttons: {
-                            confirm: {
-                                text: '확인',
-                                value: true,
-                                visible: true,
-                                className: 'swal-custom' // 사용자 정의 클래스 추가
-                            }
-                        }
-                    })
+                    alert("내용을 입력해 주세요");
                     e.preventDefault();
                     return false;
                 }
