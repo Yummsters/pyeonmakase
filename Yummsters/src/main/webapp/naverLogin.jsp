@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<title>네이버 로그인</title>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <title>네이버 로그인</title>
 </head>
 <body>
 <script type="text/javascript">
@@ -27,17 +28,61 @@
     	data: {id:id, name:name, nickname:nickname, email:email, token:token},
     	success: function(res) {
     		if(res == "signupAndLoginSuccess") {
-    			alert("회원가입 후 로그인이 완료되었습니다.");
+                swal({
+                    title: '회원가입 후 로그인이 완료되었습니다',
+                    icon: 'success',
+                    buttons: {
+                        confirm: {
+                            text: '확인',
+                            value: true,
+                            visible: true,
+                            className: 'swal-custom' // 사용자 정의 클래스 추가
+                        }
+                    }
+                })
     		} else if (res = "loginSuccess") {
-    			alert("로그인 완료되었습니다.");
+                swal({
+                    title: '로그인 완료되었습니다',
+                    icon: 'success',
+                    buttons: {
+                        confirm: {
+                            text: '확인',
+                            value: true,
+                            visible: true,
+                            className: 'swal-custom' // 사용자 정의 클래스 추가
+                        }
+                    }
+                })
     		} else {
-    			alert("회원가입 또는 로그인에 실패했습니다.");
+                swal({
+                    title: '회원가입 또는 로그인에 실패했습니다',
+                    icon: 'error',
+                    buttons: {
+                        confirm: {
+                            text: '확인',
+                            value: true,
+                            visible: true,
+                            className: 'swal-custom' // 사용자 정의 클래스 추가
+                        }
+                    }
+                })
     		}
    			window.opener.location.href = "home";
 	        window.close();
     	},
     	error: function() {
-    		alert("에러발생");
+            aswal({
+                title: '서버 오류가 발생했습니다 \n 관리자에게 문의하세요',
+                icon: 'error',
+                buttons: {
+                    confirm: {
+                        text: '확인',
+                        value: true,
+                        visible: true,
+                        className: 'swal-custom' // 사용자 정의 클래스 추가
+                    }
+                }
+            })
     	}
     });
   }
