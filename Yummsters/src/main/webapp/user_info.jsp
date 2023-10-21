@@ -71,9 +71,18 @@ $(document).ready(function() {
                     }
                 });
           } else {
-                 alert("비밀번호가 일치하지 않습니다.");
-                 console.log("password: " + password)
-
+			  swal({
+				  title: '비밀번호가 일치하지 않습니다.',
+				  icon: 'error',
+				  buttons: {
+					  confirm: {
+						  text: '확인',
+						  value: true,
+						  visible: true,
+						  className: 'swal-custom' // 사용자 정의 클래스 추가
+					  }
+				  }
+			  })
                 }
                     // 모달 닫기
                     modal.hide();
@@ -88,8 +97,6 @@ $(document).ready(function() {
                            modal.hide();
                            //모달 배경 닫기
                            modalBackground.hide();
-                       
-          
        });
    });
 
@@ -194,7 +201,7 @@ $(document).ready(function() {
 			// 질문 후 취소 클릭 시 작동 멈춤
 			swal({
 				title: '정말 탈퇴하시겠습니까? \n 탈퇴하시면 회원정보를 되돌릴 수 없습니다',
-				icon: 'question',
+				icon: 'warning',
 				buttons: {
 					confirm: {
 						text: '확인',
@@ -219,7 +226,7 @@ $(document).ready(function() {
 							url: 'memberdelete',
 							type: 'POST',
 							data: {
-								nickname: nickname,
+								nickname: "${sessionScope.member.nickname}",
 								password: "kakaoLogin"
 							},
 							success: function(res) {

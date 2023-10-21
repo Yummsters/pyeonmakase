@@ -935,7 +935,7 @@ li a {
 .input-with-button>input {
     border: none;
     font-size: 17px;
-    width: 60%;
+    width: 50%;
     outline: none;
     height: 26px;
 	background-color: #fae3c800;

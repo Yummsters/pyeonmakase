@@ -136,7 +136,7 @@
                                   }
                                 if (response.login === true) {
                                 	swal({
-                                        title: '회원가입 후 로그인이 완료되었습니다.',
+                                        title: '로그인이 완료되었습니다.',
                                            icon: 'success',
                                            buttons: {
                                                confirm: {
