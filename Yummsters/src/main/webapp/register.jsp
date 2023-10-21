@@ -84,7 +84,7 @@
                 console.log(content);
                 if(content == "<p><br></p>"||content == "<p></p>"||content ==""||content == null) {
                     swal({
-                        title: '카테고리를 하나 이상 선택해주세요',
+                        title: '내용을 작성해주세요',
                         icon: 'error',
                         buttons: {
                             confirm: {

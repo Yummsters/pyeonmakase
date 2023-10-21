@@ -96,11 +96,12 @@
 
         <script type="text/javascript">
         $(function(){
-            $("#board_delete").click(function (){
+            $("#board_delete").click(function (e){
                 console.log("삭제 진행");
+                e.preventDefault();
                 swal({
                     title: '정말 삭제 하시겠습니까?',
-                    icon: 'question',
+                    icon: 'warning',
                     buttons: {
                         confirm: {
                             text: '확인',
