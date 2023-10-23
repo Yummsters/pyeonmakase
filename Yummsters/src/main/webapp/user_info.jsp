@@ -103,7 +103,7 @@ $(document).ready(function() {
     $('#naverDelete').click(function() {
 		swal({
 			title: '정말 탈퇴 하시겠습니까? \n 탈퇴 하시면 회원정보를 되돌릴 수 없습니다',
-			icon: 'question',
+			icon: 'warning',
 			buttons: {
 				confirm: {
 					text: '확인',
