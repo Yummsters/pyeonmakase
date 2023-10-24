@@ -29,15 +29,15 @@
 ## 구현영상 - Web
 
 ### 네이버/카카오톡 로그인
-![네이버로그인](https://github.com/Yummsters/pyeonmakase/assets/95160590/cf3bbf1a-d86c-4d73-8889-26ce6d1caac0)
-![카카오회원가입_카카오로그인](https://github.com/Yummsters/pyeonmakase/assets/95160590/0b31ae76-2e99-4818-9a0f-bb769dcc8f27)
+![네이버로그인](https://github.com/Yummsters/pyeonmakase/assets/95160590/cbdb0bc3-8c50-4684-b00e-bc9ab41d5e08)
+![카카오회원가입_카카오로그인](https://github.com/Yummsters/pyeonmakase/assets/95160590/404dae12-0026-483c-9a73-8ec1e2c0f4ec)
 </br><aside>
 - 네이버/카카오 소셜 로그인이 가능하도록 구현했어요. </aside>
 <br>
 
 ### 네이버/카카오톡 탈퇴
-![네이버회원탈퇴](https://github.com/Yummsters/pyeonmakase/assets/95160590/307da52a-a5e4-42bd-a0ae-f3e916bc6e5c)
-![카카오회원탈퇴](https://github.com/Yummsters/pyeonmakase/assets/95160590/cb54e3e7-27c6-46de-b0ba-b202bb08af90)
+![네이버회원탈퇴](https://github.com/Yummsters/pyeonmakase/assets/95160590/d6b4090d-c4b9-4b53-8e9c-339ca788b0d3)
+![카카오회원탈퇴](https://github.com/Yummsters/pyeonmakase/assets/95160590/3dba7372-3855-42aa-b200-9a800b36d4ec)
 </br><aside>
 - 네이버/카카오 소셜 로그인 후 탈퇴도 가능하도록 구현했어요. </aside>
 <br>
@@ -49,7 +49,7 @@
 <br>
 
 ### 로그인을 해야지 이용 가능한 기능
-![로그인시이용가능한부분](https://github.com/Yummsters/pyeonmakase/assets/95160590/092b0bcd-b2ad-4834-8e6d-77c578df93d8)
+![로그인시이용가능한부분](https://github.com/Yummsters/pyeonmakase/assets/95160590/b2dfa662-ddc0-44d8-a165-c39527160481)
 <br><aside>
 - 추천/찜, 댓글에 대한 기능은 로그인을 해야지만 가능해요! </aside>
 <br>
@@ -62,13 +62,13 @@
 <br>
 
 ### 편의점 레시피 추천/찜하기 기능
-![추천 및 찜하기](https://github.com/Yummsters/pyeonmakase/assets/95160590/38fb6728-b797-4ed1-b838-eed340e0c356)
+![추천 및 찜하기](https://github.com/Yummsters/pyeonmakase/assets/95160590/a7f92405-e793-46f0-b0fe-b5449494d6af)
 <br><aside>
 - 회원은 편의점 레시피를 추천하고 찜하는 것이 가능해요! </aside>
 <br>
 
 ### 마이페이지
-![마이페이지 (1)](https://github.com/Yummsters/pyeonmakase/assets/95160590/37d07eb8-dc44-4b6a-a0e0-f5bfe0585840)
+![마이페이지 (1)](https://github.com/Yummsters/pyeonmakase/assets/95160590/dd194301-a888-40ae-a170-250139a33379)
 <br><aside>
 - 회원은 자신이 작성한 레시피와 찜한 레시피를 마이페이지에서 확인 가능해요! </aside>
 <br>
@@ -80,7 +80,7 @@
 <br>
 
 ### 회원 정보 수정 및 회원 탈퇴 페이지
-![회원정보수정](https://github.com/Yummsters/pyeonmakase/assets/95160590/577d0e34-698f-409a-b496-a9c69cd7a5fd)
-![회원탈퇴](https://github.com/Yummsters/pyeonmakase/assets/95160590/2ad0101e-a82d-4a53-95d5-3d14d86e9f55)
+![회원정보수정](https://github.com/Yummsters/pyeonmakase/assets/95160590/ca99b241-8aa2-4178-927c-98e318906e9b)
+![회원탈퇴](https://github.com/Yummsters/pyeonmakase/assets/95160590/c226a232-49c9-4bbc-b676-41fdc32ecaa1)
 <br><aside>
 - 회원의 정보를 수정하고 탈퇴도 가능해요!(탈퇴 회원에 대한 게시글 정보는 삭제되지 않습니다.) </aside>
